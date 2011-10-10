@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 11px; }
+  body.body {
+    text-align: center;
+    background: #DAD293; }
+  body #wrapper {
+    width: 960px;
+    margin: 0 auto;
+    text-align: left;
+    position: relative; }
+    body #wrapper #header {
+      position: relative; }
+      body #wrapper #header #main-nav {
+        position: relative; }
+    body #wrapper #main {
+      position: relative;
+      background: #ffffff; }
+      body #wrapper #main #content {
+        position: relative;
+        padding: 10px; }
+    body #wrapper #footer {
+      background: #D1C883             border-radius:0 0 4px 4px; }

@@ -1,0 +1,28 @@
+{% extends 'layout_master.html' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="header">
+            <div id="header-wiz">
+                <div id="header-logo">
+                    LAND DATA 2
+                </div>
+                <div id="header-user">
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div id="header-nav">
+                {% include 'main_navigation.html' %}
+            </div>
+        </div>
+        <div id="main">
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            <small>Land Data 2.0 - Powered by HNI</small>
+        </div>
+    </div>
+{% endblock %}

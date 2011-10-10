@@ -1,0 +1,50 @@
+[
+    {
+        "model": "localites.Province",
+        "pk": 1,
+        "fields": {
+            "nom": "Antananarivo",
+            "code": "1"
+        }
+    },
+    {
+        "model": "localites.Province",
+        "pk": 2,
+        "fields": {
+            "nom": "Antsiranana",
+            "code": "2"
+        }
+    },
+    {
+        "model": "localites.Province",
+        "pk": 3,
+        "fields": {
+            "nom": "Fianarantsoa",
+            "code": "3"
+        }
+    },
+    {
+        "model": "localites.Province",
+        "pk": 4,
+        "fields": {
+            "nom": "Mahajanga",
+            "code": "4"
+        }
+    },
+    {
+        "model": "localites.Province",
+        "pk": 5,
+        "fields": {
+            "nom": "Toamasina",
+            "code": "5"
+        }
+    },
+    {
+        "model": "localites.Province",
+        "pk": 6,
+        "fields": {
+            "nom": "Toliara",
+            "code": "6"
+        }
+    }
+]

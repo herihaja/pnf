@@ -1,0 +1,200 @@
+[
+    {
+        "model":"localites.Region",
+        "pk":1,
+        "fields": {
+            "province":5,
+            "nom":"Alaotra-Mangoro",
+            "code": "511"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":2,
+        "fields": {
+            "province":3,
+            "nom":"Amoron'i Mania",
+            "code": "314"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":3,
+        "fields": {
+            "province":1,
+            "nom":"Analamanga",
+            "code": "104"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":4,
+        "fields": {
+            "province":5,
+            "nom":"Analanjirofo",
+            "code": "513"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":5,
+        "fields": {
+            "province":6,
+            "nom":"Androy",
+            "code": "621"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":6,
+        "fields": {
+            "province":6,
+            "nom":"Anosy",
+            "code": "622"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":7,
+        "fields": {
+            "province":6,
+            "nom":"Atsimo-Andrefana",
+            "code": "620"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":8,
+        "fields": {
+            "province":3,
+            "nom":"Atsimo-Atsinanana",
+            "code": "317"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":9,
+        "fields": {
+            "province":5,
+            "nom":"Atsinanana",
+            "code": "512"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":10,
+        "fields": {
+            "province":4,
+            "nom":"Betsiboka",
+            "code": "409"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":11,
+        "fields": {
+            "province":4,
+            "nom":"Boeny",
+            "code": "408"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":12,
+        "fields": {
+            "province":1,
+            "nom":"Bongolava",
+            "code": "106"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":13,
+        "fields": {
+            "province":2,
+            "nom":"Diana",
+            "code": "201"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":14,
+        "fields": {
+            "province":3,
+            "nom":"Haute Matsiatra",
+            "code": "315"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":15,
+        "fields": {
+            "province":6,
+            "nom":"Ihorombe",
+            "code": "618"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":16,
+        "fields": {
+            "province":1,
+            "nom":"Itasy",
+            "code": "103"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":17,
+        "fields": {
+            "province":4,
+            "nom":"Melaky",
+            "code": "410"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":18,
+        "fields": {
+            "province":6,
+            "nom":"Menabe",
+            "code": "619"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":19,
+        "fields": {
+            "province":2,
+            "nom":"Sava",
+            "code": "201"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":20,
+        "fields": {
+            "province":4,
+            "nom":"Sofia",
+            "code": "407"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":21,
+        "fields": {
+            "province":1,
+            "nom":"Vakinankaratra",
+            "code": "105"
+        }
+    },
+    {
+        "model":"localites.Region",
+        "pk":22,
+        "fields": {
+            "province":3,
+            "nom":"Vatovavy-Fitovinany",
+            "code": "316"
+        }
+    }
+]

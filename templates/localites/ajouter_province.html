@@ -1,0 +1,8 @@
+{% extends 'layout_content.html' %}
+<form action="" method="post">
+        {% csrf_token %}
+        <fieldset>
+            {{ form.as_p }}
+            <input type="submit" value="Enregistrer" />
+        </fieldset>
+    </form>

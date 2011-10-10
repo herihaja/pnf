@@ -1,0 +1,9 @@
+ipython
+CouchDB
+Django
+django-compressor
+psycopg2
+simplejson
+xlrd
+xlwt
+python-dateutil
