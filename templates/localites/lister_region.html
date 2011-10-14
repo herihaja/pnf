@@ -3,34 +3,36 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Liste des provinces</h1>
+            <h1>Liste des régions</h1>
         </div>
         <div class="navigation">
-            <a href="{% url localites.views.ajouter_province %}">Ajouter une province</a>
+            <a href="{% url localites.views.ajouter_region %}">Ajouter une région</a>
         </div>
         <div class="clear"></div>
     </div>
 
-    {% if provinces.object_list|length > 0 %}
+    {% if regions.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
             <th width="200">Nom</th>
-            <th width="200">Code</th>
+            <th width="80">Code</th>
+            <th width="140">Province</th>
             <th width="140" style="text-align: center">Actions</th>
         </tr>
-        {% for province in provinces.object_list %}
+        {% for region in regions.object_list %}
         <tr>
-            <td>{{ province.nom }}</td>
-            <td>{{ province.code }}</td>
+            <td>{{ region.nom }}</td>
+            <td>{{ region.code }}</td>
+            <td>{{ region.province }}</td>
             <td class="tb_action">
-                <a href="{{ province.lien_editer }}">edit</a>
-                <a href="{{ province.lien_supprimer }}"
+                <a href="{{ region.lien_editer }}">edit</a>
+                <a href="{{ region.lien_supprimer }}"
                    onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
-        <div class="message">Aucune province enregistrée.</div>
+        <div class="message">Aucune region enregistrée.</div>
     {% endif %}
 {% endblock %}

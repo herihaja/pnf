@@ -5,9 +5,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-#                        (r'', include('pnf.bailleurs.urls')),
+                        (r'', include('pnf.bailleurs.urls')),
 #                        (r'', include('pnf.donnees.urls')),
-#                        (r'', include('pnf.guichets.urls')),
+                        (r'', include('pnf.guichets.urls')),
 #                        (r'', include('pnf.indicateurs.urls')),
                         (r'', include('pnf.localites.urls')),
 #                        (r'', include('pnf.ratios.urls')),

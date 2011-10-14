@@ -4,8 +4,9 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pnf',
         'USER': 'hni',
-        'PASSWORD': 'datawinner',
-        'HOST': '',
-        'PORT': '',
+        'PASSWORD': 'hni',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
+GEOS_LIBRARY_PATH = '/Library/Frameworks/GEOS.framework/GEOS'

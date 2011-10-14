@@ -1,0 +1,75 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div class="titlebar">
+        <div class="title">
+            <h1>Liste des communes</h1>
+        </div>
+        <div class="navigation">
+            <a href="{% url localites.views.ajouter_commune %}">Ajouter une commune</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="filter-form">
+        <form action="." method="post" id="form-filter">
+            {% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+            <div class="clear-l"></div>
+            <input type="hidden" name="action" value="liste" id="action" />
+            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
+            <input type="submit" value="Exporter" id="export-button"/>
+            <div class="clear-l"></div>
+        </form>
+    </div>
+
+    {% if communes.object_list|length > 0 %}
+    <table class="tb_list">
+        <tr>
+            <th width="220">Nom</th>
+            <th width="80">Code</th>
+            <th width="140">Région</th>
+            <th width="140">District</th>
+            <th width="140" style="text-align: center">Actions</th>
+        </tr>
+        {% for commune in communes.object_list %}
+        <tr>
+            <td>{{ commune.nom }}</td>
+            <td>{{ commune.code }}</td>
+            <td>{{ commune.region }}</td>
+            <td>{{ commune.district }}</td>
+            <td class="tb_action">
+                <a href="{{ commune.lien_editer }}">edit</a>
+                <a href="{{ commune.lien_supprimer }}"
+                   onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <div class="current">
+            Page {{ communes.number }} sur {{ communes.paginator.num_pages }}.
+        </div>
+        <div class="step-links">
+            {% if communes.has_previous %}
+                <a href="javascript:void(0)" rel="{{ communes.previous_page_number }}">&lt; Préc.</a>
+            {% endif %}
+            {% if communes.has_next %}
+                <a href="javascript:void(0)" rel="{{ communes.next_page_number }}">Suiv. &gt;</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <script type="text/javascript">
+        $('.step-links a').live('click', function() {
+            $('#id_page').val($(this).attr('rel'));
+            $('#form-filter').submit();
+        });
+    </script>
+    {% else %}
+        <div class="message">Aucune commune enregistrée.</div>
+    {% endif %}
+{% endblock %}

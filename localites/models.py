@@ -1,32 +1,73 @@
-from django.db import models
+# -*- coding: utf-8 -*-
 
-class Province(models.Model):
+from django.db import models
+from django.db.models import Q, Model, Manager
+
+
+class Province(Model):
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6)
+    code = models.CharField(max_length=6, unique=True)
 
     def __unicode__(self):
         return self.nom
 
-class Region(models.Model):
+class Region(Model):
     province = models.ForeignKey(Province, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6)
+    code = models.CharField(max_length=6, unique=True)
 
     def __unicode__(self):
         return self.nom
 
-class District(models.Model):
+class DistrictManager(Manager):
+    def filtrer(self, post):
+        qry = Q()
+        nom = post.POST['nom']
+        code = post.POST['code']
+        region = post.POST['region']
+        if len(nom) > 0:
+            qry = qry & Q(nom__icontains=nom)
+        if len(code) > 0:
+            qry = qry & Q(code__icontains=code)
+        if len(region) > 0:
+            qry = qry & Q(region=int(region))
+
+        return self.filter(qry)
+
+class District(Model):
     region = models.ForeignKey(Region, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
-    code = models.CharField(max_length=6)
+    code = models.CharField(max_length=6, unique=True)
+
+    objects = DistrictManager()
 
     def __unicode__(self):
         return self.nom
 
-class Commune(models.Model):
+class CommuneManager(Manager):
+    def filtrer(self, post):
+        qry = Q()
+        nom = post.POST['nom']
+        code = post.POST['code']
+        district = post.POST['district']
+        region = post.POST['region']
+        if len(nom) > 0:
+            qry = qry & Q(nom__icontains=nom)
+        if len(code) > 0:
+            qry = qry & Q(code__icontains=code)
+        if len(district) > 0:
+            qry = qry & Q(region=int(district))
+        if len(region) > 0:
+            qry = qry & Q(district__region=int(region))
+
+        return self.filter(qry)
+
+class Commune(Model):
     district = models.ForeignKey(District, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
-    code = models.CharField(max_length=6)
+    code = models.CharField(max_length=6, unique=True)
+
+    objects = CommuneManager()
 
     def __unicode__(self):
         return self.nom

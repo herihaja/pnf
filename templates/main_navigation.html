@@ -48,9 +48,9 @@
         <ul>
             <li><a href="">Utilisateurs</a></li>
             <li><a href="">Bailleurs</a></li>
-            <li><a href="{% url pnf.localites.views.lister_province %}">Régions</a></li>
-            <li><a href="">Districts</a></li>
-            <li><a href="" class="last">Communes</a></li>
+            <li><a href="{% url localites.views.lister_region %}">Régions</a></li>
+            <li><a href="{% url localites.views.lister_district %}">Districts</a></li>
+            <li><a href="{% url localites.views.lister_commune %}" class="last">Communes</a></li>
         </ul>
     </li>
 </ul>
