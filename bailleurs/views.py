@@ -20,6 +20,8 @@ def lister_bailleur(request):
         form = FiltreBailleurForm(request.POST)
         rows = Bailleur.objects.filtrer(request)
         page = int(request.POST['page'])
+        if request.POST['action'] == 'export':
+            return export(rows)
 
     if rows is not None:
         for row in rows:
@@ -73,3 +75,12 @@ def supprimer_bailleur(request, bailleur_id=None):
     obj = get_object_or_404(Bailleur, pk=bailleur_id)
     obj.delete()
     return HttpResponseRedirect(reverse(lister_bailleur))
+
+def export(rows):
+    header = ['Id', 'Nom']
+    liste = []
+    for row in rows:
+        cleaned_row = [row.id, row.nom]
+        liste.append(cleaned_row)
+    ret = export_excel(header, liste, 'bailleurs')
+    return ret
