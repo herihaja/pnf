@@ -20,6 +20,8 @@ def lister_guichet(request):
         form = FiltreGuichetForm(request.POST)
         rows = Guichet.objects.filtrer(request)
         page = int(request.POST['page'])
+        if request.POST['action'] == 'export':
+            return export(rows)
 
     if rows is not None:
         for row in rows:
@@ -80,3 +82,12 @@ def supprimer_guichet(request, guichet_id=None):
     obj = get_object_or_404(Guichet, pk=guichet_id)
     obj.delete()
     return HttpResponseRedirect(reverse(lister_guichet))
+
+def export(rows):
+    header = ['Commune', 'agf1',  'mobile1', 'agf2', 'mobile2', 'etat']
+    liste = []
+    for row in rows:
+        cleaned_row = [row.commune.code, row.agf1, row.mobile1, row.agf2, row.mobile2, row.etat]
+        liste.append(cleaned_row)
+    ret = export_excel(header, liste, 'guichets')
+    return ret

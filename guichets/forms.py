@@ -21,6 +21,8 @@ class FiltreGuichetForm(Form):
     commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
     code_commune = forms.CharField(label='Code commune', max_length=6, required=False)
     etat = forms.ChoiceField(label='Etat', choices=CHOIX_ETAT, required=False)
+    agf1 = forms.CharField(required=False)
+    mobile1 = forms.CharField(required=False)
     cree_de = forms.DateField(required=False)
     cree_a = forms.DateField(required=False)
     page = forms.CharField(widget=forms.HiddenInput(), initial=1)

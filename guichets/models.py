@@ -7,9 +7,9 @@ from localites.models import Commune
 class GuichetManager(Manager):
     def filtrer(self, post):
         qry = Q()
-        nom = post.POST['nom']
-        if len(nom) > 0:
-            qry = qry & Q(nom__icontains=nom)
+        agf = post.POST['agf1']
+        if len(agf) > 0:
+            qry = qry & Q(agf1__icontains=agf)
 
         return self.filter(qry)
 
