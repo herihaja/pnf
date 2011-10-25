@@ -82,7 +82,7 @@ class Donnees(Model):
     objects = DonneesManager()
 
     def __unicode__(self):
-        return self.nom
+        return u"données de %s pour %s" % (self.commune.nom, self.periode)
 
 class Cumul(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
@@ -101,4 +101,4 @@ class Cumul(Model):
     edit = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.nom
+        return u"données de %s pour %s" % (self.commune.nom, self.periode)

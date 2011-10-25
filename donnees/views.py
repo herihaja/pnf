@@ -30,6 +30,19 @@ def lister_donnees(request):
             lien_supprimer = reverse(supprimer_donnees, args=[donnees_id])
             donnees = dict(
                 id=row.id,
+                code = row.commune.code,
+                periode = row.periode,
+                demandes = row.demandes,
+                oppositions = row.oppositions,
+                resolues = row.resolues,
+                certificats = row.certificats,
+                femmes = row.femmes,
+                surfaces = row.surfaces,
+                recettes = row.recettes,
+                garanties = row.garanties,
+                reconnaissances = row.reconnaissances,
+                mutations = row.mutations,
+                valide = row.valide,
                 lien_editer=lien_editer,
                 lien_supprimer=lien_supprimer
             )

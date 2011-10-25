@@ -28,18 +28,36 @@
     {% if donnees.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="220">Nom</th>
-            <th width="80">Code</th>
-            <th width="140">Région</th>
-            <th width="140">District</th>
+            <th width="100">Commune</th>
+            <th width="100">Période</th>
+            <th width="60">Dem</th>
+            <th width="60">Opp</th>
+            <th width="60">Res</th>
+            <th width="60">Cert</th>
+            <th width="60">Cert F</th>
+            <th width="100">Surface</th>
+            <th width="100">Femmes</th>
+            <th width="60">Gar</th>
+            <th width="60">Rec</th>
+            <th width="60">Mut</th>
+            <th width="60">Valide</th>
             <th width="140" style="text-align: center">Actions</th>
         </tr>
         {% for donnee in donnees.object_list %}
         <tr>
-            <td>{{ donnee.nom }}</td>
             <td>{{ donnee.code }}</td>
-            <td>{{ donnee.region }}</td>
-            <td>{{ donnee.district }}</td>
+            <td>{{ donnee.periode }}</td>
+            <td>{{ donnee.demandes }}</td>
+            <td>{{ donnee.oppositions }}</td>
+            <td>{{ donnee.resolues }}</td>
+            <td>{{ donnee.certificats }}</td>
+            <td>{{ donnee.femmes }}</td>
+            <td>{{ donnee.surfaces }}</td>
+            <td>{{ donnee.recettes }}</td>
+            <td>{{ donnee.garanties }}</td>
+            <td>{{ donnee.reconnaissances }}</td>
+            <td>{{ donnee.mutations }}</td>
+            <td>{{ donnee.valide }}</td>
             <td class="tb_action">
                 <a href="{{ donnee.lien_editer }}">edit</a>
                 <a href="{{ donnee.lien_supprimer }}"
