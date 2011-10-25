@@ -79,7 +79,7 @@ class Donnees(Model):
     ajout = models.DateTimeField(auto_now_add=True)
     edit = models.DateTimeField(auto_now=True)
 
-    DonneesManager()
+    objects = DonneesManager()
 
     def __unicode__(self):
         return self.nom

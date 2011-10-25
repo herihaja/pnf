@@ -24,4 +24,8 @@ class FiltreDonneesForm(Form):
     mutations = forms.CharField(required=False)
     surfaces = forms.CharField(required=False)
     garanties = forms.CharField(required=False)
+    periode_de_annee = forms.CharField(required=False)
+    periode_a_annee = forms.CharField(required=False)
+    periode_de_mois = forms.CharField(required=False)
+    periode_a_mois = forms.CharField(required=False)
     page = forms.CharField(widget=forms.HiddenInput(), initial=1)
