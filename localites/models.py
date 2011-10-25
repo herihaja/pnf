@@ -6,7 +6,7 @@ from django.db.models import Q, Model, Manager
 
 class Province(Model):
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6, unique=True)
+    code = models.CharField(max_length=6, blank=True, null=True)
 
     def __unicode__(self):
         return self.nom
@@ -14,7 +14,7 @@ class Province(Model):
 class Region(Model):
     province = models.ForeignKey(Province, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6, unique=True)
+    code = models.CharField(max_length=6, blank=True, null=True)
 
     def __unicode__(self):
         return self.nom
@@ -37,7 +37,7 @@ class DistrictManager(Manager):
 class District(Model):
     region = models.ForeignKey(Region, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
-    code = models.CharField(max_length=6, unique=True)
+    code = models.CharField(max_length=6, blank=True, null=True)
 
     objects = DistrictManager()
 
@@ -65,7 +65,7 @@ class CommuneManager(Manager):
 class Commune(Model):
     district = models.ForeignKey(District, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
-    code = models.CharField(max_length=6, unique=True)
+    code = models.CharField(max_length=8, blank=True, null=True)
 
     objects = CommuneManager()
 

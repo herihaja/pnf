@@ -114,7 +114,7 @@ INSTALLED_APPS = (
     'pnf.donnees',
     'pnf.guichets',
     'pnf.localites',
-    'pnf.import',
+    'pnf.imports',
 #    'pnf.ratios',
     'pnf.sms',
 #    'pnf.utilisateurs',

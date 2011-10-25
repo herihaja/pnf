@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67ffe82d-5e2f-47d9-b234-961595fa13f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/rova.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/rova.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/pnf.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/pnf.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" />
     </list>
     <ignored path="pnf.iws" />
@@ -33,45 +33,27 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sms/views.py">
+        <entry file="file://$PROJECT_DIR$/imports/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="34" selection-start="2620" selection-end="2620" vertical-scroll-proportion="0.85393256">
+            <state line="75" column="41" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.6187151">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="importer_donnees.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/imports/importer_donnees.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="14" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sms/models.py">
+        <entry file="file://$PROJECT_DIR$/donnees/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="45" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="20" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lister_reception.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/sms/lister_reception.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="35" selection-start="1348" selection-end="1348" vertical-scroll-proportion="-2.75">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lister_envoi.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/sms/lister_envoi.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="45" selection-start="2083" selection-end="2083" vertical-scroll-proportion="-7.4444447">
+            <state line="72" column="22" selection-start="3038" selection-end="3041" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,22 +73,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/import/__init__.py" />
-        <option value="$PROJECT_DIR$/import/urls.py" />
-        <option value="$PROJECT_DIR$/import/views.py" />
-        <option value="$PROJECT_DIR$/templates/donnees/importer_donnees.html" />
-        <option value="$PROJECT_DIR$/sms/urls.py" />
-        <option value="$PROJECT_DIR$/sms/forms.py" />
         <option value="$PROJECT_DIR$/indicateurs/models.py" />
-        <option value="$PROJECT_DIR$/donnees/models.py" />
         <option value="$PROJECT_DIR$/templates/main_navigation.html" />
         <option value="$PROJECT_DIR$/guichets/views.py" />
-        <option value="$PROJECT_DIR$/urls.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/templates/sms/lister_reception.html" />
         <option value="$PROJECT_DIR$/sms/models.py" />
         <option value="$PROJECT_DIR$/templates/sms/lister_envoi.html" />
         <option value="$PROJECT_DIR$/sms/views.py" />
+        <option value="$PROJECT_DIR$/donnees/models.py" />
+        <option value="$PROJECT_DIR$/import/views.py" />
+        <option value="$PROJECT_DIR$/templates/import/importer_donnees.html" />
+        <option value="$PROJECT_DIR$/import/urls.py" />
+        <option value="$PROJECT_DIR$/urls.py" />
+        <option value="$PROJECT_DIR$/localites/models.py" />
+        <option value="$PROJECT_DIR$/templates/imports/importer_donnees.html" />
+        <option value="$PROJECT_DIR$/imports/views.py" />
       </list>
     </option>
   </component>
@@ -206,7 +188,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="sms" />
+              <option name="myItemId" value="localites" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -220,7 +202,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="sms" />
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -235,6 +221,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="localites" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pnf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pnf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -273,19 +273,19 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/import" />
       <recent name="$PROJECT_DIR$/templates/sms" />
       <recent name="$PROJECT_DIR$/templates/donnees" />
       <recent name="$PROJECT_DIR$/templates/guichets" />
       <recent name="$PROJECT_DIR$/guichets" />
-      <recent name="$PROJECT_DIR$/templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -412,14 +412,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="26" width="1436" height="874" extended-state="0" />
+    <frame x="4" y="22" width="1436" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18670438" sideWeight="0.67086834" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16690241" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47338936" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -476,104 +476,90 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sms/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="8" selection-start="85" selection-end="85" vertical-scroll-proportion="0.054775283" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guichets/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="1041" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sms/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="49" selection-start="930" selection-end="930" vertical-scroll-proportion="0.43202418" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/donnees/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="51" selection-start="3266" selection-end="3266" vertical-scroll-proportion="0.43398875" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/guichets/lister_guichet.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.657971" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/guichets/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="518" selection-end="518" vertical-scroll-proportion="0.18258427">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main_navigation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="12" selection-start="2077" selection-end="2162" vertical-scroll-proportion="0.8115942">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/localites/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="26" selection-start="2613" selection-end="2613" vertical-scroll-proportion="0.5294944">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guichets/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="34" selection-start="912" selection-end="912" vertical-scroll-proportion="0.018258426">
-          <folding />
-        </state>
+        <state line="26" column="34" selection-start="912" selection-end="912" vertical-scroll-proportion="0.018258426" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/donnees/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="20" selection-start="3776" selection-end="3776" vertical-scroll-proportion="0.49297753">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="20" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sms/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="45" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/sms/lister_reception.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="35" selection-start="1348" selection-end="1348" vertical-scroll-proportion="-2.75">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/sms/lister_envoi.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="45" selection-start="2083" selection-end="2083" vertical-scroll-proportion="-7.4444447">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sms/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="34" selection-start="2620" selection-end="2620" vertical-scroll-proportion="0.85393256">
+        <state line="73" column="34" selection-start="2620" selection-end="2620" vertical-scroll-proportion="0.85393256" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sms/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="45" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.26966292" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/sms/lister_reception.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="35" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.309375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/sms/lister_envoi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="45" selection-start="2083" selection-end="2083" vertical-scroll-proportion="0.8375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/localites/fixtures/districts.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="915" column="28" selection-start="18404" selection-end="18413" vertical-scroll-proportion="-9.16" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/guichets/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="42" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="50" selection-start="690" selection-end="690" vertical-scroll-proportion="0.2008427" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="20" selection-start="3776" selection-end="3776" vertical-scroll-proportion="0.49297753" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/donnees/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="25" selection-end="304" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/localites/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="40" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.8002793">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/donnees/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="22" selection-start="3038" selection-end="3041" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/imports/importer_donnees.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="14" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="41" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.6187151">
           <folding />
         </state>
       </provider>

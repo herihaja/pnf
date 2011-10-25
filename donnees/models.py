@@ -74,6 +74,7 @@ class Donnees(Model):
     mutations = models.IntegerField()
     surfaces = models.FloatField()
     garanties = models.IntegerField()
+    reconnaissances = models.IntegerField()
     valide = models.BooleanField(default=False)
     ajout = models.DateTimeField(auto_now_add=True)
     edit = models.DateTimeField(auto_now=True)
@@ -95,7 +96,7 @@ class Cumul(Model):
     mutations = models.IntegerField()
     surfaces = models.FloatField()
     garanties = models.IntegerField()
-    valide = models.BooleanField(default=False)
+    reconnaissances = models.IntegerField()
     ajout = models.DateTimeField(auto_now_add=True)
     edit = models.DateTimeField(auto_now=True)
 
