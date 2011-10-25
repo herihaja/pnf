@@ -3,10 +3,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pnf',
-        'USER': 'hni',
-        'PASSWORD': 'hni',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'USER': 'rova',
+        'PASSWORD': 'rova',
+        'HOST': '',
+        'PORT': '',
     }
 }
-GEOS_LIBRARY_PATH = '/Library/Frameworks/GEOS.framework/GEOS'
+#GEOS_LIBRARY_PATH = '/Library/Frameworks/GEOS.framework/GEOS'

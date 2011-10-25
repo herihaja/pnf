@@ -28,7 +28,14 @@ def lister_guichet(request):
             lien_supprimer = reverse(supprimer_guichet, args=[guichet_id])
             guichet = dict(
                 id=row.id,
-                nom=row.nom,
+                creation=row.creation,
+                code_commune=row.commune.code,
+                commune=row.commune,
+                agf1=row.agf1,
+                mobile1=row.mobile1,
+                agf2=row.agf2,
+                mobile2=row.mobile2,
+                etat=row.etat,
                 lien_editer=lien_editer,
                 lien_supprimer=lien_supprimer
             )

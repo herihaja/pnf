@@ -22,8 +22,8 @@
     <li>
         <a href="javascript:void(0)">Guichets fonciers</a>
         <ul>
-            <li><a href="">Liste des guichets</a></li>
-            <li><a href="">Nouveau guichet</a></li>
+            <li><a href="{% url guichets.views.lister_guichet %}">Liste des guichets</a></li>
+            <li><a href="{% url guichets.views.ajouter_guichet %}">Nouveau guichet</a></li>
             <li><a href="">Etat d'envoi des RMA</a></li>
             <li><a href="" class="last">Guichets par bailleurs</a></li>
         </ul>
@@ -31,9 +31,9 @@
     <li>
         <a href="javascript:void(0)">Données</a>
         <ul>
-            <li><a href="">Données validées</a></li>
-            <li><a href="">SMS reçus</a></li>
-            <li><a href="" class="last">SMS envoyés</a></li>
+            <li><a href="{% url donnees.views.lister_donnees %}">Données validées</a></li>
+            <li><a href="{% url sms.views.lister_reception %}">SMS reçus</a></li>
+            <li><a href="{% url sms.views.lister_envoi %}" class="last">SMS envoyés</a></li>
         </ul>
     </li>
     <li>
@@ -47,7 +47,7 @@
         <a href="javascript:void(0)" class="last">Paramètres</a>
         <ul>
             <li><a href="">Utilisateurs</a></li>
-            <li><a href="">Bailleurs</a></li>
+            <li><a href="{% url bailleurs.views.lister_bailleur %}">Bailleurs</a></li>
             <li><a href="{% url localites.views.lister_region %}">Régions</a></li>
             <li><a href="{% url localites.views.lister_district %}">Districts</a></li>
             <li><a href="{% url localites.views.lister_commune %}" class="last">Communes</a></li>

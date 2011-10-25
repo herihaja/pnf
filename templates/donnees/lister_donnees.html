@@ -1,0 +1,75 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div class="titlebar">
+        <div class="title">
+            <h1>Liste des données</h1>
+        </div>
+        <div class="navigation">
+            <a href="{% url donnees.views.ajouter_donnees %}">Ajouter une donnée</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="filter-form">
+        <form action="." method="post" id="form-filter">
+            {% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+            <div class="clear-l"></div>
+            <input type="hidden" name="action" value="liste" id="action" />
+            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
+            <input type="submit" value="Exporter" id="export-button"/>
+            <div class="clear-l"></div>
+        </form>
+    </div>
+
+    {% if donnees.object_list|length > 0 %}
+    <table class="tb_list">
+        <tr>
+            <th width="220">Nom</th>
+            <th width="80">Code</th>
+            <th width="140">Région</th>
+            <th width="140">District</th>
+            <th width="140" style="text-align: center">Actions</th>
+        </tr>
+        {% for donnee in donnees.object_list %}
+        <tr>
+            <td>{{ donnee.nom }}</td>
+            <td>{{ donnee.code }}</td>
+            <td>{{ donnee.region }}</td>
+            <td>{{ donnee.district }}</td>
+            <td class="tb_action">
+                <a href="{{ donnee.lien_editer }}">edit</a>
+                <a href="{{ donnee.lien_supprimer }}"
+                   onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <div class="current">
+            Page {{ donnees.number }} sur {{ donnees.paginator.num_pages }}.
+        </div>
+        <div class="step-links">
+            {% if donnees.has_previous %}
+                <a href="javascript:void(0)" rel="{{ donnees.previous_page_number }}">&lt; Préc.</a>
+            {% endif %}
+            {% if donnees.has_next %}
+                <a href="javascript:void(0)" rel="{{ donnees.next_page_number }}">Suiv. &gt;</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <script type="text/javascript">
+        $('.step-links a').live('click', function() {
+            $('#id_page').val($(this).attr('rel'));
+            $('#form-filter').submit();
+        });
+    </script>
+    {% else %}
+        <div class="message">Aucunes données enregistrées.</div>
+    {% endif %}
+{% endblock %}

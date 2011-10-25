@@ -1,0 +1,65 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div class="titlebar">
+        <div class="title">
+            <h1>Liste des SMS envoyés</h1>
+        </div>
+        <div class="navigation"></div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="filter-form">
+        <form action="." method="post" id="form-filter">
+            {% csrf_token %}
+            <ul>
+            {{ form.as_ul }}
+            </ul>
+            <div class="clear-l"></div>
+            <input type="hidden" name="action" value="liste" id="action" />
+            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
+            <input type="submit" value="Exporter" id="export-button"/>
+            <div class="clear-l"></div>
+        </form>
+    </div>
+
+    {% if envois.object_list|length > 0 %}
+    <table class="tb_list">
+        <tr>
+            <th width="150">Date d'envoi</th>
+            <th width="150">Destinataire</th>
+            <th width="400">Message</th>
+        </tr>
+        {% for envoi in envois.object_list %}
+        <tr>
+            <td>{{ envoi.date_envoi }}</td>
+            <td>{{ envoi.destinataire }}</td>
+            <td>{{ envoi.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <div class="current">
+            Page {{ envois.number }} sur {{ envois.paginator.num_pages }}.
+        </div>
+        <div class="step-links">
+            {% if envois.has_previous %}
+                <a href="javascript:void(0)" rel="{{ envois.previous_page_number }}">&lt; Préc.</a>
+            {% endif %}
+            {% if envois.has_next %}
+                <a href="javascript:void(0)" rel="{{ envois.next_page_number }}">Suiv. &gt;</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <script type="text/javascript">
+        $('.step-links a').live('click', function() {
+            $('#id_page').val($(this).attr('rel'));
+            $('#form-filter').submit();
+        });
+    </script>
+    {% else %}
+        <div class="message">Aucun SMS envoyé enregistré.</div>
+    {% endif %}
+{% endblock %}

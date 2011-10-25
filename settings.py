@@ -111,21 +111,27 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'compressor',
     'pnf.bailleurs',
-#    'pnf.donnees',
+    'pnf.donnees',
     'pnf.guichets',
-#    'pnf.indicateurs',
     'pnf.localites',
+    'pnf.import',
 #    'pnf.ratios',
-#    'pnf.sms',
+    'pnf.sms',
 #    'pnf.utilisateurs',
     'django.contrib.admin',
 )
 
-COMPRESS_PRECOMPILERS = (
-    ('text/x-sass', 'sass {infile} {outfile}'),
-    ('text/x-scss', 'sass --scss {infile} {outfile}'),
-)
-COMPRESS_ENABLED = False
+COMPILER_FORMATS = {
+    '.sass': {
+        'binary_path': 'sass',
+        'arguments': '*.sass *.css'
+    },
+    '.scss': {
+        'binary_path': 'sass',
+        'arguments': '*.scss *.css'
+    }
+}
+COMPRESS = False
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

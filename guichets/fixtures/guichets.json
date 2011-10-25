@@ -1,0 +1,11 @@
+[
+    {
+        "model":"guichets.Guichet",
+        "pk":22,
+        "fields": {
+            "province":3,
+            "nom":"Vatovavy-Fitovinany",
+            "code": "121"
+        }
+    }
+]

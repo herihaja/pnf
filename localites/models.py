@@ -56,7 +56,7 @@ class CommuneManager(Manager):
         if len(code) > 0:
             qry = qry & Q(code__icontains=code)
         if len(district) > 0:
-            qry = qry & Q(region=int(district))
+            qry = qry & Q(district=int(district))
         if len(region) > 0:
             qry = qry & Q(district__region=int(region))
 
