@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from donnees.models import Donnees, DonneesManager
+from donnees.models import Donnees
 from donnees.forms import DonneesForm, FiltreDonneesForm
 from helpers import paginate, export_excel
 

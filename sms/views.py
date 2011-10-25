@@ -20,12 +20,14 @@ def lister_reception(request):
         form = FiltreReceptionForm(request.POST)
         rows = Reception.objects.filtrer(request)
         page = int(request.POST['page'])
+        if request.POST['action'] == 'export':
+            return export(rows)
 
     if rows is not None:
         for row in rows:
             reception_id = row.id
-            lien_editer = reverse(editer_reception, args=[reception_id])
-            lien_supprimer = reverse(supprimer_reception, args=[reception_id])
+            lien_editer = 'to_replace'#reverse(editer_reception, args=[reception_id])
+            lien_supprimer = 'to_replace'#reverse(supprimer_reception, args=[reception_id])
             reception = dict(
                 id=row.id,
                 date_reception = row.date_reception,
@@ -73,3 +75,16 @@ def lister_envoi(request):
 
     return render_to_response('sms/lister_envoi.html', {"envois": envois, "form": form},
                               context_instance=RequestContext(request))
+
+
+def editer_reception(request, reception_id=None):
+    return HttpResponse("Page en cours ....%s" % reception_id)
+
+def export(rows):
+    header = ['Date de reception', 'Expediteur','Message', 'Statut', 'retour']
+    liste = []
+    for row in rows:
+        cleaned_row = [row.date_reception, row.expediteur, row.message, row.statut, row.retour]
+        liste.append(cleaned_row)
+    ret = export_excel(header, liste, 'reçus')
+    return ret
