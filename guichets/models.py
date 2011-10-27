@@ -33,4 +33,4 @@ class Guichet(Model):
     objects = GuichetManager()
 
     def __unicode__(self):
-        return self.nom
+        return self.commune

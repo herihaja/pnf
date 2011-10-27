@@ -20,7 +20,7 @@
             <div class="clear-l"></div>
             <input type="hidden" name="action" value="liste" id="action" />
             <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <input type="submit" value="Exporter" id="export-button"/>
+            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
             <div class="clear-l"></div>
         </form>
     </div>
@@ -36,9 +36,9 @@
             <th width="60">Cert</th>
             <th width="60">Cert F</th>
             <th width="100">Surface</th>
-            <th width="100">Femmes</th>
+            <th width="100">Recettes</th>
             <th width="60">Gar</th>
-            <th width="60">Rec</th>
+            <th width="60">Reco</th>
             <th width="60">Mut</th>
             <th width="60">Valide</th>
             <th width="140" style="text-align: center">Actions</th>
@@ -46,7 +46,7 @@
         {% for donnee in donnees.object_list %}
         <tr>
             <td>{{ donnee.code }}</td>
-            <td>{{ donnee.periode }}</td>
+            <td>{{ donnee.periode|date:"m/Y" }}</td>
             <td>{{ donnee.demandes }}</td>
             <td>{{ donnee.oppositions }}</td>
             <td>{{ donnee.resolues }}</td>
@@ -90,4 +90,10 @@
     {% else %}
         <div class="message">Aucunes données enregistrées.</div>
     {% endif %}
+
+    <script type="text/javascript">
+        $('label[for="id_code"]').css({'clear': 'left'});
+        $('label[for="id_femmes"]').css({'clear': 'left'});
+        $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
+    </script>
 {% endblock %}

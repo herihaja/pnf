@@ -28,11 +28,12 @@ def lister_guichet(request):
             guichet_id = row.id
             lien_editer = reverse(editer_guichet, args=[guichet_id])
             lien_supprimer = reverse(supprimer_guichet, args=[guichet_id])
+
             guichet = dict(
                 id=row.id,
+                commune = row.commune,
+                code_commune = row.commune.code,
                 creation=row.creation,
-                code_commune=row.commune.code,
-                commune=row.commune,
                 agf1=row.agf1,
                 mobile1=row.mobile1,
                 agf2=row.agf2,

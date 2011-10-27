@@ -25,9 +25,9 @@ def lister_donnees(request):
 
     if rows is not None:
         for row in rows:
-            donnees_id = row.id
-            lien_editer = reverse(editer_donnees, args=[donnees_id])
-            lien_supprimer = reverse(supprimer_donnees, args=[donnees_id])
+            donnee_id = row.id
+            lien_editer = reverse(editer_donnees, args=[donnee_id])
+            lien_supprimer = reverse(supprimer_donnees, args=[donnee_id])
             donnees = dict(
                 id=row.id,
                 code = row.commune.code,
@@ -67,8 +67,8 @@ def ajouter_donnees(request):
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
 
-def editer_donnees(request, donnees_id=None):
-    obj = get_object_or_404(Donnee, pk=donnees_id)
+def editer_donnees(request, donnee_id=None):
+    obj = get_object_or_404(Donnees, pk=donnee_id)
 
     if request.method == 'GET':
         form = DonneesForm(instance=obj)
@@ -83,8 +83,8 @@ def editer_donnees(request, donnees_id=None):
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
 
-def supprimer_donnees(request, donnees_id=None):
-    obj = get_object_or_404(Donnee, pk=donnees_id)
+def supprimer_donnees(request, donnee_id=None):
+    obj = get_object_or_404(Donnees, pk=donnee_id)
     obj.delete()
     return HttpResponseRedirect(reverse(lister_donnees))
 
