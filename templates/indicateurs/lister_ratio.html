@@ -1,0 +1,89 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div class="titlebar">
+        <div class="title">
+            <h1>Indicateur par localité</h1>
+        </div>
+        <div class="navigation">
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="filter-form">
+        <form action="." method="post" id="form-filter">
+            {% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+            <div class="clear-l"></div>
+            <input type="hidden" name="action" value="liste" id="action" />
+            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
+            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
+            <div class="clear-l"></div>
+        </form>
+    </div>
+    {% if donnees.object_list|length > 0 %}
+    <table class="tb_list">
+        <tr>
+            <th width="100">Commune</th>
+            <th width="60">Jan</th>
+            <th width="60">Fév</th>
+            <th width="60">Mar</th>
+            <th width="60">Avr</th>
+            <th width="60">Mai</th>
+            <th width="60">Jun</th>
+            <th width="60">Jul</th>
+            <th width="60">Aou</th>
+            <th width="60">Sep</th>
+            <th width="60">Oct</th>
+            <th width="60">Nov</th>
+            <th width="60">Déc</th>
+            <th width="80">Moyenne</th>
+        </tr>
+        {% for donnee in donnees.object_list %}
+        <tr>
+            <td>{{ donnee.commune }}</td>
+            <td>{{ donnee.1 }}</td>
+            <td>{{ donnee.2 }}</td>
+            <td>{{ donnee.3 }}</td>
+            <td>{{ donnee.4 }}</td>
+            <td>{{ donnee.5 }}</td>
+            <td>{{ donnee.6 }}</td>
+            <td>{{ donnee.7 }}</td>
+            <td>{{ donnee.8 }}</td>
+            <td>{{ donnee.9 }}</td>
+            <td>{{ donnee.10 }}</td>
+            <td>{{ donnee.11 }}</td>
+            <td>{{ donnee.12 }}</td>
+            <td>{{ donnee.moyenne }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <div class="current">
+            Page {{ donnees.number }} sur {{ donnees.paginator.num_pages }}.
+        </div>
+        <div class="step-links">
+            {% if donnees.has_previous %}
+                <a href="javascript:void(0)" rel="{{ donnees.previous_page_number }}">&lt; Préc.</a>
+            {% endif %}
+            {% if donnees.has_next %}
+                <a href="javascript:void(0)" rel="{{ donnees.next_page_number }}">Suiv. &gt;</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <script type="text/javascript">
+        $('.step-links a').live('click', function() {
+            $('#id_page').val($(this).attr('rel'));
+            $('#form-filter').submit();
+        });
+
+        $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
+    </script>
+    {% else %}
+        <div class="message">Aucunes données enregistrées.</div>
+    {% endif %}
+{% endblock %}

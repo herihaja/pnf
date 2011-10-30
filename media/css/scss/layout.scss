@@ -5,7 +5,7 @@ body {
     font-size:11px;
     &.body {
         text-align:center;
-        background:#DAD293;
+        #background:#DAD293;
     }
     a {
         text-decoration:none;
@@ -95,6 +95,7 @@ body {
                             border-radius:0 0 6px 6px;
                             li {
                                 float:none;
+                                display:block;
                                 a {
                                     height:25px;
                                     width:160px;

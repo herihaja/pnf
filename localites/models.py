@@ -7,6 +7,10 @@ from django.db.models import Q, Model, Manager
 class Province(Model):
     nom = models.CharField(max_length=20)
     code = models.CharField(max_length=6, blank=True, null=True)
+    slug = models.SlugField()
+
+    class Meta:
+        ordering = ['nom']
 
     def __unicode__(self):
         return self.nom
@@ -15,6 +19,10 @@ class Region(Model):
     province = models.ForeignKey(Province, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=20)
     code = models.CharField(max_length=6, blank=True, null=True)
+    slug = models.SlugField()
+
+    class Meta:
+        ordering = ['nom']
 
     def __unicode__(self):
         return self.nom
@@ -38,8 +46,12 @@ class District(Model):
     region = models.ForeignKey(Region, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
     code = models.CharField(max_length=6, blank=True, null=True)
+    slug = models.SlugField()
 
     objects = DistrictManager()
+
+    class Meta:
+        ordering = ['nom']
 
     def __unicode__(self):
         return self.nom
@@ -66,8 +78,12 @@ class Commune(Model):
     district = models.ForeignKey(District, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=40)
     code = models.CharField(max_length=8, blank=True, null=True)
+    slug = models.SlugField()
 
     objects = CommuneManager()
+
+    class Meta:
+        ordering = ['nom']
 
     def __unicode__(self):
         return self.nom

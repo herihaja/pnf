@@ -1,0 +1,90 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div class="titlebar">
+        <div class="title">
+            <h1>Liste des données cumulées</h1>
+        </div>
+        <div class="navigation">
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="filter-form">
+        <form action="." method="post" id="form-filter">
+            {% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+            <div class="clear-l"></div>
+            <input type="hidden" name="action" value="liste" id="action" />
+            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
+            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
+            <div class="clear-l"></div>
+        </form>
+    </div>
+
+    {% if cumuls.object_list|length > 0 %}
+    <table class="tb_list">
+        <tr>
+            <th width="100">Commune</th>
+            <th width="100">Période</th>
+            <th width="60">Dem</th>
+            <th width="60">Opp</th>
+            <th width="60">Res</th>
+            <th width="60">Cert</th>
+            <th width="60">Cert F</th>
+            <th width="100">Surface</th>
+            <th width="100">Recettes</th>
+            <th width="60">Gar</th>
+            <th width="60">Reco</th>
+            <th width="60">Mut</th>
+        </tr>
+        {% for cumul in cumuls.object_list %}
+        <tr>
+            <td>{{ cumul.code }}</td>
+            <td>{{ cumul.periode|date:"m/Y" }}</td>
+            <td>{{ cumul.demandes }}</td>
+            <td>{{ cumul.oppositions }}</td>
+            <td>{{ cumul.resolues }}</td>
+            <td>{{ cumul.certificats }}</td>
+            <td>{{ cumul.femmes }}</td>
+            <td>{{ cumul.surfaces }}</td>
+            <td>{{ cumul.recettes }}</td>
+            <td>{{ cumul.garanties }}</td>
+            <td>{{ cumul.reconnaissances }}</td>
+            <td>{{ cumul.mutations }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <div class="current">
+            Page {{ cumuls.number }} sur {{ cumuls.paginator.num_pages }}.
+        </div>
+        <div class="step-links">
+            {% if cumuls.has_previous %}
+                <a href="javascript:void(0)" rel="{{ cumuls.previous_page_number }}">&lt; Préc.</a>
+            {% endif %}
+            {% if cumuls.has_next %}
+                <a href="javascript:void(0)" rel="{{ cumuls.next_page_number }}">Suiv. &gt;</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <script type="text/javascript">
+        $('.step-links a').live('click', function() {
+            $('#id_page').val($(this).attr('rel'));
+            $('#form-filter').submit();
+        });
+    </script>
+    {% else %}
+        <div class="message">Aucunes données enregistrées.</div>
+    {% endif %}
+
+    <script type="text/javascript">
+        $('label[for="id_code"]').css({'clear': 'left'});
+        $('label[for="id_femmes"]').css({'clear': 'left'});
+        $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
+    </script>
+{% endblock %}

@@ -5,7 +5,7 @@ body {
   font-size: 11px; }
   body.body {
     text-align: center;
-    background: #DAD293; }
+    #background: #DAD293; }
   body a {
     text-decoration: none;
     color: #327e04; }
@@ -82,7 +82,8 @@ body {
               border-bottom: 1px solid #AFA769;
               border-radius: 0 0 6px 6px; }
               body #wrapper #header #header-nav ul li ul li {
-                float: none; }
+                float: none;
+                display: block; }
                 body #wrapper #header #header-nav ul li ul li a {
                   height: 25px;
                   width: 160px;

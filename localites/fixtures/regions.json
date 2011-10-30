@@ -5,7 +5,8 @@
         "fields": {
             "province":5,
             "nom":"Alaotra-Mangoro",
-            "code": "100"
+            "code": "100",
+            "slug": "alaotra"
         }
     },
     {
@@ -14,7 +15,8 @@
         "fields": {
             "province":3,
             "nom":"Amoron'i Mania",
-            "code": "101"
+            "code": "101",
+            "slug": "amoron-i-mania"
         }
     },
     {
@@ -23,7 +25,8 @@
         "fields": {
             "province":1,
             "nom":"Analamanga",
-            "code": "102"
+            "code": "102",
+            "slug": "analamanga"
         }
     },
     {
@@ -32,7 +35,8 @@
         "fields": {
             "province":5,
             "nom":"Analanjirofo",
-            "code": "103"
+            "code": "103",
+            "slug": "analanjirofo"
         }
     },
     {
@@ -41,7 +45,8 @@
         "fields": {
             "province":6,
             "nom":"Androy",
-            "code": "104"
+            "code": "104",
+            "slug": "androy"
         }
     },
     {
@@ -50,7 +55,8 @@
         "fields": {
             "province":6,
             "nom":"Anosy",
-            "code": "105"
+            "code": "105",
+            "slug": "anosy"
         }
     },
     {
@@ -59,7 +65,8 @@
         "fields": {
             "province":6,
             "nom":"Atsimo-Andrefana",
-            "code": "106"
+            "code": "106",
+            "slug": "atsimo-andrefana"
         }
     },
     {
@@ -68,7 +75,8 @@
         "fields": {
             "province":3,
             "nom":"Atsimo-Atsinanana",
-            "code": "107"
+            "code": "107",
+            "slug": "atsimo-atsinana"
         }
     },
     {
@@ -77,7 +85,8 @@
         "fields": {
             "province":5,
             "nom":"Atsinanana",
-            "code": "108"
+            "code": "108",
+            "slug": "atsinanana"
         }
     },
     {
@@ -86,7 +95,8 @@
         "fields": {
             "province":4,
             "nom":"Betsiboka",
-            "code": "109"
+            "code": "109",
+            "slug": "betsiboka"
         }
     },
     {
@@ -95,7 +105,8 @@
         "fields": {
             "province":4,
             "nom":"Boeny",
-            "code": "110"
+            "code": "110",
+            "slug": "boeny"
         }
     },
     {
@@ -104,7 +115,8 @@
         "fields": {
             "province":1,
             "nom":"Bongolava",
-            "code": "111"
+            "code": "111",
+            "slug": "bongolava"
         }
     },
     {
@@ -113,7 +125,8 @@
         "fields": {
             "province":2,
             "nom":"Diana",
-            "code": "112"
+            "code": "112",
+            "slug": "diana"
         }
     },
     {
@@ -122,7 +135,8 @@
         "fields": {
             "province":3,
             "nom":"Haute Matsiatra",
-            "code": "113"
+            "code": "113",
+            "slug": "haute-matsiatra"
         }
     },
     {
@@ -131,7 +145,8 @@
         "fields": {
             "province":6,
             "nom":"Ihorombe",
-            "code": "114"
+            "code": "114",
+            "slug": "ihorombe"
         }
     },
     {
@@ -140,7 +155,8 @@
         "fields": {
             "province":1,
             "nom":"Itasy",
-            "code": "115"
+            "code": "115",
+            "slug": "itasy"
         }
     },
     {
@@ -149,7 +165,8 @@
         "fields": {
             "province":4,
             "nom":"Melaky",
-            "code": "116"
+            "code": "116",
+            "slug": "melaky"
         }
     },
     {
@@ -158,7 +175,8 @@
         "fields": {
             "province":6,
             "nom":"Menabe",
-            "code": "117"
+            "code": "117",
+            "slug": "menabe"
         }
     },
     {
@@ -167,7 +185,8 @@
         "fields": {
             "province":2,
             "nom":"Sava",
-            "code": "118"
+            "code": "118",
+            "slug": "sava"
         }
     },
     {
@@ -176,7 +195,8 @@
         "fields": {
             "province":4,
             "nom":"Sofia",
-            "code": "119"
+            "code": "119",
+            "slug": "sofia"
         }
     },
     {
@@ -185,7 +205,8 @@
         "fields": {
             "province":1,
             "nom":"Vakinankaratra",
-            "code": "120"
+            "code": "120",
+            "slug": "vakinankaratra"
         }
     },
     {
@@ -194,7 +215,8 @@
         "fields": {
             "province":3,
             "nom":"Vatovavy-Fitovinany",
-            "code": "121"
+            "code": "121",
+            "slug": "vatovavy-fitovinany"
         }
     }
 ]

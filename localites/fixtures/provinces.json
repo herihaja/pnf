@@ -4,7 +4,8 @@
         "pk": 1,
         "fields": {
             "nom": "Antananarivo",
-            "code": "1"
+            "code": "1",
+            "slug": "antananarivo"
         }
     },
     {
@@ -12,7 +13,8 @@
         "pk": 2,
         "fields": {
             "nom": "Antsiranana",
-            "code": "2"
+            "code": "2",
+            "slug": "antsiranana"
         }
     },
     {
@@ -20,7 +22,8 @@
         "pk": 3,
         "fields": {
             "nom": "Fianarantsoa",
-            "code": "3"
+            "code": "3",
+            "slug": "fianaratsoa"
         }
     },
     {
@@ -28,7 +31,8 @@
         "pk": 4,
         "fields": {
             "nom": "Mahajanga",
-            "code": "4"
+            "code": "4",
+            "slug": "mahajanga"
         }
     },
     {
@@ -36,7 +40,8 @@
         "pk": 5,
         "fields": {
             "nom": "Toamasina",
-            "code": "5"
+            "code": "5",
+            "slug": "toamasina"
         }
     },
     {
@@ -44,7 +49,8 @@
         "pk": 6,
         "fields": {
             "nom": "Toliara",
-            "code": "6"
+            "code": "6",
+            "slug": "toliara"
         }
     }
 ]

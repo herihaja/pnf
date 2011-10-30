@@ -5,18 +5,18 @@
     <li>
         <a href="javascript:void(0)">Indicateurs</a>
         <ul>
-            <li><a href="">Indicateurs par localite</a></li>
-            <li><a href="" class="last">Indicateurs par période</a></li>
+            <li><a href="{% url indicateurs.views.indicateurs_par_date %}">Indicateurs par localite</a></li>
+            <li><a href="{% url indicateurs.views.indicateur_par_date %}" class="last">Indicateurs par période</a></li>
         </ul>
     </li>
     <li>
         <a href="javascript:void(0)">Ratios</a>
         <ul>
-            <li><a href="">Taux de conflictualité</a></li>
-            <li><a href="">Taux de résolution</a></li>
-            <li><a href="">Ratio</a></li>
-            <li><a href="">Surface moyen</a></li>
-            <li><a href="" class="last">Ratio</a></li>
+            <li><a href="/ratios/certification/">Taux de certification</a></li>
+            <li><a href="/ratios/certification-aux-femmes/">Certificats femmes</a></li>
+            <li><a href="/ratios/conflictualite/">Taux de conflictualité</a></li>
+            <li><a href="/ratios/resolution/">Taux de résolution</a></li>
+            <li><a href="/ratios/surface-moyen/">Surface moyen</a></li>
         </ul>
     </li>
     <li>
@@ -46,7 +46,7 @@
     <li>
         <a href="javascript:void(0)" class="last">Paramètres</a>
         <ul>
-            <li><a href="">Utilisateurs</a></li>
+            <li><a href="javascript:void(0)">Utilisateurs</a></li>
             <li><a href="{% url bailleurs.views.lister_bailleur %}">Bailleurs</a></li>
             <li><a href="{% url localites.views.lister_region %}">Régions</a></li>
             <li><a href="{% url localites.views.lister_district %}">Districts</a></li>

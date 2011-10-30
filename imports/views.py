@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
@@ -24,23 +26,11 @@ LISTE_MOIS = {
     'decembre' : '12'
 }
 
-def _ajouter_commune(commune, code, district):
-    commune_nom = commune.strip()
-    commune_nom = commune_nom.replace('  ', '')
-    commune_code = str(int(code))
-    try:
-        commune_obj = Commune.objects.get(nom__iexact=commune_nom)
-    except Commune.DoesNotExist:
-        try:
-            district_nom = district.strip()
-            district_nom = district_nom.replace('  ', '')
-            district_obj = District.objects.get(nom__iexact=district_nom)
-            commune_obj = Commune(nom=commune, code=commune_code, district=district_obj)
-            commune_obj.save()
-        except District.DoesNotExist:
-            return None
-
-    return commune_obj
+def _nettoyer_nom(nom):
+    nom = nom.strip()
+    nom = nom.replace('  ', '')
+    nom = slugify(nom)
+    return nom
 
 def _convesion_int(n):
     if n is None or n == '':
@@ -56,11 +46,28 @@ def _convesion_float(n):
         n = float(n)
     return n
 
+def _ajouter_commune(commune, code, district):
+    commune_slug =  _nettoyer_nom(commune)
+    commune_code = str(int(code))
+    district_slug = _nettoyer_nom(district)
+    try:
+        commune_obj = Commune.objects.get(slug=commune_slug, district__slug=district_slug)
+    except Commune.DoesNotExist:
+        try:
+            district_obj = District.objects.get(slug=district_slug)
+            commune_obj = Commune(nom=commune, code=commune_code, slug=commune_slug, district=district_obj)
+            commune_obj.save()
+        except District.DoesNotExist:
+            return None
+
+    return commune_obj
+
 def importer_donnees(request):
     book = xlrd.open_workbook("media/data2010.xls")
     sheet = book.sheets()[0]
 
     data_ignored = []
+    data_added = 0
     for i in xrange(sheet.nrows):
         row = sheet.row_values(i)
         commune = _ajouter_commune(row[5], row[1], row[4])
@@ -75,15 +82,6 @@ def importer_donnees(request):
                 if mois in LISTE_MOIS:
                     mois = LISTE_MOIS[mois]
                     periode = annee + '-' + mois + '-01'
-
-                    # verifier si doublon
-                    doublon = Donnees.objects.filter(periode=periode, commune=commune, valide=True)
-                    if doublon is not None:
-                        valide = False
-                    else:
-                        valide = True
-
-                    # insertion donnee
                     obj = Donnees(
                         commune = commune,
                         periode = periode,
@@ -97,16 +95,18 @@ def importer_donnees(request):
                         garanties = _convesion_int(row[14]),
                         reconnaissances = _convesion_int(row[15]),
                         mutations = _convesion_int(row[16]),
-                        valide = valide
+                        valide = True,
                     )
-                    obj.save()
-                    print obj
+                    if obj.save():
+                        data_added += 1
+                    else:
+                        data_ignored.append(u'Mois précédents non remplis ligne %s' % i)
                 else:
-                    data_ignored.append('%s mois' % i)
+                    data_ignored.append('Mois introuvable ligne %s' % i)
             else:
-                data_ignored.append('%s annee / mois' % i)
+                data_ignored.append('Annee ou mois vide ligne' % i)
         else:
-            data_ignored.append('%s commune' % i)
+            data_ignored.append('Commune introuvable ligne %s' % i)
 
-    return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored},
+    return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
                               context_instance=RequestContext(request))

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from donnees.models import Donnees
+from donnees.models import Donnees, Cumul
 from donnees.forms import DonneesForm, FiltreDonneesForm
 from helpers import paginate, export_excel
 
@@ -21,7 +21,7 @@ def lister_donnees(request):
         rows = Donnees.objects.filtrer(request)
         page = int(request.POST['page'])
         if request.POST['action'] == 'export':
-            return export(rows)
+            return _export(rows)
 
     if rows is not None:
         for row in rows:
@@ -61,8 +61,13 @@ def ajouter_donnees(request):
 
     form = DonneesForm(request.POST)
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse(lister_donnees))
+        if form.save():
+            form = RegionForm()
+            message = "Vos données ont été ajoutées avec succès."
+        else:
+            message = "Veuillez d'abord enregistrer les données des mois précédents."
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message},
+                                  context_instance=RequestContext(request))
     else:
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
@@ -77,18 +82,65 @@ def editer_donnees(request, donnee_id=None):
 
     form = DonneesForm(request.POST, instance=obj)
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse(lister_donnees))
+        if form.save():
+            form = RegionForm()
+            message = "Vos données ont été mises à jour avec succès."
+        else:
+            message = "Veuillez d'abord enregistrer les données des mois précédents."
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message},
+                                  context_instance=RequestContext(request))
     else:
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
 
 def supprimer_donnees(request, donnee_id=None):
     obj = get_object_or_404(Donnees, pk=donnee_id)
-    obj.delete()
+    if obj.delete():
+        message = "Vos données on été supprimées avec succès."
+    else:
+        message = "Vous devez supprimer les données des mois suivants avant de poursuivre."
     return HttpResponseRedirect(reverse(lister_donnees))
 
-def export(rows):
+
+
+def lister_cumuls(request):
+    cumuls_liste = []
+
+    if request.method == 'GET':
+        form = FiltreDonneesForm()
+        rows = Cumul.objects.all()
+        page = int(request.GET.get('page', '1'))
+    else:
+        form = FiltreDonneesForm(request.POST)
+        rows = Cumul.filtered_objects.filtrer(request)
+        page = int(request.POST['page'])
+        if request.POST['action'] == 'export':
+            return _export(rows)
+
+    if rows is not None:
+        for row in rows:
+            cumuls = dict(
+                code = row.commune.code,
+                periode = row.periode,
+                demandes = row.demandes,
+                oppositions = row.oppositions,
+                resolues = row.resolues,
+                certificats = row.certificats,
+                femmes = row.femmes,
+                surfaces = row.surfaces,
+                recettes = row.recettes,
+                garanties = row.garanties,
+                reconnaissances = row.reconnaissances,
+                mutations = row.mutations,
+            )
+            cumuls_liste.append(cumuls)
+
+    cumuls = paginate(cumuls_liste, 25, page)
+
+    return render_to_response('donnees/lister_cumul.html', {"cumuls": cumuls, "form": form},
+                              context_instance=RequestContext(request))
+
+def _export(rows):
     header = ['Commune', 'Sms','Periode', 'Demandes', 'Oppositions', 'Resolues', 'Certificats', 'Femmes', 'Recettes', 'Mutations', 'Surfaces', 'Garanties', 'Reconnaissance', 'Valide']
     liste = []
     for row in rows:
