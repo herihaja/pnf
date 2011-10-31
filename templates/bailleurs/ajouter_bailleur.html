@@ -8,14 +8,14 @@
         <div class="navigation">
             <a href="{% url bailleurs.views.lister_bailleur %}">Retour à la liste</a>
         </div>
-        <div class="clearboth"></div>
+        <div class="clear"></div>
     </div>
 
     <form action="" method="post">
         {% csrf_token %}
-        <fieldset>
+        <fieldset class="add">
             {{ form.as_p }}
-            <input type="submit" value="Enregistrer" />
+            <input type="submit" class="submit" value="Enregistrer" />
         </fieldset>
     </form>
 {% endblock %}

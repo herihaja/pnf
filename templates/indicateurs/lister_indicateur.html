@@ -26,37 +26,37 @@
     {% if donnees.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="100">Commune</th>
-            <th width="60">Jan</th>
-            <th width="60">Fév</th>
-            <th width="60">Mar</th>
-            <th width="60">Avr</th>
-            <th width="60">Mai</th>
-            <th width="60">Jun</th>
-            <th width="60">Jul</th>
-            <th width="60">Aou</th>
-            <th width="60">Sep</th>
-            <th width="60">Oct</th>
-            <th width="60">Nov</th>
-            <th width="60">Déc</th>
-            <th width="80">Total</th>
+            <th width="280">Commune</th>
+            <th width="50" align="center">Jan</th>
+            <th width="50" align="center">Fév</th>
+            <th width="50" align="center">Mar</th>
+            <th width="50" align="center">Avr</th>
+            <th width="50" align="center">Mai</th>
+            <th width="50" align="center">Jun</th>
+            <th width="50" align="center">Jul</th>
+            <th width="50" align="center">Aou</th>
+            <th width="50" align="center">Sep</th>
+            <th width="50" align="center">Oct</th>
+            <th width="50" align="center">Nov</th>
+            <th width="50" align="center">Déc</th>
+            <th width="60">Total</th>
         </tr>
         {% for donnee in donnees.object_list %}
         <tr>
-            <td>{{ donnee.commune }}</td>
-            <td>{{ donnee.1 }}</td>
-            <td>{{ donnee.2 }}</td>
-            <td>{{ donnee.3 }}</td>
-            <td>{{ donnee.4 }}</td>
-            <td>{{ donnee.5 }}</td>
-            <td>{{ donnee.6 }}</td>
-            <td>{{ donnee.7 }}</td>
-            <td>{{ donnee.8 }}</td>
-            <td>{{ donnee.9 }}</td>
-            <td>{{ donnee.10 }}</td>
-            <td>{{ donnee.11 }}</td>
-            <td>{{ donnee.12 }}</td>
-            <td>{{ donnee.total }}</td>
+            <td class="titre">{{ donnee.commune }}</td>
+            <td align="center">{{ donnee.1 }}</td>
+            <td align="center">{{ donnee.2 }}</td>
+            <td align="center">{{ donnee.3 }}</td>
+            <td align="center">{{ donnee.4 }}</td>
+            <td align="center">{{ donnee.5 }}</td>
+            <td align="center">{{ donnee.6 }}</td>
+            <td align="center">{{ donnee.7 }}</td>
+            <td align="center">{{ donnee.8 }}</td>
+            <td align="center">{{ donnee.9 }}</td>
+            <td align="center">{{ donnee.10 }}</td>
+            <td align="center">{{ donnee.11 }}</td>
+            <td align="center">{{ donnee.12 }}</td>
+            <td align="center" class="total">{{ donnee.total }}</td>
         </tr>
         {% endfor %}
     </table>
