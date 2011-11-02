@@ -26,10 +26,11 @@
     {% if receptions.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="150">Date de réception</th>
-            <th width="150">Expéditeur</th>
+            <th width="80">Date de réception</th>
+            <th width="60">Exp.</th>
             <th width="400">Message</th>
-            <th width="100">Statut</th>
+            <th width="50">Statut</th>
+            <th width="300">Retour</th>
         </tr>
         {% for reception in receptions.object_list %}
         <tr>

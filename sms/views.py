@@ -38,6 +38,7 @@ def lister_reception(request):
                 date_reception = row.date_reception,
                 expediteur = row.expediteur,
                 message = row.message,
+                retour = row.retour,
                 statut = row.statut,
                 lien_editer=lien_editer,
                 lien_supprimer=lien_supprimer
@@ -104,7 +105,7 @@ def sms_tester(request):
 
             donnees = Donnees(
                 commune = data['commune'],
-                sms = reception.insert_id(),
+                sms = reception,
                 periode = data['periode'],
                 demandes = data['demandes'],
                 oppositions = data['oppositions'],
@@ -142,7 +143,7 @@ def export(rows):
     return ret
 
 def _parser(message):
-    data = []
+    data = {}
     tokens = re.split(' \.', message)
 
     if len(tokens) < 12:
@@ -164,21 +165,24 @@ def _parser(message):
 
         mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
                    't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
+        # dict(p='periode', d='demandes', o='oppositions', r='resolues', c='certificats', f='femmes',
+        #           t='reconnaissances', a='recettes', s='surfaces', g='garanties', m='mutations')
 
         if len(agf) == 1:
+            agf = agf[0]
             data['commune'] = agf.commune
             for token in tokens:
                 token = token.strip()
-                token = token.split
+                token = token.split()
                 if token[0] in mapping:
                     if token[0] == 'p':
                         periode = token[1].split('.')
                         if len(periode[0]) > 2 or len(periode[1]) < 4:
                             return data, u"Date erronée"
                         else:
-                            data['periode'] = '%s-%s-01' & (periode[1], periode[0])
+                            data['periode'] = '%s-%s-01' % (periode[1], periode[0])
                     else:
-                        data[mapping[token[0]]] = int(token[1])
+                        data[mapping[token[0]]] = token[1]
                 else:
                     return data, u"Code question '%s' inconnu" % token[0]
             return data, u"Félicitations! Données enregistrées"
