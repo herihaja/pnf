@@ -97,6 +97,10 @@
 .pagination .current {
   width: 50%;
   float: left; }
+.pagination .step-links {
+  width: 50%;
+  float: right;
+  text-align: right; }
 
 fieldset.add {
   width: 80%;
@@ -154,3 +158,15 @@ fieldset.add {
     border: 1px solid #AAA;
     border-radius: 4px;
     padding: 2px 3px; }
+
+ul.errorlist {
+  margin: 0 0 1px 0;
+  padding: 8px 0 0 0;
+  clear: left;
+  list-style-type: none; }
+  ul.errorlist li {
+    display: inline;
+    padding: 2px 10px 2px 15px;
+    border-radius: 4px;
+    background-color: #DB1111;
+    color: #ffffff; }

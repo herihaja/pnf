@@ -3,7 +3,7 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Indicateur par localité</h1>
+            <h1>{{ indicateur }} par localité</h1>
         </div>
         <div class="navigation">
         </div>
@@ -80,7 +80,7 @@
             $('#id_page').val($(this).attr('rel'));
             $('#form-filter').submit();
         });
-
+        $('label[for="id_region"]').css({'clear': 'left'});
         $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
     </script>
     {% else %}

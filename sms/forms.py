@@ -23,3 +23,7 @@ class FiltreEnvoiForm(Form):
     date_envoi_de = forms.DateField(label='Envoyé entre le', required=False)
     date_envoi_a = forms.DateField(label='et le', required=False)
     page = forms.CharField(widget=forms.HiddenInput(), initial=1)
+
+class TesterForm(Form):
+    expediteur = forms.CharField(label='Expéditeur', max_length=20, required=True)
+    message = forms.CharField(label='Message', widget=forms.Textarea, required=True)

@@ -1391,5 +1391,1075 @@
             "code":"14112",
             "slug": "lalangina"
         }
+    },
+    {
+        "pk": 38,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ALAKAMISY AMBANO",
+            "code": "140401",
+            "slug": "alakamisy-ambano",
+            "district": 103
+        }
+    },
+    {
+        "pk": 39,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ALATSINAINY IBITY",
+            "code": "140402",
+            "slug": "alatsinainy-ibity",
+            "district": 103
+        }
+    },
+    {
+        "pk": 52,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOASANA VALABETOKANA",
+            "code": "140607",
+            "slug": "ambatoasana-valabetokana",
+            "district": 105
+        }
+    },
+    {
+        "pk": 48,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOFOTSY AMBOHIBORONA",
+            "code": "140601",
+            "slug": "ambatofotsy-ambohiborona",
+            "district": 105
+        }
+    },
+    {
+        "pk": 94,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOHARANANA",
+            "code": "520101",
+            "slug": "ambatoharanana",
+            "district": 18
+        }
+    },
+    {
+        "pk": 25,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOLAMPY",
+            "code": "140101",
+            "slug": "ambatolampy",
+            "district": 100
+        }
+    },
+    {
+        "pk": 1,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOLAMPY  TSIMAHAFOTSY",
+            "code": "110102",
+            "slug": "ambatolampytsimahafotsy",
+            "district": 10
+        }
+    },
+    {
+        "pk": 73,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOMAINTY",
+            "code": "510201",
+            "slug": "ambatomainty",
+            "district": 2
+        }
+    },
+    {
+        "pk": 4,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOMANOINA",
+            "code": "110302",
+            "slug": "ambatomanoina",
+            "district": 12
+        }
+    },
+    {
+        "pk": 40,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOMENA",
+            "code": "140404",
+            "slug": "ambatomena",
+            "district": 103
+        }
+    },
+    {
+        "pk": 60,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATONDRAZAKA SUBURBAINE",
+            "code": "510103",
+            "slug": "ambatondrazaka-suburbaine",
+            "district": 1
+        }
+    },
+    {
+        "pk": 33,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOTSIPIHINA",
+            "code": "140203",
+            "slug": "ambatotsipihina",
+            "district": 101
+        }
+    },
+    {
+        "pk": 88,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBATOVOLA",
+            "code": "510501",
+            "slug": "ambatovola",
+            "district": 5
+        }
+    },
+    {
+        "pk": 58,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBILA",
+            "code": "350306",
+            "slug": "ambila",
+            "district": 108
+        }
+    },
+    {
+        "pk": 74,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOAVORY",
+            "code": "510202",
+            "slug": "amboavory",
+            "district": 2
+        }
+    },
+    {
+        "pk": 95,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBODIMANGA II",
+            "code": "520102",
+            "slug": "ambodimanga-ii",
+            "district": 18
+        }
+    },
+    {
+        "pk": 34,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBODIRIANA",
+            "code": "140204",
+            "slug": "ambodiriana",
+            "district": 101
+        }
+    },
+    {
+        "pk": 102,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBODIVOANANTO",
+            "code": "530704",
+            "slug": "ambodivoananto",
+            "district": 50
+        }
+    },
+    {
+        "pk": 89,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIBARY",
+            "code": "510501",
+            "slug": "ambohibary",
+            "district": 5
+        }
+    },
+    {
+        "pk": 75,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIJANAHARY",
+            "code": "510204",
+            "slug": "ambohijanahary",
+            "district": 2
+        }
+    },
+    {
+        "pk": 76,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIMANDROSO",
+            "code": "510205",
+            "slug": "ambohimandroso",
+            "district": 2
+        }
+    },
+    {
+        "pk": 35,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIMANDROSO",
+            "code": "140205",
+            "slug": "ambohimandroso",
+            "district": 101
+        }
+    },
+    {
+        "pk": 37,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIMIARIVO",
+            "code": "140401",
+            "slug": "ambohimiarivo",
+            "district": 103
+        }
+    },
+    {
+        "pk": 5,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIMIRARY",
+            "code": "110306",
+            "slug": "ambohimirary",
+            "district": 12
+        }
+    },
+    {
+        "pk": 26,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHIPIHAONANA",
+            "code": "140104",
+            "slug": "ambohipihaonana",
+            "district": 100
+        }
+    },
+    {
+        "pk": 77,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHITRARIVO",
+            "code": "510206",
+            "slug": "ambohitrarivo",
+            "district": 2
+        }
+    },
+    {
+        "pk": 11,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHITROMBY",
+            "code": "110401",
+            "slug": "ambohitromby",
+            "district": 13
+        }
+    },
+    {
+        "pk": 61,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOHITSILAOZANA",
+            "code": "510105",
+            "slug": "ambohitsilaozana",
+            "district": 1
+        }
+    },
+    {
+        "pk": 106,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMBOVOMBE CENTRE",
+            "code": "610106",
+            "slug": "ambovombe-centre",
+            "district": 24
+        }
+    },
+    {
+        "pk": 2,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPANOTOKANA",
+            "code": "110108",
+            "slug": "ampanotokana",
+            "district": 10
+        }
+    },
+    {
+        "pk": 78,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPARAFARAVOLA",
+            "code": "510207",
+            "slug": "amparafaravola",
+            "district": 2
+        }
+    },
+    {
+        "pk": 62,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPARIHINTSORAKATRA",
+            "code": "510106",
+            "slug": "amparihintsorakatra",
+            "district": 1
+        }
+    },
+    {
+        "pk": 23,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPARY",
+            "code": "130305",
+            "slug": "ampary",
+            "district": 78
+        }
+    },
+    {
+        "pk": 96,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPASIMBE MANATSATRANA",
+            "code": "520103",
+            "slug": "ampasimbe-manatsatrana",
+            "district": 18
+        }
+    },
+    {
+        "pk": 97,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPASINA MANINGORY",
+            "code": "520104",
+            "slug": "ampasina-maningory",
+            "district": 18
+        }
+    },
+    {
+        "pk": 90,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPASIPOTSY GARE",
+            "code": "510505",
+            "slug": "ampasipotsy-gare",
+            "district": 5
+        }
+    },
+    {
+        "pk": 63,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "AMPITATSIMO",
+            "code": "510107",
+            "slug": "ampitatsimo",
+            "district": 1
+        }
+    },
+    {
+        "pk": 6,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANALAROA",
+            "code": "110309",
+            "slug": "analaroa",
+            "district": 12
+        }
+    },
+    {
+        "pk": 91,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDASIBE",
+            "code": "510508",
+            "slug": "andasibe",
+            "district": 5
+        }
+    },
+    {
+        "pk": 85,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDILAMENA",
+            "code": "510301",
+            "slug": "andilamena",
+            "district": 3
+        }
+    },
+    {
+        "pk": 64,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDILANATOBY",
+            "code": "510108",
+            "slug": "andilanatoby",
+            "district": 1
+        }
+    },
+    {
+        "pk": 53,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDRAFIABE",
+            "code": "210402",
+            "slug": "andrafiabe",
+            "district": 66
+        }
+    },
+    {
+        "pk": 41,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDRANOMANELATRA",
+            "code": "140409",
+            "slug": "andranomanelatra",
+            "district": 103
+        }
+    },
+    {
+        "pk": 27,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDRAVOLA VOHIPENO",
+            "code": "140106",
+            "slug": "andravola-vohipeno",
+            "district": 100
+        }
+    },
+    {
+        "pk": 28,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDRIAMBILANY",
+            "code": "140107",
+            "slug": "andriambilany",
+            "district": 100
+        }
+    },
+    {
+        "pk": 8,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANDROVAKELY",
+            "code": "110310",
+            "slug": "androvakely",
+            "district": 12
+        }
+    },
+    {
+        "pk": 101,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANJAHAMBE",
+            "code": "520606",
+            "slug": "anjahambe",
+            "district": 23
+        }
+    },
+    {
+        "pk": 18,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANKADINONDRY SAKAY",
+            "code": "120204",
+            "slug": "ankadinondry-sakay",
+            "district": 62
+        }
+    },
+    {
+        "pk": 12,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANKAZOBE",
+            "code": "110403",
+            "slug": "ankazobe",
+            "district": 13
+        }
+    },
+    {
+        "pk": 107,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANKILIZATO",
+            "code": "640205",
+            "slug": "ankilizato",
+            "district": 85
+        }
+    },
+    {
+        "pk": 79,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANORORO",
+            "code": "510212",
+            "slug": "anororo",
+            "district": 2
+        }
+    },
+    {
+        "pk": 103,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTANAMBAO MAHATSARA",
+            "code": "530707",
+            "slug": "antanambao-mahatsara",
+            "district": 50
+        }
+    },
+    {
+        "pk": 7,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTANETIBE",
+            "code": "110309",
+            "slug": "antanetibe",
+            "district": 12
+        }
+    },
+    {
+        "pk": 9,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTANETIBE ANATIVOLO",
+            "code": "110312",
+            "slug": "antanetibe-anativolo",
+            "district": 12
+        }
+    },
+    {
+        "pk": 86,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTANIMENABAKA",
+            "code": "510302",
+            "slug": "antanimenabaka",
+            "district": 3
+        }
+    },
+    {
+        "pk": 13,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTOTOHAZO",
+            "code": "110405",
+            "slug": "antotohazo",
+            "district": 13
+        }
+    },
+    {
+        "pk": 36,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTSAHALAVA",
+            "code": "140210",
+            "slug": "antsahalava",
+            "district": 101
+        }
+    },
+    {
+        "pk": 49,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTSAMPANIMAHAZO",
+            "code": "140603",
+            "slug": "antsampanimahazo",
+            "district": 105
+        }
+    },
+    {
+        "pk": 65,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTSANGASANGA",
+            "code": "510111",
+            "slug": "antsangasanga",
+            "district": 1
+        }
+    },
+    {
+        "pk": 98,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ANTSIATSIAKA",
+            "code": "520105",
+            "slug": "antsiatsiaka",
+            "district": 18
+        }
+    },
+    {
+        "pk": 92,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BEFORONA",
+            "code": "510512",
+            "slug": "beforona",
+            "district": 5
+        }
+    },
+    {
+        "pk": 29,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BEHENJY",
+            "code": "140112",
+            "slug": "behenjy",
+            "district": 100
+        }
+    },
+    {
+        "pk": 66,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BEJOFO",
+            "code": "510112",
+            "slug": "bejofo",
+            "district": 1
+        }
+    },
+    {
+        "pk": 10,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BELANITRA",
+            "code": "110313",
+            "slug": "belanitra",
+            "district": 12
+        }
+    },
+    {
+        "pk": 19,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BELOBAKA",
+            "code": "120207",
+            "slug": "belobaka",
+            "district": 62
+        }
+    },
+    {
+        "pk": 87,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "BEMAITSO",
+            "code": "510303",
+            "slug": "bemaitso",
+            "district": 3
+        }
+    },
+    {
+        "pk": 67,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "DIDY",
+            "code": "510113",
+            "slug": "didy",
+            "district": 1
+        }
+    },
+    {
+        "pk": 50,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "FARATSIHO",
+            "code": "140604",
+            "slug": "faratsiho",
+            "district": 105
+        }
+    },
+    {
+        "pk": 68,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "FERAMANGA NORD",
+            "code": "510114",
+            "slug": "feramanga-nord",
+            "district": 1
+        }
+    },
+    {
+        "pk": 14,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "FIADANANA",
+            "code": "110406",
+            "slug": "fiadanana",
+            "district": 13
+        }
+    },
+    {
+        "pk": 56,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "IARITSENA",
+            "code": "330111",
+            "slug": "iaritsena",
+            "district": 68
+        }
+    },
+    {
+        "pk": 69,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "ILAFY",
+            "code": "510115",
+            "slug": "ilafy",
+            "district": 1
+        }
+    },
+    {
+        "pk": 70,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "IMERIMANDROSO",
+            "code": "510116",
+            "slug": "imerimandroso",
+            "district": 1
+        }
+    },
+    {
+        "pk": 93,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "LAKATO",
+            "code": "510516",
+            "slug": "lakato",
+            "district": 5
+        }
+    },
+    {
+        "pk": 99,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAHANORO",
+            "code": "520108",
+            "slug": "mahanoro",
+            "district": 18
+        }
+    },
+    {
+        "pk": 20,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAHASOLO",
+            "code": "120211",
+            "slug": "mahasolo",
+            "district": 62
+        }
+    },
+    {
+        "pk": 54,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAHAVANONA",
+            "code": "210416",
+            "slug": "mahavanona",
+            "district": 66
+        }
+    },
+    {
+        "pk": 15,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAHAVELONA",
+            "code": "110409",
+            "slug": "mahavelona",
+            "district": 13
+        }
+    },
+    {
+        "pk": 3,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAHITSY",
+            "code": "110121",
+            "slug": "mahitsy",
+            "district": 10
+        }
+    },
+    {
+        "pk": 104,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MAINTINANDRY",
+            "code": "530712",
+            "slug": "maintinandry",
+            "district": 50
+        }
+    },
+    {
+        "pk": 71,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANAKAMBAHINY EST",
+            "code": "510117",
+            "slug": "manakambahiny-est",
+            "district": 1
+        }
+    },
+    {
+        "pk": 72,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANAKAMBAHINY OUEST",
+            "code": "510118",
+            "slug": "manakambahiny-ouest",
+            "district": 1
+        }
+    },
+    {
+        "pk": 42,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANANDONA",
+            "code": "140414",
+            "slug": "manandona",
+            "district": 103
+        }
+    },
+    {
+        "pk": 43,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANDROSOHASINA",
+            "code": "140415",
+            "slug": "mandrosohasina",
+            "district": 103
+        }
+    },
+    {
+        "pk": 44,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANGARANO",
+            "code": "140416",
+            "slug": "mangarano",
+            "district": 103
+        }
+    },
+    {
+        "pk": 30,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MANJAKATOMPO",
+            "code": "140114",
+            "slug": "manjakatompo",
+            "district": 100
+        }
+    },
+    {
+        "pk": 16,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MARONDRY",
+            "code": "110410",
+            "slug": "marondry",
+            "district": 13
+        }
+    },
+    {
+        "pk": 51,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MIANDRARIVO",
+            "code": "140605",
+            "slug": "miandrarivo",
+            "district": 105
+        }
+    },
+    {
+        "pk": 17,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MIANTSO",
+            "code": "110411",
+            "slug": "miantso",
+            "district": 13
+        }
+    },
+    {
+        "pk": 59,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MIZILO GARE",
+            "code": "350329",
+            "slug": "mizilo-gare",
+            "district": 108
+        }
+    },
+    {
+        "pk": 31,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "MORARANO",
+            "code": "140115",
+            "slug": "morarano",
+            "district": 100
+        }
+    },
+    {
+        "pk": 55,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "RAMENA",
+            "code": "210419",
+            "slug": "ramena",
+            "district": 66
+        }
+    },
+    {
+        "pk": 32,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SABOTSY NAMATOANA",
+            "code": "140116",
+            "slug": "sabotsy-namatoana",
+            "district": 100
+        }
+    },
+    {
+        "pk": 80,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SAHAMAMY",
+            "code": "510217",
+            "slug": "sahamamy",
+            "district": 2
+        }
+    },
+    {
+        "pk": 105,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SAHAMATEVINA",
+            "code": "530715",
+            "slug": "sahamatevina",
+            "district": 50
+        }
+    },
+    {
+        "pk": 57,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SAHAMBAVY",
+            "code": "330431",
+            "slug": "sahambavy",
+            "district": 112
+        }
+    },
+    {
+        "pk": 45,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SAHANIVOTRY MANANDONA",
+            "code": "140417",
+            "slug": "sahanivotry-manandona",
+            "district": 103
+        }
+    },
+    {
+        "pk": 24,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "SOAVINANDRIANA",
+            "code": "130314",
+            "slug": "soavinandriana",
+            "district": 78
+        }
+    },
+    {
+        "pk": 81,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "TANAMBE",
+            "code": "510218",
+            "slug": "tanambe",
+            "district": 2
+        }
+    },
+    {
+        "pk": 82,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "TANAMBE",
+            "code": "510218",
+            "slug": "tanambe",
+            "district": 1
+        }
+    },
+    {
+        "pk": 46,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "TSARAHONENANA SAHANIVOTRY",
+            "code": "140419",
+            "slug": "tsarahonenana-sahanivotry",
+            "district": 103
+        }
+    },
+    {
+        "pk": 22,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "TSIROANOMANDIDY CU",
+            "code": "120218",
+            "slug": "tsiroanomandidy-cu",
+            "district": 62
+        }
+    },
+    {
+        "pk": 21,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "TSIROANOMANDIDY FIHAONANA",
+            "code": "120217",
+            "slug": "tsiroanomandidy-fihaonana",
+            "district": 62
+        }
+    },
+    {
+        "pk": 47,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "VINANINKARENA",
+            "code": "140420",
+            "slug": "vinaninkarena",
+            "district": 103
+        }
+    },
+    {
+        "pk": 100,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "VOHILENGO",
+            "code": "520111",
+            "slug": "vohilengo",
+            "district": 18
+        }
+    },
+    {
+        "pk": 83,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "VOHIMENAKELY",
+            "code": "510219",
+            "slug": "vohimenakely",
+            "district": 2
+        }
+    },
+    {
+        "pk": 84,
+        "model": "localites.commune",
+        "fields": {
+            "nom": "VOHITSARA",
+            "code": "510220",
+            "slug": "vohitsara",
+            "district": 2
+        }
     }
 ]

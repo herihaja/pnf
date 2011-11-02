@@ -92,10 +92,10 @@ def indicateur_par_date(request):
             mois += 1
 
     donnees = paginate(donnees_liste, 25, page)
-    return render_to_response('indicateurs/lister_indicateur.html', {"donnees": donnees, "form": form},
+    return render_to_response('indicateurs/lister_indicateur.html', {"donnees": donnees, "indicateur": indicateur, "form": form},
                               context_instance=RequestContext(request))
 
-def ratio(request, numerateur, denominateur):
+def ratio(request, numerateur, denominateur, titre):
     donnees_liste = []
     if request.method == 'GET':
         form = FiltreRatioForm()
@@ -160,5 +160,5 @@ def ratio(request, numerateur, denominateur):
             donnees_liste.append(donnees)
 
     donnees = paginate(donnees_liste, 25, page)
-    return render_to_response('indicateurs/lister_ratio.html', {"donnees": donnees, "form": form},
+    return render_to_response('indicateurs/lister_ratio.html', {"donnees": donnees, "titre": titre, "form": form},
                               context_instance=RequestContext(request))

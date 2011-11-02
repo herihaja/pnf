@@ -3,7 +3,7 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Indicateur par localité</h1>
+            <h1>{{ titre }}</h1>
         </div>
         <div class="navigation">
         </div>
@@ -81,7 +81,7 @@
             $('#form-filter').submit();
         });
 
-        $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
+        $('label[for="id_annee"]').css({'clear': 'left'});
     </script>
     {% else %}
         <div class="message">Aucunes données enregistrées.</div>

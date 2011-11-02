@@ -3,7 +3,7 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Liste des données cumulées</h1>
+            <h1>Indicateurs cumulés</h1>
         </div>
         <div class="navigation">
         </div>
@@ -27,33 +27,33 @@
     {% if cumuls.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="100">Commune</th>
-            <th width="100">Période</th>
-            <th width="60">Dem</th>
-            <th width="60">Opp</th>
-            <th width="60">Res</th>
-            <th width="60">Cert</th>
-            <th width="60">Cert F</th>
-            <th width="100">Surface</th>
-            <th width="100">Recettes</th>
-            <th width="60">Gar</th>
-            <th width="60">Reco</th>
-            <th width="60">Mut</th>
+            <th width="260">Commune</th>
+            <th width="60" align="center">Période</th>
+            <th width="50" align="center">Dem</th>
+            <th width="50" align="center">Opp</th>
+            <th width="50" align="center">Res</th>
+            <th width="50" align="center">Cert</th>
+            <th width="50" align="center">Cert F</th>
+            <th width="80" align="center">Surface</th>
+            <th width="80" align="center">Recettes</th>
+            <th width="50" align="center">Gar</th>
+            <th width="50" align="center">Reco</th>
+            <th width="50" align="center">Mut</th>
         </tr>
         {% for cumul in cumuls.object_list %}
         <tr>
-            <td>{{ cumul.code }}</td>
-            <td>{{ cumul.periode|date:"m/Y" }}</td>
-            <td>{{ cumul.demandes }}</td>
-            <td>{{ cumul.oppositions }}</td>
-            <td>{{ cumul.resolues }}</td>
-            <td>{{ cumul.certificats }}</td>
-            <td>{{ cumul.femmes }}</td>
-            <td>{{ cumul.surfaces }}</td>
-            <td>{{ cumul.recettes }}</td>
-            <td>{{ cumul.garanties }}</td>
-            <td>{{ cumul.reconnaissances }}</td>
-            <td>{{ cumul.mutations }}</td>
+            <td class="titre">{{ cumul.commune }}</td>
+            <td align="center">{{ cumul.periode|date:"m/Y" }}</td>
+            <td align="center">{{ cumul.demandes }}</td>
+            <td align="center">{{ cumul.oppositions }}</td>
+            <td align="center">{{ cumul.resolues }}</td>
+            <td align="center">{{ cumul.certificats }}</td>
+            <td align="center">{{ cumul.femmes }}</td>
+            <td align="center">{{ cumul.surfaces }}</td>
+            <td align="center">{{ cumul.recettes }}</td>
+            <td align="center">{{ cumul.garanties }}</td>
+            <td align="center">{{ cumul.reconnaissances }}</td>
+            <td align="center">{{ cumul.mutations }}</td>
         </tr>
         {% endfor %}
     </table>

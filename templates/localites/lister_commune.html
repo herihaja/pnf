@@ -3,7 +3,7 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Liste des communes</h1>
+            <h1>Communes</h1>
         </div>
         <div class="navigation">
             <a href="{% url localites.views.ajouter_commune %}">Ajouter une commune</a>
@@ -20,7 +20,7 @@
             <div class="clear-l"></div>
             <input type="hidden" name="action" value="liste" id="action" />
             <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <input type="submit" value="Exporter" id="export-button"/>
+            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
             <div class="clear-l"></div>
         </form>
     </div>
@@ -28,10 +28,10 @@
     {% if communes.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="220">Nom</th>
-            <th width="80">Code</th>
-            <th width="140">Région</th>
-            <th width="140">District</th>
+            <th width="220">Noms</th>
+            <th width="80">Codes</th>
+            <th width="140">Régions</th>
+            <th width="140">Districts</th>
             <th width="140" style="text-align: center">Actions</th>
         </tr>
         {% for commune in communes.object_list %}
@@ -68,6 +68,7 @@
             $('#id_page').val($(this).attr('rel'));
             $('#form-filter').submit();
         });
+        $('label[for="id_region"]').css({'clear': 'left'});
     </script>
     {% else %}
         <div class="message">Aucune commune enregistrée.</div>

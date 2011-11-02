@@ -14,11 +14,11 @@ def lister_guichet(request):
 
     if request.method == 'GET':
         form = FiltreGuichetForm()
-        rows = Guichet.objects.all()
+        rows = Guichet.objects.all().order_by('commune')
         page = int(request.GET.get('page', '1'))
     else:
         form = FiltreGuichetForm(request.POST)
-        rows = Guichet.objects.filtrer(request)
+        rows = Guichet.objects.filtrer(request).order_by('commune')
         page = int(request.POST['page'])
         if request.POST['action'] == 'export':
             return export(rows)

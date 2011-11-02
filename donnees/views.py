@@ -30,6 +30,7 @@ def lister_donnees(request):
             lien_supprimer = reverse(supprimer_donnees, args=[donnee_id])
             donnees = dict(
                 id=row.id,
+                commune = row.commune.nom,
                 code = row.commune.code,
                 periode = row.periode,
                 demandes = row.demandes,
@@ -120,6 +121,7 @@ def lister_cumuls(request):
     if rows is not None:
         for row in rows:
             cumuls = dict(
+                commune = row.commune.nom,
                 code = row.commune.code,
                 periode = row.periode,
                 demandes = row.demandes,

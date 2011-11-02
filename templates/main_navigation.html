@@ -5,8 +5,9 @@
     <li>
         <a href="javascript:void(0)">Indicateurs</a>
         <ul>
-            <li><a href="{% url indicateurs.views.indicateurs_par_date %}">Indicateurs par localite</a></li>
-            <li><a href="{% url indicateurs.views.indicateur_par_date %}" class="last">Indicateurs par période</a></li>
+            <li><a href="{% url indicateurs.views.indicateurs_par_date %}">Indicateurs/localite</a></li>
+            <li><a href="{% url indicateurs.views.indicateur_par_date %}" class="last">Chaque indicateur/période</a></li>
+            <li><a href="/indicateurs/cumuls/" class="last">Indicateurs cumulés</a></li>
         </ul>
     </li>
     <li>
@@ -25,28 +26,29 @@
             <li><a href="{% url guichets.views.lister_guichet %}">Liste des guichets</a></li>
             <li><a href="{% url guichets.views.ajouter_guichet %}">Nouveau guichet</a></li>
             <li><a href="">Etat d'envoi des RMA</a></li>
-            <li><a href="" class="last">Guichets par bailleurs</a></li>
+            <!--<li><a href="" class="last">Guichets par bailleurs</a></li>-->
         </ul>
     </li>
     <li>
         <a href="javascript:void(0)">Données</a>
         <ul>
-            <li><a href="{% url donnees.views.lister_donnees %}">Données validées</a></li>
+            <li><a href="{% url donnees.views.lister_donnees %}">Données</a></li>
             <li><a href="{% url sms.views.lister_reception %}">SMS reçus</a></li>
             <li><a href="{% url sms.views.lister_envoi %}" class="last">SMS envoyés</a></li>
+            <li><a href="{% url sms.views.sms_tester %}" class="last">SMS tester</a></li>
         </ul>
     </li>
-    <li>
+    <!--<li>
         <a href="javascript:void(0)">Outils</a>
         <ul>
             <li><a href="">Envoi de SMS</a></li>
             <li><a href="" class="last">Export site web</a></li>
         </ul>
-    </li>
+    </li>-->
     <li>
         <a href="javascript:void(0)" class="last">Paramètres</a>
         <ul>
-            <li><a href="javascript:void(0)">Utilisateurs</a></li>
+            <!-- <li><a href="javascript:void(0)">Utilisateurs</a></li> -->
             <li><a href="{% url bailleurs.views.lister_bailleur %}">Bailleurs</a></li>
             <li><a href="{% url localites.views.lister_region %}">Régions</a></li>
             <li><a href="{% url localites.views.lister_district %}">Districts</a></li>

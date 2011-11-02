@@ -3,7 +3,7 @@
 {% block content %}
     <div class="titlebar">
         <div class="title">
-            <h1>Liste des provinces</h1>
+            <h1>Provinces</h1>
         </div>
         <div class="navigation">
             <a href="{% url localites.views.ajouter_province %}">Ajouter une province</a>
@@ -14,8 +14,8 @@
     {% if provinces.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="200">Nom</th>
-            <th width="200">Code</th>
+            <th width="200">Noms</th>
+            <th width="200">Codes</th>
             <th width="140" style="text-align: center">Actions</th>
         </tr>
         {% for province in provinces.object_list %}

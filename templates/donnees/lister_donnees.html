@@ -28,36 +28,36 @@
     {% if donnees.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="100">Commune</th>
-            <th width="100">Période</th>
-            <th width="60">Dem</th>
-            <th width="60">Opp</th>
-            <th width="60">Res</th>
-            <th width="60">Cert</th>
-            <th width="60">Cert F</th>
-            <th width="100">Surface</th>
-            <th width="100">Recettes</th>
-            <th width="60">Gar</th>
-            <th width="60">Reco</th>
-            <th width="60">Mut</th>
-            <th width="60">Valide</th>
+            <th width="260">Commune</th>
+            <th width="60" align="center">Période</th>
+            <th width="50" align="center">Dem</th>
+            <th width="50" align="center">Opp</th>
+            <th width="50" align="center">Res</th>
+            <th width="50" align="center">Cert</th>
+            <th width="50" align="center">Cert F</th>
+            <th width="80" align="center">Surface</th>
+            <th width="80" align="center">Recettes</th>
+            <th width="50" align="center">Gar</th>
+            <th width="50" align="center">Reco</th>
+            <th width="50" align="center">Mut</th>
+            <th width="50" align="center">Valide</th>
             <th width="140" style="text-align: center">Actions</th>
         </tr>
         {% for donnee in donnees.object_list %}
         <tr>
-            <td>{{ donnee.code }}</td>
-            <td>{{ donnee.periode|date:"m/Y" }}</td>
-            <td>{{ donnee.demandes }}</td>
-            <td>{{ donnee.oppositions }}</td>
-            <td>{{ donnee.resolues }}</td>
-            <td>{{ donnee.certificats }}</td>
-            <td>{{ donnee.femmes }}</td>
-            <td>{{ donnee.surfaces }}</td>
-            <td>{{ donnee.recettes }}</td>
-            <td>{{ donnee.garanties }}</td>
-            <td>{{ donnee.reconnaissances }}</td>
-            <td>{{ donnee.mutations }}</td>
-            <td>{{ donnee.valide }}</td>
+            <td class="titre">{{ donnee.commune }}</td>
+            <td align="center">{{ donnee.periode|date:"m/Y" }}</td>
+            <td align="center">{{ donnee.demandes }}</td>
+            <td align="center">{{ donnee.oppositions }}</td>
+            <td align="center">{{ donnee.resolues }}</td>
+            <td align="center">{{ donnee.certificats }}</td>
+            <td align="center">{{ donnee.femmes }}</td>
+            <td align="center">{{ donnee.surfaces }}</td>
+            <td align="center">{{ donnee.recettes }}</td>
+            <td align="center">{{ donnee.garanties }}</td>
+            <td align="center">{{ donnee.reconnaissances }}</td>
+            <td align="center">{{ donnee.mutations }}</td>
+            <td align="center">{{ donnee.valide }}</td>
             <td class="tb_action">
                 <a href="{{ donnee.lien_editer }}">edit</a>
                 <a href="{{ donnee.lien_supprimer }}"
@@ -86,14 +86,11 @@
             $('#id_page').val($(this).attr('rel'));
             $('#form-filter').submit();
         });
-    </script>
-    {% else %}
-        <div class="message">Aucunes données enregistrées.</div>
-    {% endif %}
-
-    <script type="text/javascript">
         $('label[for="id_code"]').css({'clear': 'left'});
         $('label[for="id_femmes"]').css({'clear': 'left'});
         $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
     </script>
+    {% else %}
+        <div class="message">Aucunes données enregistrées.</div>
+    {% endif %}
 {% endblock %}

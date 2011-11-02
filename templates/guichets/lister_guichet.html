@@ -20,7 +20,7 @@
             <div class="clear-l"></div>
             <input type="hidden" name="action" value="liste" id="action" />
             <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <input type="submit" value="Exporter" id="export-button"/>
+            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
             <div class="clear-l"></div>
         </form>
     </div>
@@ -28,26 +28,26 @@
     {% if guichets.object_list|length > 0 %}
     <table class="tb_list">
         <tr>
-            <th width="100">Créé le</th>
-            <th width="80">Code commune</th>
-            <th width="140">Commune</th>
-            <th width="80">Code Agf 1</th>
-            <th width="140">Num Agf 1</th>
-            <th width="80">Code Agf 2</th>
-            <th width="140">Num Agf 2</th>
-            <th width="40">Etat</th>
-            <th width="140" style="text-align: center">Actions</th>
+            <th width="220">Commune</th>
+            <th width="60" align="center">Code com</th>
+            <th width="60" align="center">Créé le</th>
+            <th width="70" align="center">Code Agf 1</th>
+            <th width="80" align="center">Num Agf 1</th>
+            <th width="70" align="center">Code Agf 2</th>
+            <th width="80" align="center">Num Agf 2</th>
+            <th width="40" align="center">Etat</th>
+            <th width="100" style="text-align: center">Actions</th>
         </tr>
         {% for guichet in guichets.object_list %}
         <tr>
-            <td>{{ guichet.creation }}</td>
-            <td>{{ guichet.commune.code }}</td>
-            <td>{{ guichet.commune }}</td>
-            <td>{{ guichet.agf1 }}</td>
-            <td>{{ guichet.mobile1 }}</td>
-            <td>{{ guichet.agf2 }}</td>
-            <td>{{ guichet.mobile2 }}</td>
-            <td>{{ guichet.etat }}</td>
+            <td class="titre">{{ guichet.commune }}</td>
+            <td align="center">{{ guichet.commune.code }}</td>
+            <td align="center">{{ guichet.creation|date:"m/Y" }}</td>
+            <td align="center">{{ guichet.agf1 }}</td>
+            <td align="center">{{ guichet.mobile1 }}</td>
+            <td align="center">{{ guichet.agf2 }}</td>
+            <td align="center">{{ guichet.mobile2 }}</td>
+            <td align="center">{{ guichet.etat }}</td>
             <td class="tb_action">
                 <a href="{{ guichet.lien_editer }}">edit</a>
                 <a href="{{ guichet.lien_supprimer }}"
@@ -76,6 +76,8 @@
             $('#id_page').val($(this).attr('rel'));
             $('#form-filter').submit();
         });
+        $('label[for="id_code_commune"]').css({'clear': 'left'});
+        $('label[for="id_cree_de"]').css({'clear': 'left'});
     </script>
     {% else %}
         <div class="message">Aucun guichet enregistré.</div>

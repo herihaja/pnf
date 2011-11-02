@@ -28,7 +28,7 @@ class FiltreIndicateurForm(Form):
             ('garanties', 'Garanties'),
         )
     indicateur = forms.ChoiceField(label='Indicateur', choices=LISTE_INDICATEURS, required=False)
-    region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
+    region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
     district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
     commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
     periode_de_annee = forms.CharField(label='De année', required=False)
