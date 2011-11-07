@@ -227,7 +227,7 @@ def supprimer_commune(request, commune_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
-def ajax(request):
+def ajax_commune(request):
     # columns titles
     columns = ['nom', 'code', 'district__region', 'district', 'actions']
 

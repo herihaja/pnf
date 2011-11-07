@@ -13,42 +13,11 @@ import simplejson
 from datetime import datetime
 
 def indicateurs_par_date(request):
-    donnees_liste = []
-
     if request.method == 'GET':
         form = FiltreIndicateursForm()
-        rows = Donnees.objects.filter(valide=True).order_by('commune', 'periode')
-        page = int(request.GET.get('page', '1'))
     else:
         form = FiltreIndicateursForm(request.POST)
-        rows = Donnees.objects.filtrer(request).order_by('commune', 'periode')
-        page = int(request.POST['page'])
-        if request.POST['action'] == 'export':
-            return _export(rows)
-
-    if rows is not None:
-        for row in rows:
-            donnees = dict(
-                id=row.id,
-                code = row.commune.code,
-                commune = row.commune.nom,
-                periode = row.periode,
-                demandes = row.demandes,
-                oppositions = row.oppositions,
-                resolues = row.resolues,
-                certificats = row.certificats,
-                femmes = row.femmes,
-                surfaces = row.surfaces,
-                recettes = row.recettes,
-                garanties = row.garanties,
-                reconnaissances = row.reconnaissances,
-                mutations = row.mutations,
-            )
-            donnees_liste.append(donnees)
-
-    donnees = paginate(donnees_liste, 25, page)
-    return render_to_response('indicateurs/lister_indicateurs.html', {"donnees": donnees, "form": form},
-                              context_instance=RequestContext(request))
+    return render_to_response('indicateurs/lister_indicateurs.html', {"form": form, "title": "Indicateurs par localités"}, context_instance=RequestContext(request))
 
 def indicateur_par_date(request):
     if request.method == 'GET':
@@ -72,6 +41,104 @@ def _process_datatables_posted_vars(post):
         value = "data[%s][value]" % (i,)
         posted[post[key]] = post[value]
     return posted
+
+def ajax_indicateurs(request):
+    # columns titles
+    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+
+    # filtering
+    posted = _process_datatables_posted_vars(request.POST)
+    # valide true
+    kwargs = {'valide': True}
+
+    if 'fCommune' in posted and posted['fCommune'] != '':
+        kwargs['nom__icontains'] = str(posted['fCommune'])
+    else:
+        if 'fCode' in posted and posted['fCode'] != '':
+            kwargs['commune__code__icontains'] = posted['fCode']
+        if 'fDistrict' in posted and posted['fDistrict'] != '':
+            kwargs['commune__district'] = posted['fDistrict']
+        else:
+            if 'fRegion' in posted and posted['fRegion'] != '':
+                kwargs['commune__district__region'] = posted['fRegion']
+
+    # ordering
+    sorts = []
+    if 'iSortingCols' in posted:
+        for i in range(0, int(posted['iSortingCols'])):
+            sort_col = "iSortCol_%s" % (i,)
+            sort_dir = posted["sSortDir_%s" % (i,)]
+            if columns[int(posted[sort_col])] == 'code':  # code
+                if sort_dir == "asc":
+                    sort_qry = "commune__code"
+                else:
+                    sort_qry = "-commune__code"
+            else:
+                if sort_dir == "asc":
+                    sort_qry = columns[int(posted[sort_col])]
+                else:
+                    sort_qry = "-%s" % (columns[int(posted[sort_col])],)
+            sorts.append(sort_qry)
+
+    # limitting
+    lim_start = None
+    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
+        lim_start = int(posted['iDisplayStart'])
+        lim_num = int(posted['iDisplayLength']) + lim_start
+
+    # querying
+    iTotalRecords = Donnees.objects.filter(valide=True).count()
+    if len(kwargs) > 0:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
+            else:
+                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)
+        else:
+            if lim_start is not None:
+                donnees = Donnees.objects.filter(**kwargs)[lim_start:lim_num]
+            else:
+                donnees = Donnees.objects.filter(**kwargs)
+        iTotalDisplayRecords = Donnees.objects.filter(**kwargs).count()
+    else:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                donnees = Donnees.objects.all().order_by(*sorts)[lim_start:lim_num]
+            else:
+                donnees = Donnees.objects.all().order_by(*sorts)
+        else:
+            if lim_start is not None:
+                donnees = Donnees.objects.all()[lim_start:lim_num]
+            else:
+                donnees = Donnees.objects.all()
+        iTotalDisplayRecords = iTotalRecords
+
+    results = []
+
+    for row in donnees:
+        result = dict(
+            id = row.id,
+            commune = row.commune.nom,
+            code = row.commune.code,
+            periode = datetime.strftime(row.periode, "%m/%Y"),
+            demandes = row.demandes,
+            oppositions = row.oppositions,
+            resolues = row.resolues,
+            certificats = row.certificats,
+            femmes = row.femmes,
+            surfaces = row.surfaces,
+            recettes = row.recettes,
+            garanties = row.garanties,
+            reconnaissances = row.reconnaissances,
+            mutations = row.garanties
+        )
+        results.append(result)
+
+    sEcho = int(posted['sEcho'])
+    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')
 
 def ajax_pivot_table(request):
     # columns titles

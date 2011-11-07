@@ -2,7 +2,7 @@
 
 from django.conf.urls.defaults import patterns, url
 from donnees.views import lister_cumuls
-from indicateurs.views import indicateurs_par_date, indicateur_par_date, ratio, ajax_pivot_table
+from indicateurs.views import indicateurs_par_date, indicateur_par_date, ratio, ajax_pivot_table, ajax_indicateurs
 
 urlpatterns = patterns('',
                         url(r'^$', indicateurs_par_date),
@@ -14,5 +14,6 @@ urlpatterns = patterns('',
                         (r'^ratios/conflictualite/$', ratio, {'ratio': 'rconflits', 'title': 'Taux de conflictualité'}),
                         (r'^ratios/resolution/$', ratio, {'ratio': 'rresolus', 'title': 'Taux de résolution'}),
                         (r'^ratios/surface-moyen/$', ratio, {'ratio': 'rsurface', 'title': 'Surface moyen'}),
-                        (r'^indicateurs/ajax/$', ajax_pivot_table)
+                        (r'^indicateurs/annees/ajax/$', ajax_pivot_table),
+                        (r'^indicateurs/localites/ajax/$', ajax_indicateurs),
                     )
