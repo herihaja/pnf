@@ -28,34 +28,21 @@
         background: -webkit-gradient(linear, left top, left bottom, from(#2c5b0a), to(#387c03));
         background-image: -moz-linear-gradient(top, #2c5b0a, #387c03); }
 
-.filter-form {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #AFA769;
-  border-radius: 6px;
-  background: #F7F5EA; }
-  .filter-form ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none; }
-    .filter-form ul li {
-      display: inline; }
-  .filter-form label {
-    display: block;
-    width: 80px;
-    height: 23px;
-    line-height: 22px;
-    padding: 0 5px;
-    margin: 0 2px 0 3px;
-    float: left;
-    background: #EAE6D0;
-    border-radius: 3px; }
-  .filter-form input, .filter-form select {
-    float: left;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    line-height: 22px;
-    padding: 2px; }
+.filter-form ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+  .filter-form ul li {
+    float: left; }
+.filter-form label {
+  width: 70px;
+  margin-top: 2px;
+  font-size: 10px; }
+.filter-form input, .filter-form select {
+  width: 140px;
+  margin-top: 2px; }
+.filter-form .ui-accordion-content {
+  padding-top: 0; }
 
 .tb_list {
   margin: 5px auto;
@@ -102,62 +89,37 @@
   float: right;
   text-align: right; }
 
-fieldset.add {
-  width: 80%;
-  margin: 20px auto 10px auto;
-  clear: both;
-  border: 1px solid #AFA769;
-  border-radius: 10px;
-  background: #F7F5EA;
-  padding: 15px 20px; }
-  fieldset.add p {
-    margin: 3px 0;
-    clear: left;
-    padding-top: 3px; }
-  fieldset.add label {
-    display: block;
-    width: 120px;
-    height: 23px;
-    line-height: 22px;
-    padding: 0 5px;
-    margin: 0 2px 0 3px;
-    float: left;
-    background: #D1C883;
-    border-radius: 3px; }
-  fieldset.add input {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    width: 70%;
-    float: left;
-    border: 1px solid #AAA;
-    border-radius: 4px;
-    padding: 3px; }
-    fieldset.add input.submit {
-      width: 160px;
-      margin: 5px auto;
-      float: right;
-      padding: 3px 10px;
-      font-size: 12px;
-      background: #9AC181;
-      background: -webkit-gradient(linear, left top, left bottom, from(#d1eac0), to(#9ac181));
-      background-image: -moz-linear-gradient(top, #d1eac0, #9ac181);
-      border: 1px solid #658C4B;
-      border-radius: 2px;
-      text-shadow: #fff 0 1px 0; }
-      fieldset.add input.submit:hover {
-        color: #ffffff;
-        text-shadow: #000 0 1px 0;
-        background: #387C03;
-        background: -webkit-gradient(linear, left top, left bottom, from(#2c5b0a), to(#387c03));
-        background-image: -moz-linear-gradient(top, #2c5b0a, #387c03); }
-  fieldset.add select {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    width: 71%;
-    float: left;
-    border: 1px solid #AAA;
-    border-radius: 4px;
-    padding: 2px 3px; }
+label {
+  display: block;
+  width: 120px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 5px;
+  margin: 0 2px 0 3px;
+  float: left;
+  background: #D4CCB0;
+  border-radius: 3px;
+  font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  color: #472F04;
+  font-size: 11px; }
+
+input {
+  font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  width: 70%;
+  float: left;
+  border: 1px solid #D4CCB0;
+  border-radius: 4px;
+  padding: 3px; }
+
+select {
+  font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  width: 71%;
+  float: left;
+  border: 1px solid #D4CCB0;
+  border-radius: 4px;
+  padding: 2px 3px; }
 
 ul.errorlist {
   margin: 0 0 1px 0;

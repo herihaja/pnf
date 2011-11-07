@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 import settings
 from django.contrib import admin
+from datatables.views import lister, ajax
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,4 +15,6 @@ urlpatterns = patterns('',
                         (r'', include('pnf.imports.urls')),
 #                        (r'', include('pnf.utilisateurs')),
                         url(r'^admin/', include(admin.site.urls)),
+                        (r'^datatables/$', lister),
+                        (r'^datatables/ajax/$', ajax),
                         )

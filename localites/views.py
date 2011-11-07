@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from localites.models import Province, Region, District, Commune
 from localites.forms import ProvinceForm, RegionForm, DistrictForm, CommuneForm, FiltreDistrictForm, FiltreCommuneForm
 from helpers import paginate, export_excel
+import simplejson
 
 def lister_province(request):
     page = int(request.GET.get('page', '1'))
@@ -29,7 +30,7 @@ def lister_province(request):
             province_liste.append(province)
 
     provinces = paginate(province_liste, 25, page)
-    
+
     return render_to_response('localites/lister_province.html', {"provinces": provinces},
                               context_instance=RequestContext(request))
 
@@ -183,37 +184,11 @@ def supprimer_district(request, district_id=None):
     return HttpResponseRedirect(reverse(lister_district))
 
 def lister_commune(request):
-    commune_liste = []
-
     if request.method == 'GET':
         form = FiltreCommuneForm()
-        rows = Commune.objects.all()
-        page = int(request.GET.get('page', '1'))
     else:
         form = FiltreCommuneForm(request.POST)
-        rows = Commune.objects.filtrer(request)
-        page = int(request.POST['page'])
-
-    if rows is not None:
-        for row in rows:
-            commune_id = row.id
-            lien_editer = reverse(editer_commune, args=[commune_id])
-            lien_supprimer = reverse(supprimer_commune, args=[commune_id])
-            commune = dict(
-                id=row.id,
-                nom=row.nom,
-                code=row.code,
-                district=row.district.nom,
-                region=row.district.region.nom,
-                lien_editer=lien_editer,
-                lien_supprimer=lien_supprimer
-            )
-            commune_liste.append(commune)
-
-    communes = paginate(commune_liste, 25, page)
-
-    return render_to_response('localites/lister_commune.html', {"communes": communes, "form": form},
-                              context_instance=RequestContext(request))
+    return render_to_response('localites/lister_commune.html', {"form": form}, context_instance=RequestContext(request))
 
 def ajouter_commune(request):
     if request.method == 'GET':
@@ -248,4 +223,95 @@ def editer_commune(request, commune_id=None):
 def supprimer_commune(request, commune_id=None):
     obj = get_object_or_404(Commune, pk=commune_id)
     obj.delete()
-    return HttpResponseRedirect(reverse(lister_commune))
+    # return HttpResponseRedirect(reverse(lister_commune))
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')
+
+def ajax(request):
+    # columns titles
+    columns = ['nom', 'code', 'district__region', 'district', 'actions']
+
+    # filtering
+    posted_data = request.POST
+    posted = {}
+    num_data = len(posted_data) // 2 -1
+    for i in range (0,  num_data):
+        key = "data[%s][name]" % (i,)
+        value = "data[%s][value]" % (i,)
+        posted[posted_data[key]] = posted_data[value]
+
+    kwargs = {}
+    if 'fCommune' in posted and posted['fCommune'] != '':
+        kwargs['nom__icontains'] = str(posted['fCommune'])
+    if 'fCode' in posted and posted['fCode'] != '':
+        kwargs['code__icontains'] = posted['fCode']
+    if 'fDistrict' in posted and posted['fDistrict'] != '':
+        kwargs['district'] = posted['fDistrict']
+    else:
+        if 'fRegion' in posted and posted['fRegion'] != '':
+            kwargs['district__region'] = posted['fRegion']
+
+    # ordering
+    sorts = []
+    if 'iSortingCols' in posted:
+        for i in range(0, int(posted['iSortingCols'])):
+            sort_col = "iSortCol_%s" % (i,)
+            sort_dir = posted["sSortDir_%s" % (i,)]
+            if sort_dir == "asc":
+                sort_qry = columns[int(posted[sort_col])]
+            else:
+                sort_qry = "-%s" % (columns[int(posted[sort_col])],)
+            sorts.append(sort_qry)
+    # limitting
+    lim_start = None
+    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
+        lim_start = int(posted['iDisplayStart'])
+        lim_num = int(posted['iDisplayLength']) + lim_start
+
+    # querying
+    iTotalRecords = Commune.objects.count()
+    if len(kwargs) > 0:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                commune = Commune.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
+            else:
+                commune = Commune.objects.filter(**kwargs).order_by(*sorts)
+        else:
+            if lim_start is not None:
+                commune = Commune.objects.filter(**kwargs)[lim_start:lim_num]
+            else:
+                commune = Commune.objects.filter(**kwargs)
+        iTotalDisplayRecords = Commune.objects.filter(**kwargs).count()
+    else:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                commune = Commune.objects.all().order_by(*sorts)[lim_start:lim_num]
+            else:
+                commune = Commune.objects.all().order_by(*sorts)
+        else:
+            if lim_start is not None:
+                commune = Commune.objects.all()[lim_start:lim_num]
+            else:
+                commune = Commune.objects.all()
+        iTotalDisplayRecords = iTotalRecords
+
+    results = []
+
+    for row in commune:
+        edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_commune, args=[row.id]),)
+        edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_commune, args=[row.id]),)
+        result = dict(
+            id = row.id,
+            nom = row.nom,
+            code = row.code,
+            region = row.district.region.nom,
+            district = row.district.nom,
+            actions = edit_link,
+        )
+        results.append(result)
+
+    sEcho = int(posted['sEcho'])
+    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')

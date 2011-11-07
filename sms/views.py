@@ -120,13 +120,14 @@ def sms_tester(request):
             )
             donnees.save()
         else:
-            Reception(
+            reception = Reception(
                 date_reception = datetime.datetime.now(),
                 expediteur = request.POST['expediteur'],
                 message = request.POST['message'],
                 statut = 2,
                 retour = message_retour
             )
+            reception.save()
         return HttpResponseRedirect(reverse(lister_reception))
     else:
         return render_to_response('sms/tester.html', {'form': form},
@@ -160,7 +161,7 @@ def _parser(message):
         return data, u"Code AGF erroné"
     else:
         # vérifier mot de passe
-        #ADEFFD#675333 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0,233 .g 1000 .m 2000
+        # AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000
         agf = Guichet.objects.filter((Q(agf1=expediteur[0]) & Q(password1=expediteur[1])) | (Q(agf2=expediteur[0]) & Q(password2=expediteur[1])))
 
         mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
@@ -181,6 +182,10 @@ def _parser(message):
                             return data, u"Date erronée"
                         else:
                             data['periode'] = '%s-%s-01' % (periode[1], periode[0])
+                    elif token[0] == 's' or token[0] == 'a':
+                        value = token[1]
+                        value.replace(',', '.')
+                        data[mapping[token[0]]] = float(value)
                     else:
                         data[mapping[token[0]]] = token[1]
                 else:

@@ -6,7 +6,7 @@ from django.db.models import Q, Model, Manager
 
 class Province(Model):
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6, blank=True, null=True)
+    code = models.CharField(max_length=6, blank=True, null=True, unique=True)
     slug = models.SlugField()
 
     class Meta:
@@ -18,7 +18,7 @@ class Province(Model):
 class Region(Model):
     province = models.ForeignKey(Province, blank=True, null=True, on_delete=models.SET_NULL)
     nom = models.CharField(max_length=20)
-    code = models.CharField(max_length=6, blank=True, null=True)
+    code = models.CharField(max_length=6, blank=True, null=True, unique=True)
     slug = models.SlugField()
 
     class Meta:

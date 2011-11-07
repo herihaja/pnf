@@ -7,18 +7,22 @@ from localites.models import Province, Region, District, Commune
 class ProvinceForm(ModelForm):
     class Meta:
         model = Province
+        exclude= ("slug")
 
 class RegionForm(ModelForm):
     class Meta:
         model = Region
+        exclude= ("slug")
 
 class DistrictForm(ModelForm):
     class Meta:
         model = District
+        exclude= ("slug")
 
 class CommuneForm(ModelForm):
     class Meta:
         model = Commune
+        exclude= ("slug")
 
 class FiltreDistrictForm(Form):
     nom = forms.CharField(max_length=40, required=False)

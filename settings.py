@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'pnf.imports',
     'pnf.indicateurs',
     'pnf.sms',
+    'pnf.datatables',
 #    'pnf.utilisateurs',
     'django.contrib.admin',
 )

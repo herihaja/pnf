@@ -63,12 +63,8 @@ def ajouter_donnees(request):
     form = DonneesForm(request.POST)
     if form.is_valid():
         if form.save():
-            form = RegionForm()
             message = "Vos données ont été ajoutées avec succès."
-        else:
-            message = "Veuillez d'abord enregistrer les données des mois précédents."
-        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message},
-                                  context_instance=RequestContext(request))
+            return HttpResponseRedirect(reverse(lister_donnees))
     else:
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
@@ -84,8 +80,8 @@ def editer_donnees(request, donnee_id=None):
     form = DonneesForm(request.POST, instance=obj)
     if form.is_valid():
         if form.save():
-            form = RegionForm()
             message = "Vos données ont été mises à jour avec succès."
+            return HttpResponseRedirect(reverse(lister_donnees))
         else:
             message = "Veuillez d'abord enregistrer les données des mois précédents."
         return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message},

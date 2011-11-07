@@ -1,0 +1,80 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <input type="submit" value="Exporter" id="export-button"/>
+                <div class="clear-l"></div>
+            </form>
+        </div>
+    </div>
+
+    <table id="example" class="display" style="width: 100%;">
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('label[for="id_region"]').parent().css({'clear': 'left'});
+            $('.filter-form input:submit').button();
+
+            $('#accordion').accordion({
+                collapsible: true
+            });
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/indicateurs/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Commune", "mDataProp": "nom", "bSortable": false },
+                    { "sTitle": "J", "mDataProp": "jan", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "F", "mDataProp": "fev", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "M", "mDataProp": "mar", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "A", "mDataProp": "avr", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "M", "mDataProp": "mai", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "J", "mDataProp": "jun", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "J", "mDataProp": "jul", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "A", "mDataProp": "aou", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "S", "mDataProp": "sep", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "O", "mDataProp": "oct", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "N", "mDataProp": "nov", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "D", "mDataProp": "dec", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "Moy", "mDataProp": "moy", "sWidth": "60px", "bSortable": false },
+                    { "sTitle": "Total", "mDataProp": "total", "sWidth": "60px", "bSortable": false }
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    aoData.push(
+                        {"name": "fRegion", "value": $('#id_region').val()},
+                        {"name": "fCommune", "value": $('#id_commune').val()},
+                        {"name": "fDistrict", "value": $('#id_district').val()},
+                        {"name": "fIndicateur", "value": $('#id_indicateur').val()},
+                        {"name": "fValide", "value": $('#id_valide').val()}
+                    );
+                    $.ajax( {
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}", "data": aoData},
+                        "success": fnCallback
+                    } );
+                },
+                "sDom": 'rt<"F"ip>'
+            });
+
+            $('#form-filter').submit(function(){
+                oTable.fnDraw();
+                return false;
+            });
+        } );
+    </script>
+{% endblock %}
