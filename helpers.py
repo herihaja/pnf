@@ -39,3 +39,12 @@ def export_excel(header, input, filename):
 
     wb.save(response)
     return response
+
+def process_datatables_posted_vars(post):
+    posted = {}
+    num_data = len(post) // 2 -1
+    for i in range (0,  num_data):
+        key = "data[%s][name]" % (i,)
+        value = "data[%s][value]" % (i,)
+        posted[post[key]] = post[value]
+    return posted

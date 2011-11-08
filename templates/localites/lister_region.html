@@ -12,7 +12,7 @@
     </div>
 
     {% if regions.object_list|length > 0 %}
-    <table class="tb_list">
+    <table id="example" class="tb_list">
         <tr>
             <th width="200">Noms</th>
             <th width="80">Codes</th>
@@ -35,4 +35,9 @@
     {% else %}
         <div class="message">Aucune region enregistrée.</div>
     {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').dataTable();
+        });
+    </script>
 {% endblock %}

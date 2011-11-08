@@ -5,7 +5,7 @@ body {
   font-size: 11px; }
   body.body {
     text-align: center;
-    /*background:#DAD293;*/ }
+    background: #DAD293; }
   body a {
     text-decoration: none;
     color: #327e04; }

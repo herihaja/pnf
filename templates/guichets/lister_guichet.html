@@ -1,85 +1,92 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>Liste des guichets</h1>
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <input type="submit" value="Exporter" id="export-button"/>
+                <div class="clear-l"></div>
+            </form>
         </div>
-        <div class="navigation">
-            <a href="{% url guichets.views.ajouter_guichet %}">Ajouter un guichet</a>
-        </div>
-        <div class="clear"></div>
     </div>
 
-    <div class="filter-form">
-        <form action="." method="post" id="form-filter">
-            {% csrf_token %}
-            <ul>
-                {{ form.as_ul }}
-            </ul>
-            <div class="clear-l"></div>
-            <input type="hidden" name="action" value="liste" id="action" />
-            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
-            <div class="clear-l"></div>
-        </form>
-    </div>
-
-    {% if guichets.object_list|length > 0 %}
-    <table class="tb_list">
-        <tr>
-            <th width="220">Commune</th>
-            <th width="60" align="center">Code com</th>
-            <th width="60" align="center">Créé le</th>
-            <th width="70" align="center">Code Agf 1</th>
-            <th width="80" align="center">Num Agf 1</th>
-            <th width="70" align="center">Code Agf 2</th>
-            <th width="80" align="center">Num Agf 2</th>
-            <th width="40" align="center">Etat</th>
-            <th width="100" style="text-align: center">Actions</th>
-        </tr>
-        {% for guichet in guichets.object_list %}
-        <tr>
-            <td class="titre">{{ guichet.commune }}</td>
-            <td align="center">{{ guichet.commune.code }}</td>
-            <td align="center">{{ guichet.creation|date:"m/Y" }}</td>
-            <td align="center">{{ guichet.agf1 }}</td>
-            <td align="center">{{ guichet.mobile1 }}</td>
-            <td align="center">{{ guichet.agf2 }}</td>
-            <td align="center">{{ guichet.mobile2 }}</td>
-            <td align="center">{{ guichet.etat }}</td>
-            <td class="tb_action">
-                <a href="{{ guichet.lien_editer }}">edit</a>
-                <a href="{{ guichet.lien_supprimer }}"
-                   onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
-            </td>
-        </tr>
-        {% endfor %}
+    <table id="example" class="display" style="width: 100%;">
     </table>
-    <div class="pagination">
-        <div class="current">
-            Page {{ guichets.number }} sur {{ guichets.paginator.num_pages }}.
-        </div>
-        <div class="step-links">
-            {% if guichets.has_previous %}
-                <a href="javascript:void(0)" rel="{{ guichets.previous_page_number }}">&lt; Préc.</a>
-            {% endif %}
-            {% if guichets.has_next %}
-                <a href="javascript:void(0)" rel="{{ guichets.next_page_number }}">Suiv. &gt;</a>
-            {% endif %}
-        </div>
-        <div class="clear"></div>
-    </div>
 
     <script type="text/javascript">
-        $('.step-links a').live('click', function() {
-            $('#id_page').val($(this).attr('rel'));
-            $('#form-filter').submit();
-        });
-        $('label[for="id_code_commune"]').css({'clear': 'left'});
-        $('label[for="id_cree_de"]').css({'clear': 'left'});
+        $(document).ready(function() {
+            $('label[for="id_etat"]').parent().css({'clear': 'left'});
+            $('.filter-form input:submit').button();
+            $('#id_creede').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_creede').datepicker("option", $.datepicker.regional['fr']);
+            $('#id_creea').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_creea').datepicker("option", $.datepicker.regional['fr']);
+
+            $('#accordion').accordion({
+                collapsible: true
+            });
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/guichets/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Commune", "mDataProp": "commune"},
+                    { "sTitle": "Code", "mDataProp": "code", "sWidth": "40px" },
+                    { "sTitle": "Création", "mDataProp": "creation", "sWidth": "60px" },
+                    { "sTitle": "Agf1", "mDataProp": "agf1", "sWidth": "50px", "bSortable": false },
+                    { "sTitle": "Mobile1", "mDataProp": "num1", "sWidth": "80px", "bSortable": false },
+                    { "sTitle": "Psw1", "mDataProp": "password1", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "Agf2", "mDataProp": "agf2", "sWidth": "50px", "bSortable": false },
+                    { "sTitle": "Mobile2", "mDataProp": "num2", "sWidth": "80px", "bSortable": false },
+                    { "sTitle": "Psw2", "mDataProp": "password2", "sWidth": "40px", "bSortable": false },
+                    { "sTitle": "Etat", "mDataProp": "etat", "sWidth": "50px", "bSortable": false },
+                    { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "100px", "bSortable": false },
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    aoData.push(
+                        {"name": "fRegion", "value": $('#id_region').val()},
+                        {"name": "fCommune", "value": $('#id_commune').val()},
+                        {"name": "fDistrict", "value": $('#id_district').val()},
+                        {"name": "fCode", "value": $('#id_code').val()},
+                        {"name": "fAgf1", "value": $('#id_agf1').val()},
+                        {"name": "fMobile1", "value": $('#id_mobile1').val()},
+                        {"name": "fAgf2", "value": $('#id_agf2').val()},
+                        {"name": "fMobile2", "value": $('#id_mobile2').val()},
+                        {"name": "fCreede", "value": $('#id_creede').val()},
+                        {"name": "fCreea", "value": $('#id_creea').val()},
+                        {"name": "fEtat", "value": $('#id_etat').val()}
+                    );
+                    $.ajax( {
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}", "data": aoData},
+                        "success": fnCallback
+                    } );
+                },
+                "sDom": 'rt<"F"ip>'
+            });
+
+            $('#form-filter').submit(function(){
+                oTable.fnDraw();
+                return false;
+            });
+        } );
     </script>
-    {% else %}
-        <div class="message">Aucun guichet enregistré.</div>
-    {% endif %}
 {% endblock %}

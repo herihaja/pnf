@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Cumul
-from helpers import paginate, export_excel
+from helpers import process_datatables_posted_vars
 from indicateurs.forms import FiltreIndicateursForm, FiltreIndicateurForm, FiltreRatioForm
 from django.db.models import Count
 import simplejson
@@ -33,21 +33,12 @@ def ratio(request, ratio, title):
         form = FiltreRatioForm(request.POST)
     return render_to_response('indicateurs/liste.html', {"form": form, "title": title}, context_instance=RequestContext(request))
 
-def _process_datatables_posted_vars(post):
-    posted = {}
-    num_data = len(post) // 2 -1
-    for i in range (0,  num_data):
-        key = "data[%s][name]" % (i,)
-        value = "data[%s][value]" % (i,)
-        posted[post[key]] = post[value]
-    return posted
-
 def ajax_indicateurs(request):
     # columns titles
     columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
 
     # filtering
-    posted = _process_datatables_posted_vars(request.POST)
+    posted = process_datatables_posted_vars(request.POST)
     # valide true
     kwargs = {'valide': True}
 
@@ -87,30 +78,30 @@ def ajax_indicateurs(request):
         lim_num = int(posted['iDisplayLength']) + lim_start
 
     # querying
-    iTotalRecords = Donnees.objects.filter(valide=True).count()
+    iTotalRecords = Cumul.objects.filter(valide=True).count()
     if len(kwargs) > 0:
         if len(sorts) > 0:
             if lim_start is not None:
-                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
+                donnees = Cumul.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
             else:
-                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)
+                donnees = Cumul.objects.filter(**kwargs).order_by(*sorts)
         else:
             if lim_start is not None:
-                donnees = Donnees.objects.filter(**kwargs)[lim_start:lim_num]
+                donnees = Cumul.objects.filter(**kwargs)[lim_start:lim_num]
             else:
-                donnees = Donnees.objects.filter(**kwargs)
-        iTotalDisplayRecords = Donnees.objects.filter(**kwargs).count()
+                donnees = Cumul.objects.filter(**kwargs)
+        iTotalDisplayRecords = Cumul.objects.filter(**kwargs).count()
     else:
         if len(sorts) > 0:
             if lim_start is not None:
-                donnees = Donnees.objects.all().order_by(*sorts)[lim_start:lim_num]
+                donnees = Cumul.objects.all().order_by(*sorts)[lim_start:lim_num]
             else:
-                donnees = Donnees.objects.all().order_by(*sorts)
+                donnees = Cumul.objects.all().order_by(*sorts)
         else:
             if lim_start is not None:
-                donnees = Donnees.objects.all()[lim_start:lim_num]
+                donnees = Cumul.objects.all()[lim_start:lim_num]
             else:
-                donnees = Donnees.objects.all()
+                donnees = Cumul.objects.all()
         iTotalDisplayRecords = iTotalRecords
 
     results = []
@@ -145,7 +136,7 @@ def ajax_pivot_table(request):
     columns = ['nom', 'jan', 'fev', 'mar', 'avr', 'mai', 'jun', 'jul', 'aou', 'sep', 'oct', 'nov', 'dec', 'moy', 'total']
 
     # filtering
-    posted = _process_datatables_posted_vars(request.POST)
+    posted = process_datatables_posted_vars(request.POST)
     kwargs = {}
     # indicateur valide is mandatory
     if 'fIndicateur' in posted and  posted['fIndicateur'] != '':

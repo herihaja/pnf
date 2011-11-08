@@ -1,90 +1,127 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>Indicateurs cumulés</h1>
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">Données cumulées</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <input type="submit" value="Exporter" id="export-button"/>
+                <div class="clear-l"></div>
+            </form>
         </div>
-        <div class="navigation">
-        </div>
-        <div class="clear"></div>
     </div>
 
-    <div class="filter-form">
-        <form action="." method="post" id="form-filter">
-            {% csrf_token %}
-            <ul>
-                {{ form.as_ul }}
-            </ul>
-            <div class="clear-l"></div>
-            <input type="hidden" name="action" value="liste" id="action" />
-            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
-            <div class="clear-l"></div>
-        </form>
-    </div>
-
-    {% if cumuls.object_list|length > 0 %}
-    <table class="tb_list">
-        <tr>
-            <th width="260">Commune</th>
-            <th width="60" align="center">Période</th>
-            <th width="50" align="center">Dem</th>
-            <th width="50" align="center">Opp</th>
-            <th width="50" align="center">Res</th>
-            <th width="50" align="center">Cert</th>
-            <th width="50" align="center">Cert F</th>
-            <th width="80" align="center">Surface</th>
-            <th width="80" align="center">Recettes</th>
-            <th width="50" align="center">Gar</th>
-            <th width="50" align="center">Reco</th>
-            <th width="50" align="center">Mut</th>
-        </tr>
-        {% for cumul in cumuls.object_list %}
-        <tr>
-            <td class="titre">{{ cumul.commune }}</td>
-            <td align="center">{{ cumul.periode|date:"m/Y" }}</td>
-            <td align="center">{{ cumul.demandes }}</td>
-            <td align="center">{{ cumul.oppositions }}</td>
-            <td align="center">{{ cumul.resolues }}</td>
-            <td align="center">{{ cumul.certificats }}</td>
-            <td align="center">{{ cumul.femmes }}</td>
-            <td align="center">{{ cumul.surfaces }}</td>
-            <td align="center">{{ cumul.recettes }}</td>
-            <td align="center">{{ cumul.garanties }}</td>
-            <td align="center">{{ cumul.reconnaissances }}</td>
-            <td align="center">{{ cumul.mutations }}</td>
-        </tr>
-        {% endfor %}
+    <table id="example" class="display" style="width: 100%;">
     </table>
-    <div class="pagination">
-        <div class="current">
-            Page {{ cumuls.number }} sur {{ cumuls.paginator.num_pages }}.
-        </div>
-        <div class="step-links">
-            {% if cumuls.has_previous %}
-                <a href="javascript:void(0)" rel="{{ cumuls.previous_page_number }}">&lt; Préc.</a>
-            {% endif %}
-            {% if cumuls.has_next %}
-                <a href="javascript:void(0)" rel="{{ cumuls.next_page_number }}">Suiv. &gt;</a>
-            {% endif %}
-        </div>
-        <div class="clear"></div>
+
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
     </div>
-
     <script type="text/javascript">
-        $('.step-links a').live('click', function() {
-            $('#id_page').val($(this).attr('rel'));
-            $('#form-filter').submit();
-        });
-    </script>
-    {% else %}
-        <div class="message">Aucunes données enregistrées.</div>
-    {% endif %}
+        $(document).ready(function() {
+            $('label[for="id_demandes"]').parent().css({'clear': 'left'});
+            $('label[for="id_recettes"]').parent().css({'clear': 'left'});
+            $('label[for="id_periode_de"]').parent().css({'clear': 'left'});
+            $('.filter-form input:submit').button();
 
-    <script type="text/javascript">
-        $('label[for="id_code"]').css({'clear': 'left'});
-        $('label[for="id_femmes"]').css({'clear': 'left'});
-        $('label[for="id_periode_de_annee"]').css({'clear': 'left'});
+            $('#accordion').accordion({
+                collapsible: true
+            });
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/cumuls/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Commune", "mDataProp": "commune" },
+                    { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px" },
+                    { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px" },
+                    { "sTitle": "Dem", "mDataProp": "demandes", "sWidth": "40px" },
+                    { "sTitle": "Opp", "mDataProp": "oppositions", "sWidth": "40px" },
+                    { "sTitle": "Res", "mDataProp": "resolues", "sWidth": "40px" },
+                    { "sTitle": "Cert", "mDataProp": "certificats", "sWidth": "40px" },
+                    { "sTitle": "Fem", "mDataProp": "femmes", "sWidth": "40px" },
+                    { "sTitle": "Surf", "mDataProp": "surfaces", "sWidth": "60px" },
+                    { "sTitle": "Rect", "mDataProp": "recettes", "sWidth": "60px" },
+                    { "sTitle": "Gar", "mDataProp": "garanties", "sWidth": "40px" },
+                    { "sTitle": "Reco", "mDataProp": "reconnaissances", "sWidth": "40px" },
+                    { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "40px" },
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    aoData.push(
+                        {"name": "fRegion", "value": $('#id_region').val()},
+                        {"name": "fCommune", "value": $('#id_commune').val()},
+                        {"name": "fDistrict", "value": $('#id_district').val()},
+                        {"name": "fCode", "value": $('#id_code').val()},
+                        {"name": "fDemandes", "value": $('#id_demandes').val()},
+                        {"name": "fOppositions", "value": $('#id_oppositions').val()},
+                        {"name": "fResolues", "value": $('#id_resolues').val()},
+                        {"name": "fCertificats", "value": $('#id_certificats').val()},
+                        {"name": "fFemmes", "value": $('#id_femmes').val()},
+                        {"name": "fRecettes", "value": $('#id_recettes').val()},
+                        {"name": "fMutations", "value": $('#id_mutations').val()},
+                        {"name": "fGaranties", "value": $('#id_garanties').val()},
+                        {"name": "fSurfaces", "value": $('#id_surfaces').val()},
+                        {"name": "fReconnaissances", "value": $('#id_reconnaissances').val()},
+                        {"name": "fPeriodeDe", "value": $('#id_periode_de').val()},
+                        {"name": "fPeriodeA", "value": $('#id_periode_a').val()}
+                    );
+                    $.ajax( {
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}", "data": aoData},
+                        "success": fnCallback
+                    } );
+                },
+                "sDom": 'rt<"F"ip>'
+            });
+
+            $('#del-confirm').dialog({
+                autoOpen: false,
+                resizable: false,
+                height:150,
+                modal: true
+            });
+
+            $('.del-link').live('click', function(e) {
+                e.preventDefault();
+                var targetUrl = $(this).attr("href");
+                $('#del-confirm').dialog({
+                    buttons : {
+                        "Supprimer": function() {
+                            $.ajax({
+                                "dataType": 'json',
+                                "type": "POST",
+                                "url": targetUrl,
+                                "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                                "success": function() {
+                                    oTable.fnDraw();
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Annuler": function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $('#del-confirm').dialog('open');
+            });
+
+            $('#form-filter').submit(function(){
+                oTable.fnDraw();
+                return false;
+            });
+        } );
     </script>
 {% endblock %}

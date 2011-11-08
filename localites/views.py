@@ -7,7 +7,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from localites.models import Province, Region, District, Commune
 from localites.forms import ProvinceForm, RegionForm, DistrictForm, CommuneForm, FiltreDistrictForm, FiltreCommuneForm
-from helpers import paginate, export_excel
+from helpers import paginate, process_datatables_posted_vars
 import simplejson
 
 def lister_province(request):
@@ -232,13 +232,7 @@ def ajax_commune(request):
     columns = ['nom', 'code', 'district__region', 'district', 'actions']
 
     # filtering
-    posted_data = request.POST
-    posted = {}
-    num_data = len(posted_data) // 2 -1
-    for i in range (0,  num_data):
-        key = "data[%s][name]" % (i,)
-        value = "data[%s][value]" % (i,)
-        posted[posted_data[key]] = posted_data[value]
+    posted = process_datatables_posted_vars(request.POST)
 
     kwargs = {}
     if 'fCommune' in posted and posted['fCommune'] != '':

@@ -132,3 +132,6 @@ ul.errorlist {
     border-radius: 4px;
     background-color: #DB1111;
     color: #ffffff; }
+
+#del-confirm {
+  display: none; }
