@@ -1,21 +1,35 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>SMS tester</h1>
+    <div id="accordion" class="edit-form">
+        <h3><a href="#">SMS tester</a></h3>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="submit" value="Enregistrer" />
+                <br/><br/>
+                <small>Format : AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000<br/>
+                code_agf#psw_agf
+                <br/>.p periode au format mm.aaaa
+                <br/>.d demandes
+                <br/>.o oppositions
+                <br/>.r resolues
+                <br/>.c certificats
+                <br/>.f femmes
+                <br/>.t reconnaissances
+                <br/>.a recettes
+                <br/>.s surfaces
+                <br/>.g garanties
+                <br/>.m mutations<br/>
+                </small>
+            </form>
         </div>
-        <div class="navigation"></div>
-        <div class="clear"></div>
     </div>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <fieldset class="add">
-            Format : AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000<br/>
-            code_agf#psw_agf/periode mm.aaaa/demandes/oppositions/resolues/certificats/femmes/reconnaissances/recettes/surfaces/garanties/mutations<br/>
-            {{ form.as_p }}
-            <input type="submit" class="submit" value="Enregistrer" />
-        </fieldset>
-    </form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.edit-form input:submit').button();
+            $('#accordion').accordion({ collapsible: false });
+        });
+    </script>
 {% endblock %}

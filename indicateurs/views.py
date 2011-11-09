@@ -78,30 +78,30 @@ def ajax_indicateurs(request):
         lim_num = int(posted['iDisplayLength']) + lim_start
 
     # querying
-    iTotalRecords = Cumul.objects.filter(valide=True).count()
+    iTotalRecords = Donnees.objects.filter(valide=True).count()
     if len(kwargs) > 0:
         if len(sorts) > 0:
             if lim_start is not None:
-                donnees = Cumul.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
+                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
             else:
-                donnees = Cumul.objects.filter(**kwargs).order_by(*sorts)
+                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)
         else:
             if lim_start is not None:
-                donnees = Cumul.objects.filter(**kwargs)[lim_start:lim_num]
+                donnees = Donnees.objects.filter(**kwargs)[lim_start:lim_num]
             else:
-                donnees = Cumul.objects.filter(**kwargs)
-        iTotalDisplayRecords = Cumul.objects.filter(**kwargs).count()
+                donnees = Donnees.objects.filter(**kwargs)
+        iTotalDisplayRecords = Donnees.objects.filter(**kwargs).count()
     else:
         if len(sorts) > 0:
             if lim_start is not None:
-                donnees = Cumul.objects.all().order_by(*sorts)[lim_start:lim_num]
+                donnees = Donnees.objects.all().order_by(*sorts)[lim_start:lim_num]
             else:
-                donnees = Cumul.objects.all().order_by(*sorts)
+                donnees = Donnees.objects.all().order_by(*sorts)
         else:
             if lim_start is not None:
-                donnees = Cumul.objects.all()[lim_start:lim_num]
+                donnees = Donnees.objects.all()[lim_start:lim_num]
             else:
-                donnees = Cumul.objects.all()
+                donnees = Donnees.objects.all()
         iTotalDisplayRecords = iTotalRecords
 
     results = []
@@ -141,8 +141,6 @@ def ajax_pivot_table(request):
     # indicateur valide is mandatory
     if 'fIndicateur' in posted and  posted['fIndicateur'] != '':
         indicateur = str(posted['fIndicateur'])
-    if 'fValide' in posted and  posted['fValide'] != '':
-        kwargs['valide'] = str(posted['fValide'])
     # year is mandatory
     if 'fAnnee' in posted and  posted['fAnnee'] != '':
         year = str(posted['fAnnee'])

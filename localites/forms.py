@@ -25,14 +25,12 @@ class CommuneForm(ModelForm):
         exclude= ("slug")
 
 class FiltreDistrictForm(Form):
-    nom = forms.CharField(max_length=40, required=False)
+    district = forms.CharField(max_length=40, required=False)
     code = forms.CharField(max_length=6, required=False)
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
-    page = forms.CharField(widget=forms.HiddenInput(), initial=1)
 
 class FiltreCommuneForm(Form):
     nom = forms.CharField(max_length=40, required=False)
     code = forms.CharField(max_length=6, required=False)
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
-    page = forms.CharField(widget=forms.HiddenInput(), initial=1)

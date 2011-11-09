@@ -1,69 +1,79 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>Liste des SMS reçus</h1>
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">Liste des SMS reçus</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <div class="clear-l"></div>
+            </form>
         </div>
-        <div class="navigation"></div>
-        <div class="clear"></div>
     </div>
 
-    <div class="filter-form">
-        <form action="." method="post" id="form-filter">
-            {% csrf_token %}
-            <ul>
-            {{ form.as_ul }}
-            </ul>
-            <div class="clear-l"></div>
-            <input type="hidden" name="action" value="liste" id="action" />
-            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <input type="submit" value="Exporter" id="export-button"/>
-            <div class="clear-l"></div>
-        </form>
-    </div>
-
-    {% if receptions.object_list|length > 0 %}
-    <table class="tb_list">
-        <tr>
-            <th width="80">Date de réception</th>
-            <th width="60">Exp.</th>
-            <th width="400">Message</th>
-            <th width="50">Statut</th>
-            <th width="300">Retour</th>
-        </tr>
-        {% for reception in receptions.object_list %}
-        <tr>
-            <td>{{ reception.date_reception }}</td>
-            <td>{{ reception.expediteur }}</td>
-            <td>{{ reception.message }}</td>
-            <td>{{ reception.statut }}</td>
-            <td>{{ reception.retour }}</td>
-        </tr>
-        {% endfor %}
+    <table id="example" class="display" style="width: 100%;">
     </table>
-    <div class="pagination">
-        <div class="current">
-            Page {{ receptions.number }} sur {{ receptions.paginator.num_pages }}.
-        </div>
-        <div class="step-links">
-            {% if receptions.has_previous %}
-                <a href="javascript:void(0)" rel="{{ receptions.previous_page_number }}">&lt; Préc.</a>
-            {% endif %}
-            {% if receptions.has_next %}
-                <a href="javascript:void(0)" rel="{{ receptions.next_page_number }}">Suiv. &gt;</a>
-            {% endif %}
-        </div>
-        <div class="clear"></div>
-    </div>
 
     <script type="text/javascript">
-        $('.step-links a').live('click', function() {
-            $('#id_page').val($(this).attr('rel'));
-            $('#form-filter').submit();
-        });
+        $(document).ready(function() {
+            $('label[for="id_etat"]').parent().css({'clear': 'left'});
+            $('.filter-form input:submit').button();
+            $('#id_cree_de').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_cree_de').datepicker("option", $.datepicker.regional['fr']);
+            $('#id_cree_a').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_cree_a').datepicker("option", $.datepicker.regional['fr']);
+
+            $('#accordion').accordion({
+                collapsible: true
+            });
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/receptions/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
+                    { "sTitle": "Expediteur", "mDataProp": "numero", "sWidth": "80px" },
+                    { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
+                    { "sTitle": "Statut", "mDataProp": "statut", "sWidth": "60px" },
+                    { "sTitle": "Réponse", "mDataProp": "reponse", "bSortable": false }
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    aoData.push(
+                        {"name": "fExpediteur", "value": $('#id_expediteur').val()},
+                        {"name": "fMessage", "value": $('#id_message').val()},
+                        {"name": "fCreede", "value": $('#id_cree_de').val()},
+                        {"name": "fCreea", "value": $('#id_cree_a').val()},
+                        {"name": "fStatut", "value": $('#id_statut').val()}
+                    );
+                    $.ajax( {
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}", "data": aoData},
+                        "success": fnCallback
+                    } );
+                },
+                "sDom": 'rt<"F"ip>'
+            });
+
+            $('#form-filter').submit(function(){
+                oTable.fnDraw();
+                return false;
+            });
+        } );
     </script>
-    {% else %}
-        <div class="message">Aucun SMS reçu enregistré.</div>
-    {% endif %}
 {% endblock %}

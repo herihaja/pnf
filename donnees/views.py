@@ -44,7 +44,7 @@ def _create_query(field, value):
 
 def ajax_donnees(request):
     # columns titles
-    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'actions']
+    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'valide', 'actions']
 
     # filtering
     posted = process_datatables_posted_vars(request.POST)
@@ -124,6 +124,10 @@ def ajax_donnees(request):
     for row in donnees:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_donnees, args=[row.id]),)
+        if row.valide:
+            valide = 'Oui'
+        else:
+            valide = 'Non'
         result = dict(
             id = row.id,
             commune = row.commune.nom,
@@ -139,6 +143,7 @@ def ajax_donnees(request):
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
             mutations = row.garanties,
+            valide = valide,
             actions = edit_link,
         )
         results.append(result)

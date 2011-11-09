@@ -2,7 +2,7 @@
 
 {% block content %}
     <div id="accordion" class="filter-form">
-        <h3><a href="#">{{ title }}</a></h3>
+        <h3><a href="#">Liste des guichets fonciers</a></h3>
         <div>
             <form action="" method="post" id="form-filter">
                 <ul>
@@ -10,7 +10,6 @@
                 </ul>
                 <div class="clear-l"></div>
                 <input type="submit" value="Rechercher" />
-                <input type="submit" value="Exporter" id="export-button"/>
                 <div class="clear-l"></div>
             </form>
         </div>
@@ -22,7 +21,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('label[for="id_etat"]').parent().css({'clear': 'left'});
-            $('.filter-form input:submit').button();
             $('#id_creede').datepicker({
                 changeMonth: true,
                 changeYear: true
@@ -33,10 +31,6 @@
                 changeYear: true
             });
             $('#id_creea').datepicker("option", $.datepicker.regional['fr']);
-
-            $('#accordion').accordion({
-                collapsible: true
-            });
 
             oTable = $('#example').dataTable({
                 "bProcessing": true,
@@ -53,8 +47,8 @@
                     { "sTitle": "Agf2", "mDataProp": "agf2", "sWidth": "50px", "bSortable": false },
                     { "sTitle": "Mobile2", "mDataProp": "num2", "sWidth": "80px", "bSortable": false },
                     { "sTitle": "Psw2", "mDataProp": "password2", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "Etat", "mDataProp": "etat", "sWidth": "50px", "bSortable": false },
-                    { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "100px", "bSortable": false },
+                    { "sTitle": "Etat", "mDataProp": "etat", "sWidth": "60px", "bSortable": false },
+                    { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "100px", "bSortable": false }
                 ],
                 "sPaginationType": "full_numbers",
                 "bJQueryUI": true,
@@ -83,10 +77,12 @@
                 "sDom": 'rt<"F"ip>'
             });
 
+            $('.filter-form input:submit').button();
             $('#form-filter').submit(function(){
                 oTable.fnDraw();
                 return false;
             });
+            $('#accordion').accordion({ collapsible: true });
         } );
     </script>
 {% endblock %}

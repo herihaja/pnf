@@ -4,7 +4,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":1,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF001",
             "mobile1":"0339900001",
@@ -17,7 +16,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":2,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF002",
             "mobile1":"0339900002",
@@ -30,7 +28,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":3,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF003",
             "mobile1":"0339900003",
@@ -43,7 +40,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":4,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF004",
             "mobile1":"0339900004",
@@ -56,7 +52,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":5,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF005",
             "mobile1":"0339900005",
@@ -69,7 +64,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":6,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF006",
             "mobile1":"0339900006",
@@ -82,7 +76,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":7,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF007",
             "mobile1":"0339900007",
@@ -95,7 +88,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":8,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF008",
             "mobile1":"0339900008",
@@ -108,7 +100,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":9,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF009",
             "mobile1":"0339900009",
@@ -121,7 +112,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":10,
-            "bailleur":10,
             "creation":"2009-01-01",
             "agf1":"AGF010",
             "mobile1":"0339900010",
@@ -134,7 +124,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":11,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF011",
             "mobile1":"0339900011",
@@ -147,7 +137,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":12,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF012",
             "mobile1":"0339900012",
@@ -160,7 +150,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":13,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF013",
             "mobile1":"0339900013",
@@ -173,7 +163,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":14,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF014",
             "mobile1":"0339900014",
@@ -186,7 +176,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":15,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF015",
             "mobile1":"0339900015",
@@ -199,7 +188,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":16,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF016",
             "mobile1":"0339900016",
@@ -212,7 +200,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":17,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF017",
             "mobile1":"0339900017",
@@ -225,7 +212,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":18,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF018",
             "mobile1":"0339900018",
@@ -238,7 +224,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":19,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF019",
             "mobile1":"0339900019",
@@ -251,7 +236,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":20,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF020",
             "mobile1":"0339900020",
@@ -264,7 +248,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":21,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF021",
             "mobile1":"0339900021",
@@ -277,7 +260,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":22,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF022",
             "mobile1":"0339900022",
@@ -290,7 +272,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":23,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF023",
             "mobile1":"0339900023",
@@ -303,7 +284,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":24,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF024",
             "mobile1":"0339900024",
@@ -316,7 +297,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":25,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF025",
             "mobile1":"0339900025",
@@ -329,7 +310,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":26,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF026",
             "mobile1":"0339900026",
@@ -342,7 +323,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":27,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF027",
             "mobile1":"0339900027",
@@ -355,7 +336,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":28,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF028",
             "mobile1":"0339900028",
@@ -368,7 +349,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":29,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF029",
             "mobile1":"0339900029",
@@ -381,7 +361,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":30,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF030",
             "mobile1":"0339900030",
@@ -394,7 +373,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":31,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF031",
             "mobile1":"0339900031",
@@ -407,7 +385,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":32,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF032",
             "mobile1":"0339900032",
@@ -420,7 +397,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":33,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF033",
             "mobile1":"0339900033",
@@ -433,7 +409,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":34,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF034",
             "mobile1":"0339900034",
@@ -446,7 +421,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":35,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF035",
             "mobile1":"0339900035",
@@ -459,7 +433,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":36,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF036",
             "mobile1":"0339900036",
@@ -472,7 +445,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":37,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF037",
             "mobile1":"0339900037",
@@ -485,7 +457,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":38,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF038",
             "mobile1":"0339900038",
@@ -498,7 +470,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":39,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF039",
             "mobile1":"0339900039",
@@ -511,7 +483,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":40,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF040",
             "mobile1":"0339900040",
@@ -524,7 +496,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":41,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF041",
             "mobile1":"0339900041",
@@ -537,7 +509,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":42,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF042",
             "mobile1":"0339900042",
@@ -550,7 +522,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":43,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF043",
             "mobile1":"0339900043",
@@ -563,7 +534,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":44,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF044",
             "mobile1":"0339900044",
@@ -576,7 +546,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":45,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF045",
             "mobile1":"0339900045",
@@ -589,7 +558,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":46,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF046",
             "mobile1":"0339900046",
@@ -602,7 +570,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":47,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF047",
             "mobile1":"0339900047",
@@ -615,7 +582,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":48,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF048",
             "mobile1":"0339900048",
@@ -628,7 +594,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":49,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF049",
             "mobile1":"0339900049",
@@ -641,7 +606,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":50,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF050",
             "mobile1":"0339900050",
@@ -654,7 +618,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":51,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF051",
             "mobile1":"0339900051",
@@ -667,7 +630,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":52,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF052",
             "mobile1":"0339900052",
@@ -680,7 +643,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":53,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF053",
             "mobile1":"0339900053",
@@ -693,7 +656,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":54,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF054",
             "mobile1":"0339900054",
@@ -706,7 +669,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":55,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF055",
             "mobile1":"0339900055",
@@ -719,7 +682,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":56,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF056",
             "mobile1":"0339900056",
@@ -732,7 +695,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":57,
-            "bailleur":1,
+
             "creation":"2009-01-01",
             "agf1":"AGF057",
             "mobile1":"0339900057",
@@ -745,7 +708,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":58,
-            "bailleur":2,
+
             "creation":"2009-01-01",
             "agf1":"AGF058",
             "mobile1":"0339900058",
@@ -758,7 +721,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":59,
-            "bailleur":3,
+
             "creation":"2009-01-01",
             "agf1":"AGF059",
             "mobile1":"0339900059",
@@ -771,7 +734,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":60,
-            "bailleur":4,
+
             "creation":"2009-01-01",
             "agf1":"AGF060",
             "mobile1":"0339900060",
@@ -784,7 +747,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":61,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF061",
             "mobile1":"0339900061",
@@ -797,7 +759,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":62,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF062",
             "mobile1":"0339900062",
@@ -810,7 +771,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":63,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF063",
             "mobile1":"0339900063",
@@ -823,7 +783,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":64,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF064",
             "mobile1":"0339900064",
@@ -836,7 +795,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":65,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF065",
             "mobile1":"0339900065",
@@ -849,7 +807,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":66,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF066",
             "mobile1":"0339900066",
@@ -862,7 +820,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":67,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF067",
             "mobile1":"0339900067",
@@ -875,7 +833,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":68,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF068",
             "mobile1":"0339900068",
@@ -888,7 +846,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":69,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF069",
             "mobile1":"0339900069",
@@ -901,7 +859,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":70,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF070",
             "mobile1":"0339900070",
@@ -914,7 +872,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":71,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF071",
             "mobile1":"0339900071",
@@ -927,7 +884,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":72,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF072",
             "mobile1":"0339900072",
@@ -940,7 +896,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":73,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF073",
             "mobile1":"0339900073",
@@ -953,7 +908,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":74,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF074",
             "mobile1":"0339900074",
@@ -966,7 +920,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":75,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF075",
             "mobile1":"0339900075",
@@ -979,7 +932,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":76,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF076",
             "mobile1":"0339900076",
@@ -992,7 +944,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":77,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF077",
             "mobile1":"0339900077",
@@ -1005,7 +956,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":78,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF078",
             "mobile1":"0339900078",
@@ -1018,7 +968,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":79,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF079",
             "mobile1":"0339900079",
@@ -1031,7 +980,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":80,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF080",
             "mobile1":"0339900080",
@@ -1044,7 +993,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":81,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF081",
             "mobile1":"0339900081",
@@ -1057,7 +1006,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":82,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF082",
             "mobile1":"0339900082",
@@ -1070,7 +1019,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":83,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF083",
             "mobile1":"0339900083",
@@ -1083,7 +1032,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":84,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF084",
             "mobile1":"0339900084",
@@ -1096,7 +1045,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":85,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF085",
             "mobile1":"0339900085",
@@ -1109,7 +1057,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":86,
-            "bailleur":2,
             "creation":"2009-01-01",
             "agf1":"AGF086",
             "mobile1":"0339900086",
@@ -1122,7 +1069,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":87,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF087",
             "mobile1":"0339900087",
@@ -1135,7 +1081,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":88,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF088",
             "mobile1":"0339900088",
@@ -1148,7 +1093,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":89,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF089",
             "mobile1":"0339900089",
@@ -1161,7 +1105,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":90,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF090",
             "mobile1":"0339900090",
@@ -1174,7 +1117,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":91,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF091",
             "mobile1":"0339900091",
@@ -1187,7 +1129,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":92,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF092",
             "mobile1":"0339900092",
@@ -1200,7 +1141,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":93,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF093",
             "mobile1":"0339900093",
@@ -1213,7 +1153,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":94,
-            "bailleur":10,
+
             "creation":"2009-01-01",
             "agf1":"AGF094",
             "mobile1":"0339900094",
@@ -1226,7 +1166,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":95,
-            "bailleur":11,
+
             "creation":"2009-01-01",
             "agf1":"AGF095",
             "mobile1":"0339900095",
@@ -1239,7 +1179,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":96,
-            "bailleur":12,
+
             "creation":"2009-01-01",
             "agf1":"AGF096",
             "mobile1":"0339900096",
@@ -1252,7 +1192,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":97,
-            "bailleur":13,
+
             "creation":"2009-01-01",
             "agf1":"AGF097",
             "mobile1":"0339900097",
@@ -1265,7 +1205,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":98,
-            "bailleur":14,
+
             "creation":"2009-01-01",
             "agf1":"AGF098",
             "mobile1":"0339900098",
@@ -1278,7 +1218,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":99,
-            "bailleur":1,
             "creation":"2009-01-01",
             "agf1":"AGF099",
             "mobile1":"0339900099",
@@ -1291,7 +1230,7 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":100,
-            "bailleur":2,
+
             "creation":"2009-01-01",
             "agf1":"AGF100",
             "mobile1":"0339900100",
@@ -1304,7 +1243,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":101,
-            "bailleur":3,
             "creation":"2009-01-01",
             "agf1":"AGF101",
             "mobile1":"0339900101",
@@ -1317,7 +1255,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":102,
-            "bailleur":4,
             "creation":"2009-01-01",
             "agf1":"AGF102",
             "mobile1":"0339900102",
@@ -1330,7 +1267,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":103,
-            "bailleur":5,
             "creation":"2009-01-01",
             "agf1":"AGF103",
             "mobile1":"0339900103",
@@ -1343,7 +1279,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":104,
-            "bailleur":6,
             "creation":"2009-01-01",
             "agf1":"AGF104",
             "mobile1":"0339900104",
@@ -1356,7 +1291,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":105,
-            "bailleur":7,
             "creation":"2009-01-01",
             "agf1":"AGF105",
             "mobile1":"0339900105",
@@ -1369,7 +1303,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":106,
-            "bailleur":8,
             "creation":"2009-01-01",
             "agf1":"AGF106",
             "mobile1":"0339900106",
@@ -1382,7 +1315,6 @@
         "model":"guichets.guichet",
         "fields":{
             "commune":107,
-            "bailleur":9,
             "creation":"2009-01-01",
             "agf1":"AGF107",
             "mobile1":"0339900107",

@@ -21,7 +21,7 @@ def lister_guichet(request):
 def ajouter_guichet(request):
     if request.method == 'GET':
         form = GuichetForm()
-        return render_to_response('guichets/ajouter_guichet.html', {'form': form},
+        return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Ajouter un guichet'},
                                   context_instance=RequestContext(request))
 
     form = GuichetForm(request.POST)
@@ -29,7 +29,7 @@ def ajouter_guichet(request):
         form.save()
         return HttpResponseRedirect(reverse(lister_guichet))
     else:
-        return render_to_response('guichets/ajouter_guichet.html', {'form': form},
+        return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Ajouter un guichet'},
                                   context_instance=RequestContext(request))
 
 def editer_guichet(request, guichet_id=None):
@@ -37,7 +37,7 @@ def editer_guichet(request, guichet_id=None):
 
     if request.method == 'GET':
         form = GuichetForm(instance=obj)
-        return render_to_response('guichets/ajouter_guichet.html', {'form': form},
+        return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Editer un guichet'},
                                   context_instance=RequestContext(request))
 
     form = GuichetForm(request.POST, instance=obj)
@@ -45,7 +45,7 @@ def editer_guichet(request, guichet_id=None):
         form.save()
         return HttpResponseRedirect(reverse(lister_guichet))
     else:
-        return render_to_response('guichets/ajouter_guichet.html', {'form': form},
+        return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Editer un guichet'},
                                   context_instance=RequestContext(request))
 
 def supprimer_guichet(request, guichet_id=None):
@@ -54,7 +54,7 @@ def supprimer_guichet(request, guichet_id=None):
     return HttpResponseRedirect(reverse(lister_guichet))
 
 def export(rows):
-    header = ['Commune', 'agf1',  'mobile1', 'agf2', 'mobile2', 'etat']
+    header = ['Commune', 'Agf1',  'Mobile1', 'Password1', 'Agf2', 'Mobile2', 'Password2', 'Etat']
     liste = []
     for row in rows:
         cleaned_row = [row.commune.code, row.agf1, row.mobile1, row.agf2, row.mobile2, row.etat]
@@ -63,12 +63,6 @@ def export(rows):
     return ret
 
 def ajax_guichet(request):
-    CHOIX_ETAT = {
-        '1': 'Actif',
-        '2': 'Non actif',
-        '3': 'Fermé',
-        '4': 'En cours',
-    }
     # columns titles
     columns = ['commune', 'code', 'creation', 'agf1', 'num1', 'password1', 'agf2', 'num2', 'password2', 'etat', 'actions']
 
@@ -102,6 +96,8 @@ def ajax_guichet(request):
         cree_a = datetime.strptime(posted['fCreea'], "%d/%m/%Y")
         cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
         kwargs['creation__lte'] = cree_a
+    if 'fEtat' in posted and posted['fEtat'] != '':
+        kwargs['etat'] = posted['fEtat']
 
     # ordering
     sorts = []
@@ -130,33 +126,19 @@ def ajax_guichet(request):
 
     # querying
     iTotalRecords = Guichet.objects.count()
-    if len(kwargs) > 0:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-            else:
-                guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)
+    if len(sorts) > 0:
+        if lim_start is not None:
+            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
         else:
-            if lim_start is not None:
-                guichet = Guichet.objects.filter(**kwargs)[lim_start:lim_num]
-            else:
-                guichet = Guichet.objects.filter(**kwargs)
-        iTotalDisplayRecords = Guichet.objects.filter(**kwargs).count()
+            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)
     else:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                guichet = Guichet.objects.all().order_by(*sorts)[lim_start:lim_num]
-            else:
-                guichet = Guichet.objects.all().order_by(*sorts)
+        if lim_start is not None:
+            guichet = Guichet.objects.filter(**kwargs)[lim_start:lim_num]
         else:
-            if lim_start is not None:
-                guichet = Guichet.objects.all()[lim_start:lim_num]
-            else:
-                guichet = Guichet.objects.all()
-        iTotalDisplayRecords = iTotalRecords
+            guichet = Guichet.objects.filter(**kwargs)
+    iTotalDisplayRecords = Guichet.objects.filter(**kwargs).count()
 
     results = []
-
     for row in guichet:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_guichet, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_guichet, args=[row.id]),)
@@ -182,7 +164,7 @@ def ajax_guichet(request):
             agf2 = row.agf2,
             num2 = row.mobile2,
             password2 = password2,
-            etat = CHOIX_ETAT[row.etat],
+            etat = row.get_etat_display(),
             actions = edit_link,
         )
         results.append(result)

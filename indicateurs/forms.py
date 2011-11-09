@@ -7,6 +7,7 @@ class FiltreIndicateursForm(Form):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
     commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
+    code = forms.CharField(max_length=6, required=False)
     date_de = forms.CharField(label='Entre', required=False)
     date_a = forms.CharField(label='et', required=False)
 
@@ -28,7 +29,7 @@ class FiltreIndicateurForm(Form):
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
     district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
     commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
-    valide = forms.CharField(widget=forms.HiddenInput(), initial=1)
+    code = forms.CharField(max_length=6, required=False)
 
 class FiltreRatioForm(Form):
     LISTE_INDICATEURS = (
@@ -44,4 +45,4 @@ class FiltreRatioForm(Form):
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
     district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
     commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
-    valide = forms.CharField(widget=forms.HiddenInput(), initial=1)
+    code = forms.CharField(max_length=6, required=False)

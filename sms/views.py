@@ -1,54 +1,112 @@
 # -*- coding: utf-8 -*-
-
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-import datetime
 from donnees.models import Donnees
 from guichets.models import Guichet
 from sms.models import Reception, Envoi
 from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm
-from helpers import paginate, export_excel
+from helpers import paginate, export_excel, process_datatables_posted_vars
 import re
 from django.db.models import Q
+import simplejson
 
 def lister_reception(request):
-    reception_liste = []
-
     if request.method == 'GET':
         form = FiltreReceptionForm()
-        rows = Reception.objects.all()
-        page = int(request.GET.get('page', '1'))
     else:
         form = FiltreReceptionForm(request.POST)
-        rows = Reception.objects.filtrer(request)
-        page = int(request.POST['page'])
-        if request.POST['action'] == 'export':
-            return export(rows)
+    return render_to_response('sms/lister_reception.html', {"form": form}, context_instance=RequestContext(request))
 
-    if rows is not None:
-        for row in rows:
-            reception_id = row.id
-            lien_editer = 'to_replace'#reverse(editer_reception, args=[reception_id])
-            lien_supprimer = 'to_replace'#reverse(supprimer_reception, args=[reception_id])
-            reception = dict(
-                id=row.id,
-                date_reception = row.date_reception,
-                expediteur = row.expediteur,
-                message = row.message,
-                retour = row.retour,
-                statut = row.statut,
-                lien_editer=lien_editer,
-                lien_supprimer=lien_supprimer
-            )
-            reception_liste.append(reception)
+def ajax_reception(request):
+    # columns titles
+    columns = ['date_reception', 'numero', 'message', 'statut', 'reponse']
 
-    receptions = paginate(reception_liste, 25, page)
+    # filtering
+    posted = process_datatables_posted_vars(request.POST)
 
-    return render_to_response('sms/lister_reception.html', {"receptions": receptions, "form": form},
-                              context_instance=RequestContext(request))
+    kwargs = {}
+    if 'fExpediteur' in posted and posted['fExpediteur'] != '':
+        kwargs['expediteur__icontains'] = str(posted['fExpediteur'])
+    if 'fMessage' in posted and posted['fMessage'] != '':
+        kwargs['message__icontains'] = posted['fMessage']
+    if 'fStatut' in posted and posted['fStatut'] != '':
+        kwargs['statut'] = posted['fStatut']
+    if 'fCreede' in posted and posted['fCreede'] != '':
+        cree_de = datetime.strptime(posted['fCreede'], "%d/%m/%Y")
+        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+        kwargs['date_reception__gte'] = cree_de
+    if 'fCreea' in posted and posted['fCreea'] != '':
+        cree_a = datetime.strptime(posted['fCreea'], "%d/%m/%Y")
+        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+        kwargs['date_reception__lte'] = cree_a
+
+    # ordering
+    sorts = []
+    if 'iSortingCols' in posted:
+        for i in range(0, int(posted['iSortingCols'])):
+            sort_col = "iSortCol_%s" % (i,)
+            sort_dir = posted["sSortDir_%s" % (i,)]
+            if sort_dir == "asc":
+                sort_qry = columns[int(posted[sort_col])]
+            else:
+                sort_qry = "-%s" % (columns[int(posted[sort_col])],)
+            sorts.append(sort_qry)
+    
+    # limitting
+    lim_start = None
+    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
+        lim_start = int(posted['iDisplayStart'])
+        lim_num = int(posted['iDisplayLength']) + lim_start
+
+    # querying
+    iTotalRecords = Reception.objects.count()
+    if len(kwargs) > 0:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                reception = Reception.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
+            else:
+                reception = Reception.objects.filter(**kwargs).order_by(*sorts)
+        else:
+            if lim_start is not None:
+                reception = Reception.objects.filter(**kwargs)[lim_start:lim_num]
+            else:
+                reception = Reception.objects.filter(**kwargs)
+        iTotalDisplayRecords = Reception.objects.filter(**kwargs).count()
+    else:
+        if len(sorts) > 0:
+            if lim_start is not None:
+                reception = Reception.objects.all().order_by(*sorts)[lim_start:lim_num]
+            else:
+                reception = Reception.objects.all().order_by(*sorts)
+        else:
+            if lim_start is not None:
+                reception = Reception.objects.all()[lim_start:lim_num]
+            else:
+                reception = Reception.objects.all()
+        iTotalDisplayRecords = iTotalRecords
+
+    results = []
+
+    for row in reception:
+        result = dict(
+            date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
+            numero = row.expediteur,
+            message = row.message,
+            statut = row.get_statut_display(),
+            reponse = row.retour,
+        )
+        results.append(result)
+
+    sEcho = int(posted['sEcho'])
+    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')
+
 
 def lister_envoi(request):
     envoi_liste = []
@@ -95,7 +153,7 @@ def sms_tester(request):
 
         if len(data) == 12:
             reception = Reception(
-                date_reception = datetime.datetime.now(),
+                date_reception = datetime.now(),
                 expediteur = request.POST['expediteur'],
                 message = request.POST['message'],
                 statut = 1,
@@ -148,17 +206,17 @@ def _parser(message):
     tokens = re.split(' \.', message)
 
     if len(tokens) < 12:
-        return data, u"Nombre de données insuffisant"
+        return data, u"Erreur, Nombre de données insuffisant"
 
     if len(tokens) > 12:
-        return data, u"Nombre de données en dépassement"
+        return data, u"Erreur, Nombre de données en dépassement"
 
     expediteur = tokens.pop(0)
     expediteur = expediteur.split('#')
     if len(expediteur) < 2:
-        return data, u"Code AGF ou mot de passe non fourni"
+        return data, u"Erreur, Code AGF ou mot de passe non fourni"
     elif len(expediteur) > 2:
-        return data, u"Code AGF erroné"
+        return data, u"Erreur, Code AGF erroné"
     else:
         # vérifier mot de passe
         # AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000
@@ -189,7 +247,10 @@ def _parser(message):
                     else:
                         data[mapping[token[0]]] = token[1]
                 else:
-                    return data, u"Code question '%s' inconnu" % token[0]
+                    return data, u"Erreur, Code question '%s' inconnu" % token[0]
+            # controle de coherence
+            if data['femmes'] > data['certificats']:
+                return data, u"Erreur, certificats donnés à des femmes ne peut dépasser le nombre de certificats délivrés"
             return data, u"Félicitations! Données enregistrées"
         else:
             return data, u"Code AGF ou mot de passe erroné"

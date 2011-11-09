@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, url
 from localites.views import editer_province, ajouter_province, lister_province, supprimer_province, \
     lister_region, editer_region, ajouter_region, supprimer_region,\
     lister_district, editer_district, ajouter_district, supprimer_district, \
-    lister_commune, editer_commune, ajouter_commune, supprimer_commune, ajax_commune
+    lister_commune, editer_commune, ajouter_commune, supprimer_commune, ajax_commune, ajax_district, ajax_region
 
 urlpatterns = patterns('',
                         (r'^localites/provinces/$', lister_province),
@@ -16,11 +16,13 @@ urlpatterns = patterns('',
                         (r'^localites/regions/ajout/$', ajouter_region),
                         (r'^localites/regions/editer/(?P<region_id>.+?)$', editer_region),
                         (r'^localites/regions/supprimer/(?P<region_id>.+?)$', supprimer_region),
+                        (r'^localites/regions/ajax/$', ajax_region),
 
                         (r'^localites/districts/$', lister_district),
                         (r'^localites/districts/ajout/$', ajouter_district),
                         (r'^localites/districts/editer/(?P<district_id>.+?)$', editer_district),
                         (r'^localites/districts/supprimer/(?P<district_id>.+?)$', supprimer_district),
+                        (r'^localites/districts/ajax/$', ajax_district),
                        
                         (r'^localites/communes/$', lister_commune),
                         (r'^localites/communes/ajout/$', ajouter_commune),

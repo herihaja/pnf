@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 import xlwt
+from datetime import datetime
 
 def paginate(query, page_number, page):
     ''' pagine une liste a partir d'un queryset '''
@@ -16,13 +19,15 @@ def paginate(query, page_number, page):
     return pages
 
 
-def export_excel(header, input, filename):
-    ''' exporte au format execel les donnees dans la dictionnaire input, header est l'entete du tableau '''
+def export_excel(header, input, subject):
+    """ exporte au format excel les donnees dans la dictionnaire input, header est l'entete du tableau
+    """
 
+    filename = 'attachment; filename=%s-%s.xls' % (subject, datetime.strftime(datetime.now(), "%d%m%y"))
     response = HttpResponse(mimetype='application/vnd.ms-excel')
-    response['Content-Disposition'] = "attachment; filename=%s.xls" % filename
+    response['Content-Disposition'] = filename
     wb = xlwt.Workbook(encoding='utf8')
-    ws = wb.add_sheet('Centres')
+    ws = wb.add_sheet(subject.capitalize())
     gras = xlwt.easyxf("font: bold 1;")
     i = 0
     for elt in header:
@@ -42,7 +47,7 @@ def export_excel(header, input, filename):
 
 def process_datatables_posted_vars(post):
     posted = {}
-    num_data = len(post) // 2 -1
+    num_data = len(post) // 2
     for i in range (0,  num_data):
         key = "data[%s][name]" % (i,)
         value = "data[%s][value]" % (i,)

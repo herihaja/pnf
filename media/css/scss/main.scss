@@ -43,83 +43,34 @@
         }
     }
     label {
+        height: 22px;
+        line-height: 22px;
+        padding: 0 5px;
+        margin: 2px 2px 0 3px;
+        background: #D4CCB0;
+        border-radius: 3px;
         width: 70px;
-        margin-top:2px;
         font-size: 10px;
+        float: left;
     }
     input, select {
         width: 140px;
         margin-top:2px;
+        float: left;
     }
     .ui-accordion-content {
         padding-top: 0;
     }
 }
-.tb_list {
-    margin: 5px auto;
-    border-right: 1px solid #D6D4C7;
-    th {
-        padding: 2px 5px;
-        background: #327E04;
-        font-weight: normal;
-        color: #ffffff;
-        border: 1px solid #2C600C;
-    }
-    td {
-        padding: 3px 5px;
-        border-left: 1px solid #D6D4C7;
-        border-bottom: 1px solid #D6D4C7;
-        &.titre {
-            background: #E0EAD5;
-        }
-        &.total {
-            font-weight: bold;
-        }
-    }
-    .tb_action {
-        text-align: center;
-        a {
-            line-height: 12px;
-            text-align: center;
-            margin: 2px auto;
-            padding: 1px 6px;
-            font-size: 9px;
-            text-transform: uppercase;
-            background: #9AC181;
-            background: -webkit-gradient(linear, left top, left bottom, from(#D1EAC0), to(#9AC181));
-            background-image: -moz-linear-gradient(top, #D1EAC0, #9AC181);
-            border:1px solid #658C4B;
-            border-radius: 2px;
-            &:hover {
-                color: #ffffff;
-                background: #387C03;
-                background: -webkit-gradient(linear, left top, left bottom, from(#2C5B0A), to(#387C03));
-                background-image: -moz-linear-gradient(top, #2C5B0A, #387C03);
-            }
-        }
-    }
-}
-.pagination {
-    .current {
-        width: 50%;
-        float: left;
-    }
-    .step-links {
-        width: 50%;
-        float: right;
-        text-align: right;
+.edit-form {
+    width: 60%;
+    margin: 0 auto;
+    .ui-accordion-content {
+        padding-top: 0;
     }
 }
 label {
     display: block;
-    width: 120px;
-    height: 22px;
-    line-height: 22px;
-    padding: 0 5px;
-    margin: 0 2px 0 3px;
-    float: left;
-    background: #D4CCB0;
-    border-radius: 3px;
     font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
     color: #472F04;
     font-size: 11px;
@@ -127,8 +78,7 @@ label {
 input {
     font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
     font-size: 11px;
-    width: 70%;
-    float: left;
+    width: 95%;
     border: 1px solid #D4CCB0;
     border-radius: 4px;
     padding: 3px;
@@ -137,8 +87,7 @@ input {
 select {
     font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
     font-size: 11px;
-    width: 71%;
-    float: left;
+    width: 96%;
     border: 1px solid #D4CCB0;
     border-radius: 4px;
     padding: 2px 3px;

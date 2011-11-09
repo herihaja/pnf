@@ -15,5 +15,5 @@ urlpatterns = patterns('',
                         (r'^ratios/resolution/$', ratio, {'ratio': 'rresolus', 'title': 'Taux de résolution'}),
                         (r'^ratios/surface-moyen/$', ratio, {'ratio': 'rsurface', 'title': 'Surface moyen'}),
                         (r'^indicateurs/annees/ajax/$', ajax_pivot_table),
-                        (r'^indicateurs/localites/ajax/$', ajax_indicateurs),
+                        (r'^indicateurs/ajax/$', ajax_indicateurs),
                     )

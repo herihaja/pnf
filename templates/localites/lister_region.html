@@ -1,43 +1,67 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>Régions</h1>
-        </div>
-        <div class="navigation">
-            <a href="{% url localites.views.ajouter_region %}">Ajouter une région</a>
-        </div>
-        <div class="clear"></div>
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">Liste des régions</a></h3>
     </div>
 
-    {% if regions.object_list|length > 0 %}
-    <table id="example" class="tb_list">
-        <tr>
-            <th width="200">Noms</th>
-            <th width="80">Codes</th>
-            <th width="140">Provinces</th>
-            <th width="140" style="text-align: center">Actions</th>
-        </tr>
-        {% for region in regions.object_list %}
-        <tr>
-            <td>{{ region.nom }}</td>
-            <td>{{ region.code }}</td>
-            <td>{{ region.province }}</td>
-            <td class="tb_action">
-                <a href="{{ region.lien_editer }}">edit</a>
-                <a href="{{ region.lien_supprimer }}"
-                   onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
-            </td>
-        </tr>
-        {% endfor %}
+    <table id="example" class="display" style="width: 100%;">
     </table>
-    {% else %}
-        <div class="message">Aucune region enregistrée.</div>
-    {% endif %}
+
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
+    </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#example').dataTable();
-        });
+            $('#accordion').accordion();
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/localites/regions/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Region", "mDataProp": "nom", "bSortable": false },
+                    { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px", "bSortable": false },
+                    { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px", "bSortable": false }
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "sDom": 'rt<"F"i>'
+            });
+
+            $('#del-confirm').dialog({
+                autoOpen: false,
+                resizable: false,
+                height:150,
+                modal: true
+            });
+
+            $('.del-link').live('click', function(e) {
+                e.preventDefault();
+                var targetUrl = $(this).attr("href");
+                $('#del-confirm').dialog({
+                    buttons : {
+                        "Supprimer": function() {
+                            $.ajax({
+                                "dataType": 'json',
+                                "type": "POST",
+                                "url": targetUrl,
+                                "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                                "success": function() {
+                                    oTable.fnDraw();
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Annuler": function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $('#del-confirm').dialog('open');
+            });
+        } );
     </script>
 {% endblock %}

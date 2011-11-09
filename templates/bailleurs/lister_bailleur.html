@@ -1,69 +1,97 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    <div class="titlebar">
-        <div class="title">
-            <h1>Liste des bailleurs</h1>
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">Liste des bailleurs</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <div class="clear-l"></div>
+            </form>
         </div>
-        <div class="navigation">
-            <a href="{% url bailleurs.views.ajouter_bailleur %}">Ajouter un bailleur</a>
-        </div>
-        <div class="clear"></div>
     </div>
 
-    <div class="filter-form">
-        <form action="." method="post" id="form-filter">
-            {% csrf_token %}
-            <ul>
-                {{ form.as_ul }}
-            </ul>
-            <div class="clear-l"></div>
-            <input type="hidden" name="action" value="liste" id="action" />
-            <input type="submit" value="Rechercher" onclick="$('#action').val('liste');"/>
-            <!-- <input type="submit" value="Exporter" id="export-button"/> -->
-            <div class="clear-l"></div>
-        </form>
-    </div>
-
-    {% if bailleurs.object_list|length > 0 %}
-    <table class="tb_list">
-        <tr>
-            <th width="220">Nom</th>
-            <th width="140" style="text-align: center">Actions</th>
-        </tr>
-        {% for bailleur in bailleurs.object_list %}
-        <tr>
-            <td>{{ bailleur.nom }}</td>
-            <td class="tb_action">
-                <a href="{{ bailleur.lien_editer }}">edit</a>
-                <a href="{{ bailleur.lien_supprimer }}"
-                   onclick="return confirm('Voulez-vous supprimer cet enregistrement ?')">suppr</a>
-            </td>
-        </tr>
-        {% endfor %}
+    <table id="example" class="display" style="width: 100%;">
     </table>
-    <div class="pagination">
-        <div class="current">
-            Page {{ bailleurs.number }} sur {{ bailleurs.paginator.num_pages }}.
-        </div>
-        <div class="step-links">
-            {% if bailleurs.has_previous %}
-                <a href="javascript:void(0)" rel="{{ bailleurs.previous_page_number }}">&lt; Préc.</a>
-            {% endif %}
-            {% if bailleurs.has_next %}
-                <a href="javascript:void(0)" rel="{{ bailleurs.next_page_number }}">Suiv. &gt;</a>
-            {% endif %}
-        </div>
-        <div class="clear"></div>
-    </div>
 
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
+    </div>
     <script type="text/javascript">
-        $('.step-links a').live('click', function() {
-            $('#id_page').val($(this).attr('rel'));
-            $('#form-filter').submit();
-        });
+        $(document).ready(function() {
+            $('.filter-form input:submit').button();
+
+            $('#accordion').accordion({
+                collapsible: true
+            });
+
+            oTable = $('#example').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "bFilter": false,
+                "sAjaxSource": '/bailleurs/ajax/',
+                "aoColumns": [
+                    { "sTitle": "Nom", "mDataProp": "nom" },
+                    { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
+                ],
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    aoData.push(
+                        {"name": "fNom", "value": $('#id_nom').val()}
+                    );
+                    $.ajax( {
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}", "data": aoData},
+                        "success": fnCallback
+                    } );
+                },
+                "sDom": 'rt<"F"ip>'
+            });
+
+            $('#del-confirm').dialog({
+                autoOpen: false,
+                resizable: false,
+                height:150,
+                modal: true
+            });
+
+            $('.del-link').live('click', function(e) {
+                e.preventDefault();
+                var targetUrl = $(this).attr("href");
+                $('#del-confirm').dialog({
+                    buttons : {
+                        "Supprimer": function() {
+                            $.ajax({
+                                "dataType": 'json',
+                                "type": "POST",
+                                "url": targetUrl,
+                                "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                                "success": function() {
+                                    oTable.fnDraw();
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Annuler": function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $('#del-confirm').dialog('open');
+            });
+
+            $('#form-filter').submit(function(){
+                oTable.fnDraw();
+                return false;
+            });
+        } );
     </script>
-    {% else %}
-        <div class="message">Aucun bailleur enregistré.</div>
-    {% endif %}
 {% endblock %}
