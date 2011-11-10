@@ -1,6 +1,7 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
+    <a href="{% url localites.views.ajouter_commune %}">&raquo; Ajouter une commune</a>
     <div id="accordion" class="filter-form">
         <h3><a href="#">Liste des communes</a></h3>
         <div>
@@ -33,6 +34,7 @@
             oTable = $('#example').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
+                "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
                 "bFilter": false,
                 "sAjaxSource": '/localites/communes/ajax/',
                 "aoColumns": [
@@ -98,6 +100,23 @@
             $('#form-filter').submit(function(){
                 oTable.fnDraw();
                 return false;
+            });
+
+            $('#id_region').live('change', function(){
+                $('#id_district').html('<option value="">---</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '/cascade/region/',
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "region": $(this).val()},
+                    success: function(data){
+                        var items = new Array();
+                        items.push('<option value="">---</option>');
+                        for(i=0; i<data.length; i++) {
+                            items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                        }
+                        $('#id_district').html(items.join(''));
+                    }
+                });
             });
         } );
     </script>

@@ -214,7 +214,7 @@ def ajax_cumuls(request):
     kwargs = {}
 
     if 'fCommune' in posted and posted['fCommune'] != '':
-        kwargs['nom__icontains'] = str(posted['fCommune'])
+        kwargs['commune'] = str(posted['fCommune'])
     else:
         if 'fCode' in posted and posted['fCode'] != '':
             kwargs['commune__code__icontains'] = posted['fCode']

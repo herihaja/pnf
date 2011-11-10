@@ -348,3 +348,25 @@ def ajax_commune(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
+def select_district(request):
+    region_id = int(request.POST['region'])
+
+    districts = District.objects.filter(region=region_id).values('id', 'nom').order_by('nom')
+    results = []
+    for row in districts:
+        results.append(dict(id=row['id'], nom=row['nom']))
+
+    json = simplejson.dumps(results)
+    return HttpResponse(json, mimetype='application/json')
+
+def select_commune(request):
+    commune_id = int(request.POST['district'])
+
+    communes = Commune.objects.filter(district=commune_id).values('id', 'nom').order_by('nom')
+    results = []
+    for row in communes:
+        results.append(dict(id=row['id'], nom=row['nom'].lower().capitalize()))
+
+    json = simplejson.dumps(results)
+    return HttpResponse(json, mimetype='application/json')

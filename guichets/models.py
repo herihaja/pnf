@@ -13,6 +13,7 @@ class Guichet(Model):
         ('4', 'En cours'),
     )
     commune = models.OneToOneField(Commune, blank=True, null=True, on_delete=models.SET_NULL)
+    bailleurs = models.ManyToManyField(Bailleur)
     creation = models.DateField()
     agf1 = models.CharField(max_length=6, blank=True, null=True)
     mobile1 = models.CharField(max_length=15, blank=True, null=True)
@@ -24,5 +25,3 @@ class Guichet(Model):
     ajout = models.DateTimeField(auto_now_add=True)
     edit = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
-        return 'Guichet à %s' % (self.commune.nom,)

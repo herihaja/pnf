@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, url
 from localites.views import editer_province, ajouter_province, lister_province, supprimer_province, \
     lister_region, editer_region, ajouter_region, supprimer_region,\
     lister_district, editer_district, ajouter_district, supprimer_district, \
-    lister_commune, editer_commune, ajouter_commune, supprimer_commune, ajax_commune, ajax_district, ajax_region
+    lister_commune, editer_commune, ajouter_commune, supprimer_commune, ajax_commune, ajax_district, ajax_region, select_district, select_commune
 
 urlpatterns = patterns('',
                         (r'^localites/provinces/$', lister_province),
@@ -28,5 +28,8 @@ urlpatterns = patterns('',
                         (r'^localites/communes/ajout/$', ajouter_commune),
                         (r'^localites/communes/editer/(?P<commune_id>.+?)$', editer_commune),
                         (r'^localites/communes/supprimer/(?P<commune_id>.+?)$', supprimer_commune),
-                        (r'^localites/communes/ajax/$', ajax_commune)
+                        (r'^localites/communes/ajax/$', ajax_commune),
+
+                        (r'^cascade/region/$', select_district),
+                        (r'^cascade/district/$', select_commune),
                     )

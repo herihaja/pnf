@@ -3,7 +3,7 @@
 from django import forms
 from django.forms import ModelForm, Form
 from localites.models import Province, Region, District, Commune
-
+EMPTY_LIST = (('', '---'),)
 class ProvinceForm(ModelForm):
     class Meta:
         model = Province
@@ -20,9 +20,10 @@ class DistrictForm(ModelForm):
         exclude= ("slug")
 
 class CommuneForm(ModelForm):
+    region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     class Meta:
         model = Commune
-        exclude= ("slug")
+        fields = ('region', 'district', 'nom', 'code')
 
 class FiltreDistrictForm(Form):
     district = forms.CharField(max_length=40, required=False)
@@ -33,4 +34,4 @@ class FiltreCommuneForm(Form):
     nom = forms.CharField(max_length=40, required=False)
     code = forms.CharField(max_length=6, required=False)
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
-    district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
+    district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)

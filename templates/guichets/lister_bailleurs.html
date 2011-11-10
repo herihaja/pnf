@@ -2,7 +2,7 @@
 
 {% block content %}
     <div id="accordion" class="filter-form">
-        <h3><a href="#">{{ title }}</a></h3>
+        <h3><a href="#">Liste des guichets par bailleurs</a></h3>
         <div>
             <form action="" method="post" id="form-filter">
                 <ul>
@@ -20,35 +20,30 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('label[for="id_region"]').parent().css({'clear': 'left'});
-            $('.filter-form input:submit').button();
-
-            $('#accordion').accordion({
-                collapsible: true
+            $('label[for="id_etat"]').parent().css({'clear': 'left'});
+            $('#id_creede').datepicker({
+                changeMonth: true,
+                changeYear: true
             });
+            $('#id_creede').datepicker("option", $.datepicker.regional['fr']);
+            $('#id_creea').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_creea').datepicker("option", $.datepicker.regional['fr']);
 
             oTable = $('#example').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
                 "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
                 "bFilter": false,
-                "sAjaxSource": '/indicateurs/annees/ajax/',
+                "sAjaxSource": '/guichets/bailleurs/ajax/',
                 "aoColumns": [
-                    { "sTitle": "Commune", "mDataProp": "nom", "bSortable": false },
-                    { "sTitle": "J", "mDataProp": "jan", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "F", "mDataProp": "fev", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "M", "mDataProp": "mar", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "A", "mDataProp": "avr", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "M", "mDataProp": "mai", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "J", "mDataProp": "jun", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "J", "mDataProp": "jul", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "A", "mDataProp": "aou", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "S", "mDataProp": "sep", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "O", "mDataProp": "oct", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "N", "mDataProp": "nov", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "D", "mDataProp": "dec", "sWidth": "40px", "bSortable": false },
-                    { "sTitle": "Moy", "mDataProp": "moy", "sWidth": "60px", "bSortable": false },
-                    { "sTitle": "Total", "mDataProp": "total", "sWidth": "60px", "bSortable": false }
+                    { "sTitle": "Commune", "mDataProp": "commune"},
+                    { "sTitle": "Code", "mDataProp": "code", "sWidth": "40px" },
+                    { "sTitle": "Création", "mDataProp": "creation", "sWidth": "60px" },
+                    { "sTitle": "Bailleurs", "mDataProp": "bailleurs" },
+                    { "sTitle": "Etat", "mDataProp": "etat", "sWidth": "60px", "bSortable": false },
                 ],
                 "sPaginationType": "full_numbers",
                 "bJQueryUI": true,
@@ -57,7 +52,11 @@
                         {"name": "fRegion", "value": $('#id_region').val()},
                         {"name": "fCommune", "value": $('#id_commune').val()},
                         {"name": "fDistrict", "value": $('#id_district').val()},
-                        {"name": "fIndicateur", "value": $('#id_indicateur').val()}
+                        {"name": "fCode", "value": $('#id_code').val()},
+                        {"name": "fCreede", "value": $('#id_creede').val()},
+                        {"name": "fCreea", "value": $('#id_creea').val()},
+                        {"name": "fEtat", "value": $('#id_etat').val()},
+                        {"name": "fBailleur", "value": $('#id_bailleurs').val()}
                     );
                     $.ajax( {
                         "dataType": 'json',
@@ -70,11 +69,12 @@
                 "sDom": 'rt<"F"ip>'
             });
 
+            $('.filter-form input:submit').button();
             $('#form-filter').submit(function(){
                 oTable.fnDraw();
                 return false;
             });
-
+            $('#accordion').accordion({ collapsible: true });
             $('#id_region').live('change', function(){
                 $('#id_district').html('<option value="">---</option>');
                 $('#id_commune').html('<option value="">---</option>');

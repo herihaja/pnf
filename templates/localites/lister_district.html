@@ -1,6 +1,7 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
+    <a href="{% url localites.views.ajouter_district %}">&raquo; Ajouter un district</a>
     <div id="accordion" class="filter-form">
         <h3><a href="#">Liste des districts</a></h3>
         <div>
@@ -33,6 +34,7 @@
             oTable = $('#example').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
+                "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
                 "bFilter": false,
                 "sAjaxSource": '/localites/districts/ajax/',
                 "aoColumns": [

@@ -16,6 +16,41 @@
         $(document).ready(function() {
             $('.edit-form input:submit').button();
             $('#accordion').accordion({ collapsible: false });
+
+            $('#id_region').live('change', function(){
+                $('#id_district').html('<option value="">---</option>');
+                $('#id_commune').html('<option value="">---</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '/cascade/region/',
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "region": $(this).val()},
+                    success: function(data){
+                        var items = new Array();
+                        items.push('<option value="">---</option>');
+                        for(i=0; i<data.length; i++) {
+                            items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                        }
+                        $('#id_district').html(items.join(''));
+                    }
+                });
+            });
+
+            $('#id_district').live('change', function(){
+                $('#id_commune').html('<option value="">---</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '/cascade/district/',
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "district": $(this).val()},
+                    success: function(data){
+                        var items = new Array();
+                        items.push('<option value="">---</option>');
+                        for(i=0; i<data.length; i++) {
+                            items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                        }
+                        $('#id_commune').html(items.join(''));
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}

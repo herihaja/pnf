@@ -80,6 +80,11 @@ select {
   padding: 2px 3px; }
 
 ul.errorlist {
+  font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  text-shadow: 0 1px 0 #890F0F;
+  font-style: italic;
   margin: 0 0 1px 0;
   padding: 8px 0 0 0;
   clear: left;
@@ -90,6 +95,12 @@ ul.errorlist {
     border-radius: 4px;
     background-color: #DB1111;
     color: #ffffff; }
+
+.helptext {
+  font-family: 'Lucida sans', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: #327E04; }
 
 #del-confirm {
   display: none; }

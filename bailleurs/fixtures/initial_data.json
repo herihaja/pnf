@@ -2,99 +2,134 @@
     {
         "model":"bailleurs.Bailleur",
         "pk":1,
-        "fields": {
-            "nom": "Budget propre"
+        "fields":{
+            "nom":"mAFD"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":2,
-        "fields": {
-            "nom": "AFD / BVLac"
+        "fields":{
+            "nom":"BVLac"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":3,
-        "fields": {
-            "nom": "Banque Mondiale / PE III"
+        "fields":{
+            "nom":"BVPI"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":4,
-        "fields": {
-            "nom": "MCA"
+        "fields":{
+            "nom":"SEHP"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":5,
-        "fields": {
-            "nom": "ILC"
+        "fields":{
+            "nom":"KFW"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":6,
-        "fields": {
-            "nom": "PNUD / FANAMBY"
+        "fields":{
+            "nom":"PLAE"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":7,
-        "fields": {
-            "nom": "PNUD / UN Habitat"
+        "fields":{
+            "nom":"Banque Mondiale"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":8,
-        "fields": {
-            "nom": "SAHA"
+        "fields":{
+            "nom":"PE III"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":9,
-        "fields": {
-            "nom": "FIDA / PPRR / DCEM"
+        "fields":{
+            "nom":"Budget propre"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":10,
-        "fields": {
-            "nom": "FIDA / PHBM"
+        "fields":{
+            "nom":"FIDA"
         }
     },
-        {
+    {
         "model":"bailleurs.Bailleur",
         "pk":11,
-        "fields": {
-            "nom": "AFD / BVPI SEHP"
+        "fields":{
+            "nom":"PHBM"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":12,
-        "fields": {
-            "nom": "IRCOD / Conseil Général Haut Rhin"
+        "fields":{
+            "nom":"PPRR"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":13,
-        "fields": {
-            "nom": "BVPI / KFW PLAE"
+        "fields":{
+            "nom":"DCEM"
         }
     },
     {
         "model":"bailleurs.Bailleur",
         "pk":14,
-        "fields": {
-            "nom": "ICCO / FIANTSO / DCEM"
+        "fields":{
+            "nom":"ICCO"
+        }
+    },
+    {
+        "model":"bailleurs.Bailleur",
+        "pk":15,
+        "fields":{
+            "nom":"FIANTSO"
+        }
+    },
+    {
+        "model":"bailleurs.Bailleur",
+        "pk":16,
+        "fields":{
+            "nom":"DCEM"
+        }
+    },
+    {
+        "model":"bailleurs.Bailleur",
+        "pk":17,
+        "fields":{
+            "nom":"ILC"
+        }
+    },
+    {
+        "model":"bailleurs.Bailleur",
+        "pk":18,
+        "fields":{
+            "nom":"IRCOD"
+        }
+    },
+    {
+        "model":"bailleurs.Bailleur",
+        "pk":19,
+        "fields":{
+            "nom":"Conseil Général Haut Rhin"
         }
     }
 ]

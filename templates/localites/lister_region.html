@@ -1,6 +1,7 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
+    <a href="{% url localites.views.ajouter_region %}">&raquo; Ajouter une région</a>
     <div id="accordion" class="filter-form">
         <h3><a href="#">Liste des régions</a></h3>
     </div>
@@ -19,6 +20,7 @@
             oTable = $('#example').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
+                "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
                 "bFilter": false,
                 "sAjaxSource": '/localites/regions/ajax/',
                 "aoColumns": [
