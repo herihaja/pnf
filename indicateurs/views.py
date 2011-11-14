@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Cumul
-from helpers import process_datatables_posted_vars
+from helpers import process_datatables_posted_vars, query_datatables, export_excel
 from indicateurs.forms import FiltreIndicateursForm, FiltreIndicateurForm, FiltreRatioForm
 from django.db.models import Count
 import simplejson
@@ -17,96 +17,60 @@ def indicateurs_par_date(request):
         form = FiltreIndicateursForm()
     else:
         form = FiltreIndicateursForm(request.POST)
-    return render_to_response('indicateurs/lister_indicateurs.html', {"form": form, "title": "Indicateurs par localités"}, context_instance=RequestContext(request))
+    page_js = '/media/js/indicateurs/indicateurs.js'
+    title = 'Indicateurs par localités'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
 
 def indicateur_par_date(request):
     if request.method == 'GET':
         form = FiltreIndicateurForm(initial={'annee': datetime.now().year - 1})
     else:
         form = FiltreIndicateurForm(request.POST)
-    return render_to_response('indicateurs/liste.html', {"form": form, "title": "Indicateur par année"}, context_instance=RequestContext(request))
+    title = 'Indicateur par année'
+    page_js = '/media/js/indicateurs/ratios.js'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
 
 def ratio(request, ratio, title):
     if request.method == 'GET':
         form = FiltreRatioForm(initial={'indicateur': ratio, 'annee': datetime.now().year - 1})
     else:
         form = FiltreRatioForm(request.POST)
-    return render_to_response('indicateurs/liste.html', {"form": form, "title": title}, context_instance=RequestContext(request))
+    page_js = '/media/js/indicateurs/ratios.js'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
 
 def ajax_indicateurs(request):
     # columns titles
     columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
 
     # filtering
-    posted = process_datatables_posted_vars(request.POST)
+    post = process_datatables_posted_vars(request.POST)
     # valide true
     kwargs = {'valide': True}
-
-    if 'fCommune' in posted and posted['fCommune'] != '':
-        kwargs['nom__icontains'] = str(posted['fCommune'])
+    if 'fCommune' in post and post['fCommune'] != '':
+        kwargs['nom__icontains'] = str(post['fCommune'])
     else:
-        if 'fCode' in posted and posted['fCode'] != '':
-            kwargs['commune__code__icontains'] = posted['fCode']
-        if 'fDistrict' in posted and posted['fDistrict'] != '':
-            kwargs['commune__district'] = posted['fDistrict']
+        if 'fCode' in post and post['fCode'] != '':
+            kwargs['commune__code__icontains'] = post['fCode']
+        if 'fDistrict' in post and post['fDistrict'] != '':
+            kwargs['commune__district'] = post['fDistrict']
         else:
-            if 'fRegion' in posted and posted['fRegion'] != '':
-                kwargs['commune__district__region'] = posted['fRegion']
+            if 'fRegion' in post and post['fRegion'] != '':
+                kwargs['commune__district__region'] = post['fRegion']
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
+        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+        kwargs['periode__gte'] = cree_de
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
+        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+        kwargs['periode__lte'] = cree_a
 
-    # ordering
-    sorts = []
-    if 'iSortingCols' in posted:
-        for i in range(0, int(posted['iSortingCols'])):
-            sort_col = "iSortCol_%s" % (i,)
-            sort_dir = posted["sSortDir_%s" % (i,)]
-            if columns[int(posted[sort_col])] == 'code':  # code
-                if sort_dir == "asc":
-                    sort_qry = "commune__code"
-                else:
-                    sort_qry = "-commune__code"
-            else:
-                if sort_dir == "asc":
-                    sort_qry = columns[int(posted[sort_col])]
-                else:
-                    sort_qry = "-%s" % (columns[int(posted[sort_col])],)
-            sorts.append(sort_qry)
-
-    # limitting
-    lim_start = None
-    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
-        lim_start = int(posted['iDisplayStart'])
-        lim_num = int(posted['iDisplayLength']) + lim_start
-
-    # querying
-    iTotalRecords = Donnees.objects.filter(valide=True).count()
-    if len(kwargs) > 0:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-            else:
-                donnees = Donnees.objects.filter(**kwargs).order_by(*sorts)
-        else:
-            if lim_start is not None:
-                donnees = Donnees.objects.filter(**kwargs)[lim_start:lim_num]
-            else:
-                donnees = Donnees.objects.filter(**kwargs)
-        iTotalDisplayRecords = Donnees.objects.filter(**kwargs).count()
-    else:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                donnees = Donnees.objects.all().order_by(*sorts)[lim_start:lim_num]
-            else:
-                donnees = Donnees.objects.all().order_by(*sorts)
-        else:
-            if lim_start is not None:
-                donnees = Donnees.objects.all()[lim_start:lim_num]
-            else:
-                donnees = Donnees.objects.all()
-        iTotalDisplayRecords = iTotalRecords
-
+    records, total_records, display_records = query_datatables(Donnees, columns, post, **kwargs)
     results = []
-
-    for row in donnees:
+    for row in records:
         result = dict(
             id = row.id,
             commune = row.commune.nom,
@@ -125,8 +89,8 @@ def ajax_indicateurs(request):
         )
         results.append(result)
 
-    sEcho = int(posted['sEcho'])
-    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
@@ -136,29 +100,28 @@ def ajax_pivot_table(request):
     columns = ['nom', 'jan', 'fev', 'mar', 'avr', 'mai', 'jun', 'jul', 'aou', 'sep', 'oct', 'nov', 'dec', 'moy', 'total']
 
     # filtering
-    posted = process_datatables_posted_vars(request.POST)
+    post = process_datatables_posted_vars(request.POST)
     kwargs = {}
     # indicateur valide is mandatory
-    if 'fIndicateur' in posted and  posted['fIndicateur'] != '':
-        indicateur = str(posted['fIndicateur'])
+    if 'fIndicateur' in post and  post['fIndicateur'] != '':
+        indicateur = str(post['fIndicateur'])
     # year is mandatory
-    if 'fAnnee' in posted and  posted['fAnnee'] != '':
-        year = str(posted['fAnnee'])
+    if 'fAnnee' in post and  post['fAnnee'] != '':
+        year = str(post['fAnnee'])
     else:
-        #Todo : default year to current -1
-        year = '2010'
+        year = datetime.now().year - 1
     kwargs['periode__year'] = year
 
-    if 'fCommune' in posted and posted['fCommune'] != '':
-        kwargs['commune'] = str(posted['fCommune'])
+    if 'fCommune' in post and post['fCommune'] != '':
+        kwargs['commune'] = str(post['fCommune'])
     else:
-        if 'fCode' in posted and posted['fCode'] != '':
-            kwargs['code__icontains'] = posted['fCode']
-        if 'fDistrict' in posted and posted['fDistrict'] != '':
-            kwargs['commune__district'] = posted['fDistrict']
+        if 'fCode' in post and post['fCode'] != '':
+            kwargs['code__icontains'] = post['fCode']
+        if 'fDistrict' in post and post['fDistrict'] != '':
+            kwargs['commune__district'] = post['fDistrict']
         else:
-            if 'fRegion' in posted and posted['fRegion'] != '':
-                kwargs['commune__district__region'] = posted['fRegion']
+            if 'fRegion' in post and post['fRegion'] != '':
+                kwargs['commune__district__region'] = post['fRegion']
 
     # get the total rows - year fixed - grouped by commune
     iTotalRecords = Cumul.objects.filter(periode__year=year).values('commune').order_by().annotate(Count('commune'))
@@ -166,16 +129,16 @@ def ajax_pivot_table(request):
 
     # limitting
     lim_start = None
-    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
-        lim_start = int(posted['iDisplayStart'])
-        lim_num = int(posted['iDisplayLength']) + lim_start
+    if 'iDisplayStart' in post and post['iDisplayLength'] != '-1':
+        lim_start = int(post['iDisplayStart'])
+        lim_num = int(post['iDisplayLength']) + lim_start
 
     # ordering
     sorts = []
     sort_commune = None
-    if 'iSortingCols' in posted:
-        sort_col = posted['iSortCol_0']
-        sort_dir = posted['sSortDir_0']
+    if 'iSortingCols' in post:
+        sort_col = post['iSortCol_0']
+        sort_dir = post['sSortDir_0']
         # commune sorting
         if columns[int(sort_col)] == 'nom':
             if sort_dir == "asc":
@@ -228,8 +191,61 @@ def ajax_pivot_table(request):
         ratio['total'] = total
         results.append(ratio)
 
-    sEcho = int(posted['sEcho'])
+    sEcho = int(post['sEcho'])
     results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')
+
+def export_indicateurs(request):
+    columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
+    dataset = Donnees.objects.filter_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'indicateurs')
+    return response
+
+def export_ratios(request):
+    columns = [u'Commune', u'Jan', u'Fév', u'Mar', u'Avr', u'Mai', u'Jun', u'Jul', u'Sep', u'Oct', u'Nov', u'Déc', 'Moy', 'Tot']
+    dataset = Donnees.objects.filter_ratio_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'ratio')
+    return response
+
+def ajax_ratios_localite(request):
+    # columns titles
+    columns = ['localite', 'certificats', 'femmes', 'conflits', 'resolus', 'surface']
+
+    # filtering
+    post = process_datatables_posted_vars(request.POST)
+    kwargs = {}
+    # year is mandatory
+    if 'fAnnee' in post and  post['fAnnee'] != '':
+        year = str(post['fAnnee'])
+    else:
+        year = datetime.now().year - 1
+    kwargs['periode__year'] = year
+
+    records = Cumul.objects.filter(**kwargs).values('periode', 'rcertificats', 'rfemmes', 'rconflits', 'rresolus', 'rsurface').order_by('periode')
+    results = []
+    for row in records:
+        result = dict(
+            id = row.id,
+            commune = row.commune.nom,
+            code = row.commune.code,
+            periode = datetime.strftime(row.periode, "%m/%Y"),
+            demandes = row.demandes,
+            oppositions = row.oppositions,
+            resolues = row.resolues,
+            certificats = row.certificats,
+            femmes = row.femmes,
+            surfaces = row.surfaces,
+            recettes = row.recettes,
+            garanties = row.garanties,
+            reconnaissances = row.reconnaissances,
+            mutations = row.garanties
+        )
+        results.append(result)
+
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')

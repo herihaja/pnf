@@ -9,7 +9,7 @@ from donnees.models import Donnees
 from guichets.models import Guichet
 from sms.models import Reception, Envoi
 from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm
-from helpers import paginate, export_excel, process_datatables_posted_vars
+from helpers import export_excel, process_datatables_posted_vars, query_datatables
 import re
 from django.db.models import Q
 import simplejson
@@ -19,79 +19,37 @@ def lister_reception(request):
         form = FiltreReceptionForm()
     else:
         form = FiltreReceptionForm(request.POST)
-    return render_to_response('sms/lister_reception.html', {"form": form}, context_instance=RequestContext(request))
+    page_js = '/media/js/sms/reception.js'
+    title = 'Sms reçus'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
 
 def ajax_reception(request):
     # columns titles
     columns = ['date_reception', 'numero', 'message', 'statut', 'reponse']
 
     # filtering
-    posted = process_datatables_posted_vars(request.POST)
+    post = process_datatables_posted_vars(request.POST)
 
     kwargs = {}
-    if 'fExpediteur' in posted and posted['fExpediteur'] != '':
-        kwargs['expediteur__icontains'] = str(posted['fExpediteur'])
-    if 'fMessage' in posted and posted['fMessage'] != '':
-        kwargs['message__icontains'] = posted['fMessage']
-    if 'fStatut' in posted and posted['fStatut'] != '':
-        kwargs['statut'] = posted['fStatut']
-    if 'fCreede' in posted and posted['fCreede'] != '':
-        cree_de = datetime.strptime(posted['fCreede'], "%d/%m/%Y")
+    if 'fExpediteur' in post and post['fExpediteur'] != '':
+        kwargs['expediteur__icontains'] = str(post['fExpediteur'])
+    if 'fMessage' in post and post['fMessage'] != '':
+        kwargs['message__icontains'] = post['fMessage']
+    if 'fStatut' in post and post['fStatut'] != '':
+        kwargs['statut'] = post['fStatut']
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
         cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
         kwargs['date_reception__gte'] = cree_de
-    if 'fCreea' in posted and posted['fCreea'] != '':
-        cree_a = datetime.strptime(posted['fCreea'], "%d/%m/%Y")
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
         cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
         kwargs['date_reception__lte'] = cree_a
 
-    # ordering
-    sorts = []
-    if 'iSortingCols' in posted:
-        for i in range(0, int(posted['iSortingCols'])):
-            sort_col = "iSortCol_%s" % (i,)
-            sort_dir = posted["sSortDir_%s" % (i,)]
-            if sort_dir == "asc":
-                sort_qry = columns[int(posted[sort_col])]
-            else:
-                sort_qry = "-%s" % (columns[int(posted[sort_col])],)
-            sorts.append(sort_qry)
-    
-    # limitting
-    lim_start = None
-    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
-        lim_start = int(posted['iDisplayStart'])
-        lim_num = int(posted['iDisplayLength']) + lim_start
-
-    # querying
-    iTotalRecords = Reception.objects.count()
-    if len(kwargs) > 0:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                reception = Reception.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-            else:
-                reception = Reception.objects.filter(**kwargs).order_by(*sorts)
-        else:
-            if lim_start is not None:
-                reception = Reception.objects.filter(**kwargs)[lim_start:lim_num]
-            else:
-                reception = Reception.objects.filter(**kwargs)
-        iTotalDisplayRecords = Reception.objects.filter(**kwargs).count()
-    else:
-        if len(sorts) > 0:
-            if lim_start is not None:
-                reception = Reception.objects.all().order_by(*sorts)[lim_start:lim_num]
-            else:
-                reception = Reception.objects.all().order_by(*sorts)
-        else:
-            if lim_start is not None:
-                reception = Reception.objects.all()[lim_start:lim_num]
-            else:
-                reception = Reception.objects.all()
-        iTotalDisplayRecords = iTotalRecords
-
+    records, total_records, display_records = query_datatables(Reception, columns, post, **kwargs)
     results = []
-
-    for row in reception:
+    for row in records:
         result = dict(
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             numero = row.expediteur,
@@ -101,45 +59,71 @@ def ajax_reception(request):
         )
         results.append(result)
 
-    sEcho = int(posted['sEcho'])
-    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
 
+def export_reception(request):
+    columns = [u'Date / Heure', u'Expéditeur', u'Message', u'Statut', u'Réponse']
+    dataset = Reception.objects.filter_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'sms')
+    return response
 
 def lister_envoi(request):
-    envoi_liste = []
-
     if request.method == 'GET':
         form = FiltreEnvoiForm()
-        rows = Envoi.objects.all()
-        page = int(request.GET.get('page', '1'))
     else:
         form = FiltreEnvoiForm(request.POST)
-        rows = Envoi.objects.filtrer(request)
-        page = int(request.POST['page'])
-
-    if rows is not None:
-        for row in rows:
-            envoi_id = row.id
-            lien_editer = reverse(editer_envoi, args=[envoi_id])
-            lien_supprimer = reverse(supprimer_envoi, args=[envoi_id])
-            envoi = dict(
-                id=row.id,
-                date_envoi = row.date_envoi,
-                destinataire = row.destinataire,
-                message = reow.message,
-                lien_editer=lien_editer,
-                lien_supprimer=lien_supprimer
-            )
-            envoi_liste.append(envoi)
-
-    envois = paginate(envoi_liste, 25, page)
-
-    return render_to_response('sms/lister_envoi.html', {"envois": envois, "form": form},
+    page_js = '/media/js/sms/envois.js'
+    title = 'Sms envoyés'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+def ajax_envoi(request):
+    # columns titles
+    columns = ['date_envoi', 'numero', 'message', 'statut', 'reponse']
+
+    # filtering
+    post = process_datatables_posted_vars(request.POST)
+
+    kwargs = {}
+    if 'fDestinataire' in post and post['fDestinataire'] != '':
+        kwargs['destinataire__icontains'] = str(post['fDestinataire'])
+    if 'fMessage' in post and post['fMessage'] != '':
+        kwargs['message__icontains'] = post['fMessage']
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
+        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+        kwargs['date_envoi__gte'] = cree_de
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
+        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+        kwargs['date_envoi__lte'] = cree_a
+
+    records, total_records, display_records = query_datatables(Envoi, columns, post, **kwargs)
+    results = []
+
+    for row in records:
+        result = dict(
+            date_envoi = datetime.strftime(row.date_envoi, "%d-%m-%Y %H:%M:%S"),
+            numero = row.destinataire,
+            message = row.message,
+        )
+        results.append(result)
+
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')
+
+def export_envoi(request):
+    columns = [u'Date / Heure', u'Destinataire', u'Message']
+    dataset = Envoi.objects.filter_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'sms')
+    return response
 
 def sms_tester(request):
     if request.method == 'GET':
@@ -179,7 +163,7 @@ def sms_tester(request):
             donnees.save()
         else:
             reception = Reception(
-                date_reception = datetime.datetime.now(),
+                date_reception = datetime.now(),
                 expediteur = request.POST['expediteur'],
                 message = request.POST['message'],
                 statut = 2,
@@ -190,16 +174,6 @@ def sms_tester(request):
     else:
         return render_to_response('sms/tester.html', {'form': form},
                                   context_instance=RequestContext(request))
-
-
-def export(rows):
-    header = ['Date de reception', 'Expediteur','Message', 'Statut', 'retour']
-    liste = []
-    for row in rows:
-        cleaned_row = [row.date_reception, row.expediteur, row.message, row.statut, row.retour]
-        liste.append(cleaned_row)
-    ret = export_excel(header, liste, 'reçus')
-    return ret
 
 def _parser(message):
     data = {}

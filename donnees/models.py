@@ -1,85 +1,108 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import datetime
+from datetime import datetime
 from django.db import models
 from django.db.models import Q, Model, Manager
+from helpers import create_compare_condition
 from localites.models import Commune
 from sms.models import Reception
+from django.db.models import Count
 
 class DonneesManager(Manager):
-    def _construire_requete(self, champ, condition):
-        condition = condition.strip()
-        qry = {}
-        if condition[0:1] == '>':
-            if condition[1:2] == '=':
-                qry = {champ + '__gte': int(condition[2:].lstrip())}
+    def filter_for_xls(self, post):
+        columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+        kwargs = {'valide': True}
+        if 'commune' in post and post['commune'] != '':
+            kwargs['nom__icontains'] = str(post['commune'])
+        else:
+            if 'code' in post and post['code'] != '':
+                kwargs['commune__code__icontains'] = post['code']
+            if 'district' in post and post['district'] != '':
+                kwargs['commune__district'] = post['district']
             else:
-                qry = {champ + '__gt': int(condition[1:].lstrip())}
-        if condition[0:1] == '<':
-            if condition[1:2] == '=':
-                qry = {champ + '__lte': int(condition[2:].lstrip())}
+                if 'region' in post and post['region'] != '':
+                    kwargs['commune__district__region'] = post['region']
+
+        for i in range(0, 9):
+            post_key = columns[i]
+            if post_key in post and post[post_key] != '':
+                key, value = create_compare_condition(columns[i], post[post_key])
+                kwargs[key] = value
+
+        if 'date_de' in post and post['date_de'] != '':
+            cree_de = datetime.strptime(post['date_de'], "%d/%m/%Y")
+            cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+            kwargs['periode__gte'] = cree_de
+        if 'date_a' in post and post['date_a'] != '':
+            cree_a = datetime.strptime(post['date_a'], "%d/%m/%Y")
+            cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+            kwargs['periode__lte'] = cree_a
+        
+        queryset = self.filter(**kwargs)
+        dataset = []
+        for row in queryset:
+            periode = datetime.strftime(row.periode, "%m/%Y")
+            row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
+                        row.certificats, row.femmes, row.recettes, row.mutations, row.surfaces, row.garanties, row.reconnaissances]
+            dataset.append(row_list)
+        return dataset
+
+    def filter_ratio_for_xls(self, post):
+        kwargs = {}
+        # indicateur valide is mandatory
+        if 'indicateur' in post and  post['indicateur'] != '':
+            indicateur = str(post['indicateur'])
+        # year is mandatory
+        if 'annee' in post and  post['annee'] != '':
+            year = str(post['annee'])
+        else:
+            year = datetime.now().year - 1
+        kwargs['periode__year'] = year
+
+        if 'commune' in post and post['commune'] != '':
+            kwargs['commune'] = str(post['commune'])
+        else:
+            if 'code' in post and post['code'] != '':
+                kwargs['code__icontains'] = post['code']
+            if 'district' in post and post['district'] != '':
+                kwargs['commune__district'] = post['district']
             else:
-                qry = {champ + '__lt': int(condition[1:].lstrip())}
-        if condition[0:1] == '=' and  (condition[1:2] != '<' or condition[1:2] != '>'):
-            qry = {champ: int(condition[1:].lstrip())}
-        if len(qry) == 0:
-            qry = {champ: int(condition)}
-        qry = Q(**qry)
-        return qry
+                if 'region' in post and post['region'] != '':
+                    kwargs['commune__district__region'] = post['region']
 
-    def filtrer(self, post):
-        qry = Q()
-        indicateurs = ('demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'recettes', 'mutations', 'surfaces', 'garanties')
-
-        if 'commune' in post.POST:
-            commune = post.POST['commune']
-            if len(commune) > 0:
-                qry = qry & Q(commune=int(commune))
-            else:
-                if 'code' in post.POST:
-                    code = post.POST['code']
-                    if len(code) > 0:
-                        qry = qry & Q(commune__code__icontains=code)
-
-                if 'district' in post.POST:
-                    district = post.POST['district']
-                    if len(district) > 0:
-                        qry = qry & Q(commune__district=int(district))
-                    else:
-                        if 'region' in post.POST:
-                            region = post.POST['region']
-                            if len(region) > 0:
-                                qry = qry & Q(commune__district__region=int(region))
-
-        if 'periode_de_annee' in post.POST and 'periode_de_mois' in post.POST:
-            periode_de_annee = post.POST['periode_de_annee']
-            periode_de_mois = post.POST['periode_de_mois']
-            if len(periode_de_annee) > 0:
-                if len(periode_de_mois) > 0:
-                    qry =  qry & Q(periode__gte=periode_de_annee.strip()+'-'+periode_de_mois.strip()+'-01')
+        cumuls = Cumul.objects.filter(**kwargs).values('commune', 'commune__nom').annotate(Count('commune'))
+        results = []
+        for cumul in cumuls:
+            ratios = Cumul.objects.filter(periode__year=year, commune=cumul['commune']).values('periode', indicateur).order_by('periode')
+            nom = cumul['commune__nom']
+            ratio = {}
+            total = 0
+            n = 0
+            m = 1
+            for row in ratios:
+                month = row['periode'].month
+                # fill the blanks
+                while month > m:
+                    ratio[str(m)] = '-'
+                    m += 1
+                if row[indicateur] is not None:
+                    ratio[str(m)] = row[indicateur]
+                    total += row[indicateur]
                 else:
-                    qry =  qry & Q(periode__gte=periode_de_annee.strip()+'-01-01')
+                    ratio[str(m)] = '-'
+                n += 1
+                m += 1
+            # fill the blanks
+            while m <= 12:
+                ratio[str(m)] = '-'
+                m += 1
+            moyenne = round(total / n, 2)
+            total = total
+            row_list = [nom, ratio['1'], ratio['2'], ratio['3'], ratio['4'], ratio['5'],
+                        ratio['6'], ratio['7'], ratio['8'], ratio['9'], ratio['10'], ratio['11'], ratio['12'], moyenne, total]
+            results.append(row_list)
+        return results
 
-        if 'periode_a_annee' in post.POST and 'periode_a_mois' in post.POST:
-            periode_a_annee = post.POST['periode_a_annee']
-            periode_a_mois = post.POST['periode_a_mois']
-            if len(periode_a_annee) > 0:
-                if len(periode_a_mois) > 0:
-                    qry =  qry & Q(periode__lte=periode_a_annee.strip()+'-'+periode_a_mois.strip()+'-01')
-                else:
-                    qry =  qry & Q(periode__lte=periode_a_annee.strip()+'-12-31')
-
-        if 'annee' in post.POST:
-            annee = post.POST['annee']
-            if len(annee) > 0:
-                qry =  qry & Q(periode__lte=annee.strip()+'-12-31', periode__gte=annee.strip()+'-01-01')
-
-        for indicateur in indicateurs:
-            if indicateur in post.POST:
-                if len(post.POST[indicateur]) > 0:
-                    qry =  qry & self._construire_requete(indicateur, post.POST[indicateur])
-
-        return self.filter(qry)
 
 class Donnees(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
@@ -249,6 +272,44 @@ class Donnees(Model):
             
 
 class CumulManager(Manager):
+    def filter_for_xls(self, post):
+        columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+        kwargs = {}
+        if 'commune' in post and post['commune'] != '':
+            kwargs['commune'] = str(post['commune'])
+        else:
+            if 'code' in post and post['code'] != '':
+                kwargs['commune__code__icontains'] = post['code']
+            if 'district' in post and post['district'] != '':
+                kwargs['commune__district'] = post['district']
+            else:
+                if 'region' in post and post['region'] != '':
+                    kwargs['commune__district__region'] = post['region']
+
+        for i in range(0, 9):
+            post_key = columns[i]
+            if post_key in post and post[post_key] != '':
+                key, value = create_compare_condition(columns[i], post[post_key])
+                kwargs[key] = value
+
+        if 'periode_de' in post and post['periode_de'] != '':
+            cree_de = datetime.strptime(post['periode_de'], "%d/%m/%Y")
+            cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+            kwargs['periode__gte'] = cree_de
+        if 'periode_a' in post and post['periode_a'] != '':
+            cree_a = datetime.strptime(post['periode_a'], "%d/%m/%Y")
+            cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+            kwargs['periode__lte'] = cree_a
+
+        queryset = self.filter(**kwargs)
+        dataset = []
+        for row in queryset:
+            periode = datetime.strftime(row.periode, "%m/%Y")
+            row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
+                        row.certificats, row.femmes, row.recettes, row.mutations, row.surfaces, row.garanties, row.reconnaissances]
+            dataset.append(row_list)
+        return dataset
+
     def _calcul_ratio(self, demandes, certificats, femmes, oppositions, resolues, surfaces):
         if demandes is not None and demandes != 0:
             rcertificats = round(certificats / demandes, 2)

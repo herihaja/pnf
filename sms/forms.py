@@ -20,9 +20,8 @@ class FiltreReceptionForm(Form):
 class FiltreEnvoiForm(Form):
     destinataire = forms.CharField(label='Destinataire', max_length=6, required=False)
     message = forms.CharField(label='Message', max_length=6, required=False)
-    date_envoi_de = forms.DateField(label='Envoyé entre le', required=False)
-    date_envoi_a = forms.DateField(label='et le', required=False)
-    page = forms.CharField(widget=forms.HiddenInput(), initial=1)
+    cree_de = forms.DateField(label='Envoyé du', required=False)
+    cree_a = forms.DateField(label='au', required=False)
 
 class TesterForm(Form):
     expediteur = forms.CharField(label='Expéditeur', max_length=20, required=True)

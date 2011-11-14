@@ -104,3 +104,11 @@ ul.errorlist {
 
 #del-confirm {
   display: none; }
+
+.datatables_length {
+  width: 110px; }
+  .datatables_length select {
+    width: 55px; }
+
+.datatables_info {
+  width: 300px; }

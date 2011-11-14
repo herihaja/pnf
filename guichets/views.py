@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from guichets.models import Guichet
 from guichets.forms import GuichetForm, FiltreGuichetForm, FiltreBailleurForm
-from helpers import export_excel, process_datatables_posted_vars
+from helpers import process_datatables_posted_vars, export_excel, query_datatables
 import simplejson
 
 def lister_guichet(request):
@@ -16,14 +16,21 @@ def lister_guichet(request):
         form = FiltreGuichetForm()
     else:
         form = FiltreGuichetForm(request.POST)
-    return render_to_response('guichets/lister_guichet.html', {"form": form}, context_instance=RequestContext(request))
+    header_link = '<a href="%s">&raquo; Ajouter un guichet</a>' % (reverse(ajouter_guichet),)
+    page_js = '/media/js/guichets/guichets.js'
+    title = 'Liste des guichets'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
+                              context_instance=RequestContext(request))
 
 def lister_bailleurs(request):
     if request.method == 'GET':
         form = FiltreBailleurForm()
     else:
         form = FiltreBailleurForm(request.POST)
-    return render_to_response('guichets/lister_bailleurs.html', {"form": form}, context_instance=RequestContext(request))
+    page_js = '/media/js/guichets/bailleurs.js'
+    title = 'Liste des guichets'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
 
 def ajouter_guichet(request):
     if request.method == 'GET':
@@ -74,79 +81,41 @@ def ajax_guichet(request):
     columns = ['commune', 'code', 'creation', 'agf1', 'num1', 'password1', 'agf2', 'num2', 'password2', 'etat', 'actions']
 
     # filtering
-    posted = process_datatables_posted_vars(request.POST)
+    post = process_datatables_posted_vars(request.POST)
 
     kwargs = {}
-    if 'fCommune' in posted and posted['fCommune'] != '':
-        kwargs['nom__icontains'] = str(posted['fCommune'])
+    if 'fCommune' in post and post['fCommune'] != '':
+        kwargs['commune'] = str(post['fCommune'])
     else:
-        if 'fCode' in posted and posted['fCode'] != '':
-            kwargs['commune__code__icontains'] = posted['fCode']
-        if 'fDistrict' in posted and posted['fDistrict'] != '':
-            kwargs['commune__district'] = posted['fDistrict']
+        if 'fCode' in post and post['fCode'] != '':
+            kwargs['commune__code__icontains'] = post['fCode']
+        if 'fDistrict' in post and post['fDistrict'] != '':
+            kwargs['commune__district'] = post['fDistrict']
         else:
-            if 'fRegion' in posted and posted['fRegion'] != '':
-                kwargs['commune__district__region'] = posted['fRegion']
-    if 'fAgf1' in posted and posted['fAgf1'] != '':
-        kwargs['agf1__icontains'] = str(posted['fAgf1'])
-    if 'fMobile1' in posted and posted['fMobile1'] != '':
-        kwargs['mobile1__icontains'] = str(posted['fMobile1'])
-    if 'fAgf2' in posted and posted['fAgf2'] != '':
-        kwargs['agf2__icontains'] = str(posted['fAgf2'])
-    if 'fMobile2' in posted and posted['fMobile2'] != '':
-        kwargs['mobile2__icontains'] = str(posted['fMobile2'])
-    if 'fCreede' in posted and posted['fCreede'] != '':
-        cree_de = datetime.strptime(posted['fCreede'], "%d/%m/%Y")
+            if 'fRegion' in post and post['fRegion'] != '':
+                kwargs['commune__district__region'] = post['fRegion']
+    if 'fAgf1' in post and post['fAgf1'] != '':
+        kwargs['agf1__icontains'] = str(post['fAgf1'])
+    if 'fMobile1' in post and post['fMobile1'] != '':
+        kwargs['mobile1__icontains'] = str(post['fMobile1'])
+    if 'fAgf2' in post and post['fAgf2'] != '':
+        kwargs['agf2__icontains'] = str(post['fAgf2'])
+    if 'fMobile2' in post and post['fMobile2'] != '':
+        kwargs['mobile2__icontains'] = str(post['fMobile2'])
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
         cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
         kwargs['creation__gte'] = cree_de
-    if 'fCreea' in posted and posted['fCreea'] != '':
-        cree_a = datetime.strptime(posted['fCreea'], "%d/%m/%Y")
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
         cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
         kwargs['creation__lte'] = cree_a
-    if 'fEtat' in posted and posted['fEtat'] != '':
-        kwargs['etat'] = posted['fEtat']
+    if 'fEtat' in post and post['fEtat'] != '':
+        kwargs['etat'] = post['fEtat']
 
-    # ordering
-    sorts = []
-    if 'iSortingCols' in posted:
-        for i in range(0, int(posted['iSortingCols'])):
-            sort_col = "iSortCol_%s" % (i,)
-            sort_dir = posted["sSortDir_%s" % (i,)]
-            if columns[int(posted[sort_col])] == 'code':
-                if sort_dir == "asc":
-                    sort_qry = 'commune__code'
-                else:
-                    sort_qry = '-commune__code'
-                sorts.append(sort_qry)
-            else:
-                if sort_dir == "asc":
-                    sort_qry = columns[int(posted[sort_col])]
-                else:
-                    sort_qry = "-%s" % (columns[int(posted[sort_col])],)
-                sorts.append(sort_qry)
-            
-    # limitting
-    lim_start = None
-    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
-        lim_start = int(posted['iDisplayStart'])
-        lim_num = int(posted['iDisplayLength']) + lim_start
-
-    # querying
-    iTotalRecords = Guichet.objects.count()
-    if len(sorts) > 0:
-        if lim_start is not None:
-            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-        else:
-            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)
-    else:
-        if lim_start is not None:
-            guichet = Guichet.objects.filter(**kwargs)[lim_start:lim_num]
-        else:
-            guichet = Guichet.objects.filter(**kwargs)
-    iTotalDisplayRecords = Guichet.objects.filter(**kwargs).count()
-
+    records, total_records, display_records = query_datatables(Guichet, columns, post, **kwargs)
     results = []
-    for row in guichet:
+    for row in records:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_guichet, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_guichet, args=[row.id]),)
         if len(row.password1) > 0:
@@ -176,8 +145,8 @@ def ajax_guichet(request):
         )
         results.append(result)
 
-    sEcho = int(posted['sEcho'])
-    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
@@ -187,85 +156,35 @@ def ajax_bailleur(request):
     columns = ['commune', 'code', 'creation', 'bailleurs', 'etat']
 
     # filtering
-    posted = process_datatables_posted_vars(request.POST)
+    post = process_datatables_posted_vars(request.POST)
 
     kwargs = {}
-    if 'fCommune' in posted and posted['fCommune'] != '':
-        kwargs['nom__icontains'] = str(posted['fCommune'])
+    if 'fCommune' in post and post['fCommune'] != '':
+        kwargs['commune'] = str(post['fCommune'])
     else:
-        if 'fCode' in posted and posted['fCode'] != '':
-            kwargs['commune__code__icontains'] = posted['fCode']
-        if 'fDistrict' in posted and posted['fDistrict'] != '':
-            kwargs['commune__district'] = posted['fDistrict']
+        if 'fCode' in post and post['fCode'] != '':
+            kwargs['commune__code__icontains'] = post['fCode']
+        if 'fDistrict' in post and post['fDistrict'] != '':
+            kwargs['commune__district'] = post['fDistrict']
         else:
-            if 'fRegion' in posted and posted['fRegion'] != '':
-                kwargs['commune__district__region'] = posted['fRegion']
-    if 'fCreede' in posted and posted['fCreede'] != '':
-        cree_de = datetime.strptime(posted['fCreede'], "%d/%m/%Y")
+            if 'fRegion' in post and post['fRegion'] != '':
+                kwargs['commune__district__region'] = post['fRegion']
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
         cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
         kwargs['creation__gte'] = cree_de
-    if 'fCreea' in posted and posted['fCreea'] != '':
-        cree_a = datetime.strptime(posted['fCreea'], "%d/%m/%Y")
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
         cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
         kwargs['creation__lte'] = cree_a
-    if 'fEtat' in posted and posted['fEtat'] != '':
-        kwargs['etat'] = posted['fEtat']
-    if 'fBailleur' in posted and posted['fBailleur'] != '':
-        kwargs['bailleurs__in'] = posted['fBailleur']
+    if 'fEtat' in post and post['fEtat'] != '':
+        kwargs['etat'] = post['fEtat']
+    if 'fBailleur' in post and post['fBailleur'] != '':
+        kwargs['bailleurs__in'] = post['fBailleur']
 
-    # ordering
-    sorts = []
-    if 'iSortingCols' in posted:
-        for i in range(0, int(posted['iSortingCols'])):
-            sort_col = "iSortCol_%s" % (i,)
-            sort_dir = posted["sSortDir_%s" % (i,)]
-            if columns[int(posted[sort_col])] == 'code':
-                if sort_dir == "asc":
-                    sort_qry = 'commune__code'
-                else:
-                    sort_qry = '-commune__code'
-                sorts.append(sort_qry)
-            else:
-                if sort_dir == "asc":
-                    sort_qry = columns[int(posted[sort_col])]
-                else:
-                    sort_qry = "-%s" % (columns[int(posted[sort_col])],)
-                sorts.append(sort_qry)
-
-    # limitting
-    lim_start = None
-    if 'iDisplayStart' in posted and posted['iDisplayLength'] != '-1':
-        lim_start = int(posted['iDisplayStart'])
-        lim_num = int(posted['iDisplayLength']) + lim_start
-
-    # querying
-    iTotalRecords = Guichet.objects.count()
-    if len(sorts) > 0:
-        if lim_start is not None:
-            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-        else:
-            guichet = Guichet.objects.filter(**kwargs).order_by(*sorts)
-    else:
-        if lim_start is not None:
-            guichet = Guichet.objects.filter(**kwargs)[lim_start:lim_num]
-        else:
-            guichet = Guichet.objects.filter(**kwargs)
-    iTotalDisplayRecords = Guichet.objects.filter(**kwargs).count()
-
+    records, total_records, display_records = query_datatables(Guichet, columns, post, **kwargs)
     results = []
-    for row in guichet:
-        if len(row.password1) > 0:
-            password1 = 'Oui'
-        else:
-            password1 = 'Non'
-        if row.agf2 is not None:
-            if len(row.password2) > 0:
-                password2 = 'Oui'
-            else:
-                password2 = 'Non'
-        else:
-            password2 = ''
-
+    for row in records:
         bailleurs_list = row.bailleurs.all()
         bailleurs = ''
         if len(bailleurs_list) > 0:
@@ -284,8 +203,20 @@ def ajax_bailleur(request):
         )
         results.append(result)
 
-    sEcho = int(posted['sEcho'])
-    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
+def export_guichet(request):
+    columns = [u'Commune', u'Code', u'Creation', u'Agf1', u'Mobile1', 'Password1', u'Agf2', u'Mobile2', 'Password2', u'Etat']
+    dataset = Guichet.objects.filter_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'guichets')
+    return response
+
+def export_guichet_bailleurs(request):
+    columns = [u'Commune', u'Code', u'Création', u'Guichets']
+    dataset = Guichet.objects.filter_bailleurs_for_xls(request.GET)
+    response = export_excel(columns, dataset, 'guichets')
+    return response
