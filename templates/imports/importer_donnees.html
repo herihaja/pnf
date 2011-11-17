@@ -1,5 +1,12 @@
 {% extends 'layout_content.html' %}
 
 {% block content %}
-    {{ data_ignored }}
+    <h2>{{ data_added }} lignes ajoutées</h2>
+    <hr />
+    <h2>Lignes ignorées</h2>
+    <ul>
+    {% for row in data_ignored %}
+        <li>{{ row }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

@@ -7,8 +7,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from donnees.models import Donnees
-from localites.views import Commune, District
-from datetime import date
+from localites.models import Province, Region, Commune, District
 import xlrd
 
 LISTE_MOIS = {
@@ -26,11 +25,12 @@ LISTE_MOIS = {
     'decembre' : '12'
 }
 
-def _nettoyer_nom(nom):
+def _nettoyer_nom(nom, code):
     nom = nom.strip()
     nom = nom.replace('  ', '')
-    nom = slugify(nom)
-    return nom
+    slug = slugify(nom)
+    code = str(int(code))
+    return nom, slug, code
 
 def _convesion_int(n):
     if n is None or n == '':
@@ -46,21 +46,25 @@ def _convesion_float(n):
         n = float(n)
     return n
 
-def _ajouter_commune(commune, code, district):
-    commune_slug =  _nettoyer_nom(commune)
-    commune_code = str(int(code))
-    district_slug = _nettoyer_nom(district)
-    try:
-        commune_obj = Commune.objects.get(slug=commune_slug, district__slug=district_slug)
-    except Commune.DoesNotExist:
-        try:
-            district_obj = District.objects.get(slug=district_slug)
-            commune_obj = Commune(nom=commune, code=commune_code, slug=commune_slug, district=district_obj)
-            commune_obj.save()
-        except District.DoesNotExist:
-            return None
+def _ajouter_province(nom, code):
+    nom, slug, code = _nettoyer_nom(nom, code)
+    obj, created = Province.objects.get_or_create(slug=slug, code=code, nom=nom)
+    return obj
 
-    return commune_obj
+def _ajouter_region(nom, code, province):
+    nom, slug, code = _nettoyer_nom(nom, code)
+    obj, created = Region.objects.get_or_create(slug=slug, code=code, nom=nom, province=province)
+    return obj
+
+def _ajouter_district(nom, code, region):
+    nom, slug, code = _nettoyer_nom(nom, code)
+    obj, created = District.objects.get_or_create(slug=slug, code=code, nom=nom, region=region)
+    return obj
+
+def _ajouter_commune(nom, code, district):
+    nom, slug, code = _nettoyer_nom(nom, code)
+    obj, created = Commune.objects.get_or_create(slug=slug, code=code, nom=nom, district=district)
+    return obj, created
 
 def importer_donnees(request):
     book = xlrd.open_workbook("media/data2010.xls")
@@ -70,8 +74,9 @@ def importer_donnees(request):
     data_added = 0
     for i in xrange(sheet.nrows):
         row = sheet.row_values(i)
-        commune = _ajouter_commune(row[5], row[1], row[4])
-        if commune is not None:
+        nom, slug, code =  _nettoyer_nom(row[5], row[1])
+        try:
+            commune = Commune.objects.get(slug=slug, code=code, nom=nom)
             annee = row[2]
             mois = row[6]
             if annee is not None and annee != '' and mois is not None and mois != '':
@@ -105,8 +110,36 @@ def importer_donnees(request):
                     data_ignored.append('Mois introuvable ligne %s' % i)
             else:
                 data_ignored.append('Annee ou mois vide ligne' % i)
-        else:
+        except Commune.DoesNotExist:
             data_ignored.append('Commune introuvable ligne %s' % i)
 
+    return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
+                              context_instance=RequestContext(request))
+
+def importer_localites(request):
+    book = xlrd.open_workbook("media/localites.xls")
+    sheet = book.sheets()[0]
+
+    data_ignored = []
+    data_added = 0
+    for i in xrange(sheet.nrows):
+        row = sheet.row_values(i)
+        if row[2] != '' and row[3] != '':
+            province = _ajouter_province(row[2], row[3])
+            if row[4] != '' and row[5] != '':
+                region = _ajouter_region(row[4], row[5], province)
+                if row[6] != '' and row[7] != '':
+                    district = _ajouter_district(row[6], row[7], region)
+                    if row[1] != '' and row[0] != '':
+                        commune = _ajouter_commune(row[1], row[0], district)
+                        data_added += 1
+                    else:
+                        data_ignored.append('%s commune manquante')
+                else:
+                    data_ignored.append('%s district manquant')
+            else:
+                data_ignored.append('%s region manquante')
+        else:
+            data_ignored.append('%s province manquante')
     return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
                               context_instance=RequestContext(request))
