@@ -1,12 +1,12 @@
 <ul>
     <li>
-        <a href="javascript:void(0)" class="first">Tableau de bord</a>
+        <a href="{% url dashboard.views.index_dashboard %}" class="first">Tableau de bord</a>
     </li>
     <li>
         <a href="javascript:void(0)">Indicateurs</a>
         <ul>
             <li><a href="{% url indicateurs.views.indicateurs_par_date %}">Indicateurs/localite</a></li>
-            <li><a href="{% url indicateurs.views.indicateur_par_date %}" class="last">Chaque indicateur/période</a></li>
+            <li><a href="{% url indicateurs.views.indicateur_par_date %}">Chaque indicateur/période</a></li>
             <li><a href="/indicateurs/cumuls/" class="last">Indicateurs cumulés</a></li>
         </ul>
     </li>
@@ -33,9 +33,11 @@
         <a href="javascript:void(0)">Données</a>
         <ul>
             <li><a href="{% url donnees.views.lister_donnees %}">Données</a></li>
-            <li><a href="{% url sms.views.lister_reception %}">SMS reçus</a></li>
-            <li><a href="{% url sms.views.lister_envoi %}" class="last">SMS envoyés</a></li>
-            <li><a href="{% url sms.views.sms_tester %}" class="last">SMS tester</a></li>
+            <li><a href="{% url sms.views.lister_reception 1 %}">SMS corrects</a></li>
+            <li><a href="{% url sms.views.lister_reception 2 %}">SMS erronés</a></li>
+            <li><a href="{% url sms.views.lister_reception 3 %}">SMS inconnus</a></li>
+            <li><a href="{% url sms.views.lister_envoi %}">Historique SMS</a></li>
+            <li><a href="{% url sms.views.sms_tester %}" class="last">Simulateur SMS</a></li>
         </ul>
     </li>
     <!--<li>

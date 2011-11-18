@@ -17,7 +17,7 @@ body {
     border-spacing: 0;
     border-collapse: collapse; }
   body #wrapper {
-    width: 960px;
+    width: 1000px;
     margin: 0 auto;
     text-align: left;
     position: relative; }
@@ -34,7 +34,7 @@ body {
         text-align: right; }
       body #wrapper #header #header-nav {
         position: relative;
-        width: 960px;
+        width: 1000px;
         height: 30px;
         background: #6B4602;
         background: -webkit-gradient(linear, left top, left bottom, from(#6b4602), to(#472f04));

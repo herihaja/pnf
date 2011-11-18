@@ -9,11 +9,20 @@ from localites.models import Region, District, Commune
 EMPTY_LIST = (('', '---'),)
 class GuichetForm(ModelForm):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
-    district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
-    commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
+    district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
+    commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
+    
     class Meta:
         model = Guichet
-        fields = ('region', 'district', 'commune', 'creation', 'agf1', 'mobile1', 'password1', 'agf2', 'mobile2', 'password2', 'etat')
+        fields = ('region', 'district', 'commune', 'bailleurs', 'creation', 'agf1', 'mobile1', 'password1', 'agf2', 'mobile2', 'password2', 'etat')
+
+    def __init__(self, *args, **kwargs):
+        region_id = kwargs.pop('region_id', None)
+        district_id = kwargs.pop('district_id', None)
+        super(GuichetForm, self).__init__(*args, **kwargs)
+        if region_id:
+            self.fields['district'].queryset = District.objects.filter(region=region_id)
+            self.fields['commune'].queryset = Commune.objects.filter(district=district_id)
 
 class FiltreGuichetForm(Form):
     CHOIX_ETAT = (

@@ -34,7 +34,7 @@ def lister_bailleurs(request):
 
 def ajouter_guichet(request):
     if request.method == 'GET':
-        form = GuichetForm()
+        form = GuichetForm(region_id=1, initial={'region': 1,})
         return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Ajouter un guichet'},
                                   context_instance=RequestContext(request))
 
@@ -50,7 +50,10 @@ def editer_guichet(request, guichet_id=None):
     obj = get_object_or_404(Guichet, pk=guichet_id)
 
     if request.method == 'GET':
-        form = GuichetForm(instance=obj)
+        region_id = obj.commune.district.region_id
+        district_id = obj.commune.district_id
+        form = GuichetForm(instance=obj, region_id=region_id, district_id=district_id,
+                           initial={'commune': obj.commune_id, 'district': district_id, 'region': region_id,})
         return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Editer un guichet'},
                                   context_instance=RequestContext(request))
 

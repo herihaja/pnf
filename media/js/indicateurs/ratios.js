@@ -22,7 +22,6 @@ $(document).ready(function() {
             { "sTitle": "N", "mDataProp": "nov", "sWidth": "40px", "bSortable": false },
             { "sTitle": "D", "mDataProp": "dec", "sWidth": "40px", "bSortable": false },
             { "sTitle": "Moy", "mDataProp": "moy", "sWidth": "60px", "bSortable": false },
-            { "sTitle": "Total", "mDataProp": "total", "sWidth": "60px", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -39,7 +38,12 @@ $(document).ready(function() {
                 "type": "POST",
                 "url": sSource,
                 "data": {"csrfmiddlewaretoken": csrf, "data": aoData},
-                "success": fnCallback
+                "success": function(result) {
+                    $('#tot-national').html(result.national);
+                    $('#tot-region').html(result.regional);
+                    $('#tot-district').html(result.district);
+                    fnCallback(result);
+                }
             });
         },
         "sDom": 'rt<"F"lip>'

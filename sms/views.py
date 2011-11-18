@@ -14,13 +14,18 @@ import re
 from django.db.models import Q
 import simplejson
 
-def lister_reception(request):
+def lister_reception(request, statut=1):
     if request.method == 'GET':
-        form = FiltreReceptionForm()
+        form = FiltreReceptionForm(initial={'statut': statut})
     else:
-        form = FiltreReceptionForm(request.POST)
+        form = FiltreReceptionForm(request.POST, initial={'statut': statut})
     page_js = '/media/js/sms/reception.js'
-    title = 'Sms reçus'
+    if statut == 1:
+        title = 'Sms corrects'
+    elif statut == 2:
+        title = 'Sms inconnus'
+    else:
+        title = 'Sms erronés'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
@@ -54,7 +59,6 @@ def ajax_reception(request):
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             numero = row.expediteur,
             message = row.message,
-            statut = row.get_statut_display(),
             reponse = row.retour,
         )
         results.append(result)

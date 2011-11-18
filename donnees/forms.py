@@ -8,12 +8,20 @@ from localites.models import Region, District, Commune
 EMPTY_LIST = (('', '---'),)
 class DonneesForm(ModelForm):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
-    district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
-    commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
+    district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
+    commune = forms.ModelChoiceField(label='Commune', queryset=Commune.objects.all(), required=False)
     class Meta:
         model = Donnees
         fields = ('region', 'district', 'commune', 'periode', 'demandes', 'oppositions', 'resolues',
             'certificats', 'femmes', 'reconnaissances', 'recettes', 'mutations', 'surfaces', 'garanties')
+
+    def __init__(self, *args, **kwargs):
+        region_id = kwargs.pop('region_id', None)
+        district_id = kwargs.pop('district_id', None)
+        super(DonneesForm, self).__init__(*args, **kwargs)
+        if region_id:
+            self.fields['district'].queryset = District.objects.filter(region=region_id)
+            self.fields['commune'].queryset = Commune.objects.filter(district=district_id)
         
 
 class FiltreDonneesForm(Form):

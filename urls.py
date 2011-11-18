@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                         (r'', include('pnf.indicateurs.urls')),
                         (r'', include('pnf.sms.urls')),
                         (r'', include('pnf.imports.urls')),
+                        (r'', include('pnf.dashboard.urls')),
 #                        (r'', include('pnf.utilisateurs')),
                         url(r'^admin/', include(admin.site.urls)),
                         )

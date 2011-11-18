@@ -16,9 +16,10 @@ def lister_donnees(request):
             form = FiltreDonneesForm()
     else:
         form = FiltreDonneesForm(request.POST)
+    header_link = '<a href="%s">&raquo; Ajouter des données manuellement</a>' % (reverse(ajouter_donnees),)
     title = 'Données reçues'
     page_js = '/media/js/donnees/donnees.js'
-    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
 def ajax_donnees(request):
@@ -94,8 +95,8 @@ def ajax_donnees(request):
 
 def ajouter_donnees(request):
     if request.method == 'GET':
-        form = DonneesForm()
-        return render_to_response('donnees/ajouter_donnees.html', {'form': form},
+        form = DonneesForm(region_id=1, initial={'region': 1,})
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'title': u'Ajout manuel'},
                                   context_instance=RequestContext(request))
 
     form = DonneesForm(request.POST)
@@ -103,16 +104,21 @@ def ajouter_donnees(request):
         if form.save():
             message = "Vos données ont été ajoutées avec succès."
             return HttpResponseRedirect(reverse(lister_donnees))
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message, 'title': u'Ajout manuel'},
+                                  context_instance=RequestContext(request))
     else:
-        return render_to_response('donnees/ajouter_donnees.html', {'form': form},
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'title': u'Ajout manuel'},
                                   context_instance=RequestContext(request))
 
 def editer_donnees(request, donnee_id=None):
     obj = get_object_or_404(Donnees, pk=donnee_id)
 
     if request.method == 'GET':
-        form = DonneesForm(instance=obj)
-        return render_to_response('donnees/ajouter_donnees.html', {'form': form},
+        region_id = obj.commune.district.region_id
+        district_id = obj.commune.district_id
+        form = DonneesForm(instance=obj, region_id=region_id, district_id=district_id,
+                           initial={'commune': obj.commune_id, 'district': district_id, 'region': region_id,})
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'title': u'Edition'},
                                   context_instance=RequestContext(request))
 
     form = DonneesForm(request.POST, instance=obj)
@@ -120,9 +126,7 @@ def editer_donnees(request, donnee_id=None):
         if form.save():
             message = "Vos données ont été mises à jour avec succès."
             return HttpResponseRedirect(reverse(lister_donnees))
-        else:
-            message = "Veuillez d'abord enregistrer les données des mois précédents."
-        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message},
+        return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'message': message, 'title': u'Edition'},
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},

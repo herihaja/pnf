@@ -16,8 +16,8 @@
         $(document).ready(function() {
             $('.edit-form input:submit').button();
             $('#accordion').accordion({ collapsible: false });
-        });
-        $('#id_region').live('change', function(){
+
+            $('#id_region').live('change', function(){
                 $('#id_district').html('<option value="">---</option>');
                 $('#id_commune').html('<option value="">---</option>');
                 $.ajax({
@@ -51,5 +51,6 @@
                     }
                 });
             });
+        });
     </script>
 {% endblock %}

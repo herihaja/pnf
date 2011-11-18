@@ -21,9 +21,16 @@ class DistrictForm(ModelForm):
 
 class CommuneForm(ModelForm):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
+    district = forms.ModelChoiceField(label='District', queryset=District.objects.all(), required=False)
     class Meta:
         model = Commune
         fields = ('region', 'district', 'nom', 'code')
+
+    def __init__(self, *args, **kwargs):
+        region_id = kwargs.pop('region_id', None)
+        super(CommuneForm, self).__init__(*args, **kwargs)
+        if region_id:
+            self.fields['district'].queryset = District.objects.filter(region=region_id)
 
 class FiltreDistrictForm(Form):
     district = forms.CharField(max_length=40, required=False)

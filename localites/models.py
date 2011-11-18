@@ -104,4 +104,4 @@ class Commune(Model):
         ordering = ['nom']
 
     def __unicode__(self):
-        return self.nom
+        return '%s - %s' % (self.code, self.nom,)

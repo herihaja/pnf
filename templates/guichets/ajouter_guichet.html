@@ -14,6 +14,20 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#id_creation').css('width', '150px');
+            $('#id_creation').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#id_creation').datepicker("option", $.datepicker.regional['fr']);
+
+            $('label[for="id_agf1"]').parent().addClass('p-form');
+            $('label[for="id_mobile1"]').parent().addClass('p-form');
+            $('label[for="id_password1"]').parent().addClass('p-form');
+            $('label[for="id_agf2"]').parent().addClass('p-form');
+            $('label[for="id_mobile2"]').parent().addClass('p-form');
+            $('label[for="id_password2"]').parent().addClass('p-form');
+
             $('.edit-form input:submit').button();
             $('#accordion').accordion({ collapsible: false });
 

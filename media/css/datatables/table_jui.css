@@ -111,8 +111,6 @@ table.display thead th div.datatables_sort_wrapper span {
 
 .datatables_wrapper {
 	position: relative;
-	min-height: 302px;
-	_height: 302px;
 	clear: both;
 }
 
@@ -127,6 +125,7 @@ table.display thead th div.datatables_sort_wrapper span {
 	color: #999;
 	font-size: 11px;
 	padding: 2px 0;
+    background: #fff;
 }
 
 .datatables_length {
@@ -198,6 +197,7 @@ table.display tr.heading2 td {
 
 table.display td {
 	padding: 3px 10px;
+    border-left:  1px solid #CED0ED;
 }
 
 table.display td.center {

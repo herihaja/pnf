@@ -22,7 +22,6 @@ $(document).ready(function() {
             { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
             { "sTitle": "Expediteur", "mDataProp": "numero", "sWidth": "80px" },
             { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
-            { "sTitle": "Statut", "mDataProp": "statut", "sWidth": "60px" },
             { "sTitle": "Réponse", "mDataProp": "reponse", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",

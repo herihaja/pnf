@@ -1,0 +1,41 @@
+{% extends 'layout_content.html' %}
+{% block page_js %}
+    <script type="text/javascript">
+        var csrf = '{{ csrf_token }}';
+    </script>
+    <script src="{% autoescape off %}{{ page_js }}{% endautoescape %}" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+    {% autoescape off %}
+        {{ header_link }}
+    {% endautoescape %}
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" />
+                <input type="button" value="Export Excel" id="btn_export" />
+                <div class="clear-l"></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="ui-state-highlight" style="padding: 5px; margin: 10px 0;">
+        <h3>Ratios au niveau &raquo; </h3>
+        National : <span id="tot-national">{{ national }}</span>
+        Regional : <span id="tot-region">{{ regional }}</span>
+        District: <span id="tot-district">{{ district }}</span>
+    </div>
+
+    <table id="example" class="display" style="width: 100%;">
+    </table>
+
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
+    </div>
+{% endblock %}

@@ -164,7 +164,7 @@ def lister_commune(request):
 
 def ajouter_commune(request):
     if request.method == 'GET':
-        form = CommuneForm()
+        form = CommuneForm(region_id=1, initial={'region': 1,})
         return render_to_response('localites/ajouter_commune.html', {'form': form, 'title': 'Ajouter une commune'},
                                   context_instance=RequestContext(request))
 
@@ -180,7 +180,8 @@ def editer_commune(request, commune_id=None):
     obj = get_object_or_404(Commune, pk=commune_id)
 
     if request.method == 'GET':
-        form = CommuneForm(instance=obj)
+        region_id = obj.district.region_id
+        form = CommuneForm(instance=obj, region_id=region_id, initial={'region': region_id,})
         return render_to_response('localites/ajouter_commune.html', {'form': form, 'title': 'Editer une commune'},
                                   context_instance=RequestContext(request))
 
@@ -301,12 +302,12 @@ def select_district(request):
     return HttpResponse(json, mimetype='application/json')
 
 def select_commune(request):
-    commune_id = int(request.POST['district'])
-
-    communes = Commune.objects.filter(district=commune_id).values('id', 'nom').order_by('nom')
+    district_id = int(request.POST['district'])
+    communes = Commune.objects.filter(district=district_id).values('id', 'nom', 'code').order_by('nom')
     results = []
     for row in communes:
-        results.append(dict(id=row['id'], nom=row['nom'].lower().capitalize()))
+        nom = "%s - %s" % (row['code'], row['nom'])
+        results.append(dict(id=row['id'], nom=nom))
 
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')

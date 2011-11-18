@@ -11,6 +11,7 @@ from indicateurs.forms import FiltreIndicateursForm, FiltreIndicateurForm, Filtr
 from django.db.models import Count
 import simplejson
 from datetime import datetime
+from localites.models import District, Commune
 
 def indicateurs_par_date(request):
     if request.method == 'GET':
@@ -38,7 +39,7 @@ def ratio(request, ratio, title):
     else:
         form = FiltreRatioForm(request.POST)
     page_js = '/media/js/indicateurs/ratios.js'
-    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+    return render_to_response('layout_ratio_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
 def ajax_indicateurs(request):
@@ -99,6 +100,8 @@ def ajax_pivot_table(request):
     # columns titles
     columns = ['nom', 'jan', 'fev', 'mar', 'avr', 'mai', 'jun', 'jul', 'aou', 'sep', 'oct', 'nov', 'dec', 'moy', 'total']
 
+    region_id = 0
+    district_id = 0
     # filtering
     post = process_datatables_posted_vars(request.POST)
     kwargs = {}
@@ -187,12 +190,36 @@ def ajax_pivot_table(request):
         while m <= 12:
             ratio[columns[m]] = '-'
             m += 1
-        ratio['moy'] = round(total / n, 2)
-        ratio['total'] = total
+        ratio['moy'] = round(total / n, 3)
+        ratio['total'] = round(total, 3)
         results.append(ratio)
 
+    # les totaux
+    total = get_total_indicateur()
+    national = total[0][indicateur]
+    regional = ''
+    district = ''
+
+    if 'fRegion' in post and post['fRegion'] != '':
+        region_id = int(post['fRegion'])
+        if region_id in total[1]:
+            regional = total[1][region_id][indicateur]
+            nregion = Commune.objects.filter(district__region=region_id).values('code').annotate(Count('code'))
+            nregion= len(nregion)
+            regional = round(regional / nregion, 3)
+
+    if 'fDistrict' in post and post['fDistrict'] != '':
+        district_id = int(post['fDistrict'])
+        if district_id in total[2]:
+            district = total[2][district_id][indicateur]
+            ndistrict = Commune.objects.filter(district=district_id).values('code').annotate(Count('code'))
+            ndistrict = len(ndistrict)
+            district = round(district / ndistrict, 3)
+
+
     sEcho = int(post['sEcho'])
-    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results}
+    results = {"iTotalRecords": iTotalRecords, "iTotalDisplayRecords":iTotalDisplayRecords, "sEcho": sEcho, "aaData": results,
+               "national": national, "regional": regional, "district": district}
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
@@ -249,3 +276,148 @@ def ajax_ratios_localite(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
+def _remove_none(data):
+    if data.oppositions is None:
+        data.oppositions = 0
+    if data.resolues is None:
+        data.resolues = 0
+    if data.certificats is None:
+        data.certificats = 0
+    if data.femmes is None:
+        data.femmes = 0
+    if data.recettes is None:
+        data.recettes = 0
+    if data.mutations is None:
+        data.mutations = 0
+    if data.surfaces is None:
+        data.surfaces = 0
+    if data.garanties is None:
+        data.garanties = 0
+    if data.reconnaissances is None:
+        data.reconnaissances = 0
+    if data.rcertificats is None:
+        data.rcertificats = 0
+    if data.rfemmes is None:
+        data.rfemmes = 0
+    if data.rresolus is None:
+        data.rresolus = 0
+    if data.rconflits is None:
+        data.rconflits = 0
+    if data.rsurface is None:
+        data.rsurface = 0
+    return data
+
+
+def get_total_indicateur():
+    # select distincts commune having data
+    cumuls = Cumul.objects.all().values('commune').order_by('commune__district__region__code', 'commune__district__code').annotate(Count('commune'))
+    n = len(cumuls)
+
+    region = {}
+    district = {}
+    national = dict(demandes=0, oppositions=0, resolues=0, certificats=0, femmes=0,
+                    recettes=0, mutations=0, surfaces=0, garanties=0, reconnaissances=0,
+                    rcertificats=0, rfemmes=0, rresolus=0, rconflits=0, rsurface=0)
+    for cumul in cumuls:
+        # select the last record for each commune
+        last_record = Cumul.objects.filter(commune=cumul['commune']).order_by('-periode')[:1]
+        last_record = _remove_none(last_record[0])
+        region_code = last_record.commune.district.region.id
+        district_code = last_record.commune.district.id
+        
+        #total regional
+        if region_code in region:
+            region[region_code]['demandes'] += last_record.demandes
+            region[region_code]['oppositions'] += last_record.oppositions
+            region[region_code]['resolues'] += last_record.resolues
+            region[region_code]['certificats'] += last_record.certificats
+            region[region_code]['femmes'] += last_record.femmes
+            region[region_code]['recettes'] += last_record.recettes
+            region[region_code]['mutations'] += last_record.mutations
+            region[region_code]['surfaces'] += last_record.surfaces
+            region[region_code]['garanties'] += last_record.garanties
+            region[region_code]['reconnaissances'] += last_record.reconnaissances
+            region[region_code]['rcertificats'] += last_record.rcertificats
+            region[region_code]['rfemmes'] += last_record.rfemmes
+            region[region_code]['rresolus'] += last_record.rresolus
+            region[region_code]['rconflits'] += last_record.rconflits
+            region[region_code]['rsurface'] += last_record.rsurface            
+        else:
+            data = dict(demandes=last_record.demandes,
+            oppositions=last_record.oppositions,
+            resolues=last_record.resolues,
+            certificats=last_record.certificats,
+            femmes=last_record.femmes,
+            recettes=last_record.recettes,
+            mutations=last_record.mutations,
+            surfaces=last_record.surfaces,
+            garanties=last_record.garanties,
+            reconnaissances=last_record.reconnaissances,
+            rcertificats=last_record.rcertificats,
+            rfemmes=last_record.rfemmes,
+            rresolus=last_record.rresolus,
+            rconflits=last_record.rconflits,
+            rsurface=last_record.rsurface)
+            region[region_code] = data
+
+        #total district
+        if district_code in district:
+            district[district_code]['demandes'] += last_record.demandes
+            district[district_code]['oppositions'] += last_record.oppositions
+            district[district_code]['resolues'] += last_record.resolues
+            district[district_code]['certificats'] += last_record.certificats
+            district[district_code]['femmes'] += last_record.femmes
+            district[district_code]['recettes'] += last_record.recettes
+            district[district_code]['mutations'] += last_record.mutations
+            district[district_code]['surfaces'] += last_record.surfaces
+            district[district_code]['garanties'] += last_record.garanties
+            district[district_code]['reconnaissances'] += last_record.reconnaissances
+            district[district_code]['rcertificats'] += last_record.rcertificats
+            district[district_code]['rfemmes'] += last_record.rfemmes
+            district[district_code]['rresolus'] += last_record.rresolus
+            district[district_code]['rconflits'] += last_record.rconflits
+            district[district_code]['rsurface'] += last_record.rsurface            
+        else:
+            data = dict(demandes=last_record.demandes,
+            oppositions=last_record.oppositions,
+            resolues=last_record.resolues,
+            certificats=last_record.certificats,
+            femmes=last_record.femmes,
+            recettes=last_record.recettes,
+            mutations=last_record.mutations,
+            surfaces=last_record.surfaces,
+            garanties=last_record.garanties,
+            reconnaissances=last_record.reconnaissances,
+            rcertificats=last_record.rcertificats,
+            rfemmes=last_record.rfemmes,
+            rresolus=last_record.rresolus,
+            rconflits=last_record.rconflits,
+            rsurface=last_record.rsurface)
+            district[district_code] = data
+
+        # national
+        national['demandes'] += last_record.demandes
+        national['oppositions'] += last_record.oppositions
+        national['resolues'] += last_record.resolues
+        national['certificats'] += last_record.certificats
+        national['femmes'] += last_record.femmes
+        national['recettes'] += last_record.recettes
+        national['mutations'] += last_record.mutations
+        national['surfaces'] += last_record.surfaces
+        national['garanties'] += last_record.garanties
+        national['reconnaissances'] += last_record.reconnaissances
+        national['rcertificats'] += last_record.rcertificats
+        national['rfemmes'] += last_record.rfemmes
+        national['rresolus'] += last_record.rresolus
+        national['rconflits'] += last_record.rconflits
+        national['rsurface'] += last_record.rsurface
+
+        national['rcertificats'] = round(national['rcertificats'] / n, 3)
+        national['rfemmes'] = round(national['rfemmes'] / n, 3)
+        national['rresolus'] = round(national['rresolus'] / n, 3)
+        national['rconflits'] = round(national['rconflits'] / n, 3)
+        national['rsurface'] = round(national['rsurface'] / n, 3)
+
+    return (national, region, district)
+

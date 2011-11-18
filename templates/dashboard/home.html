@@ -1,0 +1,76 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div id="accordion">
+        <h3><a href="#">Indicateurs au niveau national</a></h3>
+        <div>
+            <table class="dataTable display">
+                <thead>
+                    <tr>
+                        <th class="ui-state-default">Demandes</th>
+                        <th class="ui-state-default">Oppositions</th>
+                        <th class="ui-state-default">Résolues</th>
+                        <th class="ui-state-default">Certificats</th>
+                        <th class="ui-state-default">Femmes</th>
+                        <th class="ui-state-default">Surfaces</th>
+                        <th class="ui-state-default">Recettes</th>
+                        <th class="ui-state-default">Garanties</th>
+                        <th class="ui-state-default">Recoonnaissances</th>
+                        <th class="ui-state-default">Mutations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ national.demandes }}</td>
+                        <td>{{ national.oppositions }}</td>
+                        <td>{{ national.resolues }}</td>
+                        <td>{{ national.certificats }}</td>
+                        <td>{{ national.femmes }}</td>
+                        <td>{{ national.surfaces }}</td>
+                        <td>{{ national.recettes }}</td>
+                        <td>{{ national.garanties }}</td>
+                        <td>{{ national.reconnaissances }}</td>
+                        <td>{{ national.mutations }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3><a href="#">Ratios au niveau national</a></h3>
+        <div>
+            <table class="dataTable display">
+                <thead>
+                    <tr>
+                        <th class="ui-state-default">Certification</th>
+                        <th class="ui-state-default">Femmes</th>
+                        <th class="ui-state-default">Conflictualité</th>
+                        <th class="ui-state-default">Resolution</th>
+                        <th class="ui-state-default">Surface moyen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ national.rcertificats }}</td>
+                        <td>{{ national.rfemmes }}</td>
+                        <td>{{ national.rconflits }}</td>
+                        <td>{{ national.rresolus }}</td>
+                        <td>{{ national.rsurface }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#accordion').accordion({
+                collapsible: false,
+                autoHeight: true,
+            });
+            $('.dataTable').dataTable({
+                "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
+                "bFilter": false,
+                "sDom": 'rt'
+            });
+        });
+    </script>
+{% endblock %}

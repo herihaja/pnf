@@ -14,8 +14,44 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#id_periode').css('width', '150px');
+            $('#id_periode').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: "dd/mm/yy",
+                onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                },
+                beforeShow : function(input, inst) {
+                    if ((datestr = $(this).val()).length > 0) {
+                        year = datestr.substring(datestr.length-4, datestr.length);
+                        month = parseInt(datestr.substring(3, 5))-1;
+                        $(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+                        $(this).datepicker('setDate', new Date(year, month, 1));
+                    }
+                }
+            });
+            $('#id_periode').focus(function () {
+                $(".ui-datepicker-calendar").hide();
+            });
+            $('#id_periode').datepicker("option", $.datepicker.regional['fr']);
+
+            $('label[for="id_demandes"]').parent().addClass('p-form');
+            $('label[for="id_oppositions"]').parent().addClass('p-form');
+            $('label[for="id_resolues"]').parent().addClass('p-form');
+            $('label[for="id_certificats"]').parent().addClass('p-form');
+            $('label[for="id_femmes"]').parent().addClass('p-form');
+            $('label[for="id_reconnaissances"]').parent().addClass('p-form');
+            $('label[for="id_recettes"]').parent().addClass('p-form');
+            $('label[for="id_mutations"]').parent().addClass('p-form');
+            $('label[for="id_surfaces"]').parent().addClass('p-form');
+            $('label[for="id_garanties"]').parent().addClass('p-form');
+
             $('.edit-form input:submit').button();
-            $('#accordion').accordion({ collapsible: false });
+            $('#accordion').accordion({ collapsible: false,  });
 
             $('#id_region').live('change', function(){
                 $('#id_district').html('<option value="">---</option>');
