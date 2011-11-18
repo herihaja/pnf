@@ -467,3 +467,6 @@ class Recu(Model):
     garanties = models.IntegerField()
     reconnaissances = models.IntegerField()
     ajout = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.id

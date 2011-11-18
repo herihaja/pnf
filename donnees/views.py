@@ -11,17 +11,6 @@ from helpers import export_excel, process_datatables_posted_vars, create_compare
 import simplejson
 from datetime import datetime
 
-"""def lister_donnees(request):
-    if request.method == 'GET':
-            form = FiltreDonneesForm()
-    else:
-        form = FiltreDonneesForm(request.POST)
-    header_link = '<a href="%s">&raquo; Ajouter des données manuellement</a>' % (reverse(ajouter_donnees),)
-    title = 'Données reçues'
-    page_js = '/media/js/donnees/donnees.js'
-    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
-                              context_instance=RequestContext(request))"""
-
 def ajax_donnees(request):
     # columns titles
     columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'valide', 'actions']
@@ -235,19 +224,66 @@ def supprimer_recu(request, recu_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+def tester_recu(request, recu_id=None):
+    obj = get_object_or_404(Recu, pk=recu_id)
+
+    # prendre les dernieres donnees cumulees du guichet (commune)
+    cumul_demandes = 0
+    cumul_certificats = 0
+    cumul_reco = 0
+    cumul = Cumul.objects.filter(commune=obj.commune, periode__lt=obj.periode).values('certificats', 'demandes', 'reconnaissances').order_by('-periode')[:1]
+    if len(cumul) == 1:
+        cumul_demandes = cumul[0]['demandes']
+        cumul_certificats = cumul[0]['certificats']
+        cumul_reco = cumul[0]['reconnaissances']
+
+
+    if request.method == 'GET':
+        region_id = obj.commune.district.region_id
+        district_id = obj.commune.district_id
+        form = DonneesForm(instance=obj, region_id=region_id, district_id=district_id,
+                           initial={'commune': obj.commune_id, 'district': district_id, 'region': region_id,})
+        return render_to_response('donnees/tester_recu.html', {'form': form, 'title': u'Tests de cohérence', 'id': obj.id,
+                                                               'demandes': cumul_demandes, 'recos': cumul_reco, 'certifs': cumul_certificats,},
+                                  context_instance=RequestContext(request))
+
+def valider_recu(request, recu_id=None):
+    obj = get_object_or_404(Recu, pk=recu_id)
+
+    donnees = Donnees(
+        commune = obj.commune,
+        sms = obj.sms,
+        periode = obj.periode,
+        demandes = int(request.POST['demandes']),
+        oppositions = int(request.POST['oppositions']),
+        resolues = int(request.POST['resolues']),
+        certificats = int(request.POST['certificats']),
+        femmes = int(request.POST['femmes']),
+        surfaces = float(request.POST['surfaces']),
+        recettes = int(request.POST['recettes']),
+        garanties = int(request.POST['garanties']),
+        reconnaissances = int(request.POST['reconnaissances']),
+        valide = True,
+        mutations = int(request.POST['mutations']),
+    )
+    
+    if donnees.save():
+        obj.delete()
+        message = u'Enregistrement validé'
+
+    json = simplejson.dumps([{'message': message}])
+    return HttpResponse(json, mimetype='application/json')
+
 def ajax_recu(request):
     post = process_datatables_posted_vars(request.POST)
     
-    # columns titles
-    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'actions']
-
     records = Recu.objects.all().order_by('-ajout')
     total_records = len(records)
     display_records = total_records
     results = []
 
     for row in records:
-        edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
+        edit_link = '<a href="%s">[Tester]</a>' % (reverse(tester_recu, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_recu, args=[row.id]),)
         result = dict(
             id = row.id,

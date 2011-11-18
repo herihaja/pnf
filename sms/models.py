@@ -45,7 +45,7 @@ class Reception(Model):
     objects = ReceptionManager()
 
     def __unicode__(self):
-        return self.nom
+        return self.id
 
 class EnvoiManager(Manager):
     def filter_for_xls(self, post):

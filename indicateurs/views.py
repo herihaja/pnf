@@ -52,7 +52,7 @@ def ajax_indicateurs(request):
     # valide true
     kwargs = {'valide': True}
     if 'fCommune' in post and post['fCommune'] != '':
-        kwargs['nom__icontains'] = str(post['fCommune'])
+        kwargs['commune'] = int(post['fCommune'])
     else:
         if 'fCode' in post and post['fCode'] != '':
             kwargs['commune__code__icontains'] = post['fCode']

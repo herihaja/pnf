@@ -1,0 +1,183 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <div id="accordion" class="edit-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" id="test-form" method="post" class="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="clear-l"></div>
+                <div class="validation ui-state-highlight">
+                    <h3 style="float: none;">Derniers cumuls</h3>
+                    <p class="p-form">
+                        <label>Certificats</label>
+                        <input type="text" id="certif1" value="{{ certifs }}" name="ccertificats" />
+                    </p>
+                    <p class="p-form">
+                        <label>Reconnaissances</label>
+                        <input type="text" id="reco1" value="{{ recos }}" name="crecos" />
+                    </p>
+                    <p class="p-form">
+                        <label>Demandes</label>
+                        <input type="text" id="demandes1" value="{{ demandes }}" name="cdemandes" />
+                    </p>
+                    <div class="clear-l"></div>
+                    <br />
+                    <h3 style="float: none;">Nouveaux cumuls</h3>
+                    <p class="p-form">
+                        <label>Certificats</label>
+                        <input type="text" id="certif2" value="" name="ccertificats" />
+                    </p>
+                    <p class="p-form">
+                        <label>Reconnaissances</label>
+                        <input type="text" id="reco2" value="" name="crecos" />
+                    </p>
+                    <p class="p-form">
+                        <label>Demandes</label>
+                        <input type="text" id="demandes2" value="" name="cdemandes" />
+                    </p>
+                    <div class="clear-l"></div>
+                </div>
+                <input type="button" class="submit" value="Rejeter" id="rejeter" />
+                <input type="button" class="submit" value="Valider" id="valider" />
+            </form>
+        </div>
+    </div>
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_periode').css('width', '150px');
+            $('#id_periode').attr('disabled', 'disabled');
+            $('#id_region').attr('disabled', 'disabled');
+            $('#id_district').attr('disabled', 'disabled');
+            $('#id_commune').attr('disabled', 'disabled');
+
+            $('label[for="id_demandes"]').parent().addClass('p-form');
+            $('label[for="id_oppositions"]').parent().addClass('p-form');
+            $('label[for="id_resolues"]').parent().addClass('p-form');
+            $('label[for="id_certificats"]').parent().addClass('p-form');
+            $('label[for="id_femmes"]').parent().addClass('p-form');
+            $('label[for="id_reconnaissances"]').parent().addClass('p-form');
+            $('label[for="id_recettes"]').parent().addClass('p-form');
+            $('label[for="id_mutations"]').parent().addClass('p-form');
+            $('label[for="id_surfaces"]').parent().addClass('p-form');
+            $('label[for="id_garanties"]').parent().addClass('p-form');
+
+            $('.form .submit').button();
+            $('.form .submit').css({'width': '160px'});
+            $('#accordion').accordion({ collapsible: false });
+
+            $('#id_region').live('change', function(){
+                $('#id_district').html('<option value="">---</option>');
+                $('#id_commune').html('<option value="">---</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '/cascade/region/',
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "region": $(this).val()},
+                    success: function(data){
+                        var items = new Array();
+                        items.push('<option value="">---</option>');
+                        for(i=0; i<data.length; i++) {
+                            items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                        }
+                        $('#id_district').html(items.join(''));
+                    }
+                });
+            });
+
+            $('#id_district').live('change', function(){
+                $('#id_commune').html('<option value="">---</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '/cascade/district/',
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "district": $(this).val()},
+                    success: function(data){
+                        var items = new Array();
+                        items.push('<option value="">---</option>');
+                        for(i=0; i<data.length; i++) {
+                            items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                        }
+                        $('#id_commune').html(items.join(''));
+                    }
+                });
+            });
+
+            function update_test() {
+                $('#certif2').val(parseInt($('#id_certificats').val(), 10) + parseInt($('#certif1').val(), 10));
+                $('#reco2').val(parseInt($('#id_reconnaissances').val(), 10) + parseInt($('#reco1').val(), 10));
+                $('#demandes2').val(parseInt($('#id_demandes').val(), 10) + parseInt($('#demandes1').val(), 10));
+                if (parseInt($('#reco1').val(), 10) > parseInt($('#demandes1').val(), 10)) {
+                    $('#reco1').addClass('alert');
+                    $('#demandes1').addClass('alert');
+                }
+                if (parseInt($('#certif1').val(), 10) > parseInt($('#reco1').val(), 10)) {
+                    $('#reco1').addClass('alert');
+                    $('#certif1').addClass('alert');
+                }
+                if (parseInt($('#reco2').val(), 10) > parseInt($('#demandes2').val(), 10)) {
+                    $('#reco2').addClass('alert');
+                    $('#demandes2').addClass('alert');
+                } else {
+                    $('#reco2').removeClass('alert');
+                    $('#demandes2').removeClass('alert');
+                }
+                if (parseInt($('#certif2').val(), 10) > parseInt($('#reco2').val(), 10)) {
+                    $('#reco2').addClass('alert');
+                    $('#certif2').addClass('alert');
+                } else {
+                    $('#reco2').removeClass('alert');
+                    $('#certif2').removeClass('alert');
+                }
+            }
+
+            update_test();
+
+            $('#id_certificats, #id_demandes, #id_reconnaissances').live('change', function(){
+                update_test();
+            });
+
+            $('#rejeter').live('click', function(e) {
+                e.preventDefault();
+                var targetUrl = $(this).attr("href");
+                $('#del-confirm').dialog({
+                    buttons : {
+                        "Supprimer": function() {
+                            $.ajax({
+                                "dataType": 'json',
+                                "type": "POST",
+                                "url": '/recu/supprimer/' + {{ id }},
+                                "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                                "success": function() {
+                                    window.location.replace('/donnees/recues/');
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Annuler": function() {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $('#del-confirm').dialog('open');
+            });
+
+
+            $('#valider').live('click', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    "dataType": 'json',
+                    "type": "POST",
+                    "url": '/recu/valider/' + {{ id }},
+                    "data": $('#test-form').serialize(),
+                    "success": function() {
+                        window.location.replace('/donnees/recues/');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

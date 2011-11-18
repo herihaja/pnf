@@ -2,7 +2,7 @@
 
 from django import forms
 from django.forms import ModelForm, Form
-from donnees.models import Donnees
+from donnees.models import Donnees, Recu
 from localites.models import Region, District, Commune
 
 EMPTY_LIST = (('', '---'),)

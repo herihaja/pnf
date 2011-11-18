@@ -132,7 +132,7 @@ ul{
 }
 .p-form {
     display: block;
-    width: 32%;
+    width: 30% !important;
     float: left;
     input {
         width: 70%;
@@ -149,5 +149,17 @@ ul{
         border-radius: 3px;
         padding: 3px;
         margin-right: 15px;
+    }
+}
+.validation {
+    padding: 5px;
+    margin-bottom: 20px;
+    p {
+        margin: 2px 0;
+    }
+    .alert {
+        background: #DA3838;
+        font-weight: bold;
+        color: #ffffff;
     }
 }
