@@ -11,4 +11,4 @@ class BailleurForm(ModelForm):
 
 class FiltreBailleurForm(Form):
     nom = forms.CharField(max_length=40, required=False)
-    page = forms.CharField(widget=forms.HiddenInput(), initial=1)
+    projet = forms.CharField(max_length=200, required=False)

@@ -8,13 +8,15 @@ $(document).ready(function() {
         "sAjaxSource": '/bailleurs/ajax/',
         "aoColumns": [
             { "sTitle": "Nom", "mDataProp": "nom" },
+            { "sTitle": "Projet", "mDataProp": "projet" },
             { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
         "fnServerData": function ( sSource, aoData, fnCallback ) {
             aoData.push(
-                {"name": "fNom", "value": $('#id_nom').val()}
+                {"name": "fNom", "value": $('#id_nom').val()},
+                {"name": "fProjet", "value": $('#id_projet').val()}
             );
             $.ajax( {
                 "dataType": 'json',

@@ -58,14 +58,14 @@ def supprimer_bailleur(request, bailleur_id=None):
     return HttpResponse(json, mimetype='application/json')
 
 def export_bailleur(request):
-    columns = [u'Nom']
+    columns = [u'Nom', u'Projets']
     dataset = Bailleur.objects.filter_for_xls(request.GET)
     response = export_excel(columns, dataset, 'bailleurs')
     return response
 
 def ajax_bailleur(request):
     # columns titles
-    columns = ['nom', 'actions']
+    columns = ['nom', 'projet', 'actions']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -73,6 +73,9 @@ def ajax_bailleur(request):
     kwargs = {}
     if 'fNom' in post and post['fNom'] != '':
         kwargs['nom__icontains'] = post['fNom']
+
+    if 'fProjet' in post and post['fProjet'] != '':
+        kwargs['projet__icontains'] = post['fProjet']
 
     records, total_records, display_records = query_datatables(Bailleur, columns, post, **kwargs)
     results = []
@@ -82,6 +85,7 @@ def ajax_bailleur(request):
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_bailleur, args=[row.id]),)
         result = dict(
             nom = row.nom,
+            projet = row.projet,
             actions = edit_link,
         )
         results.append(result)
