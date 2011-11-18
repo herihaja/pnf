@@ -2,11 +2,13 @@
 
 from django.conf.urls.defaults import patterns, url
 from sms.views import lister_reception, lister_envoi, sms_tester, ajax_reception, \
-    ajax_envoi, export_envoi, export_reception
+    ajax_envoi, export_envoi, export_reception, lister_communication, ajax_communication
 
 urlpatterns = patterns('',
                         (r'^receptions/ajax/$', ajax_reception),
                         (r'^receptions/export/$', export_reception),
+                        (r'^communications/list/$', lister_communication),
+                        (r'^communications/ajax/$', ajax_communication),
                         (r'^receptions/(?P<statut>.+?)$', lister_reception),
                         (r'^receptions/$', lister_reception),
                         (r'^envois/$', lister_envoi),

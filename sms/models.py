@@ -3,6 +3,7 @@
 from datetime import datetime
 from django.db import models
 from django.db.models import Q, Model, Manager
+from localites.models import Commune
 
 class ReceptionManager(Manager):
     def filter_for_xls(self, post):
@@ -80,3 +81,10 @@ class Envoi(Model):
 
     def __unicode__(self):
         return self.nom
+
+class Communication(Model):
+    commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
+    sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
+    date_reception = models.DateTimeField()
+    message = models.CharField(max_length=160)
+    ajout = models.DateTimeField(auto_now_add=True)
