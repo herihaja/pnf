@@ -67,7 +67,8 @@ $(document).ready(function() {
             { "sTitle": "Rect", "mDataProp": "recettes", "sWidth": "80px" },
             { "sTitle": "Gar", "mDataProp": "garanties", "sWidth": "50px" },
             { "sTitle": "Reco", "mDataProp": "reconnaissances", "sWidth": "50px" },
-            { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "50px" }
+            { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "50px" },
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,

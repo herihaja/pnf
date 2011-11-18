@@ -452,3 +452,18 @@ class Cumul(Model):
     def __unicode__(self):
         return u"données de %s pour %s" % (self.commune.nom, self.periode)
 
+class Recu(Model):
+    commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
+    sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
+    periode = models.DateField()
+    demandes = models.IntegerField()
+    oppositions = models.IntegerField()
+    resolues = models.IntegerField()
+    certificats = models.IntegerField()
+    femmes = models.IntegerField()
+    recettes = models.BigIntegerField()
+    mutations = models.IntegerField()
+    surfaces = models.FloatField()
+    garanties = models.IntegerField()
+    reconnaissances = models.IntegerField()
+    ajout = models.DateTimeField(auto_now_add=True)

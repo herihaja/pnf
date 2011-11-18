@@ -5,13 +5,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from donnees.models import Donnees, Cumul
+from donnees.models import Donnees, Cumul, Recu
 from donnees.forms import DonneesForm, FiltreDonneesForm
 from helpers import export_excel, process_datatables_posted_vars, create_compare_condition, query_datatables
 import simplejson
 from datetime import datetime
 
-def lister_donnees(request):
+"""def lister_donnees(request):
     if request.method == 'GET':
             form = FiltreDonneesForm()
     else:
@@ -20,7 +20,7 @@ def lister_donnees(request):
     title = 'Données reçues'
     page_js = '/media/js/donnees/donnees.js'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
-                              context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))"""
 
 def ajax_donnees(request):
     # columns titles
@@ -222,3 +222,54 @@ def export_cumuls(request):
     dataset = Cumul.objects.filter_for_xls(request.GET)
     response = export_excel(columns, dataset, 'cumul')
     return response
+
+def lister_recu(request):
+    title = 'Données reçues'
+    page_js = '/media/js/donnees/recu.js'
+    return render_to_response('layout_list_no_form.html', {"title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
+
+def supprimer_recu(request, recu_id=None):
+    obj = get_object_or_404(Recu, pk=recu_id)
+    obj.delete()
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')
+
+def ajax_recu(request):
+    post = process_datatables_posted_vars(request.POST)
+    
+    # columns titles
+    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'actions']
+
+    records = Recu.objects.all().order_by('-ajout')
+    total_records = len(records)
+    display_records = total_records
+    results = []
+
+    for row in records:
+        edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
+        edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_recu, args=[row.id]),)
+        result = dict(
+            id = row.id,
+            commune = row.commune.nom,
+            code = row.commune.code,
+            periode = datetime.strftime(row.periode, "%m/%Y"),
+            demandes = row.demandes,
+            oppositions = row.oppositions,
+            resolues = row.resolues,
+            certificats = row.certificats,
+            femmes = row.femmes,
+            surfaces = row.surfaces,
+            recettes = row.recettes,
+            garanties = row.garanties,
+            reconnaissances = row.reconnaissances,
+            mutations = row.garanties,
+            actions = edit_link,
+        )
+        results.append(result)
+
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords": display_records, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')

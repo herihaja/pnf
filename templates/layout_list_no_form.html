@@ -1,0 +1,24 @@
+{% extends 'layout_content.html' %}
+{% block page_js %}
+    <script type="text/javascript">
+        var csrf = '{{ csrf_token }}';
+    </script>
+    <script src="{% autoescape off %}{{ page_js }}{% endautoescape %}" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+    {% autoescape off %}
+        {{ header_link }}
+    {% endautoescape %}
+
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">{{ title }}</a></h3>
+    </div>
+
+    <table id="example" class="display" style="width: 100%;">
+    </table>
+
+    <div id="del-confirm" title="Suppression d'un enregistrement">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Voulez-vous supprimer cet enregistrement ?</p>
+    </div>
+{% endblock %}

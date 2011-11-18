@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Cumul
+from donnees.views import editer_donnees, supprimer_donnees
 from helpers import process_datatables_posted_vars, query_datatables, export_excel
 from indicateurs.forms import FiltreIndicateursForm, FiltreIndicateurForm, FiltreRatioForm
 from django.db.models import Count
@@ -44,7 +45,7 @@ def ratio(request, ratio, title):
 
 def ajax_indicateurs(request):
     # columns titles
-    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'actions']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -72,6 +73,8 @@ def ajax_indicateurs(request):
     records, total_records, display_records = query_datatables(Donnees, columns, post, **kwargs)
     results = []
     for row in records:
+        edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
+        edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_donnees, args=[row.id]),)
         result = dict(
             id = row.id,
             commune = row.commune.nom,
@@ -86,7 +89,8 @@ def ajax_indicateurs(request):
             recettes = row.recettes,
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
-            mutations = row.garanties
+            mutations = row.mutations,
+            actions = edit_link,
         )
         results.append(result)
 
