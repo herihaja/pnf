@@ -280,7 +280,7 @@ def lister_communication(request):
         form = FiltreReceptionForm(request.POST)
     page_js = '/media/js/sms/messages.js'
     title = 'Messages'
-    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+    return render_to_response('layout_list_no_form.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
 def ajax_communication(request):
