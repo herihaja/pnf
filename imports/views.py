@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from bailleurs.models import Bailleur
 from donnees.models import Donnees
+from guichets.models import Guichet
 from localites.models import Province, Region, Commune, District
 import xlrd
 
@@ -131,15 +133,104 @@ def importer_localites(request):
                 if row[6] != '' and row[7] != '':
                     district = _ajouter_district(row[6], row[7], region)
                     if row[1] != '' and row[0] != '':
-                        commune = _ajouter_commune(row[1], row[0], district)
+                        _ajouter_commune(row[1], row[0], district)
                         data_added += 1
                     else:
-                        data_ignored.append('%s commune manquante')
+                        data_ignored.append('%s commune manquante' %(i,))
                 else:
-                    data_ignored.append('%s district manquant')
+                    data_ignored.append('%s district manquant' %(i,))
             else:
-                data_ignored.append('%s region manquante')
+                data_ignored.append('%s region manquante' %(i,))
         else:
-            data_ignored.append('%s province manquante')
+            data_ignored.append('%s province manquante' %(i,))
     return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
                               context_instance=RequestContext(request))
+
+def importer_bailleurs(request):
+    STATUT = ['1', '2', '3', '4']
+    book = xlrd.open_workbook("media/bailleurs.xls")
+    sheet = book.sheets()[0]
+
+    data_ignored = []
+    data_added = 0
+    for i in xrange(sheet.nrows):
+        commune = None
+
+        row = sheet.row_values(i)
+        # retrouver la commune
+        if row[2] != '':
+            slug = row[2].strip()
+            slug = slugify(slug)
+        communes = Commune.objects.filter(slug=slug)
+        if len(communes) == 0:
+            data_ignored.append('%s commune inconnue' %(i,))
+        elif len(communes) > 1:
+            # rechercher district
+            slug_district = row[1].strip()
+            slug_district = slugify(slug_district)
+            n = 0
+            for c in communes:
+                if c.district.slug == slug_district:
+                    commune = c
+                    n += 1
+            if n == 0:
+                data_ignored.append('%s commune inconnue' %(i,))
+            elif n == 2:
+                commune = None
+                data_ignored.append('%s commune ambigüe' %(i,))
+        else:
+            commune = communes[0]
+            #vérifier doublon
+            obj = Guichet.objects.filter(commune__id=commune.id)
+            if len(obj) > 0:
+                commune = None
+                data_ignored.append('%s guichet en doublon' %(i,))
+
+        if commune is not None:
+            # retrouver bailleur
+            nom = row[3].strip()
+            nom = nom.split('/')
+            bailleurs = []
+            for n in nom:
+                bailleur  = Bailleur.objects.filter(nom=n)
+                if len(bailleur) == 1:
+                    bailleurs.append(bailleur[0])
+            # retrouver le statut
+            statut = str(int(row[4]))
+            if statut in STATUT:
+                if statut == '1':
+                    # date ouverture
+                    if row[5] != '' and row[6] != '':
+                        creation = datetime(int(row[5]), int(row[6]), 1)
+                        creation = datetime.strftime(creation, '%Y-%m-%d')
+                    # code AGF
+                    if row[7] != '':
+                        agf = row[7].strip()
+                        password = '0000'
+                        guichet = Guichet(
+                            commune = commune,
+                            creation = creation,
+                            agf1 = agf,
+                            password1 = password,
+                            etat = statut,
+                        )
+                    else:
+                        guichet = Guichet(
+                            commune = commune,
+                            creation = creation,
+                            etat = statut,
+                        )
+                else:
+                    guichet = Guichet(
+                        commune = commune,
+                        etat = statut,
+                    )
+                guichet.save()
+                for bailleur in bailleurs:
+                    guichet.bailleurs.add(bailleur)
+                data_added += 1
+            else:
+                data_ignored.append('%s statut inconnu' % (i,))
+    return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
+                              context_instance=RequestContext(request))
+            

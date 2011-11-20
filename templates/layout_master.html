@@ -20,6 +20,9 @@
 
     {% load compress %}
     {% compress js %}
+        <script type="text/javascript">
+            var csrf = '{{ csrf_token }}';
+        </script>
          {% include 'javascript.html' %}
     {% endcompress %}
     {% block page_js %} {% endblock %}

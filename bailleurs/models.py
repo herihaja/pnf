@@ -18,7 +18,7 @@ class BailleurManager(Manager):
         return dataset
 
 class Bailleur(Model):
-    nom = models.CharField(max_length=40)
+    nom = models.CharField(max_length=40, unique=True)
     projet = models.CharField(max_length=200, blank=True, null=True)
 
     objects = BailleurManager()

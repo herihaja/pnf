@@ -1,8 +1,5 @@
 {% extends 'layout_content.html' %}
 {% block page_js %}
-    <script type="text/javascript">
-        var csrf = '{{ csrf_token }}';
-    </script>
     <script src="{% autoescape off %}{{ page_js }}{% endautoescape %}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}

@@ -26,7 +26,7 @@ $(document).ready(function() {
                 "success": fnCallback
             } );
         },
-        "sDom": 'rt<"F"ip>'
+        "sDom": 'rt<"F"lip>'
     });
 
     $('#form-filter').submit(function(){

@@ -10,7 +10,7 @@ $(document).ready(function() {
             { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
             { "sTitle": "Commune", "mDataProp": "commune" },
             { "sTitle": "Code", "mDataProp": "code" },
-            { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
+            { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,

@@ -75,20 +75,12 @@
         "pk": 10,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "DCEM",
-            "projet": ""
-        }
-    },
-    {
-        "pk": 11,
-        "model": "bailleurs.bailleur",
-        "fields": {
             "nom": "CONSEIL GENERAL BAS RHIN",
             "projet": "IRCOD"
         }
     },
     {
-        "pk": 12,
+        "pk": 11,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "DCEM",
@@ -96,7 +88,7 @@
         }
     },
     {
-        "pk": 13,
+        "pk": 12,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "INTERCOOPERATION SUISSE",
@@ -104,7 +96,7 @@
         }
     },
     {
-        "pk": 14,
+        "pk": 13,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "ILC",
@@ -112,7 +104,7 @@
         }
     },
     {
-        "pk": 15,
+        "pk": 14,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "SCAC",
@@ -120,7 +112,7 @@
         }
     },
     {
-        "pk": 16,
+        "pk": 15,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "INTERCOOPERATION MUESINGEN",
@@ -128,7 +120,7 @@
         }
     },
         {
-        "pk": 17,
+        "pk": 16,
         "model": "bailleurs.bailleur",
         "fields": {
             "nom": "FONDS PROPRES",

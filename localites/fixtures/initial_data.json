@@ -2067,9 +2067,9 @@
         "pk": 1282,
         "model": "localites.commune",
         "fields": {
-            "nom": "AMBANISARIKE",
+            "nom": "AMBANISARIKA",
             "code": "610101",
-            "slug": "ambanisarike",
+            "slug": "ambanisarika",
             "district": 94
         }
     },
@@ -2437,9 +2437,9 @@
         "pk": 2,
         "model": "localites.commune",
         "fields": {
-            "nom": "AMBATOLAMPYTSIMAHAFOTSY",
+            "nom": "AMBATOLAMPYT SIMAHAFOTSY",
             "code": "110102",
-            "slug": "ambatolampytsimahafotsy",
+            "slug": "ambatolampy-tsimahafotsy",
             "district": 1
         }
     },
@@ -3287,9 +3287,9 @@
         "pk": 1077,
         "model": "localites.commune",
         "fields": {
-            "nom": "AMBODIMNGA",
+            "nom": "AMBODIMANGA",
             "code": "510203",
-            "slug": "ambodimnga",
+            "slug": "ambodimanga",
             "district": 77
         }
     },
@@ -11197,9 +11197,9 @@
         "pk": 18,
         "model": "localites.commune",
         "fields": {
-            "nom": "IVATO FIARISANA",
+            "nom": "IVATO FIRAISANA",
             "code": "110118",
-            "slug": "ivato-fiarisana",
+            "slug": "ivato-firaisana",
             "district": 1
         }
     },
@@ -16507,9 +16507,9 @@
         "pk": 494,
         "model": "localites.commune",
         "fields": {
-            "nom": "VINANYANDAKATANIKELY",
+            "nom": "VINANY ANDAKATANIKELY",
             "code": "310410",
-            "slug": "vinanyandakatanikely",
+            "slug": "vinany-andakatanikely",
             "district": 33
         }
     },

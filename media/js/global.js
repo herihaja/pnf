@@ -19,7 +19,7 @@ $(document).ready(function() {
                         "dataType": 'json',
                         "type": "POST",
                         "url": targetUrl,
-                        "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                        "data": {"csrfmiddlewaretoken": csrf},
                         "success": function() {
                             oTable.fnDraw();
                         }

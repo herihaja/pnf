@@ -68,7 +68,8 @@ def editer_guichet(request, guichet_id=None):
 def supprimer_guichet(request, guichet_id=None):
     obj = get_object_or_404(Guichet, pk=guichet_id)
     obj.delete()
-    return HttpResponseRedirect(reverse(lister_guichet))
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')
 
 def export(rows):
     header = ['Commune', 'Agf1',  'Mobile1', 'Password1', 'Agf2', 'Mobile2', 'Password2', 'Etat']
@@ -121,22 +122,27 @@ def ajax_guichet(request):
     for row in records:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_guichet, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_guichet, args=[row.id]),)
-        if len(row.password1) > 0:
+        if row.password1 is not None and len(row.password1) > 0:
             password1 = 'Oui'
         else:
             password1 = 'Non'
         if row.agf2 is not None:
-            if len(row.password2) > 0:
+            if row.password2 is not None and len(row.password2) > 0:
                 password2 = 'Oui'
             else:
                 password2 = 'Non'
         else:
             password2 = ''
 
+        if row.creation is not None:
+            creation = datetime.strftime(row.creation, "%d/%m/%Y")
+        else:
+            creation = ''
+
         result = dict(
             commune = row.commune.nom,
             code = row.commune.code,
-            creation = datetime.strftime(row.creation, "%d-%m-%Y"),
+            creation = creation,
             agf1 = row.agf1,
             num1 = row.mobile1,
             password1 = password1,

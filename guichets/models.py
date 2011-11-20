@@ -88,14 +88,14 @@ class GuichetManager(Manager):
 
 class Guichet(Model):
     CHOIX_ETAT = (
-        ('1', 'Actif'),
-        ('2', 'Non actif'),
+        ('1', 'Ouvert'),
+        ('2', 'Suspendu'),
         ('3', 'Fermé'),
-        ('4', 'En cours'),
+        ('4', 'En constitution'),
     )
     commune = models.OneToOneField(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     bailleurs = models.ManyToManyField(Bailleur)
-    creation = models.DateField()
+    creation = models.DateField(blank=True, null=True)
     agf1 = models.CharField(max_length=6, blank=True, null=True)
     mobile1 = models.CharField(max_length=15, blank=True, null=True)
     password1 = models.CharField(max_length=6, blank=True, null=True)
