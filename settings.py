@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'pnf.indicateurs',
     'pnf.sms',
     'pnf.dashboard',
+    'pnf.gammu',
 #    'pnf.utilisateurs',
     'django.contrib.admin',
 )

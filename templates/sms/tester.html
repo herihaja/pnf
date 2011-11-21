@@ -4,12 +4,16 @@
     <div id="accordion" class="edit-form">
         <h3><a href="#">SMS tester</a></h3>
         <div>
-            <form action="" method="post">
+            <form action="" method="post" id="tester-form">
                 {% csrf_token %}
                 {{ form.as_p }}
+                <span id="nchar" style="font-size:10px;"></span>
+                <br /><br />
                 <input type="submit" class="submit" value="Enregistrer" />
-                <br/><br/>
-                <small>Format : AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000<br/>
+            </form>
+
+            <br/><br/>
+            <small>Format : AGF048#0000 .p 11.2010 .d 1000 .o 1200 .r 2000 .c 3000 .f 0000 .t 1000 .a 1000000000 .s 0.233 .g 1000 .m 2000<br/>
                 code_agf#psw_agf
                 <br/>.p periode au format mm.aaaa
                 <br/>.d demandes
@@ -23,13 +27,46 @@
                 <br/>.g garanties
                 <br/>.m mutations<br/>
                 </small>
-            </form>
         </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            var limitNum = 160
             $('.edit-form input:submit').button();
             $('#accordion').accordion({ collapsible: false });
+
+            function limitText(limitField, limitNum) {
+                if (limitField.val().length > limitNum) {
+                    limitField.val(limitField.val().substring(0, limitNum));
+                }
+                nchar = limitNum - limitField.val().length;
+                $('#nchar').html(nchar + ' caractères restants.');
+            }
+
+            $('#id_message').keyup(function() {
+                limitText($(this), limitNum)
+            });
+
+            $('#id_message').keydown(function() {
+                limitText($(this), 160)
+            });
+
+            nchar = limitNum - $('#id_message').val().length;
+            $('#nchar').html(nchar + ' caractères restants.');
+
+            $('#tester-form').submit(function() {
+                if($('#id_expediteur').val() == '') {
+                    alert('Numéro de téléphone obligatoire!');
+                    return false;
+                }
+
+                if($('#id_message').val() == '') {
+                    alert('Message obligatoire!');
+                    return false;
+                }
+
+                $(this).submit();
+            });
         });
     </script>
 {% endblock %}

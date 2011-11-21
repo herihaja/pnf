@@ -2,7 +2,7 @@ $(document).ready(function() {
     oTable = $('#example').dataTable({
         "bProcessing": true,
         "bServerSide": true,
-        "oLanguage": {"sUrl": "/media/js/dataTables.french.txt"},
+        "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
         "bFilter": false,
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/localites/communes/ajax/',

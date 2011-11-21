@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Recu
+from gammu.models import Outbox
 from guichets.models import Guichet
 from sms.models import Reception, Envoi, Communication
 from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm
@@ -13,6 +14,8 @@ from helpers import export_excel, process_datatables_posted_vars, query_datatabl
 import re
 from django.db.models import Q
 import simplejson
+
+RECIPIENT_LIST = ['orange', 'airtel', 'telma']
 
 def lister_reception(request, statut=1):
     if request.method == 'GET':
@@ -137,139 +140,151 @@ def sms_tester(request):
 
     form = TesterForm(request.POST)
     if form.is_valid():
-        date_reception = datetime.now()
-        type_sms, reponse, data, texte = _parser(request.POST['message'])
+        receiving_date = datetime.now()
+        type_sms = process_sms(request.POST['expediteur'], request.POST['message'], receiving_date, 'tester')
 
-        if type_sms == 1:
-            reception = Reception(
-                date_reception = date_reception,
-                expediteur = request.POST['expediteur'],
-                message = request.POST['message'],
-                statut = 1,
-                retour = reponse,
-            )
-            reception.save()
-
-            donnees = Recu(
-                commune = data['commune'],
-                sms = reception,
-                periode = data['periode'],
-                demandes = data['demandes'],
-                oppositions = data['oppositions'],
-                resolues = data['resolues'],
-                certificats = data['certificats'],
-                femmes = data['femmes'],
-                surfaces = data['surfaces'],
-                recettes = data['recettes'],
-                garanties = data['garanties'],
-                reconnaissances = data['reconnaissances'],
-                mutations = data['mutations'],
-            )
-            donnees.save()
-
-            if texte != '':
-                message = Communication(
-                    commune = data['commune'],
-                    sms = reception,
-                    date_reception = date_reception,
-                    message = texte,
-                )
-                message.save()
-        else:
-            reception = Reception(
-                date_reception = date_reception,
-                expediteur = request.POST['expediteur'],
-                message = request.POST['message'],
-                statut = type_sms,
-                retour = reponse,
-            )
-            reception.save()
+        # afficher le sms reçu
         return HttpResponseRedirect(reverse(lister_reception, args=[type_sms]))
     else:
         return render_to_response('sms/tester.html', {'form': form},
                                   context_instance=RequestContext(request))
 
-def _parser(message):
+
+def process_sms(sendernumber, message, receiving_date, recipient=None):
+    type_sms, reponse, data, texte = _parser_sms(message)
+
+    # enregistrer le sms
+    reception = Reception(
+            date_reception = receiving_date,
+            expediteur = sendernumber,
+            message = message,
+            statut = type_sms,
+            retour = reponse,
+        )
+    reception.save()
+
+    # si message valide enregistrer pour test
+    if type_sms == 1:
+        donnees = Recu(
+            commune = data['commune'],
+            sms = reception,
+            periode = data['periode'],
+            demandes = data['demandes'],
+            oppositions = data['oppositions'],
+            resolues = data['resolues'],
+            certificats = data['certificats'],
+            femmes = data['femmes'],
+            surfaces = data['surfaces'],
+            recettes = data['recettes'],
+            garanties = data['garanties'],
+            reconnaissances = data['reconnaissances'],
+            mutations = data['mutations'],
+        )
+        donnees.save()
+
+        if texte != '':
+            message = Communication(
+                commune = data['commune'],
+                sms = reception,
+                date_reception = receiving_date,
+                message = texte,
+            )
+            message.save()
+
+
+    # message de retour
+    if recipient != 'tester':
+        if recipient in RECIPIENT_LIST:
+            _inject_in_outbox(recipient, sendernumber, reponse)
+
+    return type_sms
+
+def _parser_sms(message):
     data = {}
     reponse = ''
     texte = ''
     type_sms = 1
 
     sms_parts = message.split('#')
-    
-    expediteur = sms_parts[0]
-    indicateurs = sms_parts[1]
-    if len(sms_parts) > 2:
-        texte = sms_parts[2]
 
     # vérifier le code agf en premier
-    agf = Guichet.objects.filter(Q(agf1=expediteur) | Q(agf2=expediteur))
+    agf = Guichet.objects.filter(Q(agf1=sms_parts[0]) | Q(agf2=sms_parts[0]))
     if len(agf) == 0:
         reponse = u"Erreur, AGF inconnu"
         type_sms = 3
     else:
-        agf = agf[0]
-        # envoyeur 1 ou 2
-        if agf.agf1 == expediteur:
-            password1 = 'password1'
-        else:
-            password1 = 'password2'
 
-        tokens = re.split(' \.', indicateurs)
-        password = tokens.pop(0)
-
-        # verifier mot de passe
-        kwargs = {password1: password}
-        agf = Guichet.objects.filter(**kwargs)
-        if len(agf) == 0:
-            reponse = u"Mot de passe erroné"
+        if len(sms_parts) == 1:
+            reponse = u"Erreur, Nombre de données insuffisant"
             type_sms = 2
         else:
+            expediteur = sms_parts[0]
+            indicateurs = sms_parts[1]
+            if len(sms_parts) > 2:
+                texte = sms_parts[2]
+
             agf = agf[0]
-            if len(tokens) < 11:
-                message = u"Erreur, Nombre de données insuffisant"
-                type_sms = 2
-            elif len(tokens) > 11:
-                return data, u"Erreur, Nombre de données en dépassement"
+            # envoyeur 1 ou 2
+            if agf.agf1 == expediteur:
+                password1 = 'password1'
+            else:
+                password1 = 'password2'
+
+            tokens = re.split(' \.', indicateurs)
+            password = tokens.pop(0)
+
+            # verifier mot de passe
+            kwargs = {password1: password}
+            agf = Guichet.objects.filter(**kwargs)
+            if len(agf) == 0:
+                reponse = u"Mot de passe erroné"
                 type_sms = 2
             else:
-                mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
-                           't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
+                agf = agf[0]
+                if len(tokens) < 11:
+                    reponse = u"Erreur, Nombre de données insuffisant"
+                    type_sms = 2
+                elif len(tokens) > 11:
+                    reponse = u"Erreur, Nombre de données en dépassement"
+                    type_sms = 2
+                else:
+                    mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
+                               't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
 
-                data['commune'] = agf.commune
-                for token in tokens:
-                    token = token.strip()
-                    token = token.split()
-                    if len(token) == 2:
-                        if token[0] in mapping:
-                            if token[0] == 'p':
-                                periode = token[1].split('.')
-                                if len(periode[0]) > 2 or len(periode[1]) < 4:
-                                    reponse = u"Date erronée"
-                                    type_sms = 2
+                    data['commune'] = agf.commune
+                    for token in tokens:
+                        token = token.strip()
+                        token = token.split()
+                        if len(token) == 2:
+                            if token[0] in mapping:
+                                if token[0] == 'p':
+                                    periode = token[1].split('.')
+                                    if len(periode[0]) > 2 or len(periode[1]) < 4:
+                                        reponse = u"Date erronée"
+                                        type_sms = 2
+                                    else:
+                                        data['periode'] = '%s-%s-01' % (periode[1], periode[0])
+                                elif token[0] == 's' or token[0] == 'a':
+                                    value = token[1]
+                                    value.replace(',', '.')
+                                    data[mapping[token[0]]] = float(value)
                                 else:
-                                    data['periode'] = '%s-%s-01' % (periode[1], periode[0])
-                            elif token[0] == 's' or token[0] == 'a':
-                                value = token[1]
-                                value.replace(',', '.')
-                                data[mapping[token[0]]] = float(value)
+                                    data[mapping[token[0]]] = int(token[1])
                             else:
-                                data[mapping[token[0]]] = token[1]
+                                reponse = u"Erreur, Code question '%s' inconnu" % token[0]
+                                type_sms = 2
                         else:
-                            reponse = u"Erreur, Code question '%s' inconnu" % token[0]
+                            reponse = u"Erreur, Réponse '%s' erronée ou manquante" % token[0]
                             type_sms = 2
-                    else:
-                        reponse = u"Erreur, Réponse '%s' erronée ou manquante" % token[0]
-                        type_sms = 2
 
-                # controle de coherence
-                if type_sms == 1:
-                    if data['femmes'] > data['certificats']:
-                        reponse = u"Erreur, certificats donnés à des femmes ne peut dépasser le nombre de certificats délivrés"
-                        type_sms = 2
-                    else:
-                        reponse = u"Félicitations! Données enregistrées"
-                        type_sms = 1
+                    # controle de coherence
+                    if type_sms == 1:
+                        if data['femmes'] > data['certificats']:
+                            reponse = u"Erreur, certificats donnés à des femmes ne peut dépasser le nombre de certificats délivrés"
+                            type_sms = 2
+                        else:
+                            reponse = u"Félicitations! Données enregistrées"
+                            type_sms = 1
 
     return type_sms, reponse, data, texte
 
@@ -306,3 +321,22 @@ def ajax_communication(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
+
+def _inject_in_outbox(smsc, numero, texte):
+    outgoing_sms = Outbox(
+        updatedindb = datetime.now(),
+        insertintodb = datetime.now(),
+        sendingdatetime = datetime.now(),
+        sendbefore = '23:59:59',
+        sendafter = '00:00:00',
+        coding = 'Default_No_Compression',
+        destinationnumber = numero,
+        senderid = smsc,
+        textdecoded = unicode(texte),
+        multipart = False,
+        sendingtimeout = datetime.now(),
+        creatorid = 'pnf'
+    )
+    outgoing_sms.save()
+

@@ -1,0 +1,49 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <table id="sms-table" class="display">
+        <thead>
+            <tr>
+                <th class="ui-state-default">In DB</th>
+                <th class="ui-state-default">Heure</th>
+                <th class="ui-state-default">Texte</th>
+                <th class="ui-state-default">Sender</th>
+                <th class="ui-state-default">Coding</th>
+                <th class="ui-state-default">Udh</th>
+                <th class="ui-state-default">Smsc</th>
+                <th class="ui-state-default">Class</th>
+                <th class="ui-state-default">Decoded</th>
+                <th class="ui-state-default">Recipient</th>
+                <th class="ui-state-default">Proc</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in object_list %}
+            <tr>
+                <td>{{ row.updatedindb }}</td>
+                <td>{{ row.receivingdatetime }}</td>
+                <td>{{ row.text }}</td>
+                <td>{{ row.sendernumber }}</td>
+                <td>{{ row.coding }}</td>
+                <td>{{ row.udh }}</td>
+                <td>{{ row.smscnumber }}</td>
+                <td>{{ row.class_field }}</td>
+                <td>{{ row.textdecoded }}</td>
+                <td>{{ row.recipientid }}</td>
+                <td>{{ row.processed }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sms-table').dataTable({
+                "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
+                "bFilter": false,
+                "bSort" : false,
+                "sDom": 'rt<"F"lip>'
+            });
+        });
+    </script>
+{% endblock %}
