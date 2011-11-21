@@ -26,7 +26,6 @@
             <li><a href="{% url guichets.views.lister_guichet %}">Liste des guichets</a></li>
             <li><a href="{% url guichets.views.lister_bailleurs %}">Guichets par bailleurs</a></li>
             <li><a href="{% url guichets.views.ajouter_guichet %}">Nouveau guichet</a></li>
-            <li><a href="" class="last">Etat d'envoi des RMA</a></li>
         </ul>
     </li>
     <li>
@@ -36,7 +35,7 @@
             <li><a href="{% url sms.views.lister_reception 1 %}">SMS corrects</a></li>
             <li><a href="{% url sms.views.lister_reception 2 %}">SMS erronés</a></li>
             <li><a href="{% url sms.views.lister_reception 3 %}">SMS inconnus</a></li>
-            <li><a href="{% url sms.views.lister_communication %}">Messages</a></li>
+            <li><a href="{% url sms.views.lister_communication %}">Commentaires</a></li>
             <li><a href="{% url sms.views.lister_envoi %}">Historique SMS</a></li>
             <li><a href="{% url sms.views.sms_tester %}" class="last">Simulateur SMS</a></li>
         </ul>

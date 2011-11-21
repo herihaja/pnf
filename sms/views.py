@@ -9,7 +9,7 @@ from donnees.models import Donnees, Recu
 from gammu.models import Outbox
 from guichets.models import Guichet
 from sms.models import Reception, Envoi, Communication
-from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm
+from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm, BroadcastForm
 from helpers import export_excel, process_datatables_posted_vars, query_datatables
 import re
 from django.db.models import Q
@@ -195,7 +195,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
     # message de retour
     if recipient != 'tester':
         if recipient in RECIPIENT_LIST:
-            _inject_in_outbox(recipient, sendernumber, reponse)
+            send_sms(recipient, sendernumber, reponse)
 
     return type_sms
 
@@ -322,6 +322,15 @@ def ajax_communication(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+def send_sms(smsc, numero, texte):
+    _inject_in_outbox(smsc, numero, texte)
+
+    envoi = Envoi(
+        date_envoi = datetime.now(),
+        destinataire = numero,
+        message = texte
+    )
+    envoi.save()
 
 def _inject_in_outbox(smsc, numero, texte):
     outgoing_sms = Outbox(
@@ -334,7 +343,44 @@ def _inject_in_outbox(smsc, numero, texte):
         textdecoded = unicode(texte),
         multipart = False,
         sendingtimeout = datetime.now(),
-        creatorid = 'pnf'
+        creatorid = smsc
     )
     outgoing_sms.save()
 
+
+def broadcast_sms(request):
+    if request.method == 'GET':
+        form = BroadcastForm()
+        return render_to_response('sms/broadcast.html', {'form': form},
+                                  context_instance=RequestContext(request))
+
+    form = BroadcastForm(request.POST)
+    if form.is_valid():
+        texte = request.POST['message']
+        numeros = request.POST['destinataire']
+        numeros = numeros.split(',')
+
+        for numero in numeros:
+            numero = numero.trim()
+            operateur = numero[:3]
+            if operateur == '033':
+                smsc = 'airtel'
+            elif operateur == '032':
+                smsc = 'orange'
+            elif operateur == '034':
+                smsc = 'telma'
+            else:
+                continue
+
+            send_sms(smsc, numero, texte)
+
+        # afficher le sms reçu
+        return HttpResponseRedirect(reverse(lister_envoi))
+    else:
+        return render_to_response('sms/broadcast.html', {'form': form},
+                                  context_instance=RequestContext(request))
+
+def ajax_broadcast(request):
+
+
+    pass
