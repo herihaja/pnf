@@ -19,7 +19,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/envois/ajax/',
         "aoColumns": [
-            { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
+            { "sTitle": "Date / Heure", "mDataProp": "date_envoi", "sWidth": "100px" },
             { "sTitle": "Destinataire", "mDataProp": "numero", "sWidth": "80px" },
             { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
         ],
