@@ -13,7 +13,7 @@ class Outbox(models.Model):
     destinationnumber = models.CharField(max_length=20)
     coding = models.CharField(max_length=255, blank=True, null=True)
     udh = models.TextField(blank=True, null=True)
-    class_field = models.IntegerField(blank=True, null=True)
+    class_field = models.IntegerField(db_column='Processed', blank=True, null=True)
     textdecoded = models.TextField()
     multipart = models.BooleanField()
     relativevalidity = models.IntegerField(blank=True, null=True)
@@ -32,9 +32,9 @@ class Inbox(models.Model):
     coding = models.CharField(max_length=255)
     udh = models.TextField()
     smscnumber = models.CharField(max_length=20)
-    class_field = models.IntegerField()
+    class_field = models.IntegerField(db_column='class')
     textdecoded = models.TextField()
     recipientid = models.TextField()
-    processed = models.BooleanField()
+    processed = models.BooleanField() # Field name made lowercase.
     class Meta:
         db_table = u'inbox'
