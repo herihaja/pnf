@@ -15,7 +15,7 @@ class Command(BaseCommand):
             try:
                 process_sms(row.sendernumber, row.textdecoded, row.receivingdatetime, row.recipientid)
             except:
-                stderr.write('Error parsing message "%s"\n' % row.ID)
+                stderr.write('Error parsing message "%s"\n' % row.id)
 
             # marquer comme traite
             row.processed = True
