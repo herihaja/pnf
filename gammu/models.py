@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 
 class Outbox(models.Model):
+    ID = models.AutoField(primary_key=True)
     updatedindb = models.DateTimeField(db_column='UpdatedInDB') # Field name made lowercase.
     insertintodb = models.DateTimeField(db_column='InsertIntoDB') # Field name made lowercase.
     sendingdatetime = models.DateTimeField(db_column='SendingDateTime') # Field name made lowercase.
@@ -25,6 +26,7 @@ class Outbox(models.Model):
         db_table = u'outbox'
 
 class Inbox(models.Model):
+    ID = models.AutoField(primary_key=True)
     updatedindb = models.DateTimeField(db_column='UpdatedInDB') # Field name made lowercase.
     receivingdatetime = models.DateTimeField(db_column='ReceivingDateTime') # Field name made lowercase.
     text = models.TextField(db_column='Text') # Field name made lowercase.
