@@ -3,7 +3,7 @@ from datetime import datetime
 from sys import stderr, stdout
 from django.core.management.base import BaseCommand, CommandError
 from gammu.models import Inbox
-from sms.views import process_sms
+from sms.views import process_sms, set_inbox_as_processed
 
 class Command(BaseCommand):
 
@@ -18,8 +18,7 @@ class Command(BaseCommand):
                 stderr.write('Error parsing message "%s"\n' % row.id)
 
             # marquer comme traite
-            row.processed = True
-            row.save()
+            set_inbox_as_processed(row.id)
             n += 1
 
         # stdout.write('Traitement de %s messages a %s \n' % (n, datetime.now()))

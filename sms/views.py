@@ -340,3 +340,7 @@ def _inject_in_outbox(smsc, numero, texte):
     )
     outgoing_sms.save()
 
+def set_inbox_as_processed(id=None):
+    inbox = Inbox.objects.get(pk=id)
+    inbox.processed = True
+    inbox.save()
