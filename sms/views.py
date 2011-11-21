@@ -328,8 +328,6 @@ def _inject_in_outbox(smsc, numero, texte):
         updatedindb = datetime.now(),
         insertintodb = datetime.now(),
         sendingdatetime = datetime.now(),
-        sendbefore = '23:59:59',
-        sendafter = '00:00:00',
         coding = 'Default_No_Compression',
         destinationnumber = numero,
         senderid = smsc,

@@ -7,8 +7,6 @@ class Outbox(models.Model):
     updatedindb = models.DateTimeField()
     insertintodb = models.DateTimeField()
     sendingdatetime = models.DateTimeField()
-    sendbefore = models.TimeField()
-    sendafter = models.TimeField()
     text = models.TextField(blank=True, null=True)
     destinationnumber = models.CharField(max_length=20)
     coding = models.CharField(max_length=255, blank=True, null=True)
@@ -23,6 +21,9 @@ class Outbox(models.Model):
     creatorid = models.TextField()
     class Meta:
         db_table = u'outbox'
+
+
+
 
 class Inbox(models.Model):
     id = models.AutoField(primary_key=True)
