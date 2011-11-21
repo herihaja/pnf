@@ -25,6 +25,7 @@ class Outbox(models.Model):
         db_table = u'outbox'
 
 class Inbox(models.Model):
+    id = models.AutoField(primary_key=True)
     updatedindb = models.DateTimeField()
     receivingdatetime = models.DateTimeField()
     text = models.TextField()
