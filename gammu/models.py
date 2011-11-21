@@ -13,7 +13,7 @@ class Outbox(models.Model):
     destinationnumber = models.CharField(max_length=20)
     coding = models.CharField(max_length=255, blank=True, null=True)
     udh = models.TextField(blank=True, null=True)
-    class_field = models.IntegerField(db_column='Processed', blank=True, null=True)
+    class_field = models.IntegerField(db_column='class', blank=True, null=True)
     textdecoded = models.TextField()
     multipart = models.BooleanField()
     relativevalidity = models.IntegerField(blank=True, null=True)
