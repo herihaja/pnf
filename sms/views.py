@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Recu
-from gammu.models import Outbox
+from gammu.models import Outbox, Inbox
 from guichets.models import Guichet
 from sms.models import Reception, Envoi, Communication
 from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm
