@@ -27,10 +27,10 @@ class GuichetForm(ModelForm):
 class FiltreGuichetForm(Form):
     CHOIX_ETAT = (
         ('', '---'),
-        ('1', 'Actif'),
-        ('2', 'Non actif'),
+        ('1', 'Ouvert'),
+        ('2', 'Suspendu'),
         ('3', 'Fermé'),
-        ('4', 'En cours'),
+        ('4', 'En constitution'),
     )
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)

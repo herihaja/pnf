@@ -1,0 +1,21 @@
+{% extends 'layout_content.html' %}
+{% block page_js %}
+    <script type="text/javascript">
+        var csrf = '{{ csrf_token }}';
+    </script>
+    <script src="/media/js/sms/broadcast.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+    <div id="accordion" class="edit-form">
+        <h3><a href="#">Envoi de SMS</a></h3>
+        <div>
+            <form action="" method="post" id="tester-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <span id="nchar" style="font-size:10px;"></span>
+                <br /><br />
+                <input type="submit" class="submit" value="Enregistrer" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

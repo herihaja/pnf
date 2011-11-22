@@ -26,5 +26,6 @@ class BroadcastForm(Form):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
     commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
-    expediteur = forms.CharField(label='Destinataire', max_length=20, required=True)
+    liste = forms.CharField(label='Destinataire', max_length=200, required=False)
+    destinataire = forms.CharField(label='Destinataire', required=True, widget=forms.HiddenInput())
     message = forms.CharField(label='Message', widget=forms.Textarea, required=True)

@@ -342,7 +342,25 @@ def _inject_in_outbox(smsc, numero, texte):
     outgoing_sms.save()
 
 
-def broadcast_sms(request):
+def _get_operateur(numero):
+    if numero[:4] == '+261':
+        code = '0%s' % (numero[4:2],)
+    elif numero[:5] == '00261':
+        code = '0%s' % (numero[5:2],)
+    else:
+        code = numero[:3]
+
+    if code == '033':
+        operateur = 'airtel'
+    elif code == '032':
+        operateur = 'orange'
+    elif code == '034':
+        operateur = 'telma'
+    else:
+        operateur = None
+    return operateur
+
+def sms_broadcast(request):
     if request.method == 'GET':
         form = BroadcastForm()
         return render_to_response('sms/broadcast.html', {'form': form},
@@ -355,26 +373,36 @@ def broadcast_sms(request):
         numeros = numeros.split(',')
 
         for numero in numeros:
-            numero = numero.trim()
-            operateur = numero[:3]
-            if operateur == '033':
-                smsc = 'airtel'
-            elif operateur == '032':
-                smsc = 'orange'
-            elif operateur == '034':
-                smsc = 'telma'
-            else:
-                continue
+            operateur = _get_operateur(numero)
+            if operateur is not None:
+                send_sms(operateur, numero, texte)
 
-            send_sms(smsc, numero, texte)
-
-        # afficher le sms reçu
         return HttpResponseRedirect(reverse(lister_envoi))
     else:
         return render_to_response('sms/broadcast.html', {'form': form},
                                   context_instance=RequestContext(request))
 
 def ajax_broadcast(request):
+    # selectionner la liste des agf actifs de la localite ayant un num tel
+    kwargs = {'etat': 1}
+    if 'localite' in request.POST and request.POST['localite'] == 'region':
+        kwargs['commune__district__region'] = int(request.POST['value'])
+    if 'localite' in request.POST and request.POST['localite'] == 'district':
+        kwargs['commune__district'] = int(request.POST['value'])
+    if 'localite' in request.POST and request.POST['localite'] == 'commune':
+        kwargs['commune'] = int(request.POST['value'])
 
+    destinataires = Guichet.objects.filter(**kwargs).\
+        exclude((Q(mobile1__isnull=True) | Q(mobile1__exact='')) & (Q(mobile2__isnull=True) | Q(mobile2__exact=''))).\
+        values('mobile1', 'mobile2')
 
-    pass
+    numeros = []
+    for row in destinataires:
+        if row['mobile1'] is not None and row['mobile1'] != '':
+            numeros.append(row['mobile1'])
+        elif row['mobile2'] is not None and row['mobile2'] != '':
+            numeros.append(row['mobile2'])
+
+    results = {"numeros": numeros}
+    json = simplejson.dumps(results)
+    return HttpResponse(json, mimetype='application/json')
