@@ -203,10 +203,15 @@ def ajax_bailleur(request):
                 else:
                     bailleurs = '%s, %s' % (bailleurs, bailleur.nom,)
 
+        if row.creation is not None:
+            creation = datetime.strftime(row.creation, "%d-%m-%Y")
+        else:
+            creation = ''
+
         result = dict(
             commune = row.commune.nom,
             code = row.commune.code,
-            creation = datetime.strftime(row.creation, "%d-%m-%Y"),
+            creation = creation,
             bailleurs = bailleurs,
             etat = row.get_etat_display(),
         )

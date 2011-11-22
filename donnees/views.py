@@ -196,7 +196,7 @@ def ajax_cumuls(request):
             recettes = row.recettes,
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
-            mutations = row.garanties,
+            mutations = row.mutations,
         )
         results.append(result)
 
@@ -299,7 +299,7 @@ def ajax_recu(request):
             recettes = row.recettes,
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
-            mutations = row.garanties,
+            mutations = row.mutations,
             actions = edit_link,
         )
         results.append(result)

@@ -213,7 +213,8 @@ def _parser_sms(message):
         reponse = u"Erreur, AGF inconnu"
         type_sms = 3
     else:
-
+        agf = agf[0]
+        
         if len(sms_parts) == 1:
             reponse = u"Erreur, Nombre de données insuffisant"
             type_sms = 2
@@ -223,24 +224,18 @@ def _parser_sms(message):
             if len(sms_parts) > 2:
                 texte = sms_parts[2]
 
-            agf = agf[0]
-            # envoyeur 1 ou 2
-            if agf.agf1 == expediteur:
-                password1 = 'password1'
-            else:
-                password1 = 'password2'
-
             tokens = re.split(' \.', indicateurs)
             password = tokens.pop(0)
 
             # verifier mot de passe
-            kwargs = {password1: password}
-            agf = Guichet.objects.filter(**kwargs)
-            if len(agf) == 0:
+            # envoyeur 1 ou 2
+            if agf.agf1 == expediteur and agf.password1 != password:
+                reponse = u"Mot de passe erroné"
+                type_sms = 2
+            elif agf.agf2 == expediteur and agf.password2 != password:
                 reponse = u"Mot de passe erroné"
                 type_sms = 2
             else:
-                agf = agf[0]
                 if len(tokens) < 11:
                     reponse = u"Erreur, Nombre de données insuffisant"
                     type_sms = 2
@@ -255,8 +250,8 @@ def _parser_sms(message):
                     for token in tokens:
                         token = token.strip()
                         token = token.split()
-                        if len(token) == 2:
-                            if token[0] in mapping:
+                        if token[0] in mapping:
+                            if len(token) == 2:
                                 if token[0] == 'p':
                                     periode = token[1].split('.')
                                     if len(periode[0]) > 2 or len(periode[1]) < 4:
@@ -271,10 +266,10 @@ def _parser_sms(message):
                                 else:
                                     data[mapping[token[0]]] = int(token[1])
                             else:
-                                reponse = u"Erreur, Code question '%s' inconnu" % token[0]
+                                reponse = u"Erreur, Réponse '%s' manquante" % token[0]
                                 type_sms = 2
                         else:
-                            reponse = u"Erreur, Réponse '%s' erronée ou manquante" % token[0]
+                            reponse = u"Erreur, Code question '%s' inconnu" % token[0]
                             type_sms = 2
 
                     # controle de coherence
@@ -284,7 +279,6 @@ def _parser_sms(message):
                             type_sms = 2
                         else:
                             reponse = u"Félicitations! Données enregistrées"
-                            type_sms = 1
 
     return type_sms, reponse, data, texte
 

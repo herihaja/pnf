@@ -43,7 +43,7 @@ class DonneesManager(Manager):
         for row in queryset:
             periode = datetime.strftime(row.periode, "%m/%Y")
             row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
-                        row.certificats, row.femmes, row.recettes, row.mutations, row.surfaces, row.garanties, row.reconnaissances]
+                        row.certificats, row.femmes, row.surfaces, row.recettes, row.garanties, row.reconnaissances, row.mutations, row.valide]
             dataset.append(row_list)
         return dataset
 
