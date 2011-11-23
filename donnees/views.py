@@ -10,6 +10,18 @@ from donnees.forms import DonneesForm, FiltreDonneesForm
 from helpers import export_excel, process_datatables_posted_vars, create_compare_condition, query_datatables
 import simplejson
 from datetime import datetime
+from localites.forms import FiltreCommuneForm
+
+def lister_donnees(request):
+    if request.method == 'GET':
+        form = FiltreDonneesForm()
+    else:
+        form = FiltreDonneesForm(request.POST)
+    header_link = '<a href="%s">&raquo; Insertion manuelle</a>' % (reverse(ajouter_donnees),)
+    page_js = '/media/js/donnees/donnees.js'
+    title = 'Liste des données'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
+                              context_instance=RequestContext(request))
 
 def ajax_donnees(request):
     # columns titles
@@ -48,7 +60,6 @@ def ajax_donnees(request):
 
     records, total_records, display_records = query_datatables(Donnees, columns, post, **kwargs)
     results = []
-
     for row in records:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_donnees, args=[row.id]),)
@@ -309,3 +320,21 @@ def ajax_recu(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
+def exporter_pour_site(request):
+    if request.method == 'GET':
+        form = FiltreDonneesForm()
+    else:
+        form = FiltreDonneesForm(request.POST)
+    page_js = '/media/js/donnees/export.js'
+    title = 'Export site'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
+
+def export_site(request):
+    columns = [u'ID_COMMUNE', u'ANNEE', u'MOIS', u'REGION', u'DISTRICT', u'COMMUNES', u'BAILLEUR',
+               u'NB_DEMANDE', u'NB_DEM_REJ', u'NB_CF_DELI', u'NB_CF_FEMM', u'NB_BENEFIC', u'NB_BENEF_F',
+               u'SUPERFICIE', u'NB_OPPOSIT', u'NB_OPP_RES', u'RECETTE']
+    dataset = Donnees.objects.filter_for_site(request.GET)
+    response = export_excel(columns, dataset, 'export')
+    return response

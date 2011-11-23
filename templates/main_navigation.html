@@ -31,19 +31,26 @@
     <li>
         <a href="javascript:void(0)">Données</a>
         <ul>
-            <li><a href="{% url donnees.views.lister_recu %}">Données reçues</a></li>
-            <li><a href="{% url sms.views.lister_communication %}">Commentaires</a></li>
+            <li><a href="{% url donnees.views.lister_recu %}">Données à valider</a></li>
+            <li><a href="{% url donnees.views.lister_donnees %}">Données validées</a></li>
+            <li><a href="{% url donnees.views.ajouter_donnees %}">Insertion manuelle</a></li>
+            <li><a href="{% url sms.views.lister_communication %}" class="last">Commentaires</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:void(0)">SMS</a>
+        <ul>
             <li><a href="{% url sms.views.lister_reception 1 %}">SMS corrects</a></li>
             <li><a href="{% url sms.views.lister_reception 2 %}">SMS erronés</a></li>
             <li><a href="{% url sms.views.lister_reception 3 %}">SMS inconnus</a></li>
-            <li><a href="{% url sms.views.lister_envoi %}">Historique SMS</a></li>
+            <li><a href="{% url sms.views.lister_envoi %}" class="last">Historique SMS</a></li>
         </ul>
     </li>
     <li>
         <a href="javascript:void(0)">Outils</a>
         <ul>
             <li><a href="{% url sms.views.sms_broadcast %}">Envoi de SMS</a></li>
-            <li><a href="">Export site web</a></li>
+            <li><a href="{%  url donnees.views.exporter_pour_site %}">Export site web</a></li>
             <li><a href="{% url sms.views.sms_tester %}" class="last">Simulateur SMS</a></li>
         </ul>
     </li>

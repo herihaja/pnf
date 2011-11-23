@@ -3,10 +3,12 @@ from __future__ import division
 from datetime import datetime
 from django.db import models
 from django.db.models import Q, Model, Manager
+from guichets.models import Guichet
 from helpers import create_compare_condition
 from localites.models import Commune
 from sms.models import Reception
 from django.db.models import Count
+from django.core.exceptions import ObjectDoesNotExist
 
 class DonneesManager(Manager):
     def filter_for_xls(self, post):
@@ -44,6 +46,63 @@ class DonneesManager(Manager):
             periode = datetime.strftime(row.periode, "%m/%Y")
             row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
                         row.certificats, row.femmes, row.surfaces, row.recettes, row.garanties, row.reconnaissances, row.mutations, row.valide]
+            dataset.append(row_list)
+        return dataset
+
+    def filter_for_site(self, post):
+        columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+        kwargs = {'valide': True}
+        if 'commune' in post and post['commune'] != '':
+            kwargs['nom__icontains'] = str(post['commune'])
+        else:
+            if 'code' in post and post['code'] != '':
+                kwargs['commune__code__icontains'] = post['code']
+            if 'district' in post and post['district'] != '':
+                kwargs['commune__district'] = post['district']
+            else:
+                if 'region' in post and post['region'] != '':
+                    kwargs['commune__district__region'] = post['region']
+
+        for i in range(0, 9):
+            post_key = columns[i]
+            if post_key in post and post[post_key] != '':
+                key, value = create_compare_condition(columns[i], post[post_key])
+                kwargs[key] = value
+
+        if 'date_de' in post and post['date_de'] != '':
+            cree_de = datetime.strptime(post['date_de'], "%d/%m/%Y")
+            cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+            kwargs['periode__gte'] = cree_de
+        if 'date_a' in post and post['date_a'] != '':
+            cree_a = datetime.strptime(post['date_a'], "%d/%m/%Y")
+            cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+            kwargs['periode__lte'] = cree_a
+
+        queryset = self.filter(**kwargs)
+        dataset = []
+        for row in queryset:
+            annee = datetime.strftime(row.periode, "%Y")
+            mois = datetime.strftime(row.periode, "%m")
+            columns = [u'ID_COMMUNE', u'ANNEE', u'MOIS', u'REGION', u'DISTRICT', u'COMMUNES', u'BAILLEUR',
+               u'NB_DEMANDE', u'NB_DEM_REJ', u'NB_CF_DELI', u'NB_CF_FEMM', u'NB_BENEFIC', u'NB_BENEF_F',
+               u'SUPERFICIE', u'NB_OPPOSIT', u'NB_OPP_RES', u'RECETTE']
+
+            bailleurs = ''
+            try:
+                guichet = row.commune.guichet
+                bailleurs_list = guichet.bailleurs.all()
+                if len(bailleurs_list) > 0:
+                    for bailleur in bailleurs_list:
+                        if bailleurs == '':
+                            bailleurs = bailleur.nom
+                        else:
+                            bailleurs = '%s, %s' % (bailleurs, bailleur.nom,)
+            except ObjectDoesNotExist:
+                pass
+
+            row_list = [row.commune.code, annee, mois, row.commune.district.region.nom, row.commune.district.nom, row.commune.nom,
+                        bailleurs, row.demandes, '', row.certificats, row.femmes, '', '', row.surfaces, row.oppositions, row.resolues,
+                        row.recettes]
             dataset.append(row_list)
         return dataset
 

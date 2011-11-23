@@ -2,9 +2,10 @@
 
 from django.conf.urls.defaults import patterns, url
 from donnees.views import ajouter_donnees, editer_donnees, lister_recu, supprimer_recu, \
-    supprimer_donnees, lister_cumuls, ajax_donnees, ajax_cumuls, export_cumuls, export_donnees, ajax_recu, tester_recu, valider_recu
+    supprimer_donnees, lister_cumuls, ajax_donnees, ajax_cumuls, export_cumuls, export_donnees, ajax_recu, tester_recu, valider_recu, lister_donnees, exporter_pour_site, export_site
 
 urlpatterns = patterns('',
+                        (r'donnees/$', lister_donnees),
                         (r'^donnees/recues/$', lister_recu),
                         (r'^donnees/ajout/$', ajouter_donnees),
                         (r'^recu/ajax/$', ajax_recu),
@@ -18,4 +19,6 @@ urlpatterns = patterns('',
                         (r'^cumuls/$', lister_cumuls),
                         (r'^cumuls/ajax/$', ajax_cumuls),
                         (r'^cumuls/export/$', export_cumuls),
+                        (r'^export-site/$', exporter_pour_site),
+                        (r'^export-site/export/$', export_site)
                     )
