@@ -15,7 +15,7 @@ class DonneesManager(Manager):
         columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
         kwargs = {'valide': True}
         if 'commune' in post and post['commune'] != '':
-            kwargs['nom__icontains'] = str(post['commune'])
+            kwargs['commune'] = str(post['commune'])
         else:
             if 'code' in post and post['code'] != '':
                 kwargs['commune__code__icontains'] = post['code']
@@ -53,7 +53,7 @@ class DonneesManager(Manager):
         columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
         kwargs = {'valide': True}
         if 'commune' in post and post['commune'] != '':
-            kwargs['nom__icontains'] = str(post['commune'])
+            kwargs['commune'] = str(post['commune'])
         else:
             if 'code' in post and post['code'] != '':
                 kwargs['commune__code__icontains'] = post['code']

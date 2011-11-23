@@ -32,7 +32,7 @@ def ajax_donnees(request):
     kwargs = {}
 
     if 'fCommune' in post and post['fCommune'] != '':
-        kwargs['nom__icontains'] = str(post['fCommune'])
+        kwargs['commune'] = str(post['fCommune'])
     else:
         if 'fCode' in post and post['fCode'] != '':
             kwargs['commune__code__icontains'] = post['fCode']
