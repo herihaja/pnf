@@ -41,3 +41,11 @@ class FiltreDonneesForm(Form):
     garanties = forms.CharField(required=False, widget=forms.TextInput(attrs={'style':'width: 60px;'}))
     periode_de = forms.CharField(label='Entre', required=False)
     periode_a = forms.CharField(label='et', required=False)
+    recu_de = forms.CharField(label='Reçu entre', required=False)
+    recu_a = forms.CharField(label='et', required=False)
+
+class FiltreRecuForm(Form):
+    region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
+    district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
+    commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
+    code = forms.CharField(max_length=6, required=False)

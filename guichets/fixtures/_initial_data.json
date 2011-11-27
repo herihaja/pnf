@@ -10,9 +10,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF001",
+            "agf1": "AGF0001",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -28,9 +28,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF002",
+            "agf1": "AGF0002",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -48,7 +48,7 @@
             "ajout": "2011-11-19 19:33:45",
             "agf1": null,
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -64,9 +64,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF003",
+            "agf1": "AGF0003",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -82,9 +82,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF004",
+            "agf1": "AGF0004",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -100,9 +100,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF005",
+            "agf1": "AGF0005",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -118,9 +118,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF006",
+            "agf1": "AGF0006",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -136,9 +136,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF007",
+            "agf1": "AGF0007",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -154,9 +154,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF008",
+            "agf1": "AGF0008",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -172,9 +172,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF009",
+            "agf1": "AGF0009",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -190,9 +190,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF010",
+            "agf1": "AGF0010",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -208,9 +208,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF011",
+            "agf1": "AGF0011",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -226,9 +226,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF012",
+            "agf1": "AGF0012",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -244,9 +244,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF013",
+            "agf1": "AGF0013",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -262,9 +262,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF014",
+            "agf1": "AGF0014",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -280,9 +280,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF015",
+            "agf1": "AGF0015",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -298,9 +298,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF016",
+            "agf1": "AGF0016",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -316,9 +316,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF017",
+            "agf1": "AGF0017",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -334,9 +334,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF018",
+            "agf1": "AGF0018",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -352,9 +352,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF019",
+            "agf1": "AGF0019",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -370,9 +370,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF020",
+            "agf1": "AGF0020",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -388,9 +388,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF021",
+            "agf1": "AGF0021",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -408,7 +408,7 @@
             "ajout": "2011-11-19 19:33:45",
             "agf1": null,
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -424,9 +424,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:45",
-            "agf1": "AGF023",
+            "agf1": "AGF0023",
             "edit": "2011-11-19 19:33:45",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -442,9 +442,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF024",
+            "agf1": "AGF0024",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -460,9 +460,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF025",
+            "agf1": "AGF0025",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -478,9 +478,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF026",
+            "agf1": "AGF0026",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -496,9 +496,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF027",
+            "agf1": "AGF0027",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -514,9 +514,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF028",
+            "agf1": "AGF0028",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -532,9 +532,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF029",
+            "agf1": "AGF0029",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -550,9 +550,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF030",
+            "agf1": "AGF0030",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -568,9 +568,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF031",
+            "agf1": "AGF0031",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -586,9 +586,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF032",
+            "agf1": "AGF0032",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -604,9 +604,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF033",
+            "agf1": "AGF0033",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -624,7 +624,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -640,9 +640,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF034",
+            "agf1": "AGF0034",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -660,7 +660,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -676,9 +676,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF035",
+            "agf1": "AGF0035",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -696,7 +696,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -712,9 +712,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF036",
+            "agf1": "AGF0036",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -730,9 +730,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF037",
+            "agf1": "AGF0037",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -750,7 +750,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -766,9 +766,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF038",
+            "agf1": "AGF0038",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -784,9 +784,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF039",
+            "agf1": "AGF0039",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -802,9 +802,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF040",
+            "agf1": "AGF0040",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -820,9 +820,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF041",
+            "agf1": "AGF0041",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -838,9 +838,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF042",
+            "agf1": "AGF0042",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -856,9 +856,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF043",
+            "agf1": "AGF0043",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -874,9 +874,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF044",
+            "agf1": "AGF0044",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -892,9 +892,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF045",
+            "agf1": "AGF0045",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -910,9 +910,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF046",
+            "agf1": "AGF0046",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -928,9 +928,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF047",
+            "agf1": "AGF0047",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -946,9 +946,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF048",
+            "agf1": "AGF0048",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -964,9 +964,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF049",
+            "agf1": "AGF0049",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -982,9 +982,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF050",
+            "agf1": "AGF0050",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1000,9 +1000,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF051",
+            "agf1": "AGF0051",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1018,9 +1018,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF052",
+            "agf1": "AGF0052",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1036,9 +1036,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF053",
+            "agf1": "AGF0053",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1054,9 +1054,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF054",
+            "agf1": "AGF0054",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1072,9 +1072,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF055",
+            "agf1": "AGF0055",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1090,9 +1090,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF056",
+            "agf1": "AGF0056",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1108,9 +1108,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF057",
+            "agf1": "AGF0057",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1126,9 +1126,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF058",
+            "agf1": "AGF0058",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1144,9 +1144,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF059",
+            "agf1": "AGF0059",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1162,9 +1162,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF060",
+            "agf1": "AGF0060",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1180,9 +1180,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF061",
+            "agf1": "AGF0061",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1198,9 +1198,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF062",
+            "agf1": "AGF0062",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1216,9 +1216,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF063",
+            "agf1": "AGF0063",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1234,9 +1234,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF064",
+            "agf1": "AGF0064",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1252,9 +1252,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF065",
+            "agf1": "AGF0065",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1270,9 +1270,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF066",
+            "agf1": "AGF0066",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1290,7 +1290,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [3],
+            "projets": [3],
             "mobile1": null,
             "mobile2": null
         }
@@ -1306,9 +1306,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF067",
+            "agf1": "AGF0067",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1324,9 +1324,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF068",
+            "agf1": "AGF0068",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1342,9 +1342,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF069",
+            "agf1": "AGF0069",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1360,9 +1360,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF070",
+            "agf1": "AGF0070",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1380,7 +1380,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1396,9 +1396,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF071",
+            "agf1": "AGF0071",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1414,9 +1414,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF072",
+            "agf1": "AGF0072",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1432,9 +1432,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF073",
+            "agf1": "AGF0073",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1450,9 +1450,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF074",
+            "agf1": "AGF0074",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1468,9 +1468,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF075",
+            "agf1": "AGF0075",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1486,9 +1486,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF076",
+            "agf1": "AGF0076",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1504,9 +1504,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF077",
+            "agf1": "AGF0077",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1522,9 +1522,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF078",
+            "agf1": "AGF0078",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1540,9 +1540,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF079",
+            "agf1": "AGF0079",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1558,9 +1558,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF080",
+            "agf1": "AGF0080",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1576,9 +1576,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF081",
+            "agf1": "AGF0081",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1594,9 +1594,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF082",
+            "agf1": "AGF0082",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1614,7 +1614,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1630,9 +1630,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF083",
+            "agf1": "AGF0083",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1650,7 +1650,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1668,7 +1668,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1686,7 +1686,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -1704,7 +1704,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1720,9 +1720,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF084",
+            "agf1": "AGF0084",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1738,9 +1738,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF085",
+            "agf1": "AGF0085",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1756,9 +1756,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF086",
+            "agf1": "AGF0086",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1774,9 +1774,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF087",
+            "agf1": "AGF0087",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1792,9 +1792,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF088",
+            "agf1": "AGF0088",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1812,7 +1812,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1828,9 +1828,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF089",
+            "agf1": "AGF0089",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1846,9 +1846,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF090",
+            "agf1": "AGF0090",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1864,9 +1864,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF091",
+            "agf1": "AGF0091",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1884,7 +1884,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [9],
+            "projets": [9],
             "mobile1": null,
             "mobile2": null
         }
@@ -1900,9 +1900,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF092",
+            "agf1": "AGF0092",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1918,9 +1918,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF093",
+            "agf1": "AGF0093",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1936,9 +1936,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF094",
+            "agf1": "AGF0094",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1954,9 +1954,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF095",
+            "agf1": "AGF0095",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1972,9 +1972,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF096",
+            "agf1": "AGF0096",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -1990,9 +1990,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF097",
+            "agf1": "AGF0097",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2008,9 +2008,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF098",
+            "agf1": "AGF0098",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2026,9 +2026,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF099",
+            "agf1": "AGF0099",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2044,9 +2044,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF100",
+            "agf1": "AGF0100",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2062,9 +2062,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF101",
+            "agf1": "AGF0101",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2080,9 +2080,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF102",
+            "agf1": "AGF0102",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2098,9 +2098,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF103",
+            "agf1": "AGF0103",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2116,9 +2116,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:46",
-            "agf1": "AGF104",
+            "agf1": "AGF0104",
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2136,7 +2136,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2154,7 +2154,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2172,7 +2172,7 @@
             "ajout": "2011-11-19 19:33:46",
             "agf1": null,
             "edit": "2011-11-19 19:33:46",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2190,7 +2190,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [15],
+            "projets": [15],
             "mobile1": null,
             "mobile2": null
         }
@@ -2208,7 +2208,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [15],
+            "projets": [15],
             "mobile1": null,
             "mobile2": null
         }
@@ -2226,7 +2226,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -2242,9 +2242,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF105",
+            "agf1": "AGF0105",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [13],
+            "projets": [13],
             "mobile1": null,
             "mobile2": null
         }
@@ -2260,9 +2260,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF106",
+            "agf1": "AGF0106",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2278,9 +2278,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF107",
+            "agf1": "AGF0107",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2296,9 +2296,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF108",
+            "agf1": "AGF0108",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2314,9 +2314,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF109",
+            "agf1": "AGF0109",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2332,9 +2332,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF110",
+            "agf1": "AGF0110",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2350,9 +2350,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF111",
+            "agf1": "AGF0111",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2368,9 +2368,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF112",
+            "agf1": "AGF0112",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2386,9 +2386,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF113",
+            "agf1": "AGF0113",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2404,9 +2404,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF114",
+            "agf1": "AGF0114",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2422,9 +2422,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF115",
+            "agf1": "AGF0115",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2440,9 +2440,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF116",
+            "agf1": "AGF0116",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2458,9 +2458,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF117",
+            "agf1": "AGF0117",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2476,9 +2476,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF118",
+            "agf1": "AGF0118",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2494,9 +2494,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF119",
+            "agf1": "AGF0119",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2512,9 +2512,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF120",
+            "agf1": "AGF0120",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2530,9 +2530,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF121",
+            "agf1": "AGF0121",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2548,9 +2548,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF122",
+            "agf1": "AGF0122",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2566,9 +2566,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF123",
+            "agf1": "AGF0123",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2, 11],
+            "projets": [2, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -2586,7 +2586,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2602,9 +2602,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF124",
+            "agf1": "AGF0124",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2622,7 +2622,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2640,7 +2640,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2656,9 +2656,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF125",
+            "agf1": "AGF0125",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2674,9 +2674,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF126",
+            "agf1": "AGF0126",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2692,9 +2692,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF127",
+            "agf1": "AGF0127",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2710,9 +2710,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF128",
+            "agf1": "AGF0128",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2728,9 +2728,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF129",
+            "agf1": "AGF0129",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2746,9 +2746,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF130",
+            "agf1": "AGF0130",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2764,9 +2764,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF131",
+            "agf1": "AGF0131",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [8],
+            "projets": [8],
             "mobile1": null,
             "mobile2": null
         }
@@ -2782,9 +2782,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF132",
+            "agf1": "AGF0132",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -2800,9 +2800,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF133",
+            "agf1": "AGF0133",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -2818,9 +2818,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF134",
+            "agf1": "AGF0134",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -2836,9 +2836,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF135",
+            "agf1": "AGF0135",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -2854,9 +2854,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF136",
+            "agf1": "AGF0136",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -2874,7 +2874,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2892,7 +2892,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2910,7 +2910,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -2926,9 +2926,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF137",
+            "agf1": "AGF0137",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -2944,9 +2944,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF138",
+            "agf1": "AGF0138",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -2962,9 +2962,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF139",
+            "agf1": "AGF0139",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -2980,9 +2980,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF140",
+            "agf1": "AGF0140",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3000,7 +3000,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3016,9 +3016,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF141",
+            "agf1": "AGF0141",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3034,9 +3034,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF142",
+            "agf1": "AGF0142",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3052,9 +3052,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF143",
+            "agf1": "AGF0143",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3070,9 +3070,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF144",
+            "agf1": "AGF0144",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3088,9 +3088,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF145",
+            "agf1": "AGF0145",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3106,9 +3106,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF146",
+            "agf1": "AGF0146",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3124,9 +3124,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF147",
+            "agf1": "AGF0147",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3144,7 +3144,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3160,9 +3160,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF148",
+            "agf1": "AGF0148",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3178,9 +3178,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF149",
+            "agf1": "AGF0149",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3196,9 +3196,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF150",
+            "agf1": "AGF0150",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -3214,9 +3214,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF151",
+            "agf1": "AGF0151",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3232,9 +3232,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF152",
+            "agf1": "AGF0152",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3250,9 +3250,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF153",
+            "agf1": "AGF0153",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3268,9 +3268,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF154",
+            "agf1": "AGF0154",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3286,9 +3286,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF155",
+            "agf1": "AGF0155",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3304,9 +3304,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF156",
+            "agf1": "AGF0156",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3322,9 +3322,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF157",
+            "agf1": "AGF0157",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3340,9 +3340,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF158",
+            "agf1": "AGF0158",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3358,9 +3358,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF159",
+            "agf1": "AGF0159",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3376,9 +3376,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF160",
+            "agf1": "AGF0160",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3396,7 +3396,7 @@
             "ajout": "2011-11-19 19:33:47",
             "agf1": null,
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3412,9 +3412,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF161",
+            "agf1": "AGF0161",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3430,9 +3430,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF162",
+            "agf1": "AGF0162",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3448,9 +3448,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF163",
+            "agf1": "AGF0163",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3466,9 +3466,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF164",
+            "agf1": "AGF0164",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3484,9 +3484,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF165",
+            "agf1": "AGF0165",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3502,9 +3502,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF166",
+            "agf1": "AGF0166",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3520,9 +3520,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF167",
+            "agf1": "AGF0167",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3538,9 +3538,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF168",
+            "agf1": "AGF0168",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3556,9 +3556,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF169",
+            "agf1": "AGF0169",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3574,9 +3574,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF170",
+            "agf1": "AGF0170",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3592,9 +3592,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF171",
+            "agf1": "AGF0171",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3610,9 +3610,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF172",
+            "agf1": "AGF0172",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3628,9 +3628,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF173",
+            "agf1": "AGF0173",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3646,9 +3646,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF174",
+            "agf1": "AGF0174",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3664,9 +3664,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF175",
+            "agf1": "AGF0175",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3682,9 +3682,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF176",
+            "agf1": "AGF0176",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3700,9 +3700,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF177",
+            "agf1": "AGF0177",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3718,9 +3718,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF178",
+            "agf1": "AGF0178",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3736,9 +3736,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF179",
+            "agf1": "AGF0179",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3754,9 +3754,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF180",
+            "agf1": "AGF0180",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3772,9 +3772,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF181",
+            "agf1": "AGF0181",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3790,9 +3790,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF182",
+            "agf1": "AGF0182",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3808,9 +3808,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:47",
-            "agf1": "AGF183",
+            "agf1": "AGF0183",
             "edit": "2011-11-19 19:33:47",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3826,9 +3826,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF184",
+            "agf1": "AGF0184",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3844,9 +3844,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF185",
+            "agf1": "AGF0185",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3862,9 +3862,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF186",
+            "agf1": "AGF0186",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3880,9 +3880,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF187",
+            "agf1": "AGF0187",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3898,9 +3898,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF188",
+            "agf1": "AGF0188",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3916,9 +3916,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF189",
+            "agf1": "AGF0189",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3934,9 +3934,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF190",
+            "agf1": "AGF0190",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3952,9 +3952,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF191",
+            "agf1": "AGF0191",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3970,9 +3970,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF192",
+            "agf1": "AGF0192",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -3988,9 +3988,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF193",
+            "agf1": "AGF0193",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4006,9 +4006,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF194",
+            "agf1": "AGF0194",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4024,9 +4024,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF195",
+            "agf1": "AGF0195",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4044,7 +4044,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4060,9 +4060,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF196",
+            "agf1": "AGF0196",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4078,9 +4078,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF197",
+            "agf1": "AGF0197",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4098,7 +4098,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4114,9 +4114,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF198",
+            "agf1": "AGF0198",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4132,9 +4132,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF199",
+            "agf1": "AGF0199",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4150,9 +4150,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF200",
+            "agf1": "AGF0200",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4170,7 +4170,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4186,9 +4186,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF201",
+            "agf1": "AGF0201",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4204,9 +4204,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF202",
+            "agf1": "AGF0202",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4222,9 +4222,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF203",
+            "agf1": "AGF0203",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4242,7 +4242,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -4258,9 +4258,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF204",
+            "agf1": "AGF0204",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4278,7 +4278,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4296,7 +4296,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4314,7 +4314,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4332,7 +4332,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [10],
+            "projets": [10],
             "mobile1": null,
             "mobile2": null
         }
@@ -4348,9 +4348,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF205",
+            "agf1": "AGF0205",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -4366,9 +4366,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF206",
+            "agf1": "AGF0206",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4384,9 +4384,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF207",
+            "agf1": "AGF0207",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4402,9 +4402,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF208",
+            "agf1": "AGF0208",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4420,9 +4420,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF209",
+            "agf1": "AGF0209",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4438,9 +4438,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF210",
+            "agf1": "AGF0210",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4456,9 +4456,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF211",
+            "agf1": "AGF0211",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4474,9 +4474,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF212",
+            "agf1": "AGF0212",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4492,9 +4492,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF213",
+            "agf1": "AGF0213",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4512,7 +4512,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4528,9 +4528,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF214",
+            "agf1": "AGF0214",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4546,9 +4546,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF215",
+            "agf1": "AGF0215",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4564,9 +4564,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF216",
+            "agf1": "AGF0216",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4582,9 +4582,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF217",
+            "agf1": "AGF0217",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4600,9 +4600,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF218",
+            "agf1": "AGF0218",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4618,9 +4618,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF219",
+            "agf1": "AGF0219",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4636,9 +4636,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF220",
+            "agf1": "AGF0220",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4654,9 +4654,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF221",
+            "agf1": "AGF0221",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4672,9 +4672,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF222",
+            "agf1": "AGF0222",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4690,9 +4690,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF223",
+            "agf1": "AGF0223",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4708,9 +4708,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF224",
+            "agf1": "AGF0224",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4726,9 +4726,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF225",
+            "agf1": "AGF0225",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4744,9 +4744,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF226",
+            "agf1": "AGF0226",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4762,9 +4762,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF227",
+            "agf1": "AGF0227",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4780,9 +4780,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF228",
+            "agf1": "AGF0228",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4798,9 +4798,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF229",
+            "agf1": "AGF0229",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -4816,9 +4816,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF230",
+            "agf1": "AGF0230",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4834,9 +4834,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF231",
+            "agf1": "AGF0231",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4852,9 +4852,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF232",
+            "agf1": "AGF0232",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4870,9 +4870,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF233",
+            "agf1": "AGF0233",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4888,9 +4888,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF234",
+            "agf1": "AGF0234",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4906,9 +4906,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF235",
+            "agf1": "AGF0235",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4924,9 +4924,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF236",
+            "agf1": "AGF0236",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4942,9 +4942,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF237",
+            "agf1": "AGF0237",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4960,9 +4960,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF238",
+            "agf1": "AGF0238",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4978,9 +4978,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF239",
+            "agf1": "AGF0239",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -4996,9 +4996,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF240",
+            "agf1": "AGF0240",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5014,9 +5014,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF241",
+            "agf1": "AGF0241",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5032,9 +5032,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF242",
+            "agf1": "AGF0242",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [3],
+            "projets": [3],
             "mobile1": null,
             "mobile2": null
         }
@@ -5050,9 +5050,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF243",
+            "agf1": "AGF0243",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5068,9 +5068,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF244",
+            "agf1": "AGF0244",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5086,9 +5086,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF245",
+            "agf1": "AGF0245",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5104,9 +5104,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF246",
+            "agf1": "AGF0246",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5122,9 +5122,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF247",
+            "agf1": "AGF0247",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [3],
+            "projets": [3],
             "mobile1": null,
             "mobile2": null
         }
@@ -5140,9 +5140,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF248",
+            "agf1": "AGF0248",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5158,9 +5158,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:48",
-            "agf1": "AGF249",
+            "agf1": "AGF0249",
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [3],
+            "projets": [3],
             "mobile1": null,
             "mobile2": null
         }
@@ -5178,7 +5178,7 @@
             "ajout": "2011-11-19 19:33:48",
             "agf1": null,
             "edit": "2011-11-19 19:33:48",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5194,9 +5194,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF250",
+            "agf1": "AGF0250",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5214,7 +5214,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5230,9 +5230,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF251",
+            "agf1": "AGF0251",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5248,9 +5248,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF252",
+            "agf1": "AGF0252",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5266,9 +5266,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF253",
+            "agf1": "AGF0253",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5284,9 +5284,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF254",
+            "agf1": "AGF0254",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5302,9 +5302,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF255",
+            "agf1": "AGF0255",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5320,9 +5320,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF256",
+            "agf1": "AGF0256",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5338,9 +5338,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF257",
+            "agf1": "AGF0257",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5356,9 +5356,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF258",
+            "agf1": "AGF0258",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5374,9 +5374,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF259",
+            "agf1": "AGF0259",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5392,9 +5392,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF260",
+            "agf1": "AGF0260",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5410,9 +5410,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF261",
+            "agf1": "AGF0261",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5428,9 +5428,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF262",
+            "agf1": "AGF0262",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5446,9 +5446,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF263",
+            "agf1": "AGF0263",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5464,9 +5464,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF264",
+            "agf1": "AGF0264",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5484,7 +5484,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5502,7 +5502,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5520,7 +5520,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5536,9 +5536,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF265",
+            "agf1": "AGF0265",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5554,9 +5554,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF266",
+            "agf1": "AGF0266",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5574,7 +5574,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2, 1],
+            "projets": [2, 1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5592,7 +5592,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -5610,7 +5610,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5628,7 +5628,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5646,7 +5646,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5664,7 +5664,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5682,7 +5682,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5700,7 +5700,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5718,7 +5718,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5734,9 +5734,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF267",
+            "agf1": "AGF0267",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2, 1, 11],
+            "projets": [2, 1, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -5752,9 +5752,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF268",
+            "agf1": "AGF0268",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2, 1, 11],
+            "projets": [2, 1, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -5770,9 +5770,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF269",
+            "agf1": "AGF0269",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5790,7 +5790,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5806,9 +5806,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF270",
+            "agf1": "AGF0270",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5826,7 +5826,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5844,7 +5844,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5860,9 +5860,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF271",
+            "agf1": "AGF0271",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5878,9 +5878,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF272",
+            "agf1": "AGF0272",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5896,9 +5896,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF273",
+            "agf1": "AGF0273",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5914,9 +5914,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF274",
+            "agf1": "AGF0274",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5932,9 +5932,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF275",
+            "agf1": "AGF0275",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5950,9 +5950,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF276",
+            "agf1": "AGF0276",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -5968,9 +5968,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF277",
+            "agf1": "AGF0277",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -5986,9 +5986,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF278",
+            "agf1": "AGF0278",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -6004,9 +6004,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF279",
+            "agf1": "AGF0279",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -6022,9 +6022,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF280",
+            "agf1": "AGF0280",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -6042,7 +6042,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [12],
+            "projets": [12],
             "mobile1": null,
             "mobile2": null
         }
@@ -6060,7 +6060,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6078,7 +6078,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6096,7 +6096,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6114,7 +6114,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6132,7 +6132,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6148,9 +6148,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF281",
+            "agf1": "AGF0281",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6166,9 +6166,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF282",
+            "agf1": "AGF0282",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6186,7 +6186,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6202,9 +6202,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF283",
+            "agf1": "AGF0283",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6220,9 +6220,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF284",
+            "agf1": "AGF0284",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6238,9 +6238,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF285",
+            "agf1": "AGF0285",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6256,9 +6256,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF286",
+            "agf1": "AGF0286",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6274,9 +6274,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF287",
+            "agf1": "AGF0287",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6294,7 +6294,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6310,9 +6310,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF288",
+            "agf1": "AGF0288",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6328,9 +6328,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF289",
+            "agf1": "AGF0289",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6346,9 +6346,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF290",
+            "agf1": "AGF0290",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6366,7 +6366,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6382,9 +6382,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF291",
+            "agf1": "AGF0291",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6400,9 +6400,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF292",
+            "agf1": "AGF0292",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6418,9 +6418,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF293",
+            "agf1": "AGF0293",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6436,9 +6436,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF294",
+            "agf1": "AGF0294",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6454,9 +6454,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF295",
+            "agf1": "AGF0295",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6472,9 +6472,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF296",
+            "agf1": "AGF0296",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [14],
+            "projets": [14],
             "mobile1": null,
             "mobile2": null
         }
@@ -6490,9 +6490,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF297",
+            "agf1": "AGF0297",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6508,9 +6508,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF298",
+            "agf1": "AGF0298",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6526,9 +6526,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF299",
+            "agf1": "AGF0299",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6546,7 +6546,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6562,9 +6562,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF300",
+            "agf1": "AGF0300",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6580,9 +6580,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF301",
+            "agf1": "AGF0301",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6598,9 +6598,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF302",
+            "agf1": "AGF0302",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6616,9 +6616,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF303",
+            "agf1": "AGF0303",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6634,9 +6634,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF304",
+            "agf1": "AGF0304",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6652,9 +6652,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF305",
+            "agf1": "AGF0305",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6670,9 +6670,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF306",
+            "agf1": "AGF0306",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6688,9 +6688,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF307",
+            "agf1": "AGF0307",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6706,9 +6706,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF308",
+            "agf1": "AGF0308",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6724,9 +6724,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF309",
+            "agf1": "AGF0309",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [2],
+            "projets": [2],
             "mobile1": null,
             "mobile2": null
         }
@@ -6742,9 +6742,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF310",
+            "agf1": "AGF0310",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6760,9 +6760,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF311",
+            "agf1": "AGF0311",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6780,7 +6780,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6796,9 +6796,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF312",
+            "agf1": "AGF0312",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6814,9 +6814,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:49",
-            "agf1": "AGF313",
+            "agf1": "AGF0313",
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -6834,7 +6834,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6852,7 +6852,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6870,7 +6870,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6888,7 +6888,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6906,7 +6906,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6924,7 +6924,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6942,7 +6942,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6960,7 +6960,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6978,7 +6978,7 @@
             "ajout": "2011-11-19 19:33:49",
             "agf1": null,
             "edit": "2011-11-19 19:33:49",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -6996,7 +6996,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -7014,7 +7014,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -7032,7 +7032,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [],
+            "projets": [],
             "mobile1": null,
             "mobile2": null
         }
@@ -7048,9 +7048,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF314",
+            "agf1": "AGF0314",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7066,9 +7066,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF315",
+            "agf1": "AGF0315",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7084,9 +7084,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF316",
+            "agf1": "AGF0316",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7102,9 +7102,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF317",
+            "agf1": "AGF0317",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7120,9 +7120,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF318",
+            "agf1": "AGF0318",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7138,9 +7138,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF319",
+            "agf1": "AGF0319",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7156,9 +7156,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF320",
+            "agf1": "AGF0320",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7174,9 +7174,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF321",
+            "agf1": "AGF0321",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7192,9 +7192,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF322",
+            "agf1": "AGF0322",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7210,9 +7210,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF323",
+            "agf1": "AGF0323",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7228,9 +7228,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF324",
+            "agf1": "AGF0324",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7246,9 +7246,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF325",
+            "agf1": "AGF0325",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7264,9 +7264,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF326",
+            "agf1": "AGF0326",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7282,9 +7282,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF327",
+            "agf1": "AGF0327",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7300,9 +7300,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF328",
+            "agf1": "AGF0328",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7318,9 +7318,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF329",
+            "agf1": "AGF0329",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7336,9 +7336,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF330",
+            "agf1": "AGF0330",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7354,9 +7354,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF331",
+            "agf1": "AGF0331",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7372,9 +7372,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF332",
+            "agf1": "AGF0332",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7390,9 +7390,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF333",
+            "agf1": "AGF0333",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7408,9 +7408,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF334",
+            "agf1": "AGF0334",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7426,9 +7426,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF335",
+            "agf1": "AGF0335",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7444,9 +7444,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF336",
+            "agf1": "AGF0336",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7462,9 +7462,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF337",
+            "agf1": "AGF0337",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7480,9 +7480,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF338",
+            "agf1": "AGF0338",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7498,9 +7498,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF339",
+            "agf1": "AGF0339",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7516,9 +7516,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF340",
+            "agf1": "AGF0340",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7534,9 +7534,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF341",
+            "agf1": "AGF0341",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7552,9 +7552,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF342",
+            "agf1": "AGF0342",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7570,9 +7570,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF343",
+            "agf1": "AGF0343",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7588,9 +7588,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF344",
+            "agf1": "AGF0344",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7608,7 +7608,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7624,9 +7624,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF345",
+            "agf1": "AGF0345",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7642,9 +7642,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF346",
+            "agf1": "AGF0346",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7662,7 +7662,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7678,9 +7678,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF347",
+            "agf1": "AGF0347",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7696,9 +7696,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF348",
+            "agf1": "AGF0348",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7714,9 +7714,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF349",
+            "agf1": "AGF0349",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7732,9 +7732,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF350",
+            "agf1": "AGF0350",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7750,9 +7750,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF351",
+            "agf1": "AGF0351",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7770,7 +7770,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7786,9 +7786,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF352",
+            "agf1": "AGF0352",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7804,9 +7804,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF353",
+            "agf1": "AGF0353",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7822,9 +7822,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF354",
+            "agf1": "AGF0354",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7840,9 +7840,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF355",
+            "agf1": "AGF0355",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7858,9 +7858,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF356",
+            "agf1": "AGF0356",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7876,9 +7876,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF357",
+            "agf1": "AGF0357",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7894,9 +7894,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF358",
+            "agf1": "AGF0358",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7912,9 +7912,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF359",
+            "agf1": "AGF0359",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7930,9 +7930,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF360",
+            "agf1": "AGF0360",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7948,9 +7948,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF361",
+            "agf1": "AGF0361",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7966,9 +7966,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF362",
+            "agf1": "AGF0362",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -7984,9 +7984,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF363",
+            "agf1": "AGF0363",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8002,9 +8002,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF364",
+            "agf1": "AGF0364",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8020,9 +8020,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF365",
+            "agf1": "AGF0365",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8038,9 +8038,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF366",
+            "agf1": "AGF0366",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8056,9 +8056,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF367",
+            "agf1": "AGF0367",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8074,9 +8074,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF368",
+            "agf1": "AGF0368",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8092,9 +8092,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF369",
+            "agf1": "AGF0369",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8110,9 +8110,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF370",
+            "agf1": "AGF0370",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8128,9 +8128,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF371",
+            "agf1": "AGF0371",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8146,9 +8146,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF372",
+            "agf1": "AGF0372",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8164,9 +8164,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF373",
+            "agf1": "AGF0373",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8182,9 +8182,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF374",
+            "agf1": "AGF0374",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8200,9 +8200,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF375",
+            "agf1": "AGF0375",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8218,9 +8218,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF376",
+            "agf1": "AGF0376",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8236,9 +8236,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF377",
+            "agf1": "AGF0377",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8254,9 +8254,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF378",
+            "agf1": "AGF0378",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8272,9 +8272,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF379",
+            "agf1": "AGF0379",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8290,9 +8290,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF380",
+            "agf1": "AGF0380",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8308,9 +8308,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF381",
+            "agf1": "AGF0381",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8326,9 +8326,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF382",
+            "agf1": "AGF0382",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8344,9 +8344,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF383",
+            "agf1": "AGF0383",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8362,9 +8362,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF384",
+            "agf1": "AGF0384",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8380,9 +8380,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF385",
+            "agf1": "AGF0385",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8398,9 +8398,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF386",
+            "agf1": "AGF0386",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8416,9 +8416,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF387",
+            "agf1": "AGF0387",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8434,9 +8434,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF388",
+            "agf1": "AGF0388",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8452,9 +8452,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF389",
+            "agf1": "AGF0389",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8470,9 +8470,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF390",
+            "agf1": "AGF0390",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8488,9 +8488,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF391",
+            "agf1": "AGF0391",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8506,9 +8506,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF392",
+            "agf1": "AGF0392",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8524,9 +8524,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF393",
+            "agf1": "AGF0393",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8542,9 +8542,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF394",
+            "agf1": "AGF0394",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8560,9 +8560,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF395",
+            "agf1": "AGF0395",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [16],
+            "projets": [16],
             "mobile1": null,
             "mobile2": null
         }
@@ -8580,7 +8580,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8596,9 +8596,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF396",
+            "agf1": "AGF0396",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8614,9 +8614,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF397",
+            "agf1": "AGF0397",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8632,9 +8632,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF398",
+            "agf1": "AGF0398",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8650,9 +8650,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF399",
+            "agf1": "AGF0399",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [1, 11],
+            "projets": [1, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -8670,7 +8670,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [2, 1],
+            "projets": [2, 1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8688,7 +8688,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [2, 1],
+            "projets": [2, 1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8704,9 +8704,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:50",
-            "agf1": "AGF400",
+            "agf1": "AGF0400",
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8724,7 +8724,7 @@
             "ajout": "2011-11-19 19:33:50",
             "agf1": null,
             "edit": "2011-11-19 19:33:50",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8740,9 +8740,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF401",
+            "agf1": "AGF0401",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8758,9 +8758,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF402",
+            "agf1": "AGF0402",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8778,7 +8778,7 @@
             "ajout": "2011-11-19 19:33:51",
             "agf1": null,
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8794,9 +8794,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF403",
+            "agf1": "AGF0403",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [1, 11],
+            "projets": [1, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -8812,9 +8812,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF404",
+            "agf1": "AGF0404",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [1, 11],
+            "projets": [1, 11],
             "mobile1": null,
             "mobile2": null
         }
@@ -8832,7 +8832,7 @@
             "ajout": "2011-11-19 19:33:51",
             "agf1": null,
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8848,9 +8848,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF405",
+            "agf1": "AGF0405",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8866,9 +8866,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF406",
+            "agf1": "AGF0406",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8886,7 +8886,7 @@
             "ajout": "2011-11-19 19:33:51",
             "agf1": null,
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [1],
+            "projets": [1],
             "mobile1": null,
             "mobile2": null
         }
@@ -8902,9 +8902,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF407",
+            "agf1": "AGF0407",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8920,9 +8920,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF408",
+            "agf1": "AGF0408",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8938,9 +8938,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF409",
+            "agf1": "AGF0409",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8956,9 +8956,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF410",
+            "agf1": "AGF0410",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8974,9 +8974,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF411",
+            "agf1": "AGF0411",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -8992,9 +8992,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF412",
+            "agf1": "AGF0412",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9010,9 +9010,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF413",
+            "agf1": "AGF0413",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9028,9 +9028,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF414",
+            "agf1": "AGF0414",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9046,9 +9046,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF415",
+            "agf1": "AGF0415",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9064,9 +9064,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF416",
+            "agf1": "AGF0416",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9082,9 +9082,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF417",
+            "agf1": "AGF0417",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9100,9 +9100,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF418",
+            "agf1": "AGF0418",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9118,9 +9118,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF419",
+            "agf1": "AGF0419",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }
@@ -9136,9 +9136,9 @@
             "password1": "0000",
             "agf2": null,
             "ajout": "2011-11-19 19:33:51",
-            "agf1": "AGF420",
+            "agf1": "AGF0420",
             "edit": "2011-11-19 19:33:51",
-            "bailleurs": [5],
+            "projets": [5],
             "mobile1": null,
             "mobile2": null
         }

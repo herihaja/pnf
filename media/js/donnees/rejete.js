@@ -5,7 +5,7 @@ $(document).ready(function() {
         "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
         "bFilter": false,
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
-        "sAjaxSource": '/recu/ajax/',
+        "sAjaxSource": '/rejete/ajax/',
         "aoColumns": [
             { "sTitle": "Commune", "mDataProp": "commune", "bSortable": false },
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px", "bSortable": false },
@@ -84,10 +84,10 @@ $(document).ready(function() {
 
     $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/recu/export/xls/?' + data;
+        window.location.href = '/rejete/export/xls/?' + data;
     });
     $('#btn_export_pdf').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/recu/export/pdf/?' + data;
+        window.location.href = '/rejete/export/pdf/?' + data;
     });
 } );

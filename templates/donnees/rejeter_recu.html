@@ -39,7 +39,7 @@
                     </p>
                     <div class="clear-l"></div>
                 </div>
-                <input type="button" class="submit" value="Rejeter" id="rejeter" />
+                <input type="button" class="submit" value="Supprimer" id="rejeter" />
                 <input type="button" class="submit" value="Valider" id="valider" />
             </form>
         </div>
@@ -142,15 +142,27 @@
 
             $('#rejeter').live('click', function(e) {
                 e.preventDefault();
-                $.ajax({
-                    "dataType": 'json',
-                    "type": "POST",
-                    "url": '/recu/rejeter/' + {{ id }},
-                    "data": $('#test-form').serialize(),
-                    "success": function() {
-                        window.location.replace('/donnees/rejetees/');
+                var targetUrl = $(this).attr("href");
+                $('#del-confirm').dialog({
+                    buttons : {
+                        "Supprimer": function() {
+                            $.ajax({
+                                "dataType": 'json',
+                                "type": "POST",
+                                "url": '/recu/supprimer/' + {{ id }},
+                                "data": {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                                "success": function() {
+                                    window.location.replace('/donnees/rejetees/');
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Annuler": function() {
+                            $(this).dialog("close");
+                        }
                     }
                 });
+                $('#del-confirm').dialog('open');
             });
 
 
@@ -162,7 +174,7 @@
                     "url": '/recu/valider/' + {{ id }},
                     "data": $('#test-form').serialize(),
                     "success": function() {
-                        window.location.replace('/donnees/recues/');
+                        window.location.replace('/donnees/rejetees/');
                     }
                 });
             });

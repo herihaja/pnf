@@ -1,130 +1,114 @@
 [
     {
+        "pk": 1,
+        "model": "bailleurs.bailleur",
+        "fields": {
+            "nom": "FONDS PROPRES"
+        }
+    },
+    {
         "pk": 2,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "FIDA",
-            "projet": "AD2M, PPRR, PROSPERER"
+            "nom": "FIDA"
         }
     },
     {
         "pk": 3,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "MCC",
-            "projet": "MCA"
+            "nom": "MCC"
         }
     },
     {
         "pk": 4,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "FAO",
-            "projet": ""
+            "nom": "FAO"
         }
     },
     {
         "pk": 5,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "AFD",
-            "projet": "BVLac, BVPI SEHP"
+            "nom": "AFD"
         }
     },
     {
         "pk": 6,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "Banque Mondiale",
-            "projet": "BVPI, PE III"
+            "nom": "Banque Mondiale"
         }
     },
     {
         "pk": 7,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "KFW/GIZ",
-            "projet": "PLAE"
+            "nom": "KFW/GIZ"
         }
     },
     {
         "pk": 8,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "DEPARTEMENT DE L'EURE",
-            "projet": ""
+            "nom": "DEPARTEMENT DE L'EURE"
         }
     },
     {
         "pk": 9,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "PNUD",
-            "projet": "FANAMBY, UNHABITAT"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "bailleurs.bailleur",
-        "fields": {
-            "nom": "ICCO",
-            "projet": "FIANTSO"
+            "nom": "PNUD"
         }
     },
     {
         "pk": 10,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "CONSEIL GENERAL BAS RHIN",
-            "projet": "IRCOD"
+            "nom": "ICCO"
         }
     },
     {
         "pk": 11,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "DCEM",
-            "projet": "ACORDS"
+            "nom": "CONSEIL GENERAL BAS RHIN"
         }
     },
     {
         "pk": 12,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "INTERCOOPERATION SUISSE",
-            "projet": "SAHA"
+            "nom": "DCEM"
         }
     },
     {
         "pk": 13,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "ILC",
-            "projet": ""
+            "nom": "INTERCOOPERATION SUISSE"
         }
     },
     {
         "pk": 14,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "SCAC",
-            "projet": ""
+            "nom": "ILC"
         }
     },
     {
         "pk": 15,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "INTERCOOPERATION MUESINGEN",
-            "projet": ""
+            "nom": "SCAC"
         }
     },
-        {
+    {
         "pk": 16,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "FONDS PROPRES",
-            "projet": ""
+            "nom": "INTERCOOPERATION MUESINGEN"
         }
     }
 ]

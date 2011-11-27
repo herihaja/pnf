@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.db.models import Q, Model, Manager
 from bailleurs.models import Bailleur
+from projets.models import Projet
 from localites.models import Commune
 
 class GuichetManager(Manager):
@@ -41,11 +42,12 @@ class GuichetManager(Manager):
         dataset = []
         for row in queryset:
             creation = datetime.strftime(row.creation, "%d/%m/%Y")
-            row_list = [row.commune.nom, row.commune.code, creation, row.agf1, row.mobile1, row.password1, row.agf2, row.mobile2, row.password2, row.get_etat_display()]
+            row_list = [row.commune.nom, row.commune.code, creation, row.agf1,
+                        row.mobile1, row.password1, row.agf2, row.mobile2, row.password2, row.get_etat_display()]
             dataset.append(row_list)
         return dataset
 
-    def filter_bailleurs_for_xls(self, post):
+    def filter_projets_for_xls(self, post):
         kwargs = {}
         if 'commune' in post and post['commune'] != '':
             kwargs['commune'] = str(post['commune'])
@@ -67,13 +69,17 @@ class GuichetManager(Manager):
             kwargs['creation__lte'] = cree_a
         if 'etat' in post and post['etat'] != '':
             kwargs['etat'] = post['etat']
-        if 'bailleurs' in post and post['bailleurs'] != '':
-            kwargs['bailleurs__in'] = post['bailleurs']
+        if 'projets' in post and post['projets'] != '':
+            kwargs['projets__in'] = [int(post['projets'])]
+        else:
+            if 'bailleurs' in post and post['bailleurs'] != '':
+                kwargs['bailleurs__in'] = [int(post['bailleurs'])]
 
         queryset = self.filter(**kwargs)
         dataset = []
         for row in queryset:
             creation = datetime.strftime(row.creation, "%d/%m/%Y")
+
             bailleurs_list = row.bailleurs.all()
             bailleurs = ''
             if len(bailleurs_list) > 0:
@@ -82,7 +88,16 @@ class GuichetManager(Manager):
                         bailleurs = bailleur.nom
                     else:
                         bailleurs = '%s, %s' % (bailleurs, bailleur.nom,)
-            row_list = [row.commune.nom, row.commune.code, creation, bailleurs]
+
+            projets_list = row.projets.all()
+            projets = ''
+            if len(projets_list) > 0:
+                for projet in projets_list:
+                    if projets == '':
+                        projets = projet.nom
+                    else:
+                        projets = '%s, %s' % (projets, projet.nom,)
+            row_list = [row.commune.nom, row.commune.code, creation, bailleurs, projets]
             dataset.append(row_list)
         return dataset
 
@@ -95,11 +110,12 @@ class Guichet(Model):
     )
     commune = models.OneToOneField(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     bailleurs = models.ManyToManyField(Bailleur)
+    projets = models.ManyToManyField(Projet)
     creation = models.DateField(blank=True, null=True)
-    agf1 = models.CharField(max_length=6, blank=True, null=True)
+    agf1 = models.CharField(max_length=7, blank=True, null=True)
     mobile1 = models.CharField(max_length=15, blank=True, null=True)
     password1 = models.CharField(max_length=6, blank=True, null=True)
-    agf2 = models.CharField(max_length=6, blank=True, null=True)
+    agf2 = models.CharField(max_length=7, blank=True, null=True)
     mobile2 = models.CharField(max_length=15, blank=True, null=True)
     password2 = models.CharField(max_length=6, blank=True, null=True)
     etat = models.CharField(max_length=1, choices=CHOIX_ETAT)
@@ -107,4 +123,16 @@ class Guichet(Model):
     edit = models.DateTimeField(auto_now=True)
 
     objects = GuichetManager()
+
+    '''def save(self, *args, **kwargs):
+        super(Guichet, self).save(*args, **kwargs)
+
+        projets = self.projets.all()
+        for projet in projets:
+            projet_bailleurs = projet.bailleurs.all()
+            for bailleur in projet_bailleurs:
+                self.bailleurs.add(bailleur)'''
+
+
+
 

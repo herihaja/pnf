@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('label[for="id_etat"]').parent().css({'clear': 'left'});
+    $('label[for="id_creede"]').parent().css({'clear': 'left'});
     $('#id_creede').datepicker({
         changeMonth: true,
         changeYear: true
@@ -23,6 +24,7 @@ $(document).ready(function() {
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "40px" },
             { "sTitle": "Création", "mDataProp": "creation", "sWidth": "60px" },
             { "sTitle": "Bailleurs", "mDataProp": "bailleurs" },
+            { "sTitle": "Projets", "mDataProp": "projets" },
             { "sTitle": "Etat", "mDataProp": "etat", "sWidth": "60px", "bSortable": false },
         ],
         "sPaginationType": "full_numbers",
@@ -36,7 +38,8 @@ $(document).ready(function() {
                 {"name": "fCreede", "value": $('#id_creede').val()},
                 {"name": "fCreea", "value": $('#id_creea').val()},
                 {"name": "fEtat", "value": $('#id_etat').val()},
-                {"name": "fBailleur", "value": $('#id_bailleurs').val()}
+                {"name": "fBailleur", "value": $('#id_bailleurs').val()},
+                {"name": "fProjet", "value": $('#id_projets').val()}
             );
             $.ajax( {
                 "dataType": 'json',
@@ -89,8 +92,12 @@ $(document).ready(function() {
         });
     });
     
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/guichets/bailleurs/export/?' + data;
+        window.location.href = '/guichets/bailleurs/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/guichets/bailleurs/export/pdf/?' + data;
     });
 } );

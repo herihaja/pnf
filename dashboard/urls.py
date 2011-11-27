@@ -5,5 +5,6 @@ from dashboard.views import index_dashboard
 
 
 urlpatterns = patterns('',
+                        url(r'^$', index_dashboard),
                         (r'^tableau-de-bord/$', index_dashboard),
                     )

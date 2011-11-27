@@ -49,6 +49,16 @@ $(document).ready(function() {
     $('#id_periode_a').focus(function () {
         $(".ui-datepicker-calendar").hide();
     });
+    $('#id_recu_de').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $('#id_recu_de').datepicker("option", $.datepicker.regional['fr']);
+    $('#id_recu_a').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $('#id_recu_a').datepicker("option", $.datepicker.regional['fr']);
 
     oTable = $('#example').dataTable({
         "bProcessing": true,
@@ -94,7 +104,9 @@ $(document).ready(function() {
                 {"name": "fSurfaces", "value": $('#id_surfaces').val()},
                 {"name": "fReconnaissances", "value": $('#id_reconnaissances').val()},
                 {"name": "fPeriodeDe", "value": $('#id_periode_de').val()},
-                {"name": "fPeriodeA", "value": $('#id_periode_a').val()}
+                {"name": "fPeriodeA", "value": $('#id_periode_a').val()},
+                {"name": "fRecuDe", "value": $('#id_recu_de').val()},
+                {"name": "fRecuA", "value": $('#id_recu_a').val()}
             );
             $.ajax( {
                 "dataType": 'json',
@@ -147,8 +159,12 @@ $(document).ready(function() {
         });
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/donnees/export/?' + data;
+        window.location.href = '/donnees/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/donnees/export/pdf/?' + data;
     });
 } );

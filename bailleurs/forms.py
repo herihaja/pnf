@@ -10,5 +10,4 @@ class BailleurForm(ModelForm):
         model = Bailleur
 
 class FiltreBailleurForm(Form):
-    nom = forms.CharField(max_length=40, required=False)
-    projet = forms.CharField(max_length=200, required=False)
+    nom = forms.CharField(max_length=80, required=False)

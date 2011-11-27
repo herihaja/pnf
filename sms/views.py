@@ -9,8 +9,8 @@ from donnees.models import Donnees, Recu
 from gammu.models import Outbox
 from guichets.models import Guichet
 from sms.models import Reception, Envoi, Communication
-from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm, BroadcastForm
-from helpers import export_excel, process_datatables_posted_vars, query_datatables
+from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm, BroadcastForm, FiltreCommunicationForm
+from helpers import export_excel, process_datatables_posted_vars, query_datatables, export_pdf
 import re
 from django.db.models import Q
 import simplejson
@@ -31,6 +31,18 @@ def lister_reception(request, statut=1):
         title = 'Sms erronés'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
+
+def supprimer_sms(request, sms_id=None):
+    obj = get_object_or_404(Reception, pk=sms_id)
+    obj.delete()
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')
+
+def supprimer_envoi(request, sms_id=None):
+    obj = get_object_or_404(Envoi, pk=sms_id)
+    obj.delete()
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')
 
 def ajax_reception(request):
     # columns titles
@@ -58,11 +70,13 @@ def ajax_reception(request):
     records, total_records, display_records = query_datatables(Reception, columns, post, **kwargs)
     results = []
     for row in records:
+        edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_sms, args=[row.id]),)
         result = dict(
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             numero = row.expediteur,
             message = row.message,
             reponse = row.retour,
+            actions = edit_link,
         )
         results.append(result)
 
@@ -72,10 +86,13 @@ def ajax_reception(request):
 
     return HttpResponse(json, mimetype='application/json')
 
-def export_reception(request):
+def export_reception(request, filetype=None):
     columns = [u'Date / Heure', u'Expéditeur', u'Message', u'Statut', u'Réponse']
     dataset = Reception.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'sms')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'sms')
+    else:
+        response = export_pdf(columns, dataset, 'sms', 1)
     return response
 
 def lister_envoi(request):
@@ -113,10 +130,12 @@ def ajax_envoi(request):
     results = []
 
     for row in records:
+        edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_envoi, args=[row.id]),)
         result = dict(
             date_envoi = datetime.strftime(row.date_envoi, "%d-%m-%Y %H:%M:%S"),
             numero = row.destinataire,
             message = row.message,
+            actions = edit_link,
         )
         results.append(result)
 
@@ -126,10 +145,13 @@ def ajax_envoi(request):
 
     return HttpResponse(json, mimetype='application/json')
 
-def export_envoi(request):
+def export_envoi(request, filetype=None):
     columns = [u'Date / Heure', u'Destinataire', u'Message']
     dataset = Envoi.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'sms')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'sms')
+    else:
+        response = export_pdf(columns, dataset, 'sms', 1)
     return response
 
 def sms_tester(request):
@@ -193,7 +215,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
 
 
     # message de retour
-    if recipient != 'tester':
+    if recipient != 'tester' and type_sms != 3:
         if recipient in RECIPIENT_LIST:
             send_sms(recipient, sendernumber, reponse)
 
@@ -210,13 +232,13 @@ def _parser_sms(message):
     # vérifier le code agf en premier
     agf = Guichet.objects.filter(Q(agf1=sms_parts[0]) | Q(agf2=sms_parts[0]))
     if len(agf) == 0:
-        reponse = u"Erreur, AGF inconnu"
+        reponse = u"Diso! Kaody AGF diso no nalefanao"
         type_sms = 3
     else:
         agf = agf[0]
         
         if len(sms_parts) == 1:
-            reponse = u"Erreur, Nombre de données insuffisant"
+            reponse = u"Diso! Tsy ampy ny valinteny nalefanao"
             type_sms = 2
         else:
             expediteur = sms_parts[0]
@@ -230,17 +252,17 @@ def _parser_sms(message):
             # verifier mot de passe
             # envoyeur 1 ou 2
             if agf.agf1 == expediteur and agf.password1 != password:
-                reponse = u"Mot de passe erroné"
+                reponse = u"Diso! Diso ny kaody miafina"
                 type_sms = 2
             elif agf.agf2 == expediteur and agf.password2 != password:
-                reponse = u"Mot de passe erroné"
+                reponse = u"Diso! Diso ny kaody miafina"
                 type_sms = 2
             else:
                 if len(tokens) < 11:
-                    reponse = u"Erreur, Nombre de données insuffisant"
+                    reponse = u"Diso! Tsy ampy ny valinteny nalefanao"
                     type_sms = 2
                 elif len(tokens) > 11:
-                    reponse = u"Erreur, Nombre de données en dépassement"
+                    reponse = u"Diso! Mihaotra ny valinteny nalefanao"
                     type_sms = 2
                 else:
                     mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
@@ -253,12 +275,19 @@ def _parser_sms(message):
                         if token[0] in mapping:
                             if len(token) == 2:
                                 if token[0] == 'p':
-                                    periode = token[1].split('.')
+                                    periode = token[1].split('/')
                                     if len(periode[0]) > 2 or len(periode[1]) < 4:
-                                        reponse = u"Date erronée"
+                                        reponse = u"Diso! Diso ny daty nalefanao"
                                         type_sms = 2
                                     else:
-                                        data['periode'] = '%s-%s-01' % (periode[1], periode[0])
+                                        periode = '%s-%s-01' % (periode[1], periode[0])
+                                        date_envoye = datetime.strptime(periode, '%Y-%m-%d')
+                                        date_now = datetime.now()
+                                        if date_envoye >= date_now:
+                                            reponse = u"Diso! Tsy azo atao mitovy na mihaotra ny volana diavina ny daty"
+                                            type_sms = 2
+                                        else:
+                                            data['periode'] = periode
                                 elif token[0] == 's' or token[0] == 'a':
                                     value = token[1]
                                     value.replace(',', '.')
@@ -266,30 +295,30 @@ def _parser_sms(message):
                                 else:
                                     data[mapping[token[0]]] = int(token[1])
                             else:
-                                reponse = u"Erreur, Réponse '%s' manquante" % token[0]
+                                reponse = u"Diso! Tsy nalefanao ny valin'ny fanontaniana '%s'" % token[0]
                                 type_sms = 2
                         else:
-                            reponse = u"Erreur, Code question '%s' inconnu" % token[0]
+                            reponse = u"Diso! Tsy misy ny fanontaniana manana kaody '%s'" % token[0]
                             type_sms = 2
 
                     # controle de coherence
                     if type_sms == 1:
                         if data['femmes'] > data['certificats']:
-                            reponse = u"Erreur, certificats donnés à des femmes ne peut dépasser le nombre de certificats délivrés"
+                            reponse = u"Diso! Tsy tokony mihaotra ny isan'ny taratasin-tany rehetra ny nomena hoan'ny vehivahy"
                             type_sms = 2
                         else:
-                            reponse = u"Félicitations! Données enregistrées"
+                            reponse = u"Misaotra! Voaray soa aman-tsara ny smaiso nalefanao."
 
     return type_sms, reponse, data, texte
 
 def lister_communication(request):
     if request.method == 'GET':
-        form = FiltreReceptionForm()
+        form = FiltreCommunicationForm()
     else:
-        form = FiltreReceptionForm(request.POST)
+        form = FiltreCommunicationForm(request.POST)
     page_js = '/media/js/sms/messages.js'
     title = 'Messages'
-    return render_to_response('layout_list_no_form.html', {"form": form, "title": title, "page_js": page_js},
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
 def ajax_communication(request):
@@ -299,6 +328,18 @@ def ajax_communication(request):
     # filtering
     post = process_datatables_posted_vars(request.POST)
     kwargs = {}
+    if 'fMessage' in post and post['fMessage'] != '':
+        kwargs['message__icontains'] = post['fMessage']
+    if 'fCreede' in post and post['fCreede'] != '':
+        cree_de = datetime.strptime(post['fCreede'], "%d/%m/%Y")
+        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+        kwargs['date_reception__gte'] = cree_de
+    if 'fCreea' in post and post['fCreea'] != '':
+        cree_a = datetime.strptime(post['fCreea'], "%d/%m/%Y")
+        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+        kwargs['date_reception__lte'] = cree_a
+
+    
     records, total_records, display_records = query_datatables(Communication, columns, post, **kwargs)
     results = []
     for row in records:
@@ -406,3 +447,12 @@ def ajax_broadcast(request):
     results = {"numeros": numeros}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
+
+def export_communication(request, filetype=None):
+    columns = [u'Date / Heure', u'Commune', u'Code', u'Message']
+    dataset = Communication.objects.filter_for_xls(request.GET)
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'messages')
+    else:
+        response = export_pdf(columns, dataset, 'messages')
+    return response

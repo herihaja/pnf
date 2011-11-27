@@ -98,8 +98,12 @@ $(document).ready(function() {
         });
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/guichets/export/?' + data;
+        window.location.href = '/guichets/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/guichets/export/pdf/?' + data;
     });
 } );

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 import xlwt
+from cStringIO import StringIO
 from datetime import datetime
 
 def export_excel(header, dataset, topic):
@@ -110,3 +110,55 @@ def create_compare_condition(field, value):
         key = field
         value = value
     return key, float(value)
+
+def _myLaterPages(canvas, doc):
+    from reportlab.lib.units import cm
+    from reportlab.rl_config import defaultPageSize
+    canvas.saveState()
+    canvas.setFont('Helvetica',8)
+    canvas.drawCentredString(defaultPageSize[0]/2.0, 0.6*cm, "Page %d" % (doc.page,))
+    canvas.restoreState()
+
+def export_pdf(header, dataset, topic, orientation=None):
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import A4, landscape
+    from reportlab.lib.units import cm
+    from reportlab.platypus import SimpleDocTemplate, LongTable, TableStyle
+
+    filename = 'attachment; filename=%s-%s.pdf' % (topic, datetime.strftime(datetime.now(), "%d%m%y"))
+    response = HttpResponse(mimetype='application/pdf')
+    response['Content-Disposition'] = filename
+
+    buffer = StringIO();
+    if orientation is not None:
+        orientation = landscape(A4)
+    else:
+        orientation = A4
+
+    doc = SimpleDocTemplate(buffer, pagesize=orientation, rightMargin=1*cm, leftMargin=1*cm, topMargin=1*cm, bottomMargin=1*cm)
+    elements = []
+
+    dataset.insert(0, header)
+
+    t = LongTable(dataset, repeatRows = 1)
+    t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN',(0,0),(-1,-1), 'LEFT'),
+        ('FONTSIZE',(0,0),(-1,-1), 9),
+        ('LEFTPADDING',(0,0),(-1,-1), 2),
+        ('RIGHTPADDING',(0,0),(-1,-1), 2),
+        ('BOTTOMPADDING',(0,0),(-1,-1), 1),
+        ('TOPPADDING',(0,0),(-1,-1), 1),
+        ('VALIGN',(0,0),(-1,-1), 'TOP'),
+        ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+        ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+    ]))
+    t.hAlign=0
+
+    elements.append(t)
+    doc.build(elements, onFirstPage=_myLaterPages, onLaterPages=_myLaterPages)
+
+    pdf = buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+    return response

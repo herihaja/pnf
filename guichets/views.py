@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from guichets.models import Guichet
 from guichets.forms import GuichetForm, FiltreGuichetForm, FiltreBailleurForm
-from helpers import process_datatables_posted_vars, export_excel, query_datatables
+from helpers import process_datatables_posted_vars, export_excel, query_datatables, export_pdf
 import simplejson
 
 def lister_guichet(request):
@@ -28,7 +28,7 @@ def lister_bailleurs(request):
     else:
         form = FiltreBailleurForm(request.POST)
     page_js = '/media/js/guichets/bailleurs.js'
-    title = 'Liste des guichets'
+    title = 'Liste des guichets par bailleurs'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
@@ -70,15 +70,6 @@ def supprimer_guichet(request, guichet_id=None):
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
-
-def export(rows):
-    header = ['Commune', 'Agf1',  'Mobile1', 'Password1', 'Agf2', 'Mobile2', 'Password2', 'Etat']
-    liste = []
-    for row in rows:
-        cleaned_row = [row.commune.code, row.agf1, row.mobile1, row.agf2, row.mobile2, row.etat]
-        liste.append(cleaned_row)
-    ret = export_excel(header, liste, 'guichets')
-    return ret
 
 def ajax_guichet(request):
     # columns titles
@@ -162,7 +153,7 @@ def ajax_guichet(request):
 
 def ajax_bailleur(request):
     # columns titles
-    columns = ['commune', 'code', 'creation', 'bailleurs', 'etat']
+    columns = ['commune', 'code', 'creation', 'bailleurs', 'projets', 'etat']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -188,8 +179,11 @@ def ajax_bailleur(request):
         kwargs['creation__lte'] = cree_a
     if 'fEtat' in post and post['fEtat'] != '':
         kwargs['etat'] = post['fEtat']
-    if 'fBailleur' in post and post['fBailleur'] != '':
-        kwargs['bailleurs__in'] = post['fBailleur']
+    if 'fProjet' in post and post['fProjet'] != '':
+        kwargs['projets__in'] = [int(post['fProjet'])]
+    else:
+        if 'fBailleur' in post and post['fBailleur'] != '':
+            kwargs['bailleurs__in'] = [int(post['fBailleur'])]
 
     records, total_records, display_records = query_datatables(Guichet, columns, post, **kwargs)
     results = []
@@ -203,6 +197,15 @@ def ajax_bailleur(request):
                 else:
                     bailleurs = '%s, %s' % (bailleurs, bailleur.nom,)
 
+        projets_list = row.projets.all()
+        projets = ''
+        if len(projets_list) > 0:
+            for projet in projets_list:
+                if projets == '':
+                    projets = projet.nom
+                else:
+                    projets = '%s, %s' % (projets, projet.nom,)
+
         if row.creation is not None:
             creation = datetime.strftime(row.creation, "%d-%m-%Y")
         else:
@@ -213,6 +216,7 @@ def ajax_bailleur(request):
             code = row.commune.code,
             creation = creation,
             bailleurs = bailleurs,
+            projets = projets,
             etat = row.get_etat_display(),
         )
         results.append(result)
@@ -223,14 +227,20 @@ def ajax_bailleur(request):
 
     return HttpResponse(json, mimetype='application/json')
 
-def export_guichet(request):
+def export_guichet(request, filetype=None):
     columns = [u'Commune', u'Code', u'Creation', u'Agf1', u'Mobile1', 'Password1', u'Agf2', u'Mobile2', 'Password2', u'Etat']
     dataset = Guichet.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'guichets')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'guichets')
+    else:
+        response = export_pdf(columns, dataset, 'guichets')
     return response
 
-def export_guichet_bailleurs(request):
-    columns = [u'Commune', u'Code', u'Création', u'Guichets']
-    dataset = Guichet.objects.filter_bailleurs_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'guichets')
+def export_guichet_bailleurs(request, filetype=None):
+    columns = [u'Commune', u'Code', u'Création', u'Guichets', u'Bailleurs', u'Projets']
+    dataset = Guichet.objects.filter_projets_for_xls(request.GET)
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'guichets')
+    else:
+        response = export_pdf(columns, dataset, 'guichets', 1)
     return response

@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                         (r'', include('pnf.imports.urls')),
                         (r'', include('pnf.dashboard.urls')),
                         (r'', include('pnf.gammu.urls')),
+                        (r'', include('pnf.projets.urls')),
 #                        (r'', include('pnf.utilisateurs')),
                         url(r'^admin/', include(admin.site.urls)),
                         )

@@ -144,8 +144,12 @@ $(document).ready(function() {
         });
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/cumuls/export/?' + data;
+        window.location.href = '/cumuls/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/cumuls/export/pdf/?' + data;
     });
 } );

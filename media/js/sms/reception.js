@@ -22,7 +22,8 @@ $(document).ready(function() {
             { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
             { "sTitle": "Expediteur", "mDataProp": "numero", "sWidth": "80px" },
             { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
-            { "sTitle": "Réponse", "mDataProp": "reponse", "bSortable": false }
+            { "sTitle": "Réponse", "mDataProp": "reponse", "bSortable": false },
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "60px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -50,8 +51,12 @@ $(document).ready(function() {
         return false;
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/receptions/export/?' + data;
+        window.location.href = '/receptions/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/receptions/export/pdf/?' + data;
     });
 } );

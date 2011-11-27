@@ -22,6 +22,7 @@ $(document).ready(function() {
             { "sTitle": "Date / Heure", "mDataProp": "date_envoi", "sWidth": "100px" },
             { "sTitle": "Destinataire", "mDataProp": "numero", "sWidth": "80px" },
             { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "60px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -48,8 +49,12 @@ $(document).ready(function() {
         return false;
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/envois/export/?' + data;
+        window.location.href = '/envois/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/envois/export/pdf/?' + data;
     });
 } );

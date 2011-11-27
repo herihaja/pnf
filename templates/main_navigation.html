@@ -32,7 +32,8 @@
         <a href="javascript:void(0)">Données</a>
         <ul>
             <li><a href="{% url donnees.views.lister_recu %}">Données à valider</a></li>
-            <li><a href="{% url donnees.views.lister_donnees %}">Données validées</a></li>
+            <li><a href="{% url donnees.views.lister_rejete %}">Données rejetées</a></li>
+            <li><a href="{% url donnees.views.lister_donnees %}">Données enregistrées</a></li>
             <li><a href="{% url donnees.views.ajouter_donnees %}">Insertion manuelle</a></li>
             <li><a href="{% url sms.views.lister_communication %}" class="last">Commentaires</a></li>
         </ul>
@@ -59,6 +60,7 @@
         <ul>
             <!-- <li><a href="javascript:void(0)">Utilisateurs</a></li> -->
             <li><a href="{% url bailleurs.views.lister_bailleur %}">Bailleurs</a></li>
+            <li><a href="{% url projets.views.lister_projet %}">Projets</a></li>
             <li><a href="{% url localites.views.lister_region %}">Régions</a></li>
             <li><a href="{% url localites.views.lister_district %}">Districts</a></li>
             <li><a href="{% url localites.views.lister_commune %}" class="last">Communes</a></li>

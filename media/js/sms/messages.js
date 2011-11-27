@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    $('#id_cree_de').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $('#id_cree_de').datepicker("option", $.datepicker.regional['fr']);
+    $('#id_cree_a').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    $('#id_cree_a').datepicker("option", $.datepicker.regional['fr']);
+    
     oTable = $('#example').dataTable({
         "bProcessing": true,
         "bServerSide": true,
@@ -15,6 +26,11 @@ $(document).ready(function() {
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
         "fnServerData": function ( sSource, aoData, fnCallback ) {
+            aoData.push(
+                {"name": "fMessage", "value": $('#id_message').val()},
+                {"name": "fCreede", "value": $('#id_cree_de').val()},
+                {"name": "fCreea", "value": $('#id_cree_a').val()}
+            );
             $.ajax( {
                 "dataType": 'json',
                 "type": "POST",
@@ -29,5 +45,14 @@ $(document).ready(function() {
     $('#form-filter').submit(function(){
         oTable.fnDraw();
         return false;
+    });
+
+    $('#btn_export_xls').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/communications/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/communications/export/pdf/?' + data;
     });
 } );

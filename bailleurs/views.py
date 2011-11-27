@@ -9,6 +9,7 @@ from bailleurs.models import Bailleur
 from bailleurs.forms import BailleurForm, FiltreBailleurForm
 from helpers import export_excel, process_datatables_posted_vars, query_datatables
 import simplejson
+from projets.models import Projet
 
 def lister_bailleur(request):
     if request.method == 'GET':
@@ -65,7 +66,7 @@ def export_bailleur(request):
 
 def ajax_bailleur(request):
     # columns titles
-    columns = ['nom', 'projet', 'actions']
+    columns = ['nom', 'projets', 'actions']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -73,19 +74,21 @@ def ajax_bailleur(request):
     kwargs = {}
     if 'fNom' in post and post['fNom'] != '':
         kwargs['nom__icontains'] = post['fNom']
-
-    if 'fProjet' in post and post['fProjet'] != '':
-        kwargs['projet__icontains'] = post['fProjet']
-
     records, total_records, display_records = query_datatables(Bailleur, columns, post, **kwargs)
     results = []
 
     for row in records:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_bailleur, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_bailleur, args=[row.id]),)
+
+        projets = row.projets.all()
+        projets_list = ''
+        if len(projets) > 0:
+            projets_list = ["%s %s" % (projets_list, projet.nom) for projet in projets]
+
         result = dict(
             nom = row.nom,
-            projet = row.projet,
+            projets = projets_list,
             actions = edit_link,
         )
         results.append(result)

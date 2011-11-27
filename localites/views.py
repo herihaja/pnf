@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from guichets.views import editer_guichet
 from localites.models import Province, Region, District, Commune
 from localites.forms import ProvinceForm, RegionForm, DistrictForm, CommuneForm, FiltreDistrictForm, FiltreCommuneForm
-from helpers import process_datatables_posted_vars, query_datatables, export_excel
+from helpers import process_datatables_posted_vars, query_datatables, export_excel, export_pdf
 import simplejson
 
 def ajouter_province(request):
@@ -98,11 +98,15 @@ def supprimer_region(request, region_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
-def export_region(request):
+def export_region(request, filetype=None):
     columns = [u'Region', u'Code']
     dataset = Region.objects.filter_for_xls()
-    response = export_excel(columns, dataset, 'regions')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'regions')
+    else:
+        response = export_pdf(columns, dataset, 'regions')
     return response
+
 
 def lister_district(request):
     if request.method == 'GET':
@@ -199,10 +203,13 @@ def supprimer_commune(request, commune_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
-def export_district(request):
+def export_district(request, filetype=None):
     columns = [u'District', u'Code', u'Région']
     dataset = District.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'districts')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'districts')
+    else:
+        response = export_pdf(columns, dataset, 'districts')
     return response
 
 def ajax_district(request):
@@ -239,10 +246,13 @@ def ajax_district(request):
     return HttpResponse(json, mimetype='application/json')
 
 
-def export_commune(request):
+def export_commune(request, filetype=None):
     columns = [u'Commune', u'Code', u'Région', u'District', u'Guichet']
     dataset = Commune.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'communes')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'communes')
+    else:
+        response = export_pdf(columns, dataset, 'communes')
     return response
 
 

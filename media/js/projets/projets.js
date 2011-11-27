@@ -5,17 +5,18 @@ $(document).ready(function() {
         "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
         "bFilter": false,
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
-        "sAjaxSource": '/bailleurs/ajax/',
+        "sAjaxSource": '/projets/ajax/',
         "aoColumns": [
             { "sTitle": "Nom", "mDataProp": "nom" },
-            { "sTitle": "Projets", "mDataProp": "projets" },
+            { "sTitle": "Bailleurs", "mDataProp": "bailleurs" },
             { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
         "fnServerData": function ( sSource, aoData, fnCallback ) {
             aoData.push(
-                {"name": "fNom", "value": $('#id_nom').val()}
+                {"name": "fNom", "value": $('#id_nom').val()},
+                {"name": "fBailleur", "value": $('#id_bailleurs').val()}
             );
             $.ajax( {
                 "dataType": 'json',
@@ -35,6 +36,6 @@ $(document).ready(function() {
 
     $('#btn_export').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/bailleurs/export/?' + data;
+        window.location.href = '/projets/export/?' + data;
     });
 } );

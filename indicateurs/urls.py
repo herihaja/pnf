@@ -5,9 +5,8 @@ from donnees.views import lister_cumuls
 from indicateurs.views import indicateurs_par_date, indicateur_par_date, ratio, ajax_pivot_table, ajax_indicateurs, export_indicateurs, export_ratios
 
 urlpatterns = patterns('',
-                        url(r'^$', indicateurs_par_date),
                         (r'^indicateurs/tout/$', indicateurs_par_date),
-                        (r'^indicateurs/export/$', export_indicateurs),
+                        (r'^indicateurs/export/(?P<filetype>.+?)/', export_indicateurs),
                         (r'^indicateurs/un/$', indicateur_par_date),
                         (r'^indicateurs/cumuls/$', lister_cumuls),
                         (r'^ratios/certification/$', ratio, {'ratio': 'rcertificats', 'title': 'Taux de certification'}),
@@ -17,5 +16,5 @@ urlpatterns = patterns('',
                         (r'^ratios/surface-moyen/$', ratio, {'ratio': 'rsurface', 'title': 'Surface moyen'}),
                         (r'^indicateurs/annees/ajax/$', ajax_pivot_table),
                         (r'^indicateurs/ajax/$', ajax_indicateurs),
-                        (r'^ratios/export/$', export_ratios),
+                        (r'^ratios/export/(?P<filetype>.+?)/', export_ratios),
                     )

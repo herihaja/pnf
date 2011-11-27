@@ -89,8 +89,12 @@ $(document).ready(function() {
         });
     });
 
-    $('#btn_export').live('click', function() {
+    $('#btn_export_xls').live('click', function() {
         var data = $("#form-filter").serialize();
-        window.location.href = '/ratios/export/?' + data;
+        window.location.href = '/ratios/export/xls/?' + data;
+    });
+    $('#btn_export_pdf').live('click', function() {
+        var data = $("#form-filter").serialize();
+        window.location.href = '/ratios/export/pdf/?' + data;
     });
 });

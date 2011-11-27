@@ -33,8 +33,8 @@ class ReceptionManager(Manager):
 class Reception(Model):
     CHOIX_STATUT = (
         ('1', 'Validé'),
-        ('2', 'Inconnu'),
-        ('3', 'Erreur'),
+        ('2', 'Erreur'),
+        ('3', 'Inconnu'),
     )
     date_reception = models.DateTimeField()
     expediteur = models.CharField(max_length=20)
@@ -82,9 +82,34 @@ class Envoi(Model):
     def __unicode__(self):
         return self.nom
 
+
+class CommunicationManager(Manager):
+    def filter_for_xls(self, post):
+        kwargs = {}
+        if 'message' in post and post['message'] != '':
+            kwargs['message__icontains'] = str(post['message'])
+        if 'cree_de' in post and post['cree_de'] != '':
+            cree_de = datetime.strptime(post['cree_de'], "%d/%m/%Y")
+            cree_de = datetime.strftime(cree_de, "%Y-%m-%d 00:00:00")
+            kwargs['date_reception__gte'] = cree_de
+        if 'cree_a' in post and post['cree_a'] != '':
+            cree_a = datetime.strptime(post['cree_a'], "%d/%m/%Y")
+            cree_a = datetime.strftime(cree_a, "%Y-%m-%d 23:59:59")
+            kwargs['date_reception__lte'] = cree_a
+        queryset = self.filter(**kwargs)
+        dataset = []
+        for row in queryset:
+            date_reception = datetime.strftime(row.date_reception, "%d/%m/%Y %H:%M:%S")
+            row_list = [date_reception, row.commune.nom, row.commune.code, row.message]
+            dataset.append(row_list)
+        return dataset
+
+
 class Communication(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
     date_reception = models.DateTimeField()
     message = models.CharField(max_length=160)
     ajout = models.DateTimeField(auto_now_add=True)
+
+    objects = CommunicationManager()

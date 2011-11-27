@@ -1,16 +1,6 @@
-- Association Bailleur / Commune
-- SMS player
-- SMS parser
-- Envoi SMS
-- Affichage graphes
-- Affichage carte
-- Habillage
-- Remplacer tableaux par datatables
-- Export xls
-- Export pdf
-- Export jpeg
-- Gestion utilisateurs
-- Sauvegarde
-- Export site web
-- Ajax localités
-- Pagination
+drop table : guichets_guichet_bailleurs -> guichets_guichet -> bailleurs_bailleur
+
+alter table donnees_donnees add column "reception" timestamp with time zone NOT NULL default now()
+
+alter table donnees_recu add column "rejete" boolean NOT NULL default False;
+

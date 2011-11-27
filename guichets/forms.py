@@ -4,6 +4,7 @@ from django import forms
 from django.forms import ModelForm, Form
 from bailleurs.models import Bailleur
 from guichets.models import Guichet
+from projets.models import Projet
 from localites.models import Region, District, Commune
 
 EMPTY_LIST = (('', '---'),)
@@ -14,7 +15,7 @@ class GuichetForm(ModelForm):
     
     class Meta:
         model = Guichet
-        fields = ('region', 'district', 'commune', 'bailleurs', 'creation', 'agf1', 'mobile1', 'password1', 'agf2', 'mobile2', 'password2', 'etat')
+        fields = ('region', 'district', 'commune', 'bailleurs', 'projets', 'creation', 'agf1', 'mobile1', 'password1', 'agf2', 'mobile2', 'password2', 'etat')
 
     def __init__(self, *args, **kwargs):
         region_id = kwargs.pop('region_id', None)
@@ -58,5 +59,6 @@ class FiltreBailleurForm(Form):
     code = forms.CharField(label='Code com', max_length=6, required=False)
     etat = forms.ChoiceField(label='Etat', choices=CHOIX_ETAT, required=False)
     bailleurs = forms.ModelChoiceField(label='Bailleurs', queryset=Bailleur.objects.all().order_by('nom'), required=False)
+    projets = forms.ModelChoiceField(label='Projets', queryset=Projet.objects.all().order_by('nom'), required=False)
     creede = forms.DateField(label='Créé entre', required=False)
     creea = forms.DateField(label='et', required=False)

@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     /* VALIDATION FORMULAIRE */
     $('#tester-form').submit(function() {
-        if($('#id_expediteur').val() == '') {
+        if($('#id_destinataire').val() == '') {
             alert('Numéro de téléphone obligatoire!');
             return false;
         }
@@ -61,43 +61,57 @@ $(document).ready(function() {
     $('#id_region').live('change', function(){
         $('#id_district').html('<option value="">---</option>');
         $('#id_commune').html('<option value="">---</option>');
-        var id = $(this).val();
-        $.ajax({
-            type: 'POST',
-            url: '/cascade/region/',
-            data: {"csrfmiddlewaretoken": csrf, "region": id},
-            success: function(data){
-                var items = new Array();
-                items.push('<option value="">---</option>');
-                for(i=0; i<data.length; i++) {
-                    items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+        if($(this).val != '') {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '/cascade/region/',
+                data: {"csrfmiddlewaretoken": csrf, "region": id},
+                success: function(data){
+                    var items = new Array();
+                    items.push('<option value="">---</option>');
+                    for(i=0; i<data.length; i++) {
+                        items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                    }
+                    $('#id_district').html(items.join(''));
+                    update_destinataires('region', id);
                 }
-                $('#id_district').html(items.join(''));
-                update_destinataires('region', id);
-            }
-        });
+            });
+        }
     });
 
     $('#id_district').live('change', function(){
         $('#id_commune').html('<option value="">---</option>');
-        var id = $(this).val();
-        $.ajax({
-            type: 'POST',
-            url: '/cascade/district/',
-            data: {"csrfmiddlewaretoken": csrf, "district": id},
-            success: function(data){
-                var items = new Array();
-                items.push('<option value="">---</option>');
-                for(i=0; i<data.length; i++) {
-                    items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+        if($(this).val != '') {
+            var id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '/cascade/district/',
+                data: {"csrfmiddlewaretoken": csrf, "district": id},
+                success: function(data){
+                    var items = new Array();
+                    items.push('<option value="">---</option>');
+                    for(i=0; i<data.length; i++) {
+                        items.push('<option value="' + data[i].id + '">' + data[i].nom + '</option>');
+                    }
+                    $('#id_commune').html(items.join(''));
+                    update_destinataires('district', id);
                 }
-                $('#id_commune').html(items.join(''));
-                update_destinataires('district', id);
-            }
-        });
+            });
+        }
+    });
+
+    $('#id_liste').keyup(function() {
+        $('#id_destinataire').val($(this).val());
+    });
+
+    $('#id_liste').keydown(function() {
+        $('#id_destinataire').val($(this).val());
     });
 
     $('#id_commune').live('change', function(){
-        update_destinataires('commune', $(this).val());
+        if($(this).val != '') {
+            update_destinataires('commune', $(this).val());
+        }
     });
 } );

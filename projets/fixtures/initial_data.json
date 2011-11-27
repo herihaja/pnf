@@ -1,0 +1,122 @@
+[
+    {
+        "pk": 1,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "AD2M",
+            "bailleurs": [2]
+        }
+    },
+    {
+        "pk": 2,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "PPRR",
+            "bailleurs": [2]
+        }
+    },
+    {
+        "pk": 3,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "PROSPERER",
+            "bailleurs": [2]
+        }
+    },
+    {
+        "pk": 4,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "MCA",
+            "bailleurs": [3]
+        }
+    },
+    {
+        "pk": 5,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "BVLAC",
+            "bailleurs": [5]
+        }
+    },
+    {
+        "pk": 6,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "BVPI SEHP",
+            "bailleurs": [5]
+        }
+    },
+    {
+        "pk": 7,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "BVPI",
+            "bailleurs": [6]
+        }
+    },
+    {
+        "pk": 8,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "PE III",
+            "bailleurs": [6]
+        }
+    },
+    {
+        "pk": 9,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "PLAE",
+            "bailleurs": [7]
+        }
+    },
+    {
+        "pk": 10,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "FANAMBY",
+            "bailleurs": [9]
+        }
+    },
+    {
+        "pk": 11,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "UNHABITAT",
+            "bailleurs": [9]
+        }
+    },
+    {
+        "pk": 12,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "FIANTSO",
+            "bailleurs": [10]
+        }
+    },
+    {
+        "pk": 13,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "IRCOD",
+            "bailleurs": [11]
+        }
+    },
+    {
+        "pk": 14,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "ACORDS",
+            "bailleurs": [12]
+        }
+    },
+    {
+        "pk": 15,
+        "model": "projets.projet",
+        "fields": {
+            "nom": "SAHA",
+            "bailleurs": [13]
+        }
+    }
+]

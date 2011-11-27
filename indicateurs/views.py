@@ -7,7 +7,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from donnees.models import Donnees, Cumul
 from donnees.views import editer_donnees, supprimer_donnees
-from helpers import process_datatables_posted_vars, query_datatables, export_excel
+from helpers import process_datatables_posted_vars, query_datatables, export_excel, export_pdf
 from indicateurs.forms import FiltreIndicateursForm, FiltreIndicateurForm, FiltreRatioForm
 from django.db.models import Count
 import simplejson
@@ -228,22 +228,25 @@ def ajax_pivot_table(request):
 
     return HttpResponse(json, mimetype='application/json')
 
-def export_indicateurs(request):
+def export_indicateurs(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
     dataset = Donnees.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'indicateurs')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'indicateurs')
+    else:
+        response = export_pdf(columns, dataset, 'indicateurs', 1)
     return response
 
-def export_ratios(request):
-    columns = [u'Commune', u'Jan', u'Fév', u'Mar', u'Avr', u'Mai', u'Jun', u'Jul', u'Sep', u'Oct', u'Nov', u'Déc', 'Moy', 'Tot']
+def export_ratios(request, filetype=None):
+    columns = [u'Commune', u'Jan', u'Fév', u'Mar', u'Avr', u'Mai', u'Jun', u'Jul', u'Aou', u'Sep', u'Oct', u'Nov', u'Déc', 'Moy', 'Tot']
     dataset = Donnees.objects.filter_ratio_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'ratio')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'ratio')
+    else:
+        response = export_pdf(columns, dataset, 'ratio')
     return response
 
 def ajax_ratios_localite(request):
-    # columns titles
-    columns = ['localite', 'certificats', 'femmes', 'conflits', 'resolus', 'surface']
-
     # filtering
     post = process_datatables_posted_vars(request.POST)
     kwargs = {}

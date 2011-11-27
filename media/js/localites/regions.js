@@ -16,7 +16,10 @@ $(document).ready(function() {
         "sDom": 'rt<"F"li>'
     });
 
-    $('#btn_export').live('click', function() {
-        window.location.href = '/localites/regions/export/';
+    $('#btn_export_xls').live('click', function() {
+        window.location.href = '/localites/regions/export/xls';
+    });
+    $('#btn_export_pdf').live('click', function() {
+        window.location.href = '/localites/regions/export/pdf';
     });
 } );

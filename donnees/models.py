@@ -39,13 +39,22 @@ class DonneesManager(Manager):
             cree_a = datetime.strptime(post['date_a'], "%d/%m/%Y")
             cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
             kwargs['periode__lte'] = cree_a
+
+        if 'recu_de' in post and post['recu_de'] != '':
+            recu_de = datetime.strptime(post['recu_de'], "%d/%m/%Y")
+            recu_de = datetime.strftime(recu_de, "%Y-%m-%d")
+            kwargs['reception__gte'] = recu_de
+        if 'recu_a' in post and post['recu_a'] != '':
+            recu_a = datetime.strptime(post['recu_a'], "%d/%m/%Y")
+            recu_a = datetime.strftime(recu_a, "%Y-%m-%d")
+            kwargs['reception__lte'] = cree_a
         
         queryset = self.filter(**kwargs)
         dataset = []
         for row in queryset:
             periode = datetime.strftime(row.periode, "%m/%Y")
             row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
-                        row.certificats, row.femmes, row.surfaces, row.recettes, row.garanties, row.reconnaissances, row.mutations, row.valide]
+                        row.certificats, row.femmes, row.surfaces, row.recettes, row.garanties, row.reconnaissances, row.mutations]
             dataset.append(row_list)
         return dataset
 
@@ -167,6 +176,7 @@ class Donnees(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
     periode = models.DateField()
+    reception = models.DateTimeField()
     demandes = models.IntegerField()
     oppositions = models.IntegerField()
     resolues = models.IntegerField()
@@ -484,6 +494,7 @@ class CumulManager(Manager):
             )
             obj.save()
 
+
 class Cumul(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     periode = models.DateField()
@@ -511,6 +522,56 @@ class Cumul(Model):
     def __unicode__(self):
         return u"données de %s pour %s" % (self.commune.nom, self.periode)
 
+
+class RecuManager(Manager):
+    def filter_for_xls(self, post, rejete=None):
+        # columns = ['demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations']
+        kwargs = {'rejete': rejete}
+        if 'commune' in post and post['commune'] != '':
+            kwargs['commune'] = str(post['commune'])
+        else:
+            if 'code' in post and post['code'] != '':
+                kwargs['commune__code__icontains'] = post['code']
+            if 'district' in post and post['district'] != '':
+                kwargs['commune__district'] = post['district']
+            else:
+                if 'region' in post and post['region'] != '':
+                    kwargs['commune__district__region'] = post['region']
+
+        '''for i in range(0, 9):
+            post_key = columns[i]
+            if post_key in post and post[post_key] != '':
+                key, value = create_compare_condition(columns[i], post[post_key])
+                kwargs[key] = value
+
+        if 'date_de' in post and post['date_de'] != '':
+            cree_de = datetime.strptime(post['date_de'], "%d/%m/%Y")
+            cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
+            kwargs['periode__gte'] = cree_de
+        if 'date_a' in post and post['date_a'] != '':
+            cree_a = datetime.strptime(post['date_a'], "%d/%m/%Y")
+            cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
+            kwargs['periode__lte'] = cree_a
+
+        if 'recu_de' in post and post['recu_de'] != '':
+            recu_de = datetime.strptime(post['recu_de'], "%d/%m/%Y")
+            recu_de = datetime.strftime(recu_de, "%Y-%m-%d")
+            kwargs['reception__gte'] = recu_de
+        if 'recu_a' in post and post['recu_a'] != '':
+            recu_a = datetime.strptime(post['recu_a'], "%d/%m/%Y")
+            recu_a = datetime.strftime(recu_a, "%Y-%m-%d")
+            kwargs['reception__lte'] = cree_a'''
+
+        queryset = self.filter(**kwargs)
+        dataset = []
+        for row in queryset:
+            periode = datetime.strftime(row.periode, "%m/%Y")
+            row_list = [row.commune.nom, row.commune.code, periode, row.demandes, row.oppositions, row.resolues,
+                        row.certificats, row.femmes, row.surfaces, row.recettes, row.garanties, row.reconnaissances, row.mutations]
+            dataset.append(row_list)
+        return dataset
+
+    
 class Recu(Model):
     commune = models.ForeignKey(Commune, blank=True, null=True, on_delete=models.SET_NULL)
     sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
@@ -525,7 +586,10 @@ class Recu(Model):
     surfaces = models.FloatField()
     garanties = models.IntegerField()
     reconnaissances = models.IntegerField()
+    rejete = models.BooleanField(default=False)
     ajout = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.id
+
+    objects = RecuManager()
