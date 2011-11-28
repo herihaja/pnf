@@ -4,3 +4,4 @@ alter table donnees_donnees add column "reception" timestamp with time zone NOT 
 
 alter table donnees_recu add column "rejete" boolean NOT NULL default False;
 
+alter table guichets_guichet alter column "agf2" type varchar(7);

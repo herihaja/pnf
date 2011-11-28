@@ -38,14 +38,14 @@
         "pk": 6,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "Banque Mondiale"
+            "nom": "BANQUE MONDIALE"
         }
     },
     {
         "pk": 7,
         "model": "bailleurs.bailleur",
         "fields": {
-            "nom": "KFW/GIZ"
+            "nom": "KFW-GTZ"
         }
     },
     {

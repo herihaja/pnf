@@ -2437,7 +2437,7 @@
         "pk": 2,
         "model": "localites.commune",
         "fields": {
-            "nom": "AMBATOLAMPYT SIMAHAFOTSY",
+            "nom": "AMBATOLAMPY TSIMAHAFOTSY",
             "code": "110102",
             "slug": "ambatolampy-tsimahafotsy",
             "district": 1
@@ -10967,9 +10967,9 @@
         "pk": 177,
         "model": "localites.commune",
         "fields": {
-            "nom": "IMERITSIATOSIKA",
+            "nom": "IMERINTSIATOSIKA",
             "code": "130115",
-            "slug": "imeritsiatosika",
+            "slug": "imerintsiatosika",
             "district": 11
         }
     },

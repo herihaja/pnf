@@ -11,6 +11,7 @@ from donnees.models import Donnees
 from guichets.models import Guichet
 from localites.models import Province, Region, Commune, District
 import xlrd
+from projets.models import Projet
 
 LISTE_MOIS = {
     'janvier' : '01',
@@ -191,10 +192,14 @@ def importer_bailleurs(request):
             nom = row[3].strip()
             nom = nom.split('/')
             bailleurs = []
+            projets = []
             for n in nom:
                 bailleur  = Bailleur.objects.filter(nom=n)
                 if len(bailleur) == 1:
                     bailleurs.append(bailleur[0])
+                projet = Projet.objects.filter(nom=n)
+                if len(projet) == 1:
+                    projets.append(projet[0])
             # retrouver le statut
             statut = str(int(row[4]))
             if statut in STATUT:
@@ -228,6 +233,8 @@ def importer_bailleurs(request):
                 guichet.save()
                 for bailleur in bailleurs:
                     guichet.bailleurs.add(bailleur)
+                for projet in projets:
+                    guichet.projets.add(projet)
                 data_added += 1
             else:
                 data_ignored.append('%s statut inconnu' % (i,))
