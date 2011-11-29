@@ -41,7 +41,10 @@ class GuichetManager(Manager):
         queryset = self.filter(**kwargs)
         dataset = []
         for row in queryset:
-            creation = datetime.strftime(row.creation, "%d/%m/%Y")
+            if row.creation is not None:
+                creation = datetime.strftime(row.creation, "%d/%m/%Y")
+            else:
+                creation = ''
             row_list = [row.commune.nom, row.commune.code, creation, row.agf1,
                         row.mobile1, row.password1, row.agf2, row.mobile2, row.password2, row.get_etat_display()]
             dataset.append(row_list)
