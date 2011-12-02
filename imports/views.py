@@ -203,28 +203,32 @@ def importer_bailleurs(request):
             # retrouver le statut
             statut = str(int(row[4]))
             if statut in STATUT:
-                if statut == '1':
+                if statut != '4':
                     # date ouverture
                     if row[5] != '' and row[6] != '':
                         creation = datetime(int(row[5]), int(row[6]), 1)
                         creation = datetime.strftime(creation, '%Y-%m-%d')
-                    # code AGF
+
+                    guichet = Guichet(
+                            commune = commune,
+                            creation = creation,
+                            etat = statut,
+                        )
+
+                    # code AGF1
                     if row[7] != '':
-                        agf = row[7].strip()
-                        password = '0000'
-                        guichet = Guichet(
-                            commune = commune,
-                            creation = creation,
-                            agf1 = agf,
-                            password1 = password,
-                            etat = statut,
-                        )
-                    else:
-                        guichet = Guichet(
-                            commune = commune,
-                            creation = creation,
-                            etat = statut,
-                        )
+                        agf1 = row[7].strip()
+                        guichet.agf1=agf1
+                        if row[8] != '':
+                            password1 = row[8]
+                            guichet.password1=password1
+                    # code AGF2
+                    if row[9] != '':
+                        agf2 = row[9].strip()
+                        guichet.agf2=agf2
+                        if row[10] != '':
+                            password2 = row[10]
+                            guichet.password2=password2
                 else:
                     guichet = Guichet(
                         commune = commune,
