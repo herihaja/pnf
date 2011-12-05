@@ -62,3 +62,16 @@ class FiltreBailleurForm(Form):
     projets = forms.ModelChoiceField(label='Projets', queryset=Projet.objects.all().order_by('nom'), required=False)
     creede = forms.DateField(label='Créé entre', required=False)
     creea = forms.DateField(label='et', required=False)
+
+class FiltreRmaForm(Form):
+    CHOIX_ETAT = (
+        ('', '---'),
+        ('1', 'Validé'),
+        ('2', 'Erreur'),
+    )
+    region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
+    district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
+    commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
+    agf = forms.CharField(label='Agf', max_length=7, required=False)
+    etat = forms.ChoiceField(label='Validé', choices=CHOIX_ETAT, required=False)
+    periode = forms.DateField(label='Période', required=False)

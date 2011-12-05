@@ -1,7 +1,7 @@
-drop table : guichets_guichet_bailleurs -> guichets_guichet -> bailleurs_bailleur
-
-alter table donnees_donnees add column "reception" timestamp with time zone NOT NULL default now()
-
-alter table donnees_recu add column "rejete" boolean NOT NULL default False;
-
-alter table guichets_guichet alter column "agf2" type varchar(7);
+1. Revoir js date picker, integrer regional dans init
+2. gestion utilisateur
+3. liste doublons
+4. graphes
+5. cartes
+6. graphes
+7. sauvegarde

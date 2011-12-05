@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from guichets.models import Guichet
-from guichets.forms import GuichetForm, FiltreGuichetForm, FiltreBailleurForm
+from guichets.models import Guichet, Rma
+from guichets.forms import GuichetForm, FiltreGuichetForm, FiltreBailleurForm, FiltreRmaForm
 from helpers import process_datatables_posted_vars, export_excel, query_datatables, export_pdf
 import simplejson
 
@@ -159,6 +159,13 @@ def ajax_bailleur(request):
     post = process_datatables_posted_vars(request.POST)
 
     kwargs = {}
+    if 'fPeriode' in post and post['fPeriode'] != '':
+        periode = datetime.strptime(post['fPeriode'], "%d/%m/%Y")
+    else:
+        periode = datetime.now()
+    kwargs['periode__year='] = periode.year
+    kwargs['periode__month='] = periode.month
+
     if 'fCommune' in post and post['fCommune'] != '':
         kwargs['commune'] = str(post['fCommune'])
     else:
@@ -243,4 +250,89 @@ def export_guichet_bailleurs(request, filetype=None):
         response = export_excel(columns, dataset, 'guichets')
     else:
         response = export_pdf(columns, dataset, 'guichets', 1)
+    return response
+
+def lister_envoi_rma(request):
+    if request.method == 'GET':
+        form = FiltreRmaForm()
+    else:
+        form = FiltreRmaForm(request.POST)
+
+    page_js = '/media/js/guichets/rma.js'
+    title = 'RMA envoyés'
+    return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
+                              context_instance=RequestContext(request))
+
+
+def _create_condition_for_envoi_rma(post):
+    kwargs = {}
+    periode = datetime.now() - timedelta(weeks=4)
+    if 'fCommune' in post and post['fCommune'] != '':
+        kwargs['guichet__commune'] = str(post['fCommune'])
+    else:
+        if 'fDistrict' in post and post['fDistrict'] != '':
+            kwargs['guichet__commune__district'] = post['fDistrict']
+        else:
+            if 'fRegion' in post and post['fRegion'] != '':
+                kwargs['guichet__commune__district__region'] = post['fRegion']
+    if 'fAgf' in post and post['fAgf'] != '':
+        kwargs['agf__icontains'] = str(post['fAgf'])
+    if 'fStatut' in post and post['fStatut'] != '':
+        kwargs['sms__statut'] = post['fStatut']
+    if 'fPeriode' in post and post['fPeriode'] != '':
+        periode = "01/%s" % (post['fPeriode'],)
+        periode = datetime.strptime(periode, "%d/%m/%Y")
+
+    kwargs['periode__year'] = periode.year
+    kwargs['periode__month'] = periode.month
+
+    return kwargs
+
+def ajax_envoi_rma(request):
+    # columns titles
+    columns = ['guichet__commune__district__region', 'guichet__commune__district',
+               'guichet__commune', 'sms__date_reception', 'sms__statut', 'agf']
+
+    # filtering
+    post = process_datatables_posted_vars(request.POST)
+    kwargs = _create_condition_for_envoi_rma(post)
+    records, total_records, display_records = query_datatables(Rma, columns, post, **kwargs)
+    results = []
+    for row in records:
+        result = dict(
+            region = row.guichet.commune.district.region.nom,
+            district = row.guichet.commune.district.nom,
+            commune = row.guichet.commune.nom,
+            reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S"),
+            statut = row.sms.get_statut_display(),
+            agf = row.agf,
+        )
+        results.append(result)
+
+    sEcho = int(post['sEcho'])
+    results = {"iTotalRecords": total_records, "iTotalDisplayRecords":display_records, "sEcho": sEcho, "aaData": results}
+    json = simplejson.dumps(results)
+
+    return HttpResponse(json, mimetype='application/json')
+
+def export_envoi_rma(request, filetype=None):
+    columns = [u'Region', u'District', u'Commune', u'Reception', u'Statut', 'Agf']
+
+    post = process_datatables_posted_vars(request.POST)
+    kwargs = _create_condition_for_envoi_rma(post)
+    records = Rma.objects.filter(**kwargs)
+
+    dataset = []
+    for row in records:
+        reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S")
+        row_list = [row.guichet.commune.district.region.nom,
+                    row.guichet.commune.district.nom,
+                    row.guichet.commune.nom,
+                    reception, row.sms.get_statut_display(), row.agf]
+        dataset.append(row_list)
+
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'rma-envoi')
+    else:
+        response = export_pdf(columns, dataset, 'rma-envoi')
     return response

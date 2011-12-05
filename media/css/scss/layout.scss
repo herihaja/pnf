@@ -31,8 +31,15 @@ body {
             #header-wiz {
                 #header-logo {
                     width:240px;
-                    height: 40px;
+                    height:40px;
                     float:left;
+                    font-family:"courier new", monospace;
+                    font-weight:bold;
+                    font-size:24px;
+                    color:#3F2203;
+                    text-shadow:1px 1px 1px #FAFAF4;
+                    line-height:60px;
+                    overflow:hidden;
                 }
                 #header-user {
                     width:700px;

@@ -126,8 +126,10 @@ INSTALLED_APPS = (
     'pnf.dashboard',
     'pnf.gammu',
     'pnf.projets',
-#    'pnf.utilisateurs',
+    'pnf.plots',
+    'pnf.users',
     'django.contrib.admin',
+    'django_nose',
 )
 
 COMPILER_FORMATS = {

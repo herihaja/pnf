@@ -5,9 +5,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
-from donnees.models import Donnees, Recu
+from donnees.models import Recu
 from gammu.models import Outbox
-from guichets.models import Guichet
+from guichets.models import Guichet, Rma
 from sms.models import Reception, Envoi, Communication
 from sms.forms import FiltreEnvoiForm, FiltreReceptionForm, TesterForm, BroadcastForm, FiltreCommunicationForm
 from helpers import export_excel, process_datatables_posted_vars, query_datatables, export_pdf
@@ -17,15 +17,15 @@ import simplejson
 
 RECIPIENT_LIST = ['orange', 'airtel', 'telma']
 
-def lister_reception(request, statut=1):
+def lister_reception(request, statut='1'):
     if request.method == 'GET':
         form = FiltreReceptionForm(initial={'statut': statut})
     else:
         form = FiltreReceptionForm(request.POST, initial={'statut': statut})
     page_js = '/media/js/sms/reception.js'
-    if statut == 1:
+    if statut == '1':
         title = 'Sms corrects'
-    elif statut == 2:
+    elif statut == '2':
         title = 'Sms inconnus'
     else:
         title = 'Sms erronés'
@@ -185,6 +185,15 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
         )
     reception.save()
 
+    if type_sms != 3 and 'periode' in data:
+        rma = Rma(
+            guichet = data['guichet'],
+            sms = reception,
+            periode = data['periode'],
+            agf = data['agf'],
+        )
+        rma.save()
+
     # si message valide enregistrer pour test
     if type_sms == 1:
         donnees = Recu(
@@ -223,7 +232,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
 
 def _parser_sms(message):
     data = {}
-    reponse = ''
+    reponse = 'Diso!'
     texte = ''
     type_sms = 1
 
@@ -232,16 +241,19 @@ def _parser_sms(message):
     # vérifier le code agf en premier
     agf = Guichet.objects.filter(Q(agf1=sms_parts[0]) | Q(agf2=sms_parts[0]))
     if len(agf) == 0:
-        reponse = u"Diso! Kaody AGF diso no nalefanao"
+        reponse = u"%s Kaody AGF diso no nalefanao." % (reponse,)
         type_sms = 3
     else:
         agf = agf[0]
-        
+        data['guichet'] = Guichet.objects.get(pk=agf.id)
+
+        expediteur = sms_parts[0]
+        data['agf'] = expediteur
+
         if len(sms_parts) == 1:
-            reponse = u"Diso! Tsy ampy ny valinteny nalefanao"
+            reponse = u"%s Tsy ampy ny valinteny nalefanao." % (reponse,)
             type_sms = 2
         else:
-            expediteur = sms_parts[0]
             indicateurs = sms_parts[1]
             if len(sms_parts) > 2:
                 texte = sms_parts[2]
@@ -252,63 +264,82 @@ def _parser_sms(message):
             # verifier mot de passe
             # envoyeur 1 ou 2
             if agf.agf1 == expediteur and agf.password1 != password:
-                reponse = u"Diso! Diso ny kaody miafina"
+                reponse = u"%s Diso ny kaody miafina." % (reponse,)
                 type_sms = 2
             elif agf.agf2 == expediteur and agf.password2 != password:
-                reponse = u"Diso! Diso ny kaody miafina"
+                reponse = u"Diso ny kaody miafina"
                 type_sms = 2
             else:
                 if len(tokens) < 11:
-                    reponse = u"Diso! Tsy ampy ny valinteny nalefanao"
+                    reponse = u"%s Tsy ampy ny valinteny nalefanao." % (reponse,)
                     type_sms = 2
                 elif len(tokens) > 11:
-                    reponse = u"Diso! Mihaotra ny valinteny nalefanao"
+                    reponse = u"%s Mihaotra ny valinteny nalefanao." % (reponse,)
                     type_sms = 2
-                else:
-                    mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
-                               't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
+                
+                mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
+                           't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
 
-                    data['commune'] = agf.commune
-                    for token in tokens:
-                        token = token.strip()
-                        token = token.split()
-                        if token[0] in mapping:
-                            if len(token) == 2:
-                                if token[0] == 'p':
-                                    periode = token[1].split('/')
-                                    if len(periode[0]) > 2 or len(periode[1]) < 4:
-                                        reponse = u"Diso! Diso ny daty nalefanao"
+                data['commune'] = agf.commune
+                for token in tokens:
+                    token = token.strip()
+                    token = token.split()
+                    if token[0] in mapping:
+                        if len(token) == 2:
+                            periode_correct = True
+                            if token[0] == 'p':
+                                periode = token[1].split('/')
+                                if len(periode[1]) == 2:
+                                    annee = "20%s" % (periode[1],)
+                                elif len(periode[1]) == 4:
+                                    annee = periode[1]
+                                else:
+                                    reponse = u"%s Diso ny taona nomenao." % (reponse,)
+                                    type_sms = 2
+                                    periode_correct = False
+
+
+                                if len(periode[0]) == 1:
+                                    mois = "0%s" % (periode[0],)
+                                elif len(periode[0]) == 2:
+                                    mois = periode[0]
+                                else:
+                                    reponse = u"%s Diso ny volana nomenao." % (reponse,)
+                                    type_sms = 2
+                                    periode_correct = False
+
+                                if periode_correct:
+                                    periode = '%s-%s-01' % (annee, mois)
+                                    date_envoye = datetime.strptime(periode, '%Y-%m-%d')
+                                    date_now = datetime.now()
+                                    if date_envoye >= date_now:
+                                        reponse = u"%s Tsy azo atao mitovy na mihaotra ny volana diavina ny daty." % (reponse,)
                                         type_sms = 2
                                     else:
-                                        periode = '%s-%s-01' % (periode[1], periode[0])
-                                        date_envoye = datetime.strptime(periode, '%Y-%m-%d')
-                                        date_now = datetime.now()
-                                        if date_envoye >= date_now:
-                                            reponse = u"Diso! Tsy azo atao mitovy na mihaotra ny volana diavina ny daty"
-                                            type_sms = 2
-                                        else:
-                                            data['periode'] = periode
-                                elif token[0] == 's' or token[0] == 'a':
-                                    value = token[1]
-                                    value.replace(',', '.')
-                                    data[mapping[token[0]]] = float(value)
-                                else:
-                                    data[mapping[token[0]]] = int(token[1])
+                                        data['periode'] = periode
+                            elif token[0] == 's' or token[0] == 'a':
+                                value = token[1]
+                                value.replace(',', '.')
+                                data[mapping[token[0]]] = float(value)
                             else:
-                                reponse = u"Diso! Tsy nalefanao ny valin'ny fanontaniana '%s'" % token[0]
-                                type_sms = 2
+                                data[mapping[token[0]]] = int(token[1])
                         else:
-                            reponse = u"Diso! Tsy misy ny fanontaniana manana kaody '%s'" % token[0]
+                            reponse = u"%s Tsy nalefanao ny valin'ny fanontaniana '%s'." % (reponse, token[0],)
                             type_sms = 2
+                    else:
+                        reponse = u"%s Tsy misy ny fanontaniana manana kaody '%s'." % (reponse, token[0],)
+                        type_sms = 2
 
-                    # controle de coherence
-                    if type_sms == 1:
-                        if data['femmes'] > data['certificats']:
-                            reponse = u"Diso! Tsy tokony mihaotra ny isan'ny taratasin-tany rehetra ny nomena hoan'ny vehivahy"
-                            type_sms = 2
-                        else:
-                            reponse = u"Misaotra! Voaray soa aman-tsara ny smaiso nalefanao."
+                # controle de coherence
+                if type_sms == 1:
+                    if data['femmes'] > data['certificats']:
+                        reponse = u"%s Tsy tokony mihaotra ny isan'ny taratasin-tany rehetra ny nomena hoan'ny vehivahy" % (reponse,)
+                        type_sms = 2
+                    else:
+                        reponse = u"Misaotra! Voaray soa aman-tsara ny smaiso nalefanao."
 
+    # limiter le nombre de caractere dans reponse a 158
+    reponse = reponse[:158]
     return type_sms, reponse, data, texte
 
 def lister_communication(request):
@@ -384,6 +415,7 @@ def _inject_in_outbox(smsc, numero, texte):
 
 
 def _get_operateur(numero):
+    CODES = {'032': 'orange', '033': 'airtel', '034': 'telma'}
     if numero[:4] == '+261':
         code = '0%s' % (numero[4:2],)
     elif numero[:5] == '00261':
@@ -391,12 +423,8 @@ def _get_operateur(numero):
     else:
         code = numero[:3]
 
-    if code == '033':
-        operateur = 'airtel'
-    elif code == '032':
-        operateur = 'orange'
-    elif code == '034':
-        operateur = 'telma'
+    if code in CODES:
+        operateur = CODES[code]
     else:
         operateur = None
     return operateur

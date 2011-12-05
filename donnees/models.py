@@ -219,9 +219,6 @@ class Donnees(Model):
         """ Calculer delta puis mettre a jour les cumuls
             Gerer l'activation des donnees, i.e valide
         """
-
-        """if not self._pre_save():
-            return False"""
         
         delta = {'demandes': 0, 'oppositions': 0, 'resolues': 0, 'certificats': 0, 'femmes': 0, 'recettes': 0,
                  'mutations': 0, 'surfaces': 0, 'garanties': 0, 'reconnaissances': 0,}
@@ -292,13 +289,6 @@ class Donnees(Model):
     def delete(self, *args, **kwargs):
         """ Calculer delta cumul puis supprimer les donnees
         """
-
-        """if not self._pre_delete():
-            return False
-        super(Donnees, self).delete(*args, **kwargs)
-        Cumul.objects.mettre_a_jour(self.commune, self.periode, delta)
-
-        return True"""
         delta = {
             'demandes': -self._old_demandes,
             'oppositions': -self._old_oppositions,

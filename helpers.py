@@ -38,7 +38,7 @@ def process_datatables_posted_vars(post):
         posted[post[key]] = post[value]
     return posted
 
-def query_datatables(model, columns, posted_data, **kwargs):
+def query_datatables(model, columns, posted_data, *args, **kwargs):
     # ordering
     sorts = []
     if 'iSortingCols' in posted_data:
@@ -66,16 +66,11 @@ def query_datatables(model, columns, posted_data, **kwargs):
 
     # querying
     total_records = model.objects.count()
-    if len(sorts) > 0:
-        if lim_start is not None:
-            result = model.objects.filter(**kwargs).order_by(*sorts)[lim_start:lim_num]
-        else:
-            result = model.objects.filter(**kwargs).order_by(*sorts)
-    else:
-        if lim_start is not None:
-            result = model.objects.filter(**kwargs)[lim_start:lim_num]
-        else:
-            result = model.objects.filter(**kwargs)
+    result = model.objects.filter(**kwargs).order_by(*sorts)
+    if args is not None and len(args) > 0:
+        result = result.values(*args)
+    if lim_start is not None:
+        result = result[lim_start:lim_num]
     display_records = model.objects.filter(**kwargs).count()
 
     return result, total_records, display_records

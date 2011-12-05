@@ -6,6 +6,7 @@ from django.db.models import Q, Model, Manager
 from bailleurs.models import Bailleur
 from projets.models import Projet
 from localites.models import Commune
+from sms.models import Reception
 
 class GuichetManager(Manager):
     def filter_for_xls(self, post):
@@ -127,15 +128,9 @@ class Guichet(Model):
 
     objects = GuichetManager()
 
-    '''def save(self, *args, **kwargs):
-        super(Guichet, self).save(*args, **kwargs)
-
-        projets = self.projets.all()
-        for projet in projets:
-            projet_bailleurs = projet.bailleurs.all()
-            for bailleur in projet_bailleurs:
-                self.bailleurs.add(bailleur)'''
-
-
-
+class Rma(Model):
+    guichet = models.ForeignKey(Guichet, on_delete=models.CASCADE)
+    sms = models.ForeignKey(Reception, blank=True, null=True, on_delete=models.SET_NULL)
+    agf = models.CharField(max_length=7)
+    periode = models.DateField()
 

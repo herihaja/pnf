@@ -301,7 +301,9 @@ def ajax_commune(request):
     return HttpResponse(json, mimetype='application/json')
 
 def select_district(request):
-    region_id = int(request.POST['region'])
+    region_id = 0
+    if request.POST['region'] != '':
+        region_id = int(request.POST['region'])
 
     districts = District.objects.filter(region=region_id).values('id', 'nom').order_by('nom')
     results = []
@@ -312,7 +314,9 @@ def select_district(request):
     return HttpResponse(json, mimetype='application/json')
 
 def select_commune(request):
-    district_id = int(request.POST['district'])
+    district_id = 0
+    if request.POST['district'] != '':
+        district_id = int(request.POST['district'])
     communes = Commune.objects.filter(district=district_id).values('id', 'nom', 'code').order_by('nom')
     results = []
     for row in communes:

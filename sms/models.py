@@ -76,7 +76,6 @@ class Envoi(Model):
     destinataire = models.CharField(max_length=20)
     message = models.CharField(max_length=160)
     ajout = models.DateTimeField(auto_now_add=True)
-
     objects = EnvoiManager()
 
     def __unicode__(self):
