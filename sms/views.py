@@ -277,13 +277,13 @@ def _parser_sms(message):
                     reponse = u"Diso! Mihoatra ny 14 ny isan'ny valinteny nalefanao.  Amarino tsirairay ny kaodin'ny fanontaniana sy ny valiny mifanaraka aminy"
                     type_sms = 2
                 
-                mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
+                mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'k': 'certificats', 'f': 'femmes',
                            't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
                 erreur_indic = {
                     'd': u"Ny isan'ny Fangatahana (Demandes) dia tokony ho 0 na mihoatra",
                     'o': u"Ny isan'ny Fanoherana voaray (Oppositions) dia tokony ho tokony ho 0 na mihoatra",
                     'r': u"Ny isan'ny Fanoherana nahitana vahaolana (Oppositions résolues) dia tokony ho 0 na mihoatra",
-                    'c': u"Ny isan'ny Karatany voasoratra (certificats délivrés) dia tokony ho 0 na mihoatra",
+                    'k': u"Ny isan'ny Karatany voasoratra (certificats délivrés) dia tokony ho 0 na mihoatra",
                     'f': u"Ny isan'ny Karatany amin’ny anaran'ny vehivavy (certificats accordés à des femmes) dia tokony ho 0 na mihoatra",
                     't': u"Ny isan'ny Fangatahana nahavitàna fitsirihina (Reconnaissances locales effectuées) dia tokony ho 0 na mihoatra",
                     'a': u"Ny Vola niditra (recettes) dia tokony ho 0 na mihoatra",
@@ -306,7 +306,7 @@ def _parser_sms(message):
                                 elif len(periode[1]) == 4:
                                     annee = periode[1]
                                 else:
-                                    reponse = u"Diso ny daty nalefanao"
+                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -316,7 +316,7 @@ def _parser_sms(message):
                                 elif len(periode[0]) == 2:
                                     mois = periode[0]
                                 else:
-                                    reponse = u"Diso ny daty nalefanao"
+                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -456,20 +456,16 @@ def sms_broadcast(request):
                                   context_instance=RequestContext(request))
 
     form = BroadcastForm(request.POST)
-    if form.is_valid():
-        texte = request.POST['message']
-        numeros = request.POST['destinataire']
-        numeros = numeros.split(',')
+    texte = request.POST['message']
+    numeros = request.POST['destinataire']
+    numeros = numeros.split(',')
 
-        for numero in numeros:
-            operateur = _get_operateur(numero)
-            if operateur is not None:
-                send_sms(operateur, numero, texte)
+    for numero in numeros:
+        operateur = _get_operateur(numero)
+        if operateur is not None:
+            send_sms(operateur, numero, texte)
 
-        return HttpResponseRedirect(reverse(lister_envoi))
-    else:
-        return render_to_response('sms/broadcast.html', {'form': form},
-                                  context_instance=RequestContext(request))
+    return HttpResponseRedirect(reverse(lister_envoi))
 
 def ajax_broadcast(request):
     # selectionner la liste des agf actifs de la localite ayant un num tel
