@@ -232,7 +232,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
 
 def _parser_sms(message):
     data = {}
-    reponse = 'Diso!'
+    reponse = ''
     texte = ''
     type_sms = 1
 
@@ -241,7 +241,7 @@ def _parser_sms(message):
     # vérifier le code agf en premier
     agf = Guichet.objects.filter(Q(agf1=sms_parts[0]) | Q(agf2=sms_parts[0]))
     if len(agf) == 0:
-        reponse = u"%s Kaody AGF diso no nalefanao." % (reponse,)
+        reponse = u"Diso ny Kaody AGF nalefanao"
         type_sms = 3
     else:
         agf = agf[0]
@@ -251,7 +251,7 @@ def _parser_sms(message):
         data['agf'] = expediteur
 
         if len(sms_parts) == 1:
-            reponse = u"%s Tsy ampy ny valinteny nalefanao." % (reponse,)
+            reponse = u"Tsy ampy 14 ny isan'ny valinteny nalefanao. Amarino tsirairay ny kaodin'ny fanontaniana sy ny valiny mifanaraka aminy"
             type_sms = 2
         else:
             indicateurs = sms_parts[1]
@@ -264,21 +264,33 @@ def _parser_sms(message):
             # verifier mot de passe
             # envoyeur 1 ou 2
             if agf.agf1 == expediteur and agf.password1 != password:
-                reponse = u"%s Diso ny kaody miafina." % (reponse,)
+                reponse = u"Diso ny kaody miafina"
                 type_sms = 2
             elif agf.agf2 == expediteur and agf.password2 != password:
                 reponse = u"Diso ny kaody miafina"
                 type_sms = 2
             else:
                 if len(tokens) < 11:
-                    reponse = u"%s Tsy ampy ny valinteny nalefanao." % (reponse,)
+                    reponse = u"Tsy ampy 14 ny isan'ny valinteny nalefanao. Amarino tsirairay ny kaodin'ny fanontaniana sy ny valiny mifanaraka aminy"
                     type_sms = 2
                 elif len(tokens) > 11:
-                    reponse = u"%s Mihaotra ny valinteny nalefanao." % (reponse,)
+                    reponse = u"Diso! Mihoatra ny 14 ny isan'ny valinteny nalefanao.  Amarino tsirairay ny kaodin'ny fanontaniana sy ny valiny mifanaraka aminy"
                     type_sms = 2
                 
                 mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'c': 'certificats', 'f': 'femmes',
                            't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
+                erreur_indic = {
+                    'd': u"Ny isan'ny Fangatahana (Demandes) dia tokony ho 0 na mihoatra",
+                    'o': u"Ny isan'ny Fanoherana voaray (Oppositions) dia tokony ho tokony ho 0 na mihoatra",
+                    'r': u"Ny isan'ny Fanoherana nahitana vahaolana (Oppositions résolues) dia tokony ho 0 na mihoatra",
+                    'c': u"Ny isan'ny Karatany voasoratra (certificats délivrés) dia tokony ho 0 na mihoatra",
+                    'f': u"Ny isan'ny Karatany amin’ny anaran'ny vehivavy (certificats accordés à des femmes) dia tokony ho 0 na mihoatra",
+                    't': u"Ny isan'ny Fangatahana nahavitàna fitsirihina (Reconnaissances locales effectuées) dia tokony ho 0 na mihoatra",
+                    'a': u"Ny Vola niditra (recettes) dia tokony ho 0 na mihoatra",
+                    's': u"Ny Fitambaran'ny velaran-tany t@ ireo karatany voasora (Superficie totale) dia tokony ho 0 na mihoatra",
+                    'g': u"Ny isan'ny Certificats nampiasaina natao antoka (certificats utilisés comme garanties à des banques) dia tokony ho 0 na mihoatra",
+                    'm': u"Ny isan'ny Famindràna tany (mutations) dia tokony ho 0 na mihoatra",
+                }
 
                 data['commune'] = agf.commune
                 for token in tokens:
@@ -294,7 +306,7 @@ def _parser_sms(message):
                                 elif len(periode[1]) == 4:
                                     annee = periode[1]
                                 else:
-                                    reponse = u"%s Diso ny taona nomenao." % (reponse,)
+                                    reponse = u"Diso ny daty nalefanao"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -304,7 +316,7 @@ def _parser_sms(message):
                                 elif len(periode[0]) == 2:
                                     mois = periode[0]
                                 else:
-                                    reponse = u"%s Diso ny volana nomenao." % (reponse,)
+                                    reponse = u"Diso ny daty nalefanao"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -313,27 +325,35 @@ def _parser_sms(message):
                                     date_envoye = datetime.strptime(periode, '%Y-%m-%d')
                                     date_now = datetime.now()
                                     if date_envoye >= date_now:
-                                        reponse = u"%s Tsy azo atao mitovy na mihaotra ny volana diavina ny daty." % (reponse,)
+                                        reponse = u"Diso ! Tokony ho volana, alohan'izao volana iainantsika izao, no eo amin'ny daty"
                                         type_sms = 2
                                     else:
                                         data['periode'] = periode
                             elif token[0] == 's' or token[0] == 'a':
                                 value = token[1]
                                 value.replace(',', '.')
-                                data[mapping[token[0]]] = float(value)
+                                try:
+                                    data[mapping[token[0]]] = float(value)
+                                except:
+                                    reponse = erreur_indic[token[0]]
+                                    type_sms = 2
                             else:
-                                data[mapping[token[0]]] = int(token[1])
+                                try:
+                                    data[mapping[token[0]]] = int(token[1])
+                                except:
+                                    reponse = erreur_indic[token[0]]
+                                    type_sms = 2
                         else:
-                            reponse = u"%s Tsy nalefanao ny valin'ny fanontaniana '%s'." % (reponse, token[0],)
+                            reponse = u"Diso! Tsy ao ny  kaody <.%s> sy ny valinteny mifanaraka aminy" % (token[0],)
                             type_sms = 2
                     else:
-                        reponse = u"%s Tsy misy ny fanontaniana manana kaody '%s'." % (reponse, token[0],)
+                        reponse = u"Tsy misy ny fanontaniana manana kaody <.%s>" % (token[0],)
                         type_sms = 2
 
                 # controle de coherence
                 if type_sms == 1:
                     if data['femmes'] > data['certificats']:
-                        reponse = u"%s Tsy tokony mihaotra ny isan'ny taratasin-tany rehetra ny nomena hoan'ny vehivahy" % (reponse,)
+                        reponse = u"Diso ! Ny isan'ny Karatany amin'ny anaran'ny vehivavy dia tokony ho latsaky ny isan'ny Karatany voasoratra"
                         type_sms = 2
                     else:
                         reponse = u"Misaotra! Voaray soa aman-tsara ny smaiso nalefanao."
