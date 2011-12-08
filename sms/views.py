@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
@@ -322,9 +322,12 @@ def _parser_sms(message):
 
                                 if periode_correct:
                                     periode = '%s-%s-01' % (annee, mois)
-                                    date_envoye = datetime.strptime(periode, '%Y-%m-%d')
+                                    date_envoye = datetime.strptime(periode, '%Y-%m-%d').date()
                                     date_now = datetime.now()
-                                    if date_envoye >= date_now:
+                                    date_now = "%s-%s-01" % (date_now.year, date_now.month,)
+                                    date_now = datetime.strptime(date_now, '%Y-%m-%d').date()
+                                    diff = date_envoye - date_now
+                                    if diff >= timedelta(days = 0):
                                         reponse = u"Diso ! Tokony ho volana, alohan'izao volana iainantsika izao, no eo amin'ny daty"
                                         type_sms = 2
                                     else:
@@ -356,7 +359,7 @@ def _parser_sms(message):
                         reponse = u"Diso ! Ny isan'ny Karatany amin'ny anaran'ny vehivavy dia tokony ho latsaky ny isan'ny Karatany voasoratra"
                         type_sms = 2
                     else:
-                        reponse = u"Misaotra! Voaray soa aman-tsara ny smaiso nalefanao."
+                        reponse = u"Misaotra tompoko. Voaray ny tatitra nalefanao."
 
     # limiter le nombre de caractere dans reponse a 158
     reponse = reponse[:158]
