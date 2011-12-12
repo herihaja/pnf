@@ -422,18 +422,20 @@ def send_sms(smsc, numero, texte):
     envoi.save()
 
 def _inject_in_outbox(smsc, numero, texte):
-    outgoing_sms = Outbox(
-        updatedindb = datetime.now(),
-        insertintodb = datetime.now(),
-        sendingdatetime = datetime.now(),
-        coding = 'Default_No_Compression',
-        destinationnumber = numero,
-        senderid = smsc,
-        textdecoded = unicode(texte),
-        multipart = False,
-        sendingtimeout = datetime.now(),
-        creatorid = smsc
-    )
+    outgoing_sms = Outbox({
+        'updatedindb': datetime.now(),
+        'insertintodb': datetime.now(),
+        'sendingdatetime': datetime.now(),
+        'coding': 'Unicode_No_Compression',
+        'destinationnumber': numero,
+        'senderid': smsc,
+        'class': 0,
+        'textdecoded': unicode(texte),
+        'multipart': False,
+        'sendingtimeout': datetime.now(),
+        'deliveryreport': 'no',
+        'creatorid': smsc
+    })
     outgoing_sms.save()
 
 
