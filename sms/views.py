@@ -318,11 +318,11 @@ def _parser_sms(message):
                                     elif len(periode[1]) == 4:
                                         annee = periode[1]
                                     else:
-                                        reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
+                                        reponse = u"Diso ny daty nalefanao fa tokony ho mm.aaaa ny paoziny"
                                         type_sms = 2
                                         periode_correct = False
                                 else:
-                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
+                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm.aaaa ny paoziny"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -332,7 +332,7 @@ def _parser_sms(message):
                                 elif len(periode[0]) == 2:
                                     mois = periode[0]
                                 else:
-                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
+                                    reponse = u"Diso ny daty nalefanao fa tokony ho mm.aaaa ny paoziny"
                                     type_sms = 2
                                     periode_correct = False
 
@@ -344,7 +344,7 @@ def _parser_sms(message):
                                     date_now = datetime.strptime(date_now, '%Y-%m-%d').date()
                                     diff = date_envoye - date_now
                                     if diff >= timedelta(days = 0):
-                                        reponse = u"Diso ! Tokony ho volana, alohan'izao volana iainantsika izao, no eo amin'ny daty"
+                                        reponse = u"Tokony ho volana alohan'izao volana iainantsika izao no eo amin'ny daty"
                                         type_sms = 2
                                     else:
                                         data['periode'] = periode
@@ -374,7 +374,7 @@ def _parser_sms(message):
                         reponse = u"Diso ! Ny isan'ny Karatany amin'ny anaran'ny vehivavy dia tokony ho latsaky ny isan'ny Karatany voasoratra"
                         type_sms = 2
                     else:
-                        reponse = u"Misaotra tompoko. Voaray ny tatitra nalefanao."
+                        reponse = u"Misaotra tompoko! Voaray ny tatitra nalefanao."
 
     # limiter le nombre de caractere dans reponse a 158
     reponse = reponse[:158]
