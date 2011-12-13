@@ -40,9 +40,9 @@ def lister_reception(request, statut='1'):
     if statut == '1':
         title = 'Sms corrects'
     elif statut == '2':
-        title = 'Sms inconnus'
-    else:
         title = 'Sms erronés'
+    else:
+        title = 'Sms inconnus'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
@@ -312,10 +312,15 @@ def _parser_sms(message):
                             periode_correct = True
                             if token[0] == 'p':
                                 periode = token[1].split('.')
-                                if len(periode[1]) == 2:
-                                    annee = "20%s" % (periode[1],)
-                                elif len(periode[1]) == 4:
-                                    annee = periode[1]
+                                if len(periode) == 2:
+                                    if len(periode[1]) == 2:
+                                        annee = "20%s" % (periode[1],)
+                                    elif len(periode[1]) == 4:
+                                        annee = periode[1]
+                                    else:
+                                        reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
+                                        type_sms = 2
+                                        periode_correct = False
                                 else:
                                     reponse = u"Diso ny daty nalefanao fa tokony ho mm/aaaa ny paoziny"
                                     type_sms = 2
