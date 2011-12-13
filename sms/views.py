@@ -16,6 +16,20 @@ from django.db.models import Q
 import simplejson
 
 RECIPIENT_LIST = ['orange', 'airtel', 'telma']
+mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'k': 'certificats', 'f': 'femmes',
+                           't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
+erreur_indic = {
+    'd': u"Ny isan'ny Fangatahana (Demandes) dia tokony ho 0 na mihoatra",
+    'o': u"Ny isan'ny Fanoherana voaray (Oppositions) dia tokony ho tokony ho 0 na mihoatra",
+    'r': u"Ny isan'ny Fanoherana nahitana vahaolana (Oppositions résolues) dia tokony ho 0 na mihoatra",
+    'k': u"Ny isan'ny Karatany voasoratra (certificats délivrés) dia tokony ho 0 na mihoatra",
+    'f': u"Ny isan'ny Karatany amin’ny anaran'ny vehivavy (certificats accordés à des femmes) dia tokony ho 0 na mihoatra",
+    't': u"Ny isan'ny Fangatahana nahavitàna fitsirihina (Reconnaissances locales effectuées) dia tokony ho 0 na mihoatra",
+    'a': u"Ny Vola niditra (recettes) dia tokony ho 0 na mihoatra",
+    's': u"Ny Fitambaran'ny velaran-tany t@ ireo karatany voasora (Superficie totale) dia tokony ho 0 na mihoatra",
+    'g': u"Ny isan'ny Certificats nampiasaina natao antoka (certificats utilisés comme garanties à des banques) dia tokony ho 0 na mihoatra",
+    'm': u"Ny isan'ny Famindràna tany (mutations) dia tokony ho 0 na mihoatra",
+}
 
 def lister_reception(request, statut='1'):
     if request.method == 'GET':
@@ -214,13 +228,14 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
         donnees.save()
 
         if texte != '':
-            message = Communication(
-                commune = data['commune'],
-                sms = reception,
-                date_reception = receiving_date,
-                message = texte,
-            )
-            message.save()
+            texte = 'tsy misy'
+        message = Communication(
+            commune = data['commune'],
+            sms = reception,
+            date_reception = receiving_date,
+            message = texte,
+        )
+        message.save()
 
 
     # message de retour
@@ -229,6 +244,17 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
             send_sms(recipient, sendernumber, reponse)
 
     return type_sms
+
+def cron_process_sms(sms):
+    if sms.sendernumber != '0335600080':
+        type_sms = process_sms(sms.sendernumber, sms.textdecoded, sms.receivingdatetime, sms.recipientid)
+    else:
+        type_sms = 2
+
+    # marquer comme traite
+    sms.processed = True
+    sms.save()
+
 
 def _parser_sms(message):
     data = {}
@@ -277,21 +303,6 @@ def _parser_sms(message):
                     reponse = u"Diso! Mihoatra ny 14 ny isan'ny valinteny nalefanao.  Amarino tsirairay ny kaodin'ny fanontaniana sy ny valiny mifanaraka aminy"
                     type_sms = 2
                 
-                mapping = {'p': 'periode', 'd': 'demandes', 'o': 'oppositions', 'r': 'resolues', 'k': 'certificats', 'f': 'femmes',
-                           't': 'reconnaissances', 'a': 'recettes', 's': 'surfaces', 'g': 'garanties', 'm': 'mutations'}
-                erreur_indic = {
-                    'd': u"Ny isan'ny Fangatahana (Demandes) dia tokony ho 0 na mihoatra",
-                    'o': u"Ny isan'ny Fanoherana voaray (Oppositions) dia tokony ho tokony ho 0 na mihoatra",
-                    'r': u"Ny isan'ny Fanoherana nahitana vahaolana (Oppositions résolues) dia tokony ho 0 na mihoatra",
-                    'k': u"Ny isan'ny Karatany voasoratra (certificats délivrés) dia tokony ho 0 na mihoatra",
-                    'f': u"Ny isan'ny Karatany amin’ny anaran'ny vehivavy (certificats accordés à des femmes) dia tokony ho 0 na mihoatra",
-                    't': u"Ny isan'ny Fangatahana nahavitàna fitsirihina (Reconnaissances locales effectuées) dia tokony ho 0 na mihoatra",
-                    'a': u"Ny Vola niditra (recettes) dia tokony ho 0 na mihoatra",
-                    's': u"Ny Fitambaran'ny velaran-tany t@ ireo karatany voasora (Superficie totale) dia tokony ho 0 na mihoatra",
-                    'g': u"Ny isan'ny Certificats nampiasaina natao antoka (certificats utilisés comme garanties à des banques) dia tokony ho 0 na mihoatra",
-                    'm': u"Ny isan'ny Famindràna tany (mutations) dia tokony ho 0 na mihoatra",
-                }
-
                 data['commune'] = agf.commune
                 for token in tokens:
                     token = token.strip()
@@ -300,7 +311,7 @@ def _parser_sms(message):
                         if len(token) == 2:
                             periode_correct = True
                             if token[0] == 'p':
-                                periode = token[1].split('/')
+                                periode = token[1].split('.')
                                 if len(periode[1]) == 2:
                                     annee = "20%s" % (periode[1],)
                                 elif len(periode[1]) == 4:
@@ -353,7 +364,6 @@ def _parser_sms(message):
                         reponse = u"Tsy misy ny fanontaniana manana kaody <.%s>" % (token[0],)
                         type_sms = 2
 
-                # controle de coherence
                 if type_sms == 1:
                     if data['femmes'] > data['certificats']:
                         reponse = u"Diso ! Ny isan'ny Karatany amin'ny anaran'ny vehivavy dia tokony ho latsaky ny isan'ny Karatany voasoratra"
@@ -411,6 +421,23 @@ def ajax_communication(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+def _inject_in_outbox(smsc, numero, texte):
+    outgoing_sms = Outbox(
+        updatedindb = datetime.now(),
+        insertintodb = datetime.now(),
+        sendingdatetime = datetime.now(),
+        coding = 'Unicode_No_Compression',
+        destinationnumber = numero,
+        senderid = smsc,
+        textdecoded = unicode(texte),
+        multipart = False,
+        sendingtimeout = datetime.now(),
+        deliveryreport = 'no',
+        creatorid = smsc,
+        class_field = 0
+    )
+    outgoing_sms.save()
+
 def send_sms(smsc, numero, texte):
     _inject_in_outbox(smsc, numero, texte)
 
@@ -420,23 +447,6 @@ def send_sms(smsc, numero, texte):
         message = texte
     )
     envoi.save()
-
-def _inject_in_outbox(smsc, numero, texte):
-    outgoing_sms = Outbox({
-        'updatedindb': datetime.now(),
-        'insertintodb': datetime.now(),
-        'sendingdatetime': datetime.now(),
-        'coding': 'Unicode_No_Compression',
-        'destinationnumber': numero,
-        'senderid': smsc,
-        'class': 0,
-        'textdecoded': unicode(texte),
-        'multipart': False,
-        'sendingtimeout': datetime.now(),
-        'deliveryreport': 'no',
-        'creatorid': smsc
-    })
-    outgoing_sms.save()
 
 
 def _get_operateur(numero):

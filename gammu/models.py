@@ -37,6 +37,6 @@ class Inbox(models.Model):
     class_field = models.IntegerField(db_column='class')
     textdecoded = models.TextField()
     recipientid = models.TextField()
-    processed = models.BooleanField() # Field name made lowercase.
+    processed = models.BooleanField()
     class Meta:
         db_table = u'inbox'
