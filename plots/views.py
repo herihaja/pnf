@@ -84,13 +84,36 @@ def graphe_demandes(request, year=None):
 
 
 def graphe_ratio(request, year, ratio=0, region=None, output='page'):
-    RATIOS = [{'key': 'rcertificats', 'label': 'Certification'},
-            {'key': 'rfemmes', 'label': 'Certificats à des femmes'},
-            {'key': 'rconflits', 'label': 'Conflictualité'},
-            {'key': 'rresolus', 'label': 'Résolution'},
-            {'key': 'rsurface', 'label': 'Surface moyen'}]
+    RATIOS = [{'key': 'rcertificats', 'label': u'Certification'},
+            {'key': 'rfemmes', 'label': u'Certificats à des femmes'},
+            {'key': 'rconflits', 'label': u'Conflictualité'},
+            {'key': 'rresolus', 'label': u'Résolution'},
+            {'key': 'rsurface', 'label': u'Surface moyen'}]
 
-    ratio = _get_monthly_aggregated_data(RATIOS[int(ratio)], year, region, cumul=True)
+    ratios = _get_monthly_aggregated_data(RATIOS[int(ratio)]['key'], year, region, cumul=True)
+
+    nom_region = _get_region(region)
+    indicateur = RATIOS[int(ratio)]['label']
+
+    title = "%s - %s %s" % (indicateur, nom_region, year)
+
+    fig = Figure(facecolor='w')
+    ax1 = fig.add_subplot(111, title=title)
+    ax1.set_xticks(XTICK)
+    ax1.set_xticklabels(MONTHS)
+
+    # barres
+    rect1 = ax1.plot(range(12), ratios, 'g-o')
+
+    leg = ax1.legend((rect1[0],), (indicateur,))
+    _set_graph_fontstyle(ax1, leg)
+
+    canvas = FigureCanvas(fig)
+    if output == 'page':
+        response = HttpResponse(content_type='image/png')
+        canvas.print_png(response)
+
+    return response
 
 
 def graphe_surface_moyen(request, year, region=None, output='page'):
@@ -99,12 +122,7 @@ def graphe_surface_moyen(request, year, region=None, output='page'):
     # nombre de certificats fonciers
     certificats = _get_monthly_aggregated_data('certificats', year, region)
 
-    #region
-    nom_region = ''
-    if region is not None:
-        obj = Region.objects.filter(pk=int(region))
-        if len(obj) > 0:
-            nom_region = obj[0].nom
+    nom_region = _get_region(region)
 
     title = "Surfaces et certificats fonciers - %s %s" % (nom_region, year)
 
@@ -134,30 +152,46 @@ def graphe_surface_moyen(request, year, region=None, output='page'):
 
 
 def _get_monthly_aggregated_data(indicateur, year, region=None, cumul=False):
-    kwargs = {'valide': True, 'periode__year': int(year)}
-    if region != '0':
-        kwargs['commune__district__region'] = int(region)
     try:
+        values = [0 for x in range(12)]
         if cumul:
+            kwargs = {'periode__year': int(year)}
+            if region != '0':
+                kwargs['commune__district__region'] = int(region)
             obj = Cumul.objects.filter(**kwargs).values('periode').\
                         annotate(Count('periode'), sum=Sum(indicateur)).order_by('periode')
+            for row in obj:
+                if row['sum'] is not None:
+                    values[row['periode'].month - 1] = row['sum']/row['periode__count']
+                else:
+                    values[row['periode'].month - 1] = 0
+            data = values
         else:
+            kwargs = {'valide': True, 'periode__year': int(year)}
+            if region != '0':
+                kwargs['commune__district__region'] = int(region)
             obj = Donnees.objects.filter(**kwargs).values('periode').\
                         annotate(Count('periode'), sum=Sum(indicateur)).order_by('periode')
-
-        values = [0 for x in range(12)]
-        for row in obj:
-            values[row['periode'].month - 1] = row['sum']
-        data = {}
-        i = 0
-        for m in MONTHS:
-            data[m] = values[i]
-            i += 1
-
+            for row in obj:
+                values[row['periode'].month - 1] = row['sum']
+            data = {}
+            i = 0
+            for m in MONTHS:
+                data[m] = values[i]
+                i += 1
     except:
         data = None
 
     return data
+
+
+def _get_region(region_id):
+    nom_region = ''
+    if region_id is not None:
+        obj = Region.objects.filter(pk=int(region_id))
+        if len(obj) > 0:
+            nom_region = obj[0].nom
+    return nom_region
 
 
 def _get_year(year):
@@ -201,15 +235,17 @@ def surface_moyen(request):
 def ratio(request):
     year = datetime.datetime.now().year - 1
     form = FiltreRatioForm(initial={'annee': year})
-    region = 0
+    region = ratio_id = 0
     if request.method == 'POST':
         form = FiltreRatioForm(request.POST)
         year = request.POST['annee']
         if len(request.POST['region']) > 0:
             region = request.POST['region']
+        if len(request.POST['indicateur']) > 0:
+            ratio_id = request.POST['indicateur']
 
     year = _get_year(year)
-    graph = "ratio_%s_%s_%s.png" % (year, ratio, region)
+    graph = "ratio_%s_%s_%s.png" % (year, ratio_id, region)
     return render_to_response('plots/graph.html', {'form': form,
                                                    'graph': graph, 'title': 'Ratios'},
                                           context_instance=RequestContext(request))

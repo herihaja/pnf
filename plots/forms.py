@@ -16,7 +16,6 @@ class FiltreRatioForm(Form):
                 ('1', 'Certificats à des femmes'),
                 ('2', 'Conflictualité'),
                 ('3', 'Résolution'),
-                ('4', 'Surface moyen'),
             )
     indicateur = forms.ChoiceField(label='Indicateur', choices=LISTE_INDICATEURS, required=False)
     annee = forms.ChoiceField(label='Année', choices=LISTE_ANNEE, required=False)
