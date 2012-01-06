@@ -1,0 +1,13 @@
+{% extends 'layout_login.html' %}
+
+{% block content %}
+    {% if form.errors %}
+        <p class="error">Désolé, mot de passe ou identifiant non valide.</p>
+    {% endif %}
+    <form action='.' method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="S'identifier" class="ui-button ui-state-default ui-corner-all"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+{% endblock %}

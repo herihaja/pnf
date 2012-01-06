@@ -11,6 +11,7 @@ from guichets.forms import GuichetForm, FiltreGuichetForm, FiltreBailleurForm, F
 from helpers import process_datatables_posted_vars, export_excel, query_datatables, export_pdf
 import simplejson
 
+@login_required(login_url="/connexion")
 def lister_guichet(request):
     if request.method == 'GET':
         form = FiltreGuichetForm()
@@ -22,6 +23,7 @@ def lister_guichet(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/connexion")
 def lister_bailleurs(request):
     if request.method == 'GET':
         form = FiltreBailleurForm()
@@ -32,6 +34,8 @@ def lister_bailleurs(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ajouter_guichet(request):
     if request.method == 'GET':
         form = GuichetForm(region_id=1, initial={'region': 1,})
@@ -46,6 +50,8 @@ def ajouter_guichet(request):
         return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Ajouter un guichet'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_guichet(request, guichet_id=None):
     obj = get_object_or_404(Guichet, pk=guichet_id)
 
@@ -65,11 +71,14 @@ def editer_guichet(request, guichet_id=None):
         return render_to_response('guichets/ajouter_guichet.html', {'form': form, 'title': 'Editer un guichet'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_guichet(request, guichet_id=None):
     obj = get_object_or_404(Guichet, pk=guichet_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
+
 
 def ajax_guichet(request):
     # columns titles
@@ -150,6 +159,7 @@ def ajax_guichet(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
 
 def ajax_bailleur(request):
     # columns titles
@@ -234,6 +244,8 @@ def ajax_bailleur(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_guichet(request, filetype=None):
     columns = [u'Commune', u'Code', u'Creation', u'Agf1', u'Mobile1', 'Password1', u'Agf2', u'Mobile2', 'Password2', u'Etat']
     dataset = Guichet.objects.filter_for_xls(request.GET)
@@ -243,6 +255,8 @@ def export_guichet(request, filetype=None):
         response = export_pdf(columns, dataset, 'guichets')
     return response
 
+
+@login_required(login_url="/connexion")
 def export_guichet_bailleurs(request, filetype=None):
     columns = [u'Commune', u'Code', u'Création', u'Guichets', u'Bailleurs', u'Projets']
     dataset = Guichet.objects.filter_projets_for_xls(request.GET)
@@ -252,6 +266,8 @@ def export_guichet_bailleurs(request, filetype=None):
         response = export_pdf(columns, dataset, 'guichets', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def lister_envoi_rma(request):
     if request.method == 'GET':
         form = FiltreRmaForm()
@@ -288,6 +304,7 @@ def _create_condition_for_envoi_rma(post):
 
     return kwargs
 
+
 def ajax_envoi_rma(request):
     # columns titles
     columns = ['guichet__commune__district__region', 'guichet__commune__district',
@@ -315,6 +332,8 @@ def ajax_envoi_rma(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_envoi_rma(request, filetype=None):
     columns = [u'Region', u'District', u'Commune', u'Reception', u'Statut', 'Agf']
 

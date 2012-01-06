@@ -7,7 +7,9 @@
                     &laquo;Land data 2&raquo;
                 </div>
                 <div id="header-user">
-
+                {% if user.is_authenticated %}
+                    Bienvenue, {{ user.username }} - <a href="{% url utilisateurs.views.logout %}">Déconnexion</a>
+                {% endif %}
                 </div>
                 <div class="clear"></div>
             </div>

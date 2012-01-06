@@ -10,6 +10,8 @@ import simplejson
 from datetime import datetime
 from indicateurs.views import get_total_indicateur
 
+
+@login_required(login_url='/connexion/')
 def index_dashboard(request):
     # indicateurs au niveau national
     indicateurs = get_total_indicateur()

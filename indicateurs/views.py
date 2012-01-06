@@ -14,6 +14,7 @@ import simplejson
 from datetime import datetime
 from localites.models import District, Commune
 
+@login_required(login_url="/connexion")
 def indicateurs_par_date(request):
     if request.method == 'GET':
         form = FiltreIndicateursForm()
@@ -24,6 +25,8 @@ def indicateurs_par_date(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def indicateur_par_date(request):
     if request.method == 'GET':
         form = FiltreIndicateurForm(initial={'annee': datetime.now().year - 1})
@@ -34,6 +37,8 @@ def indicateur_par_date(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ratio(request, ratio, title):
     if request.method == 'GET':
         form = FiltreRatioForm(initial={'indicateur': ratio, 'annee': datetime.now().year - 1})
@@ -42,6 +47,7 @@ def ratio(request, ratio, title):
     page_js = '/media/js/indicateurs/ratios.js'
     return render_to_response('layout_ratio_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
+
 
 def ajax_indicateurs(request):
     # columns titles
@@ -99,6 +105,7 @@ def ajax_indicateurs(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
 
 def ajax_pivot_table(request):
     # columns titles
@@ -228,6 +235,8 @@ def ajax_pivot_table(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_indicateurs(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
     dataset = Donnees.objects.filter_for_xls(request.GET)
@@ -237,6 +246,8 @@ def export_indicateurs(request, filetype=None):
         response = export_pdf(columns, dataset, 'indicateurs', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def export_ratios(request, filetype=None):
     columns = [u'Commune', u'Jan', u'Fév', u'Mar', u'Avr', u'Mai', u'Jun', u'Jul', u'Aou', u'Sep', u'Oct', u'Nov', u'Déc', 'Moy', 'Tot']
     dataset = Donnees.objects.filter_ratio_for_xls(request.GET)
@@ -245,6 +256,7 @@ def export_ratios(request, filetype=None):
     else:
         response = export_pdf(columns, dataset, 'ratio')
     return response
+
 
 def ajax_ratios_localite(request):
     # filtering
@@ -283,6 +295,7 @@ def ajax_ratios_localite(request):
     json = simplejson.dumps(results)
 
     return HttpResponse(json, mimetype='application/json')
+
 
 def _remove_none(data):
     if data.oppositions is None:

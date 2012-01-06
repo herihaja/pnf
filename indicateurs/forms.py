@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django import forms
 from django.forms import ModelForm, Form
 from localites.models import Region, District, Commune
 
 EMPTY_LIST = (('', '---'),)
+LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, datetime.datetime.now().year))
 class FiltreIndicateursForm(Form):
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
@@ -25,7 +27,6 @@ class FiltreIndicateurForm(Form):
             ('garanties', 'Garanties'),
         )
 
-    LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, 2020))
     indicateur = forms.ChoiceField(label='Indicateur', choices=LISTE_INDICATEURS, required=False)
     annee = forms.ChoiceField(label='Année', choices=LISTE_ANNEE, required=False)
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
@@ -41,7 +42,6 @@ class FiltreRatioForm(Form):
             ('rresolus', 'Résolution'),
             ('rsurface', 'Surface moyen'),
         )
-    LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, 2020))
     indicateur = forms.ChoiceField(label='Indicateur', choices=LISTE_INDICATEURS, required=False)
     annee = forms.ChoiceField(label='Année', choices=LISTE_ANNEE, required=False)
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)

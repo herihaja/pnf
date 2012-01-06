@@ -13,6 +13,7 @@ from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from localites.forms import FiltreCommuneForm
 
+@login_required(login_url="/connexion")
 def lister_donnees(request):
     if request.method == 'GET':
         form = FiltreDonneesForm()
@@ -23,6 +24,7 @@ def lister_donnees(request):
     title = 'Liste des données'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
+
 
 def ajax_donnees(request):
     # columns titles
@@ -103,6 +105,8 @@ def ajax_donnees(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def ajouter_donnees(request):
     if request.method == 'GET':
         form = DonneesForm(region_id=1, initial={'region': 1,})
@@ -123,6 +127,8 @@ def ajouter_donnees(request):
         return render_to_response('donnees/ajouter_donnees.html', {'form': form, 'title': u'Ajout manuel'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_donnees(request, donnee_id=None):
     obj = get_object_or_404(Donnees, pk=donnee_id)
 
@@ -145,12 +151,16 @@ def editer_donnees(request, donnee_id=None):
         return render_to_response('donnees/ajouter_donnees.html', {'form': form},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_donnees(request, donnee_id=None):
     obj = get_object_or_404(Donnees, pk=donnee_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_donnees(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations', u'Validé']
     dataset = Donnees.objects.filter_for_xls(request.GET)
@@ -160,6 +170,8 @@ def export_donnees(request, filetype=None):
         response = export_pdf(columns, dataset, 'donnees', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def lister_cumuls(request):
     if request.method == 'GET':
             form = FiltreDonneesForm()
@@ -169,6 +181,7 @@ def lister_cumuls(request):
     page_js = '/media/js/donnees/cumuls.js'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
+
 
 def ajax_cumuls(request):
     # columns titles
@@ -233,6 +246,8 @@ def ajax_cumuls(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_cumuls(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
     dataset = Cumul.objects.filter_for_xls(request.GET)
@@ -242,6 +257,8 @@ def export_cumuls(request, filetype=None):
         response = export_pdf(columns, dataset, 'cumul', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def lister_recu(request):
     if request.method == 'GET':
         form = FiltreRecuForm()
@@ -252,6 +269,8 @@ def lister_recu(request):
     return render_to_response('layout_list.html', {"title": title, "form": form, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def lister_rejete(request):
     if request.method == 'GET':
         form = FiltreRecuForm()
@@ -263,12 +282,15 @@ def lister_rejete(request):
                               context_instance=RequestContext(request))
 
 
+@login_required(login_url="/connexion")
 def supprimer_recu(request, recu_id=None):
     obj = get_object_or_404(Recu, pk=recu_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def tester_recu(request, recu_id=None):
     obj = get_object_or_404(Recu, pk=recu_id)
 
@@ -292,6 +314,8 @@ def tester_recu(request, recu_id=None):
                                                                'demandes': cumul_demandes, 'recos': cumul_reco, 'certifs': cumul_certificats,},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def valider_recu(request, recu_id=None):
     obj = get_object_or_404(Recu, pk=recu_id)
 
@@ -320,6 +344,8 @@ def valider_recu(request, recu_id=None):
     json = simplejson.dumps([{'message': message}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def rejeter_recu(request, recu_id=None):
     try:
         rejete = Recu.objects.get(pk=recu_id)
@@ -408,6 +434,7 @@ def ajax_recu(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
 def ajax_rejete(request):
     # columns titles
     columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'valide', 'actions']
@@ -484,6 +511,7 @@ def ajax_rejete(request):
     return HttpResponse(json, mimetype='application/json')
 
 
+@login_required(login_url="/connexion")
 def export_recu(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
     dataset = Recu.objects.filter_for_xls(request.GET, False)
@@ -493,6 +521,8 @@ def export_recu(request, filetype=None):
         response = export_pdf(columns, dataset, 'recus', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def export_rejete(request, filetype=None):
     columns = [u'Commune', u'Code', u'Période', u'Demandes', u'Oppositions', u'Résolues', u'Certificats', u'Femmes', u'Surfaces', u'Recettes', u'Garanties', u'Reconnaissances', u'Mutations']
     dataset = Recu.objects.filter_for_xls(request.GET, True)
@@ -502,6 +532,8 @@ def export_rejete(request, filetype=None):
         response = export_pdf(columns, dataset, 'rejetes', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def exporter_pour_site(request):
     if request.method == 'GET':
         form = FiltreDonneesForm()
@@ -512,6 +544,8 @@ def exporter_pour_site(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def export_site(request):
     columns = [u'ID_COMMUNE', u'ANNEE', u'MOIS', u'REGION', u'DISTRICT', u'COMMUNES', u'BAILLEUR',
                u'NB_DEMANDE', u'NB_DEM_REJ', u'NB_CF_DELI', u'NB_CF_FEMM', u'NB_BENEFIC', u'NB_BENEF_F',

@@ -7,7 +7,7 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from bailleurs.models import Bailleur
 from bailleurs.forms import BailleurForm, FiltreBailleurForm
-from helpers import export_excel, process_datatables_posted_vars, query_datatables
+from helpers import export_excel, process_datatables_posted_vars, query_datatables, export_pdf
 import simplejson
 from projets.models import Projet
 
@@ -58,10 +58,13 @@ def supprimer_bailleur(request, bailleur_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
-def export_bailleur(request):
+def export_bailleur(request, filetype=None):
     columns = [u'Nom', u'Projets']
     dataset = Bailleur.objects.filter_for_xls(request.GET)
-    response = export_excel(columns, dataset, 'bailleurs')
+    if filetype == 'xls':
+        response = export_excel(columns, dataset, 'bailleurs')
+    else:
+        response = export_pdf(columns, dataset, 'bailleurs')
     return response
 
 def ajax_bailleur(request):

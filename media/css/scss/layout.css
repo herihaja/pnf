@@ -38,7 +38,11 @@ body {
       body #wrapper #header #header-wiz #header-user {
         width: 700px;
         float: right;
-        text-align: right; }
+        text-align: right;
+        color: #472F04;
+        padding-top: 20px; }
+        body #wrapper #header #header-wiz #header-user a {
+          color: #6B4602 !important; }
       body #wrapper #header #header-nav {
         position: relative;
         width: 1000px;
@@ -157,6 +161,38 @@ body {
       background-image: -moz-linear-gradient(top, #d1c883, #b7ae66);
       border-top: 1px solid #E0D9A1;
       padding: 10px; }
+  body #wrapper-login {
+    width: 300px;
+    margin: 60px auto;
+    text-align: left; }
+    body #wrapper-login #header {
+      width: 300px;
+      height: 40px;
+      font-family: "courier new", monospace;
+      font-weight: bold;
+      font-size: 24px;
+      color: #3F2203;
+      text-shadow: 1px 1px 1px #FAFAF4;
+      line-height: 60px;
+      overflow: hidden; }
+    body #wrapper-login #header-title {
+      height: 30px;
+      width: 300px;
+      overflow: hidden;
+      background: #6B4602;
+      background: -webkit-gradient(linear, left top, left bottom, from(#6b4602), to(#472f04));
+      background-image: -moz-linear-gradient(top, #6b4602, #472f04);
+      border-top: 1px solid #261902;
+      text-align: center;
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 30px;
+      text-shadow: 1px 1px 1px #8E5E0B; }
+    body #wrapper-login #main {
+      padding: 10px 20px 20px 20px;
+      background: #EAE4B9; }
+    body #wrapper-login #footer {
+      color: #ADA672; }
 
 .clear-l {
   height: 0;

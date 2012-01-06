@@ -22,4 +22,5 @@ $(document).ready(function() {
     $('#btn_export_pdf').live('click', function() {
         window.location.href = '/localites/regions/export/pdf';
     });
+    $('#btn_submit').css('display', 'none');
 } );

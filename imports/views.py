@@ -69,6 +69,7 @@ def _ajouter_commune(nom, code, district):
     obj, created = Commune.objects.get_or_create(slug=slug, code=code, nom=nom, district=district)
     return obj, created
 
+@login_required(login_url="/connexion")
 def importer_donnees(request):
     book = xlrd.open_workbook("media/data2010.xls")
     sheet = book.sheets()[0]
@@ -119,6 +120,7 @@ def importer_donnees(request):
     return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/connexion")
 def importer_localites(request):
     book = xlrd.open_workbook("media/localites.xls")
     sheet = book.sheets()[0]
@@ -147,6 +149,7 @@ def importer_localites(request):
     return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
                               context_instance=RequestContext(request))
 
+@login_required(login_url="/connexion")
 def importer_bailleurs(request):
     STATUT = ['1', '2', '3', '4']
     book = xlrd.open_workbook("media/bailleurs.xls")

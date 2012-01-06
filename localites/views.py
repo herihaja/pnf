@@ -12,6 +12,7 @@ from localites.forms import ProvinceForm, RegionForm, DistrictForm, CommuneForm,
 from helpers import process_datatables_posted_vars, query_datatables, export_excel, export_pdf
 import simplejson
 
+@login_required(login_url="/connexion")
 def ajouter_province(request):
     if request.method == 'GET':
         form = ProvinceForm()
@@ -26,20 +27,27 @@ def ajouter_province(request):
         return render_to_response('localites/ajouter_province.html', {'form': form},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_province(request, province_id=None):
     return HttpResponseRedirect(reverse(lister_province))
 
+
+@login_required(login_url="/connexion")
 def supprimer_province(request, province_id=None):
     obj = get_object_or_404(Province, pk=province_id)
     obj.delete()
     return HttpResponseRedirect(reverse(lister_province))
 
+
+@login_required(login_url="/connexion")
 def lister_region(request):
     header_link = '<a href="%s">&raquo; Ajouter une région</a>' % (reverse(ajouter_region),)
     page_js = '/media/js/localites/regions.js'
     title = 'Liste des régions'
     return render_to_response('layout_list.html', {"title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
+
 
 def ajax_region(request):
     regions = Region.objects.all()
@@ -61,6 +69,7 @@ def ajax_region(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
 def ajouter_region(request):
     if request.method == 'GET':
         form = RegionForm()
@@ -75,6 +84,8 @@ def ajouter_region(request):
         return render_to_response('localites/ajouter_region.html', {'form': form, 'title': 'Ajouter une région'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_region(request, region_id=None):
     obj = get_object_or_404(Region, pk=region_id)
 
@@ -91,6 +102,8 @@ def editer_region(request, region_id=None):
         return render_to_response('localites/ajouter_region.html', {'form': form, 'title': 'Editer une région'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_region(request, region_id=None):
     obj = get_object_or_404(Region, pk=region_id)
     obj.delete()
@@ -98,6 +111,8 @@ def supprimer_region(request, region_id=None):
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_region(request, filetype=None):
     columns = [u'Region', u'Code']
     dataset = Region.objects.filter_for_xls()
@@ -108,6 +123,7 @@ def export_region(request, filetype=None):
     return response
 
 
+@login_required(login_url="/connexion")
 def lister_district(request):
     if request.method == 'GET':
         form = FiltreDistrictForm()
@@ -119,6 +135,8 @@ def lister_district(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ajouter_district(request):
     if request.method == 'GET':
         form = DistrictForm()
@@ -133,6 +151,8 @@ def ajouter_district(request):
         return render_to_response('localites/ajouter_district.html', {'form': form, 'title': 'Ajouter un district'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_district(request, district_id=None):
     obj = get_object_or_404(District, pk=district_id)
 
@@ -149,12 +169,16 @@ def editer_district(request, district_id=None):
         return render_to_response('localites/ajouter_district.html', {'form': form, 'title': 'Editer un district'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_district(request, district_id=None):
     obj = get_object_or_404(District, pk=district_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def lister_commune(request):
     if request.method == 'GET':
         form = FiltreCommuneForm()
@@ -166,6 +190,8 @@ def lister_commune(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ajouter_commune(request):
     if request.method == 'GET':
         form = CommuneForm(region_id=1, initial={'region': 1,})
@@ -180,6 +206,8 @@ def ajouter_commune(request):
         return render_to_response('localites/ajouter_commune.html', {'form': form, 'title': 'Ajouter une commune'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_commune(request, commune_id=None):
     obj = get_object_or_404(Commune, pk=commune_id)
 
@@ -197,12 +225,16 @@ def editer_commune(request, commune_id=None):
         return render_to_response('localites/ajouter_commune.html', {'form': form, 'title': 'Editer une commune'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_commune(request, commune_id=None):
     obj = get_object_or_404(Commune, pk=commune_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_district(request, filetype=None):
     columns = [u'District', u'Code', u'Région']
     dataset = District.objects.filter_for_xls(request.GET)
@@ -211,6 +243,7 @@ def export_district(request, filetype=None):
     else:
         response = export_pdf(columns, dataset, 'districts')
     return response
+
 
 def ajax_district(request):
     # columns titles
@@ -246,6 +279,7 @@ def ajax_district(request):
     return HttpResponse(json, mimetype='application/json')
 
 
+@login_required(login_url="/connexion")
 def export_commune(request, filetype=None):
     columns = [u'Commune', u'Code', u'Région', u'District', u'Guichet']
     dataset = Commune.objects.filter_for_xls(request.GET)
@@ -300,6 +334,8 @@ def ajax_commune(request):
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def select_district(request):
     region_id = 0
     if request.POST['region'] != '':
@@ -313,6 +349,8 @@ def select_district(request):
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def select_commune(request):
     district_id = 0
     if request.POST['district'] != '':

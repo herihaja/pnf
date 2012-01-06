@@ -126,8 +126,8 @@ INSTALLED_APPS = (
     'pnf.dashboard',
     'pnf.gammu',
     'pnf.projets',
-#    'pnf.plots',
-    'pnf.users',
+    'pnf.plots',
+    'pnf.utilisateurs',
     'django.contrib.admin',
     'django_nose',
 )

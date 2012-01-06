@@ -139,3 +139,6 @@ ul.errorlist {
     background: #DA3838;
     font-weight: bold;
     color: #ffffff; }
+
+#id_is_active, #id_is_staff {
+  width: auto !important; }

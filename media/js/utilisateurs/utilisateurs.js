@@ -5,18 +5,19 @@ $(document).ready(function() {
         "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
         "bFilter": false,
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
-        "sAjaxSource": '/bailleurs/ajax/',
+        "sAjaxSource": '/utilisateurs/ajax/',
         "aoColumns": [
-            { "sTitle": "Nom", "mDataProp": "nom" },
-            { "sTitle": "Projets", "mDataProp": "projets" },
-            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
+            { "sTitle": "Identifiant", "mDataProp": "username" },
+            { "sTitle": "Nom et prénoms", "mDataProp": "name", "bSortable": false },
+            { "sTitle": "Actif", "mDataProp": "actif", "sWidth": "40px", "bSortable": false },
+            { "sTitle": "Admin", "mDataProp": "staff", "sWidth": "40px", "bSortable": false },
+            { "sTitle": "Créé le", "mDataProp": "created", "sWidth": "130px", "bSortable": false },
+            { "sTitle": "Conneté le", "mDataProp": "last_login", "sWidth": "130px", "bSortable": false },
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "140px", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
         "fnServerData": function ( sSource, aoData, fnCallback ) {
-            aoData.push(
-                {"name": "fNom", "value": $('#id_nom').val()}
-            );
             $.ajax( {
                 "dataType": 'json',
                 "type": "POST",
@@ -28,15 +29,11 @@ $(document).ready(function() {
         "sDom": 'rt<"F"lip>'
     });
 
-    $('#form-filter').submit(function(){
-        oTable.fnDraw();
-        return false;
-    });
-
     $('#btn_export_xls').live('click', function() {
-        window.location.href = '/bailleurs/export/xls';
+        window.location.href = '/utilisateurs/export/xls';
     });
     $('#btn_export_pdf').live('click', function() {
-        window.location.href = '/bailleurs/export/pdf';
+        window.location.href = '/utilisateurs/export/pdf';
     });
+    $('#btn_submit').css('display', 'none');
 } );

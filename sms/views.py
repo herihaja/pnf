@@ -31,6 +31,8 @@ erreur_indic = {
     'm': u"Ny isan'ny Famindràna tany (mutations) dia tokony ho 0 na mihoatra",
 }
 
+
+@login_required(login_url="/connexion")
 def lister_reception(request, statut='1'):
     if request.method == 'GET':
         form = FiltreReceptionForm(initial={'statut': statut})
@@ -46,17 +48,22 @@ def lister_reception(request, statut='1'):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_sms(request, sms_id=None):
     obj = get_object_or_404(Reception, pk=sms_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def supprimer_envoi(request, sms_id=None):
     obj = get_object_or_404(Envoi, pk=sms_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
+
 
 def ajax_reception(request):
     # columns titles
@@ -100,6 +107,8 @@ def ajax_reception(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_reception(request, filetype=None):
     columns = [u'Date / Heure', u'Expéditeur', u'Message', u'Statut', u'Réponse']
     dataset = Reception.objects.filter_for_xls(request.GET)
@@ -109,6 +118,8 @@ def export_reception(request, filetype=None):
         response = export_pdf(columns, dataset, 'sms', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def lister_envoi(request):
     if request.method == 'GET':
         form = FiltreEnvoiForm()
@@ -118,6 +129,7 @@ def lister_envoi(request):
     title = 'Sms envoyés'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
+
 
 def ajax_envoi(request):
     # columns titles
@@ -159,6 +171,8 @@ def ajax_envoi(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_envoi(request, filetype=None):
     columns = [u'Date / Heure', u'Destinataire', u'Message']
     dataset = Envoi.objects.filter_for_xls(request.GET)
@@ -168,6 +182,8 @@ def export_envoi(request, filetype=None):
         response = export_pdf(columns, dataset, 'sms', 1)
     return response
 
+
+@login_required(login_url="/connexion")
 def sms_tester(request):
     if request.method == 'GET':
         form = TesterForm()
@@ -244,6 +260,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
             send_sms(recipient, sendernumber, reponse)
 
     return type_sms
+
 
 def cron_process_sms(sms):
     if sms.sendernumber != '0335600080':
@@ -380,6 +397,8 @@ def _parser_sms(message):
     reponse = reponse[:158]
     return type_sms, reponse, data, texte
 
+
+@login_required(login_url="/connexion")
 def lister_communication(request):
     if request.method == 'GET':
         form = FiltreCommunicationForm()
@@ -389,6 +408,7 @@ def lister_communication(request):
     title = 'Messages'
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js},
                               context_instance=RequestContext(request))
+
 
 def ajax_communication(request):
     # columns titles
@@ -426,6 +446,7 @@ def ajax_communication(request):
 
     return HttpResponse(json, mimetype='application/json')
 
+
 def _inject_in_outbox(smsc, numero, texte):
     outgoing_sms = Outbox(
         updatedindb = datetime.now(),
@@ -443,6 +464,8 @@ def _inject_in_outbox(smsc, numero, texte):
     )
     outgoing_sms.save()
 
+
+@login_required(login_url="/connexion")
 def send_sms(smsc, numero, texte):
     _inject_in_outbox(smsc, numero, texte)
 
@@ -487,6 +510,8 @@ def sms_broadcast(request):
 
     return HttpResponseRedirect(reverse(lister_envoi))
 
+
+@login_required(login_url="/connexion")
 def ajax_broadcast(request):
     # selectionner la liste des agf actifs de la localite ayant un num tel
     kwargs = {'etat': 1}
@@ -512,6 +537,8 @@ def ajax_broadcast(request):
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_communication(request, filetype=None):
     columns = [u'Date / Heure', u'Commune', u'Code', u'Message']
     dataset = Communication.objects.filter_for_xls(request.GET)
