@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'pnf.gammu',
     'pnf.projets',
     'pnf.plots',
+    'pnf.carte',
     'pnf.utilisateurs',
     'django.contrib.admin',
     'django_nose',

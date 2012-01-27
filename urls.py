@@ -16,6 +16,7 @@ urlpatterns = patterns('',
                         (r'', include('pnf.gammu.urls')),
                         (r'', include('pnf.projets.urls')),
                         (r'', include('pnf.plots.urls')),
+                        (r'', include('pnf.carte.urls')),
                         (r'', include('pnf.utilisateurs.urls')),
                         url(r'^admin/', include(admin.site.urls)),
                         )

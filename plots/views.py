@@ -23,10 +23,10 @@ MONTHS = ['Jan', u'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct'
 
 def graphe_guichets(request, year, region=None, output='page'):
     # nombre des nouveaux guichets par mois
-    #guichets = _get_monthly_aggregated_data('certificats', year, region)
+    #guichets = get_monthly_aggregated_data('certificats', year, region)
 
     # nombre des certificats délivrés par mois
-    certificats = _get_monthly_aggregated_data('certificats', year, region)
+    certificats = get_monthly_aggregated_data('certificats', year, region)
 
     # nombre cumulé de certificats fonciers
 
@@ -70,15 +70,15 @@ def graphe_demandes(request, year=None):
     ''' Donnees par region ou national sur une annee
     '''
 
-    year = _get_year(year)
+    year = get_year(year)
     # nombre de demandes
-    _get_monthly_aggregated_data('demandes', year)
+    get_monthly_aggregated_data('demandes', year)
 
     # nombre de reconnaissances
-    _get_monthly_aggregated_data('reconnaissances', year)
+    get_monthly_aggregated_data('reconnaissances', year)
 
     # nombre de certificats
-    _get_monthly_aggregated_data('certificats', year)
+    get_monthly_aggregated_data('certificats', year)
 
     pass
 
@@ -90,9 +90,9 @@ def graphe_ratio(request, year, ratio=0, region=None, output='page'):
             {'key': 'rresolus', 'label': u'Résolution'},
             {'key': 'rsurface', 'label': u'Surface moyen'}]
 
-    ratios = _get_monthly_aggregated_data(RATIOS[int(ratio)]['key'], year, region, cumul=True)
+    ratios = get_monthly_aggregated_data(RATIOS[int(ratio)]['key'], year, region, cumul=True)
 
-    nom_region = _get_region(region)
+    nom_region = get_region(region)
     indicateur = RATIOS[int(ratio)]['label']
 
     title = "%s - %s %s" % (indicateur, nom_region, year)
@@ -118,11 +118,11 @@ def graphe_ratio(request, year, ratio=0, region=None, output='page'):
 
 def graphe_surface_moyen(request, year, region=None, output='page'):
     # surfaces en hectares
-    surfaces = _get_monthly_aggregated_data('surfaces', year, region)
+    surfaces = get_monthly_aggregated_data('surfaces', year, region)
     # nombre de certificats fonciers
-    certificats = _get_monthly_aggregated_data('certificats', year, region)
+    certificats = get_monthly_aggregated_data('certificats', year, region)
 
-    nom_region = _get_region(region)
+    nom_region = get_region(region)
 
     title = "Surfaces et certificats fonciers - %s %s" % (nom_region, year)
 
@@ -151,7 +151,7 @@ def graphe_surface_moyen(request, year, region=None, output='page'):
     return response
 
 
-def _get_monthly_aggregated_data(indicateur, year, region=None, cumul=False):
+def get_monthly_aggregated_data(indicateur, year, region=None, cumul=False):
     try:
         values = [0 for x in range(12)]
         if cumul:
@@ -185,7 +185,7 @@ def _get_monthly_aggregated_data(indicateur, year, region=None, cumul=False):
     return data
 
 
-def _get_region(region_id):
+def get_region(region_id):
     nom_region = ''
     if region_id is not None:
         obj = Region.objects.filter(pk=int(region_id))
@@ -194,7 +194,7 @@ def _get_region(region_id):
     return nom_region
 
 
-def _get_year(year):
+def get_year(year):
     if year is None:
         year = datetime.datetime.now().year
     return year
@@ -225,7 +225,7 @@ def surface_moyen(request):
         if len(request.POST['region']) > 0:
             region = request.POST['region']
 
-    year = _get_year(year)
+    year = get_year(year)
     graph = "surface_moyen_%s_%s.png" % (year, region)
     return render_to_response('plots/graph.html', {'form': form,
                                                    'graph': graph, 'title': 'Surface et certificat foncier'},
@@ -244,7 +244,7 @@ def ratio(request):
         if len(request.POST['indicateur']) > 0:
             ratio_id = request.POST['indicateur']
 
-    year = _get_year(year)
+    year = get_year(year)
     graph = "ratio_%s_%s_%s.png" % (year, ratio_id, region)
     return render_to_response('plots/graph.html', {'form': form,
                                                    'graph': graph, 'title': 'Ratios'},
@@ -261,7 +261,7 @@ def guichet_foncier(request):
         if len(request.POST['region']) > 0:
             region = request.POST['region']
 
-    year = _get_year(year)
+    year = get_year(year)
     graph = "guichet_foncier_%s_%s.png" % (year, region)
     return render_to_response('plots/graph.html', {'form': form,
                                                    'graph': graph, 'title': 'Guichets fonciers'},

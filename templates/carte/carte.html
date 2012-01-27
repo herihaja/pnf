@@ -1,0 +1,22 @@
+{% extends 'layout_content.html' %}
+{% block content %}
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" method="post" id="form-filter">
+                {% csrf_token %}
+                <ul>
+                    {{ form.as_ul }}
+                </ul>
+                <div class="clear-l"></div>
+                <input type="submit" value="Rechercher" id="btn_submit" />
+{#                <input type="button" value="Export Jpeg" id="btn_export_jpg" />#}
+{#                <input type="button" value="Export Pdf" id="btn_export_pdf" />#}
+                <div class="clear-l"></div>
+            </form>
+        </div>
+    </div>
+    <div align="center">
+        <img src="{{ carte }}" alt="" />
+    </div>
+{% endblock %}
