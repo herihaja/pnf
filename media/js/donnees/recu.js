@@ -1,3 +1,4 @@
+var url_delete = '/recu/supprimer/0';
 $(document).ready(function() {
     oTable = $('#example').dataTable({
         "bProcessing": true,
@@ -7,6 +8,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/recu/ajax/',
         "aoColumns": [
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Commune", "mDataProp": "commune", "bSortable": false },
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px", "bSortable": false },
             { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px", "bSortable": false },
@@ -39,7 +41,10 @@ $(document).ready(function() {
                 "success": fnCallback
             } );
         },
-        "sDom": 'rt<"F"lip>'
+        "sDom": 'rt<"F"lip>',
+        "fnDrawCallback": function( oSettings ) {
+            bind_checkbox();
+        }
     });
 
     $('#form-filter').submit(function(){
@@ -90,4 +95,6 @@ $(document).ready(function() {
         var data = $("#form-filter").serialize();
         window.location.href = '/recu/export/pdf/?' + data;
     });
+
+
 } );

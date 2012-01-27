@@ -1,3 +1,4 @@
+var url_delete = '/communications/supprimer/';
 $(document).ready(function() {
     $('#id_cree_de').datepicker({
         changeMonth: true,
@@ -18,6 +19,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/communications/ajax/',
         "aoColumns": [
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
             { "sTitle": "Commune", "mDataProp": "commune" },
             { "sTitle": "Code", "mDataProp": "code" },
@@ -39,7 +41,10 @@ $(document).ready(function() {
                 "success": fnCallback
             } );
         },
-        "sDom": 'rt<"F"lip>'
+        "sDom": 'rt<"F"lip>',
+        "fnDrawCallback": function( oSettings ) {
+            bind_checkbox();
+        }
     });
 
     $('#form-filter').submit(function(){

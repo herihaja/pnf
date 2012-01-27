@@ -1,5 +1,7 @@
 {% extends 'layout_content.html' %}
 {% block page_js %}
+    <script type="text/javascript" src="/media/js/csrf_token_handler.js"></script>
+    <script type="text/javascript" src="/media/js/checkbox.js"></script>
     <script type="text/javascript">
         var csrf = '{{ csrf_token }}';
     </script>
@@ -20,6 +22,7 @@
                 <input type="submit" value="Rechercher" id="btn_submit" />
                 <input type="button" value="Export Excel" id="btn_export_xls" />
                 <input type="button" value="Export Pdf" id="btn_export_pdf" />
+                <input type="button" value="Supprimer les sélectionés" id="bulk-delete" style="width: 178px;"/>
                 <div class="clear-l"></div>
             </form>
         </div>

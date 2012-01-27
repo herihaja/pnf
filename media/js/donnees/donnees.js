@@ -1,3 +1,4 @@
+var url_delete = '/donnees/supprimer/0';
 $(document).ready(function() {
     $('label[for="id_demandes"]').parent().css({'clear': 'left'});
     $('label[for="id_recettes"]').parent().css({'clear': 'left'});
@@ -69,6 +70,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/donnees/ajax/',
         "aoColumns": [
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Commune", "mDataProp": "commune" },
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px" },
             { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px" },
@@ -116,7 +118,10 @@ $(document).ready(function() {
                 "success": fnCallback
             } );
         },
-        "sDom": 'rt<"F"lip>'
+        "sDom": 'rt<"F"lip>',
+        "fnDrawCallback": function( oSettings ) {
+            bind_checkbox();
+        }
     });
 
     $('#form-filter').submit(function(){

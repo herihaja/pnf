@@ -1,3 +1,4 @@
+var url_delete = '/envoi/supprimer/0';
 $(document).ready(function() {
     $('label[for="id_etat"]').parent().css({'clear': 'left'});
     $('#id_cree_de').datepicker({
@@ -19,6 +20,7 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/envois/ajax/',
         "aoColumns": [
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Date / Heure", "mDataProp": "date_envoi", "sWidth": "100px" },
             { "sTitle": "Destinataire", "mDataProp": "numero", "sWidth": "80px" },
             { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
@@ -41,7 +43,10 @@ $(document).ready(function() {
                 "success": fnCallback
             } );
         },
-        "sDom": 'rt<"F"lip>'
+        "sDom": 'rt<"F"lip>',
+        "fnDrawCallback": function( oSettings ) {
+            bind_checkbox();
+        }
     });
 
     $('#form-filter').submit(function(){

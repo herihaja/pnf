@@ -51,7 +51,11 @@ def lister_reception(request, statut='1'):
 
 @login_required(login_url="/connexion")
 def supprimer_sms(request, sms_id=None):
-    obj = get_object_or_404(Reception, pk=sms_id)
+    if request.method == "POST":
+        selected = request.POST.getlist("selected[]")
+        obj = Reception.objects.filter(pk__in = selected)
+    else:
+        obj = get_object_or_404(Reception, pk=sms_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
@@ -59,7 +63,11 @@ def supprimer_sms(request, sms_id=None):
 
 @login_required(login_url="/connexion")
 def supprimer_envoi(request, sms_id=None):
-    obj = get_object_or_404(Envoi, pk=sms_id)
+    if request.method == "POST":
+        selected = request.POST.getlist("selected[]")
+        obj = Envoi.objects.filter(pk__in = selected)
+    else:
+        obj = get_object_or_404(Envoi, pk=sms_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
@@ -92,7 +100,9 @@ def ajax_reception(request):
     results = []
     for row in records:
         edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_sms, args=[row.id]),)
+        checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
+            checkbox = checkbox,
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             numero = row.expediteur,
             message = row.message,
@@ -157,7 +167,9 @@ def ajax_envoi(request):
 
     for row in records:
         edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_envoi, args=[row.id]),)
+        checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
+            checkbox = checkbox,
             date_envoi = datetime.strftime(row.date_envoi, "%d-%m-%Y %H:%M:%S"),
             numero = row.destinataire,
             message = row.message,
@@ -432,7 +444,9 @@ def ajax_communication(request):
     records, total_records, display_records = query_datatables(Communication, columns, post, **kwargs)
     results = []
     for row in records:
+        checkbox = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
+            checkbox = checkbox,
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             commune = row.commune.nom,
             code = row.commune.code,
@@ -547,3 +561,14 @@ def export_communication(request, filetype=None):
     else:
         response = export_pdf(columns, dataset, 'messages')
     return response
+
+@login_required(login_url="/connexion")
+def supprimer_communication(request):
+    if request.method == "POST":
+        selected = request.POST.getlist("selected[]")
+        obj = Communication.objects.filter(pk__in = selected)
+    else:
+        obj = get_object_or_404(Communication, pk=sms_id)
+    obj.delete()
+    json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
+    return HttpResponse(json, mimetype='application/json')

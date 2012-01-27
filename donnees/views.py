@@ -12,6 +12,7 @@ import simplejson
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from localites.forms import FiltreCommuneForm
+from django.views.decorators.csrf import csrf_view_exempt
 
 @login_required(login_url="/connexion")
 def lister_donnees(request):
@@ -75,11 +76,13 @@ def ajax_donnees(request):
     for row in records:
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_donnees, args=[row.id]),)
+        checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         if row.valide:
             valide = 'Oui'
         else:
             valide = 'Non'
         result = dict(
+            checkbox = checkbox,
             id = row.id,
             commune = row.commune.nom,
             code = row.commune.code,
@@ -154,7 +157,11 @@ def editer_donnees(request, donnee_id=None):
 
 @login_required(login_url="/connexion")
 def supprimer_donnees(request, donnee_id=None):
-    obj = get_object_or_404(Donnees, pk=donnee_id)
+    if request.method == "POST":
+        selected = request.POST.getlist("selected[]")
+        obj = Donnees.objects.filter(pk__in = selected)
+    else:
+        obj = get_object_or_404(Donnees, pk=donnee_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
@@ -281,10 +288,14 @@ def lister_rejete(request):
     return render_to_response('layout_list.html', {"title": title, "form": form, "page_js": page_js},
                               context_instance=RequestContext(request))
 
-
+@csrf_view_exempt
 @login_required(login_url="/connexion")
 def supprimer_recu(request, recu_id=None):
-    obj = get_object_or_404(Recu, pk=recu_id)
+    if request.method == "POST":
+        selected = request.POST.getlist("selected[]")
+        obj = Recu.objects.filter(pk__in = selected)
+    else:
+        obj = get_object_or_404(Recu, pk=recu_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
@@ -409,7 +420,9 @@ def ajax_recu(request):
     for row in records:
         edit_link = '<a href="%s">[Tester]</a>' % (reverse(tester_recu, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_recu, args=[row.id]),)
+        checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
+            checkbox = checkbox,
             id = row.id,
             commune = row.commune.nom,
             code = row.commune.code,
