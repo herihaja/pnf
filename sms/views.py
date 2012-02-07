@@ -275,14 +275,15 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
 
 
 def cron_process_sms(sms):
-    if sms.sendernumber != '0335600080':
-        type_sms = process_sms(sms.sendernumber, sms.textdecoded, sms.receivingdatetime, sms.recipientid)
-    else:
-        type_sms = 2
-
     # marquer comme traite
     sms.processed = True
     sms.save()
+
+    #traiter
+    if sms.sendernumber != '0335600080':
+        process_sms(sms.sendernumber, sms.textdecoded, sms.receivingdatetime, sms.recipientid)
+
+
 
 
 def _parser_sms(message):
