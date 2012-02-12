@@ -19,11 +19,11 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/communications/ajax/',
         "aoColumns": [
-            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Date / Heure", "mDataProp": "date_reception", "sWidth": "100px" },
             { "sTitle": "Commune", "mDataProp": "commune" },
             { "sTitle": "Code", "mDataProp": "code" },
-            { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" }
+            { "sTitle": "Message", "mDataProp": "message", "bSortable": false, "sWidth": "400px" },
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -44,7 +44,8 @@ $(document).ready(function() {
         "sDom": 'rt<"F"lip>',
         "fnDrawCallback": function( oSettings ) {
             bind_checkbox();
-        }
+        },
+        "aaSorting": [[ 0, "desc" ]]
     });
 
     $('#form-filter').submit(function(){
