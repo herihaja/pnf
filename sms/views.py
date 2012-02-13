@@ -480,7 +480,6 @@ def _inject_in_outbox(smsc, numero, texte):
     outgoing_sms.save()
 
 
-@login_required(login_url="/connexion")
 def send_sms(smsc, numero, texte):
     _inject_in_outbox(smsc, numero, texte)
 
@@ -507,13 +506,14 @@ def _get_operateur(numero):
         operateur = None
     return operateur
 
+
+@login_required(login_url="/connexion")
 def sms_broadcast(request):
     if request.method == 'GET':
         form = BroadcastForm()
         return render_to_response('sms/broadcast.html', {'form': form},
                                   context_instance=RequestContext(request))
 
-    form = BroadcastForm(request.POST)
     texte = request.POST['message']
     numeros = request.POST['destinataire']
     numeros = numeros.split(',')
@@ -526,7 +526,6 @@ def sms_broadcast(request):
     return HttpResponseRedirect(reverse(lister_envoi))
 
 
-@login_required(login_url="/connexion")
 def ajax_broadcast(request):
     # selectionner la liste des agf actifs de la localite ayant un num tel
     kwargs = {'etat': 1}
@@ -573,3 +572,17 @@ def supprimer_communication(request):
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
+
+def nettoyer_reception():
+    # pour tous les enregistrements, supprimer les doublons
+    receptions = Reception.objects.all()
+
+    prev = None
+    for row in receptions:
+        if prev is not None:
+            if row.date_reception == prev.date_reception and row.expediteur == prev.expediteur and row.message == prev.message:
+                row.delete()
+            else:
+                prev = row
+        else:
+            prev = row
