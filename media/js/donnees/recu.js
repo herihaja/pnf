@@ -8,7 +8,6 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/recu/ajax/',
         "aoColumns": [
-            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Commune", "mDataProp": "commune", "bSortable": false },
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px", "bSortable": false },
             { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px", "bSortable": false },
@@ -22,7 +21,8 @@ $(document).ready(function() {
             { "sTitle": "Gar", "mDataProp": "garanties", "sWidth": "30px", "bSortable": false },
             { "sTitle": "Reco", "mDataProp": "reconnaissances", "sWidth": "30px", "bSortable": false },
             { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "30px", "bSortable": false },
-            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px", "bSortable": false }
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px", "bSortable": false },
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -44,7 +44,8 @@ $(document).ready(function() {
         "sDom": 'rt<"F"lip>',
         "fnDrawCallback": function( oSettings ) {
             bind_checkbox();
-        }
+        },
+        "aaSorting": [[ 2, "desc" ]]
     });
 
     $('#form-filter').submit(function(){

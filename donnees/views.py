@@ -82,7 +82,6 @@ def ajax_donnees(request):
         else:
             valide = 'Non'
         result = dict(
-            checkbox = checkbox,
             id = row.id,
             commune = row.commune.nom,
             code = row.commune.code,
@@ -99,6 +98,7 @@ def ajax_donnees(request):
             mutations = row.garanties,
             valide = valide,
             actions = edit_link,
+            checkbox = checkbox,
         )
         results.append(result)
 
@@ -422,7 +422,6 @@ def ajax_recu(request):
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_recu, args=[row.id]),)
         checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
-            checkbox = checkbox,
             id = row.id,
             commune = row.commune.nom,
             code = row.commune.code,
@@ -438,6 +437,7 @@ def ajax_recu(request):
             reconnaissances = row.reconnaissances,
             mutations = row.mutations,
             actions = edit_link,
+            checkbox = checkbox,
         )
         results.append(result)
 

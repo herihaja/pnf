@@ -70,7 +70,6 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/donnees/ajax/',
         "aoColumns": [
-            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false },
             { "sTitle": "Commune", "mDataProp": "commune" },
             { "sTitle": "Code", "mDataProp": "code", "sWidth": "60px" },
             { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px" },
@@ -85,7 +84,8 @@ $(document).ready(function() {
             { "sTitle": "Reco", "mDataProp": "reconnaissances", "sWidth": "30px" },
             { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "30px" },
             { "sTitle": "Validé", "mDataProp": "valide", "sWidth": "30px" },
-            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" }
+            { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px" },
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -121,7 +121,8 @@ $(document).ready(function() {
         "sDom": 'rt<"F"lip>',
         "fnDrawCallback": function( oSettings ) {
             bind_checkbox();
-        }
+        },
+        "aaSorting": [[ 2, "desc" ]]
     });
 
     $('#form-filter').submit(function(){

@@ -75,7 +75,7 @@ def supprimer_envoi(request, sms_id=None):
 
 def ajax_reception(request):
     # columns titles
-    columns = ['date_reception', 'numero', 'message', 'statut', 'reponse']
+    columns = ['date_reception', 'expediteur', 'message', 'statut', 'reponse']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -102,12 +102,12 @@ def ajax_reception(request):
         edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_sms, args=[row.id]),)
         checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
-            checkbox = checkbox,
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             numero = row.expediteur,
             message = row.message,
             reponse = row.retour,
             actions = edit_link,
+            checkbox = checkbox,
         )
         results.append(result)
 
@@ -169,11 +169,11 @@ def ajax_envoi(request):
         edit_link = '<a href="%s" class="del-link">[Suppr]</a>' % ( reverse(supprimer_envoi, args=[row.id]),)
         checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
-            checkbox = checkbox,
             date_envoi = datetime.strftime(row.date_envoi, "%d-%m-%Y %H:%M:%S"),
             numero = row.destinataire,
             message = row.message,
             actions = edit_link,
+            checkbox = checkbox,
         )
         results.append(result)
 
@@ -447,11 +447,11 @@ def ajax_communication(request):
     for row in records:
         checkbox = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
         result = dict(
-            checkbox = checkbox,
             date_reception = datetime.strftime(row.date_reception, "%d-%m-%Y %H:%M:%S"),
             commune = row.commune.nom,
             code = row.commune.code,
             message = row.message,
+            checkbox = checkbox,
         )
         results.append(result)
 
