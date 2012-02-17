@@ -15,7 +15,7 @@ import datetime
 from donnees.models import Cumul
 from carte.forms import FiltreRatioForm
 from plots.views import get_year, get_region
-from local_settings import project_root
+from settings import PROJECT_DIR
 
 MAP_LABELS = [u"de 0 à 0,25", u"de 0,25 à 0,5", u"de 0,5 à 0,75", u"de 0,75 à 1"]
 RATIOS = [{'key': 'rcertificats', 'label': u'Taux de certification', 'colors': ['#d1ecfe', '#a6d8fd', '#6ca1fd', '#3377fc'], 'limits': [0.25, 0.5, 0.75], 'labels': MAP_LABELS},
@@ -40,7 +40,7 @@ def _get_carte_carte(region, communes, ratio=None, title=""):
     ax.get_yaxis().set_visible(False)
 
     # Open a shapefile
-    shpFile = ogr.Open(project_root + "media/shapefiles/commune.shp")
+    shpFile = ogr.Open(PROJECT_DIR + "/media/shapefiles/commune.shp")
     layer = shpFile.GetLayer(0)
 
     # Liste des communes
