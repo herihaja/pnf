@@ -21,8 +21,9 @@ $(document).ready(function() {
             { "sTitle": "Gar", "mDataProp": "garanties", "sWidth": "30px", "bSortable": false },
             { "sTitle": "Reco", "mDataProp": "reconnaissances", "sWidth": "30px", "bSortable": false },
             { "sTitle": "Mut", "mDataProp": "mutations", "sWidth": "30px", "bSortable": false },
+            { "sTitle": "Dbl", "mDataProp": "doublon", "sWidth": "30px", "bSortable": false },
             { "sTitle": "Actions", "mDataProp": "actions", "sWidth": "80px", "bSortable": false },
-            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "bSortable": false }
+            { "sTitle": "<input type=\"checkbox\" id=\"checkall\"/>", "mDataProp": "checkbox", "sWidth": "30px", "bSortable": false }
         ],
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
@@ -31,15 +32,16 @@ $(document).ready(function() {
                 {"name": "fRegion", "value": $('#id_region').val()},
                 {"name": "fCommune", "value": $('#id_commune').val()},
                 {"name": "fDistrict", "value": $('#id_district').val()},
-                {"name": "fCode", "value": $('#id_code').val()}
+                {"name": "fCode", "value": $('#id_code').val()},
+                {"name": "fDoublon", "value": $('#id_doublon').val()}
             );
-            $.ajax( {
+            $.ajax({
                 "dataType": 'json',
                 "type": "POST",
                 "url": sSource,
                 "data": {"csrfmiddlewaretoken": csrf, "data": aoData},
                 "success": fnCallback
-            } );
+            });
         },
         "sDom": 'rt<"F"lip>',
         "fnDrawCallback": function( oSettings ) {

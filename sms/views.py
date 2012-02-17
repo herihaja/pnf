@@ -213,9 +213,19 @@ def sms_tester(request):
         return render_to_response('sms/tester.html', {'form': form},
                                   context_instance=RequestContext(request))
 
+def _check_for_duplicates(commune, periode):
+    doublon = False
+    envoi = Recu.objects.filter(commune=commune, periode=periode, rejete=False)
+    if len(envoi) > 0:
+        doublon = True
+    return  doublon
+
 
 def process_sms(sendernumber, message, receiving_date, recipient=None):
     type_sms, reponse, data, texte = _parser_sms(message)
+
+    # verifier doublon
+    doublon = _check_for_duplicates(data['commune'], data['periode'])
 
     # enregistrer le sms
     reception = Reception(
@@ -223,6 +233,7 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
             expediteur = sendernumber,
             message = message,
             statut = type_sms,
+            doublon = doublon,
             retour = reponse,
         )
     reception.save()
@@ -252,10 +263,11 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
             garanties = data['garanties'],
             reconnaissances = data['reconnaissances'],
             mutations = data['mutations'],
+            doublon = doublon,
         )
         donnees.save()
 
-        if texte != '':
+        if texte == '':
             texte = 'tsy misy'
         message = Communication(
             commune = data['commune'],
@@ -282,8 +294,6 @@ def cron_process_sms(sms):
     #traiter
     if sms.sendernumber != '0335600080':
         process_sms(sms.sendernumber, sms.textdecoded, sms.receivingdatetime, sms.recipientid)
-
-
 
 
 def _parser_sms(message):

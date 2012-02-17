@@ -27,6 +27,12 @@ def lister_donnees(request):
                               context_instance=RequestContext(request))
 
 
+def _yes_no(value):
+    if value:
+        return 'Oui'
+    return 'Non'
+
+
 def ajax_donnees(request):
     # columns titles
     columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'valide', 'actions']
@@ -77,10 +83,6 @@ def ajax_donnees(request):
         edit_link = '<a href="%s">[Edit]</a>' % (reverse(editer_donnees, args=[row.id]),)
         edit_link = '%s <a href="%s" class="del-link">[Suppr]</a>' % (edit_link, reverse(supprimer_donnees, args=[row.id]),)
         checkbox  = '<input type="checkbox" name=\"selected\" class="check-element" value="%s"/>' % row.id
-        if row.valide:
-            valide = 'Oui'
-        else:
-            valide = 'Non'
         result = dict(
             id = row.id,
             commune = row.commune.nom,
@@ -96,7 +98,7 @@ def ajax_donnees(request):
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
             mutations = row.garanties,
-            valide = valide,
+            valide = _yes_no(row.valide),
             actions = edit_link,
             checkbox = checkbox,
         )
@@ -288,11 +290,12 @@ def lister_rejete(request):
     return render_to_response('layout_list.html', {"title": title, "form": form, "page_js": page_js},
                               context_instance=RequestContext(request))
 
+
 @csrf_view_exempt
 @login_required(login_url="/connexion")
 def supprimer_recu(request, recu_id=None):
-    if request.method == "POST":
-        selected = request.POST.getlist("selected[]")
+    selected = request.POST.getlist("selected[]")
+    if len(selected) > 0:
         obj = Recu.objects.filter(pk__in = selected)
     else:
         obj = get_object_or_404(Recu, pk=recu_id)
@@ -372,7 +375,7 @@ def rejeter_recu(request, recu_id=None):
 
 def ajax_recu(request):
     # columns titles
-    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'valide', 'actions']
+    columns = ['commune', 'code', 'periode', 'demandes', 'oppositions', 'resolues', 'certificats', 'femmes', 'surfaces', 'recettes', 'garanties', 'reconnaissances', 'mutations', 'doublon', 'valide', 'actions']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -388,31 +391,8 @@ def ajax_recu(request):
         else:
             if 'fRegion' in post and post['fRegion'] != '':
                 kwargs['commune__district__region'] = post['fRegion']
-
-    # filtering of indicateurs
-    '''for i in range(3, 12):
-        post_key = 'f%s' % (columns[i].capitalize(),)
-        if post_key in post and post[post_key] != '':
-            key, value = create_compare_condition(columns[i], post[post_key])
-            kwargs[key] = value
-
-    if 'fPeriodeDe' in post and post['fPeriodeDe'] != '':
-        cree_de = datetime.strptime(post['fPeriodeDe'], "%d/%m/%Y")
-        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
-        kwargs['periode__gte'] = cree_de
-    if 'fPeriodeA' in post and post['fPeriodeA'] != '':
-        cree_a = datetime.strptime(post['fPeriodeA'], "%d/%m/%Y")
-        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
-        kwargs['periode__lte'] = cree_a
-
-    if 'fRecuDe' in post and post['fRecuDe'] != '':
-        recu_de = datetime.strptime(post['fRecuDe'], "%d/%m/%Y")
-        recu_de = datetime.strftime(recu_de, "%Y-%m-%d")
-        kwargs['reception__gte'] = recu_de
-    if 'fRecuA' in post and post['fRecuA'] != '':
-        recu_a = datetime.strptime(post['fRecuA'], "%d/%m/%Y")
-        recu_a = datetime.strftime(recu_a, "%Y-%m-%d")
-        kwargs['reception__lte'] = recu_a'''
+    if 'fDoublon' in post and post['fDoublon'] != '':
+        kwargs['doublon'] = str(post['fDoublon'])
 
     records, total_records, display_records = query_datatables(Recu, columns, post, **kwargs)
     results = []
@@ -436,6 +416,7 @@ def ajax_recu(request):
             garanties = row.garanties,
             reconnaissances = row.reconnaissances,
             mutations = row.mutations,
+            doublon = _yes_no(row.doublon),
             actions = edit_link,
             checkbox = checkbox,
         )
@@ -466,31 +447,6 @@ def ajax_rejete(request):
         else:
             if 'fRegion' in post and post['fRegion'] != '':
                 kwargs['commune__district__region'] = post['fRegion']
-
-    # filtering of indicateurs
-    '''for i in range(3, 12):
-        post_key = 'f%s' % (columns[i].capitalize(),)
-        if post_key in post and post[post_key] != '':
-            key, value = create_compare_condition(columns[i], post[post_key])
-            kwargs[key] = value
-
-    if 'fPeriodeDe' in post and post['fPeriodeDe'] != '':
-        cree_de = datetime.strptime(post['fPeriodeDe'], "%d/%m/%Y")
-        cree_de = datetime.strftime(cree_de, "%Y-%m-%d")
-        kwargs['periode__gte'] = cree_de
-    if 'fPeriodeA' in post and post['fPeriodeA'] != '':
-        cree_a = datetime.strptime(post['fPeriodeA'], "%d/%m/%Y")
-        cree_a = datetime.strftime(cree_a, "%Y-%m-%d")
-        kwargs['periode__lte'] = cree_a
-
-    if 'fRecuDe' in post and post['fRecuDe'] != '':
-        recu_de = datetime.strptime(post['fRecuDe'], "%d/%m/%Y")
-        recu_de = datetime.strftime(recu_de, "%Y-%m-%d")
-        kwargs['reception__gte'] = recu_de
-    if 'fRecuA' in post and post['fRecuA'] != '':
-        recu_a = datetime.strptime(post['fRecuA'], "%d/%m/%Y")
-        recu_a = datetime.strftime(recu_a, "%Y-%m-%d")
-        kwargs['reception__lte'] = recu_a'''
 
     records, total_records, display_records = query_datatables(Recu, columns, post, **kwargs)
     results = []

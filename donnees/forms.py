@@ -45,7 +45,13 @@ class FiltreDonneesForm(Form):
     recu_a = forms.CharField(label='et', required=False)
 
 class FiltreRecuForm(Form):
+    CHOIX_DOUBLON = (
+        ('', '---'),
+        ('0', 'Non'),
+        ('1', 'Oui'),
+    )
     region = forms.ModelChoiceField(label='Région', queryset=Region.objects.all(), required=False)
     district = forms.ChoiceField(label='District', choices=EMPTY_LIST, required=False)
     commune = forms.ChoiceField(label='Commune', choices=EMPTY_LIST, required=False)
     code = forms.CharField(max_length=6, required=False)
+    doublon = forms.ChoiceField(label='Doublon', choices=CHOIX_DOUBLON, required=False)

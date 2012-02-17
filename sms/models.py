@@ -40,6 +40,7 @@ class Reception(Model):
     expediteur = models.CharField(max_length=20)
     message = models.CharField(max_length=160)
     statut = models.CharField(max_length=1, choices=CHOIX_STATUT)
+    doublon = models.BooleanField(default=False)
     retour = models.CharField(max_length=160)
     ajout = models.DateTimeField(auto_now_add=True)
 
