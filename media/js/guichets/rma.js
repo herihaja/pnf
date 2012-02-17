@@ -31,10 +31,11 @@ $(document).ready(function() {
         "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tout"]],
         "sAjaxSource": '/rma/envoi/ajax/',
         "aoColumns": [
+            { "sTitle": "Commune", "mDataProp": "commune" },
+            { "sTitle": "Période", "mDataProp": "periode", "sWidth": "60px", "bSortable": false },
+            { "sTitle": "Reçu", "mDataProp": "reception", "sWidth": "140px", "bSortable": false },
             { "sTitle": "Région", "mDataProp": "region"},
             { "sTitle": "District", "mDataProp": "district"},
-            { "sTitle": "Commune", "mDataProp": "commune" },
-            { "sTitle": "Reçu le", "mDataProp": "reception", "sWidth": "140px", "bSortable": false },
             { "sTitle": "Sms", "mDataProp": "statut", "sWidth": "60px", "bSortable": false },
             { "sTitle": "AGF", "mDataProp": "agf", "sWidth": "60px", "bSortable": false }
         ],

@@ -308,7 +308,7 @@ def _create_condition_for_envoi_rma(post):
 def ajax_envoi_rma(request):
     # columns titles
     columns = ['guichet__commune__district__region', 'guichet__commune__district',
-               'guichet__commune', 'sms__date_reception', 'sms__statut', 'agf']
+               'guichet__commune', 'sms__date_reception', 'sms__statut', 'agf', 'periode']
 
     # filtering
     post = process_datatables_posted_vars(request.POST)
@@ -316,12 +316,19 @@ def ajax_envoi_rma(request):
     records, total_records, display_records = query_datatables(Rma, columns, post, **kwargs)
     results = []
     for row in records:
+        if row.sms is not None:
+            reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S")
+            statut = row.sms.get_statut_display()
+        else:
+            reception = 'Non'
+            statut = ''
         result = dict(
             region = row.guichet.commune.district.region.nom,
             district = row.guichet.commune.district.nom,
             commune = row.guichet.commune.nom,
-            reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S"),
-            statut = row.sms.get_statut_display(),
+            periode = datetime.strftime(row.periode, "%m-%Y"),
+            reception = reception,
+            statut = statut,
             agf = row.agf,
         )
         results.append(result)
@@ -335,7 +342,7 @@ def ajax_envoi_rma(request):
 
 @login_required(login_url="/connexion")
 def export_envoi_rma(request, filetype=None):
-    columns = [u'Region', u'District', u'Commune', u'Reception', u'Statut', 'Agf']
+    columns = [u'Commune', u'Période', u'Region', u'District', u'Reception', u'Statut', u'Agf']
 
     post = process_datatables_posted_vars(request.POST)
     kwargs = _create_condition_for_envoi_rma(post)
@@ -343,11 +350,17 @@ def export_envoi_rma(request, filetype=None):
 
     dataset = []
     for row in records:
-        reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S")
-        row_list = [row.guichet.commune.district.region.nom,
+        if row.sms is not None:
+            reception = datetime.strftime(row.sms.date_reception, "%d-%m-%Y %H:%M:%S")
+            statut = row.sms.get_statut_display()
+        else:
+            reception = 'Non'
+            statut = ''
+        row_list = [row.guichet.commune.nom,
+                    datetime.strftime(row.periode, "%m-%Y"),
+                    row.guichet.commune.district.region.nom,
                     row.guichet.commune.district.nom,
-                    row.guichet.commune.nom,
-                    reception, row.sms.get_statut_display(), row.agf]
+                    reception, statut, row.agf]
         dataset.append(row_list)
 
     if filetype == 'xls':

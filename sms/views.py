@@ -239,13 +239,12 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
     reception.save()
 
     if type_sms != 3 and 'periode' in data:
-        rma = Rma(
-            guichet = data['guichet'],
-            sms = reception,
-            periode = data['periode'],
-            agf = data['agf'],
-        )
-        rma.save()
+        obj, create = Rma.objects.get_or_create(guichet = data['guichet'], periode = data['periode'],
+                                      defaults={'agf': data['agf'], 'sms': reception})
+        if not create:
+            obj.sms = reception
+            obj.agf = data['agf']
+            obj.save()
 
     # si message valide enregistrer pour test
     if type_sms == 1:
