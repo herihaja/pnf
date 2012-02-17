@@ -581,17 +581,3 @@ def supprimer_communication(request):
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
-
-def nettoyer_reception():
-    # pour tous les enregistrements, supprimer les doublons
-    receptions = Reception.objects.all()
-
-    prev = None
-    for row in receptions:
-        if prev is not None:
-            if row.date_reception == prev.date_reception and row.expediteur == prev.expediteur and row.message == prev.message:
-                row.delete()
-            else:
-                prev = row
-        else:
-            prev = row
