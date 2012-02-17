@@ -13,9 +13,9 @@ class Command(BaseCommand):
         prev = datetime.now()
         print "%s enregistrements" % (len(receptions),)
         for row in receptions:
-            if prev-row.date_reception == 0:
+            td = prev - row.date_reception
+            if td == datetime.timedelta(0):
                 row.delete()
-                print "deleting %s %s" % (row.date_reception, row.expediteur)
             else:
                 prev = row.date_reception
 
