@@ -12,12 +12,9 @@ class Command(BaseCommand):
         prev = None
         print "%s enregistrements" % (len(receptions),)
         for row in receptions:
-            if prev is not None:
-                if row.date_reception == prev.date_reception and row.expediteur == prev.expediteur and row.message == prev.message:
-                    row.delete()
-                    print "deleting %s %s" % (row.date_reception, row.expediteur)
-                else:
-                    prev = row
+            if prev == row.date_reception:
+                row.delete()
+                print "deleting %s %s" % (row.date_reception, row.expediteur)
             else:
-                prev = row
+                prev = row.date_reception
 
