@@ -2,6 +2,7 @@
 
 import django
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db.models.aggregates import Count, Sum
 from django.http import HttpResponse
@@ -20,6 +21,7 @@ from guichets.models import Guichet
 XTICK = np.arange(12)
 BARWIDTH = 0.4
 MONTHS = ['Jan', u'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', u'Déc']
+
 
 def graphe_guichets(request, year, region=None, output='page'):
     # nombre des nouveaux guichets par mois
@@ -215,6 +217,8 @@ def _set_graph_fontstyle(ax1, legend, ax2=None):
     for t in legend.get_texts():
         t.set_fontsize(10)
 
+
+@login_required(login_url="/connexion")
 def surface_moyen(request):
     year = datetime.datetime.now().year - 1
     form = FiltreForm(initial={'annee': year})
@@ -232,6 +236,7 @@ def surface_moyen(request):
                                           context_instance=RequestContext(request))
 
 
+@login_required(login_url="/connexion")
 def ratio(request):
     year = datetime.datetime.now().year - 1
     form = FiltreRatioForm(initial={'annee': year})
@@ -251,6 +256,7 @@ def ratio(request):
                                           context_instance=RequestContext(request))
 
 
+@login_required(login_url="/connexion")
 def guichet_foncier(request):
     year = datetime.datetime.now().year - 1
     form = FiltreForm(initial={'annee': year})

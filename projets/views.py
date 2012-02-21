@@ -10,6 +10,7 @@ from projets.forms import ProjetForm, FiltreProjetForm
 from helpers import export_excel, process_datatables_posted_vars, query_datatables
 import simplejson
 
+@login_required(login_url="/connexion")
 def lister_projet(request):
     if request.method == 'GET':
         form = FiltreProjetForm()
@@ -21,6 +22,8 @@ def lister_projet(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ajouter_projet(request):
     if request.method == 'GET':
         form = ProjetForm()
@@ -35,6 +38,8 @@ def ajouter_projet(request):
         return render_to_response('projets/ajouter_projet.html', {'form': form, 'title': 'Ajouter un projet'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_projet(request, projet_id=None):
     obj = get_object_or_404(Projet, pk=projet_id)
 
@@ -51,17 +56,22 @@ def editer_projet(request, projet_id=None):
         return render_to_response('projets/ajouter_projet.html', {'form': form, 'title': 'Editer un projet'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_projet(request, projet_id=None):
     obj = get_object_or_404(Projet, pk=projet_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_projet(request):
     columns = [u'Nom', u'Bailleur']
     dataset = Projet.objects.filter_for_xls(request.GET)
     response = export_excel(columns, dataset, 'projets')
     return response
+
 
 def ajax_projet(request):
     # columns titles

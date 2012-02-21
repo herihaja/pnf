@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.db.models import Q, Model, Manager
+from django.db.models import Model, Manager
 
 class BailleurManager(Manager):
     def filter_for_xls(self, post):

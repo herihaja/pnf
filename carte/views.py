@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 from django.template.context import RequestContext
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -137,6 +138,7 @@ def carte_ratio(request, year=None, ratio=0, region=None, output='page'):
     return response
 
 
+@login_required(login_url="/connexion")
 def ratio(request, ratio=0):
     year = datetime.datetime.now().year - 1
     form = FiltreRatioForm(initial={'annee': year, 'region': 1})

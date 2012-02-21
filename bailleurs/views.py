@@ -9,8 +9,8 @@ from bailleurs.models import Bailleur
 from bailleurs.forms import BailleurForm, FiltreBailleurForm
 from helpers import export_excel, process_datatables_posted_vars, query_datatables, export_pdf
 import simplejson
-from projets.models import Projet
 
+@login_required(login_url="/connexion")
 def lister_bailleur(request):
     if request.method == 'GET':
         form = FiltreBailleurForm()
@@ -22,6 +22,8 @@ def lister_bailleur(request):
     return render_to_response('layout_list.html', {"form": form, "title": title, "page_js": page_js, "header_link": header_link},
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def ajouter_bailleur(request):
     if request.method == 'GET':
         form = BailleurForm()
@@ -36,6 +38,8 @@ def ajouter_bailleur(request):
         return render_to_response('bailleurs/ajouter_bailleur.html', {'form': form, 'title': 'Ajouter un bailleur'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def editer_bailleur(request, bailleur_id=None):
     obj = get_object_or_404(Bailleur, pk=bailleur_id)
 
@@ -52,12 +56,16 @@ def editer_bailleur(request, bailleur_id=None):
         return render_to_response('bailleurs/ajouter_bailleur.html', {'form': form, 'title': 'Editer un bailleur'},
                                   context_instance=RequestContext(request))
 
+
+@login_required(login_url="/connexion")
 def supprimer_bailleur(request, bailleur_id=None):
     obj = get_object_or_404(Bailleur, pk=bailleur_id)
     obj.delete()
     json = simplejson.dumps([{'message': 'Enregistrement supprimé'}])
     return HttpResponse(json, mimetype='application/json')
 
+
+@login_required(login_url="/connexion")
 def export_bailleur(request, filetype=None):
     columns = [u'Nom', u'Projets']
     dataset = Bailleur.objects.filter_for_xls(request.GET)
