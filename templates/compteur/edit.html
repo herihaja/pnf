@@ -1,0 +1,21 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <a href="{% url compteur.views.index %}">&raquo; Retour à la liste</a>
+    <div id="accordion" class="edit-form">
+        <h3><a href="#">{{ title }}</a></h3>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="submit" value="Enregistrer" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.edit-form input:submit').button();
+            $('#accordion').accordion({ collapsible: false });
+        });
+    </script>
+{% endblock %}

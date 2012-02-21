@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'pnf.plots',
     'pnf.carte',
     'pnf.utilisateurs',
+    'pnf.compteur',
     'django.contrib.admin',
     'django_nose',
 )

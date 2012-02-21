@@ -1,0 +1,39 @@
+{% extends 'layout_content.html' %}
+{% block content %}
+    <div id="accordion" class="filter-form">
+        <h3><a href="#">Gestion des recharges</a></h3>
+    </div>
+
+    <table class="dataTable display" style="width: 50%">
+        <tbody>
+        {% for row in data %}
+            <tr>
+                <td>{{ row.operateur }}</td>
+                <td>{{ row.solde }}</td>
+                <td>{{ row.prix }}</td>
+                <td style="text-align: center;">
+                    <a href="{{ row.link_ajout }}">[Recharger]</a>
+                    <a href="{{ row.link_ajuste }}">[Edit]</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.dataTable').dataTable({
+                "oLanguage": {"sUrl": "/media/js/datatables.french.txt"},
+                "bFilter": false,
+                "aoColumns": [
+                    { "sTitle": "Opérateur", "bSortable": false},
+                    { "sTitle": "Solde", "sWidth": "100px", "bSortable": false},
+                    { "sTitle": "PU", "sWidth": "60px", "bSortable": false},
+                    { "sTitle": "Actions", "sWidth": "120px", "bSortable": false}
+                ],
+                "sDom": 'rt',
+                "bJQueryUI": true
+            });
+        });
+    </script>
+{% endblock %}

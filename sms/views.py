@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
+from compteur.views import update_credit_after_send
 from donnees.models import Recu
 from gammu.models import Outbox
 from guichets.models import Guichet, Rma
@@ -492,12 +493,18 @@ def _inject_in_outbox(smsc, numero, texte):
 def send_sms(smsc, numero, texte):
     _inject_in_outbox(smsc, numero, texte)
 
+    # enregistrer
     envoi = Envoi(
         date_envoi = datetime.now(),
         destinataire = numero,
         message = texte
     )
     envoi.save()
+
+    # mettre à jour compteur
+    OPERATEURS = {'airtel': 1, 'orange': 2, 'telma': 3}
+    operateur = OPERATEURS[_get_operateur(numero)]
+    update_credit_after_send(operateur)
 
 
 def _get_operateur(numero):

@@ -18,5 +18,6 @@ urlpatterns = patterns('',
                         (r'', include('pnf.plots.urls')),
                         (r'', include('pnf.carte.urls')),
                         (r'', include('pnf.utilisateurs.urls')),
+                        (r'', include('pnf.compteur.urls')),
                         url(r'^admin/', include(admin.site.urls)),
                         )

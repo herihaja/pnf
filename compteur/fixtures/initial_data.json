@@ -1,0 +1,29 @@
+[
+    {
+        "pk": 1,
+        "model": "compteur.compteur",
+        "fields": {
+            "operateur": "1",
+            "prix": 120,
+            "credit": 0
+        }
+    },
+    {
+        "pk": 2,
+        "model": "compteur.compteur",
+        "fields": {
+            "operateur": "2",
+            "prix": 120,
+            "credit": 0
+        }
+    },
+    {
+        "pk": 3,
+        "model": "compteur.compteur",
+        "fields": {
+            "operateur": "3",
+            "prix": 120,
+            "credit": 0
+        }
+    }
+]
