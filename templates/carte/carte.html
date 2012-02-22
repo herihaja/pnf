@@ -19,4 +19,31 @@
     <div align="center">
         <img src="{{ carte }}" alt="" />
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_periode').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                regional: "fr",
+                dateFormat: "mm/yy",
+                onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                },
+                beforeShow : function(input, inst) {
+                    if ((datestr = $(this).val()).length > 0) {
+                        var year = datestr.substring(datestr.length-4, datestr.length);
+                        var month = parseInt(datestr.substring(0, 2), 10)-1;
+                        $(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+                        $(this).datepicker('setDate', new Date(year, month, 1));
+                    }
+                }
+            });
+            $('#id_periode').focus(function () {
+                $(".ui-datepicker-calendar").hide();
+            });
+        });
+    </script>
 {% endblock %}
