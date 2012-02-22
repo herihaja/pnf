@@ -12,3 +12,6 @@ class FiltreRatioForm(Form):
 class FiltreRMAForm(Form):
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
     periode = forms.CharField(label='Période', required=False)
+
+class FiltreGuichetForm(Form):
+    region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)

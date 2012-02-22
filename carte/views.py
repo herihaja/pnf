@@ -14,8 +14,8 @@ from descartes import PolygonPatch
 import numpy as np
 import datetime
 from donnees.models import Cumul
-from carte.forms import FiltreRatioForm, FiltreRMAForm
-from guichets.models import Rma
+from carte.forms import FiltreRatioForm, FiltreRMAForm, FiltreGuichetForm
+from guichets.models import Rma, Guichet
 from plots.views import get_year, get_region
 from settings import PROJECT_DIR
 
@@ -26,7 +26,8 @@ RATIOS = [{'key': 'rcertificats', 'label': u'Taux de certification', 'colors': [
             {'key': 'rresolus', 'label': u'Taux de résolution', 'colors': ['#ec3626', '#f39a41', '#7ccdfd', '#3d9bca'], 'limits': [0.25, 0.5, 0.75], 'labels': MAP_LABELS},
             {'key': 'rsurface', 'label': u'Surface moyen', 'colors': ['#d6facc', '#b2f89a', '#93f568', '#67c336', '#387a06'], 'limits': [0.25, 0.75, 2.5, 5],
              'labels': [u"de 0 à 0,25", u"de 0,25 à 0,75", u"de 0,75 à 2,5", u"de 2,5 à 5", u"plus de 5"]},
-            {'key': 'rma', 'label': u"Etat d'envoi des RMA", 'colors': ['#4fa950', '#E8ED6F', '#E01714'], 'limits': [1, 2, 3], 'labels': [u"avant le 10", u"après le 10", u"non envoyé"]}
+            {'key': 'rma', 'label': u"Etat d'envoi des RMA", 'colors': ['#4fa950', '#E8ED6F', '#E01714'], 'limits': [1, 2, 3], 'labels': [u"avant le 10", u"après le 10", u"non envoyé"]},
+            {'key': 'guichet', 'label': u"Guichets fonciers", 'colors': ['#4fa950', '#E01714', '#E8ED6F'], 'limits': [1, 3, 4], 'labels': [u"Ouvert", u"Suspendu ou fermé", u"En constitution"]}
     ]
 
 def _create_legende(axe, labels, colors):
@@ -207,4 +208,42 @@ def etat_rma(request):
     carte = "rma_%s_%s.png" % (periode_url_formatted, region)
     return render_to_response('carte/carte.html', {'form': form,
                                                    'carte': carte, 'title': "Etat d'envoi des RMA"},
+                                          context_instance=RequestContext(request))
+
+
+def carte_guichet(request, region=None, output='page'):
+    # param
+    nom_region = get_region(region).upper()
+
+    # retrouver les donnees
+    guichets = Guichet.objects.filter(commune__district__region=int(region))\
+                    .values('commune__nom', 'etat')
+
+    # formatage des donnees
+    communes = {}
+    for item in guichets:
+        communes[item['commune__nom']] = _get_color_for_commune(6, int(item['etat']))
+
+
+    # titre de la carte
+    title = "Guichets fonciers - %s" % (nom_region,)
+
+    # reponse
+    response = _get_carte_carte(nom_region, communes, 6, title)
+
+    return response
+
+@login_required(login_url="/connexion")
+def guichet(request):
+    form = FiltreGuichetForm(initial={'region': 1})
+    region = 1
+    if request.method == 'POST':
+        form = FiltreGuichetForm(request.POST)
+        if len(request.POST['region']) > 0:
+            region = request.POST['region']
+
+
+    carte = "guichet_%s.png" % (region)
+    return render_to_response('carte/carte.html', {'form': form,
+                                                   'carte': carte, 'title': "Guichets fonciers"},
                                           context_instance=RequestContext(request))
