@@ -226,7 +226,10 @@ def process_sms(sendernumber, message, receiving_date, recipient=None):
     type_sms, reponse, data, texte = _parser_sms(message)
 
     # verifier doublon
-    doublon = _check_for_duplicates(data['commune'], data['periode'])
+    doublon = False
+    envoi = Recu.objects.filter(commune=data['commune'], periode=data['periode'], rejete=False)
+    if len(envoi) > 0:
+        doublon = True
 
     # enregistrer le sms
     reception = Reception(
