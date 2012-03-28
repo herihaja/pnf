@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db import models
 from django.db.models import Q, Model, Manager
-from guichets.models import Guichet
-from helpers import create_compare_condition
+from pnf.helpers import create_compare_condition
 from localites.models import Commune
 from sms.models import Reception
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
+from dateutil.relativedelta import *
 
 class DonneesManager(Manager):
     def filter_for_xls(self, post):
@@ -216,93 +216,25 @@ class Donnees(Model):
         return u"données de %s pour %s" % (self.commune.nom, self.periode)
 
     def save(self, *args, **kwargs):
-        """ Calculer delta puis mettre a jour les cumuls
-            Gerer l'activation des donnees, i.e valide
-        """
-        
-        delta = {'demandes': 0, 'oppositions': 0, 'resolues': 0, 'certificats': 0, 'femmes': 0, 'recettes': 0,
-                 'mutations': 0, 'surfaces': 0, 'garanties': 0, 'reconnaissances': 0,}
+        # il ne peut y avoir qu'une ligne de donnees valide, on doit invalider la ligne "valide" si existe
         if self.valide == True:
-            # Si nouvelles donnees validees
-            if self.id is not None and self._old_valide == True:
-                # Si anciennes valeurs existent
-                delta['demandes'] -= self._old_demandes
-                delta['oppositions'] -= self._old_oppositions
-                delta['resolues'] -= self._old_resolues
-                delta['certificats'] -= self._old_certificats
-                delta['femmes'] -= self._old_femmes
-                delta['recettes'] -= self._old_recettes
-                delta['mutations'] -= self._old_mutations
-                delta['surfaces'] -= self._old_surfaces
-                delta['garanties'] -= self._old_garanties
-                delta['reconnaissances'] -= self._old_reconnaissances
-            else:
+            if self.id is None or self._old_valide == False:
                 # Rechercher si il y des anciennes donnees validees
                 valide = Donnees.objects.filter(commune=self.commune, periode=self.periode, valide=True)
-                # on retire les chiffres des cumuls
                 if len(valide) == 1:
-                    valide = valide[0]
-                    delta['demandes'] -= valide.demandes
-                    delta['oppositions'] -= valide.oppositions
-                    delta['resolues'] -= valide.resolues
-                    delta['certificats'] -= valide.certificats
-                    delta['femmes'] -= valide.femmes
-                    delta['recettes'] -= valide.recettes
-                    delta['mutations'] -= valide.mutations
-                    delta['surfaces'] -= valide.surfaces
-                    delta['garanties'] -= valide.garanties
-                    delta['reconnaissances'] -= valide.reconnaissances
-                    Donnees.objects.filter(pk=valide.id).update(valide=False)
+                    Donnees.objects.filter(pk=valide[0].id).update(valide=False)
 
-            # on enregistre les nouvelles donnees
-            super(Donnees, self).save(*args, **kwargs)
-            # on rajoute les nouveaux chiffres
-            delta['demandes'] += self.demandes
-            delta['oppositions'] += self.oppositions
-            delta['resolues'] += self.resolues
-            delta['certificats'] += self.certificats
-            delta['femmes'] += self.femmes
-            delta['recettes'] += self.recettes
-            delta['mutations'] += self.mutations
-            delta['surfaces'] += self.surfaces
-            delta['garanties'] += self.garanties
-            delta['reconnaissances'] += self.reconnaissances
-            Cumul.objects.mettre_a_jour(self.commune, self.periode, delta)
-        else:
-            if self.id is not None and self._old_valide == True:
-                # Si anciennes valeurs existent
-                delta['demandes'] -= self._old_demandes
-                delta['oppositions'] -= self._old_oppositions
-                delta['resolues'] -= self._old_resolues
-                delta['certificats'] -= self._old_certificats
-                delta['femmes'] -= self._old_femmes
-                delta['recettes'] -= self._old_recettes
-                delta['mutations'] -= self._old_mutations
-                delta['surfaces'] -= self._old_surfaces
-                delta['garanties'] -= self._old_garanties
-                delta['reconnaissances'] -= self._old_reconnaissances
-                Cumul.objects.mettre_a_jour(self.commune, self.periode, delta)
-            super(Donnees, self).save(*args, **kwargs)
+        # on enregistre les nouvelles donnees
+        super(Donnees, self).save(*args, **kwargs)
+
+        # on met a jour les cumuls
+        Cumul.objects.mettre_a_jour(self.commune, self.periode)
 
         return True
 
     def delete(self, *args, **kwargs):
-        """ Calculer delta cumul puis supprimer les donnees
-        """
-        delta = {
-            'demandes': -self._old_demandes,
-            'oppositions': -self._old_oppositions,
-            'resolues': -self._old_resolues,
-            'certificats': -self._old_certificats,
-            'femmes': -self._old_femmes,
-            'recettes': -self._old_recettes,
-            'mutations': -self._old_mutations,
-            'surfaces': -self._old_surfaces,
-            'garanties': -self._old_garanties,
-            'reconnaissances': -self._old_reconnaissances
-        }
         super(Donnees, self).delete(*args, **kwargs)
-        Cumul.objects.mettre_a_jour(self.commune, self.periode, delta)
+        Cumul.objects.mettre_a_jour(self.commune, self.periode)
         return True
 
     def _pre_save(self):
@@ -390,82 +322,66 @@ class CumulManager(Manager):
             rresolus = None
 
         return rcertificats, rfemmes, rresolus, rconflits, rsurface
-        
-    def mettre_a_jour(self, commune, periode, delta):
-        """ Ajouter delta a toutes les donnees superieures ou egales a la periode si existe sinon insertion
-        """
-        cumuls = self.filter(commune=commune, periode__gte=periode)
-        if len(cumuls):
-            for cumul in cumuls:
-                demandes = cumul.demandes + delta['demandes']
-                oppositions = cumul.oppositions + delta['oppositions']
-                resolues = cumul.resolues + delta['resolues']
-                certificats = cumul.certificats + delta['certificats']
-                femmes = cumul.femmes + delta['femmes']
-                recettes = cumul.recettes + delta['recettes']
-                mutations = cumul.mutations + delta['mutations']
-                surfaces = cumul.surfaces + delta['surfaces']
-                garanties = cumul.garanties + delta['garanties']
-                reconnaissances = cumul.reconnaissances + delta['reconnaissances']
-                rcertificats, rfemmes, rresolus, rconflits, rsurface = \
-                self._calcul_ratio(demandes, certificats, femmes, oppositions, resolues, surfaces)
 
-                obj = Cumul(
-                    id = cumul.id,
-                    commune = cumul.commune,
-                    periode = cumul.periode,
-                    demandes = demandes,
-                    oppositions = oppositions,
-                    resolues = resolues,
-                    certificats = certificats,
-                    femmes = femmes,
-                    recettes = recettes,
-                    mutations = mutations,
-                    surfaces = surfaces,
-                    garanties = garanties,
-                    reconnaissances = reconnaissances,
-                    rcertificats = rcertificats,
-                    rfemmes = rfemmes,
-                    rresolus = rresolus,
-                    rconflits = rconflits,
-                    rsurface = rsurface,
-                    ajout = cumul.ajout
-                )
-                obj.save()
-        else:
-            """ Rechercher le dernier enregistrement et s'en servir comme base
-            """
-            depart = {'demandes': 0, 'oppositions': 0, 'resolues': 0, 'certificats': 0, 'femmes': 0, 'recettes': 0,
-                 'mutations': 0, 'surfaces': 0, 'garanties': 0, 'reconnaissances': 0,}
-            precedent = Cumul.objects.filter(commune=commune).order_by("-periode")[:1]
-            if len(precedent) > 0:
-                precedent = precedent[0]
-                depart['demandes'] += precedent.demandes
-                depart['oppositions'] += precedent.oppositions
-                depart['resolues'] += precedent.resolues
-                depart['certificats'] += precedent.certificats
-                depart['femmes'] += precedent.femmes
-                depart['recettes'] += precedent.recettes
-                depart['mutations'] += precedent.mutations
-                depart['surfaces'] += precedent.surfaces
-                depart['garanties'] += precedent.garanties
-                depart['reconnaissances'] += precedent.reconnaissances
 
-            demandes = delta['demandes'] + depart['demandes']
-            oppositions = delta['oppositions'] + depart['oppositions']
-            resolues = delta['resolues'] + depart['resolues']
-            certificats = delta['certificats'] + depart['certificats']
-            femmes = delta['femmes'] + depart['femmes']
-            recettes = delta['recettes'] + depart['recettes']
-            mutations = delta['mutations'] + depart['mutations']
-            surfaces = delta['surfaces'] + depart['surfaces']
-            garanties = delta['garanties'] + depart['garanties']
-            reconnaissances = delta['reconnaissances'] + depart['reconnaissances']
+    def recherche_periodes(self, periode, commune):
+        # rechercher la periode de depart, derniere periode qui a un cumul avant periode
+        periode_depart = periode
+        periode_fin = periode
+        depart = Cumul.objects.filter(commune=commune, periode__lt=periode).order_by('-periode')[:1]
+        if len(depart) == 1:
+            periode_depart = depart[0].periode
+
+        # rechercher la derniere periode a mettre a jour
+        fin = Cumul.objects.filter(commune=commune, periode__gt=periode).order_by('-periode')[:1]
+        if len(fin) == 1:
+            periode_fin = fin[0].periode
+
+        return periode_depart, periode_fin
+
+
+    def calculer_cumul(self, debut, fin, commune):
+        # tant que date debut ne depasse pas date fin
+        if (debut - fin) <= timedelta(days = 0):
+            demandes = oppositions = resolues = certificats = femmes = recettes = mutations = surfaces = garanties = reconnaissances = 0
+
+            # recuperer donnees valides de la periode si existe sinon recopie les cumuls du mois precedent
+            donnees = Donnees.objects.filter(commune=commune, periode=debut, valide=True)
+            if len(donnees) > 0:
+                demandes = donnees[0].demandes
+                oppositions = donnees[0].oppositions
+                resolues = donnees[0].resolues
+                certificats = donnees[0].certificats
+                femmes = donnees[0].femmes
+                recettes = donnees[0].recettes
+                mutations = donnees[0].mutations
+                surfaces = donnees[0].surfaces
+                garanties = donnees[0].garanties
+                reconnaissances = donnees[0].reconnaissances
+
+            # recuperer le cumul du mois precedente
+            precedent = debut + relativedelta(months=-1)
+            cumul = Cumul.objects.filter(commune=commune, periode=precedent)
+            if len(cumul) == 1:
+                demandes = demandes + cumul[0].demandes
+                oppositions = oppositions + cumul[0].oppositions
+                resolues = resolues + cumul[0].resolues
+                certificats = certificats + cumul[0].certificats
+                femmes = femmes + cumul[0].femmes
+                recettes = recettes + cumul[0].recettes
+                mutations = mutations + cumul[0].mutations
+                surfaces = surfaces + cumul[0].surfaces
+                garanties = garanties + cumul[0].garanties
+                reconnaissances = reconnaissances + cumul[0].reconnaissances
+
+            # calculer les ratios
             rcertificats, rfemmes, rresolus, rconflits, rsurface = \
-                self._calcul_ratio(demandes, certificats, femmes, oppositions, resolues, surfaces)
+                        Cumul.objects._calcul_ratio(demandes, certificats, femmes, oppositions, resolues, surfaces)
+
+            # inserer ou mettre a jour le cumul
             obj = Cumul(
                 commune = commune,
-                periode = periode,
+                periode = debut,
                 demandes = demandes,
                 oppositions = oppositions,
                 resolues = resolues,
@@ -480,9 +396,23 @@ class CumulManager(Manager):
                 rfemmes = rfemmes,
                 rresolus = rresolus,
                 rconflits = rconflits,
-                rsurface = rsurface
+                rsurface = rsurface,
             )
+            # ajouter id  et ajouter date ajout qui est obligatoire si update
+            cumul = Cumul.objects.filter(commune=commune, periode=debut)
+            if len(cumul) > 0:
+                obj.id = cumul[0].id
+                obj.ajout = cumul[0].ajout
+
             obj.save()
+
+            # passer au mois suivant
+            suivant = debut + relativedelta(months=+1)
+            self.calculer_cumul(suivant, fin, commune)
+
+    def mettre_a_jour(self, commune, periode):
+        debut, fin = self.recherche_periodes(periode, commune)
+        self.calculer_cumul(debut, fin, commune)
 
 
 class Cumul(Model):
