@@ -510,7 +510,7 @@ def send_sms(smsc, numero, texte):
     operateur = OPERATEURS[_get_operateur(numero)]
     update_credit_after_send(operateur)
 
-
+"""
 def _get_operateur(numero):
     CODES = {'032': 'orange', '033': 'airtel', '034': 'telma'}
     if numero[:4] == '+261':
@@ -525,7 +525,17 @@ def _get_operateur(numero):
     else:
         operateur = None
     return operateur
+"""
 
+def _get_operateur(numero):
+    import re
+    if(re.search("33\d{7}$", numero)):
+        return "airtel"
+    if(re.search("32\d{7}$", numero)):
+        return "orange"
+    if(re.search("34\d{7}$", numero)):
+        return "telma"
+    return None
 
 @login_required(login_url="/connexion")
 def sms_broadcast(request):

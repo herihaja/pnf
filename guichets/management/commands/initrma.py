@@ -10,7 +10,7 @@ class Command(BaseCommand):
         ''' Selectionner tous les guichets actif et initialiser pour la periode en cours
         '''
         prev_month = date.today() + relativedelta(months=-1)
-        prev_month = "%s-%s-01" % (prev_month.year, prev_month.month,)
+        prev_month = "%s-%s-01" % (prev_month.year, prev_month.month+1,)
         prev_month = datetime.strptime(prev_month, '%Y-%m-%d').date()
 
         guichets = Guichet.objects.filter(etat=1)

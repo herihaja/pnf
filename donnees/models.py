@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.db import models
 from django.db.models import Q, Model, Manager
 from pnf.helpers import create_compare_condition
@@ -333,9 +333,12 @@ class CumulManager(Manager):
             periode_depart = depart[0].periode
 
         # rechercher la derniere periode a mettre a jour
-        fin = Cumul.objects.filter(commune=commune, periode__gt=periode).order_by('-periode')[:1]
-        if len(fin) == 1:
-            periode_fin = fin[0].periode
+        # fin = Cumul.objects.filter(commune=commune, periode__gt=periode).order_by('-periode')[:1]
+        # if len(fin) == 1:
+        #    periode_fin = fin[0].periode
+        prev_month = date.today() + relativedelta(months=-1)
+        prev_month = "%s-%s-01" % (prev_month.year, prev_month.month+1,)
+        periode_fin = datetime.strptime(prev_month, '%Y-%m-%d').date()
 
         return periode_depart, periode_fin
 
@@ -361,7 +364,8 @@ class CumulManager(Manager):
 
             # recuperer le cumul du mois precedente
             precedent = debut + relativedelta(months=-1)
-            cumul = Cumul.objects.filter(commune=commune, periode=precedent)
+            cumul = Cumul.objects.filter(commune=commune, periode=precedent)[:1]
+
             if len(cumul) == 1:
                 demandes = demandes + cumul[0].demandes
                 oppositions = oppositions + cumul[0].oppositions

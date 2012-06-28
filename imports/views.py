@@ -12,6 +12,8 @@ from guichets.models import Guichet
 from localites.models import Province, Region, Commune, District
 import xlrd
 from projets.models import Projet
+from django.views.decorators.csrf import csrf_view_exempt
+import settings
 
 LISTE_MOIS = {
     'janvier' : '01',
@@ -68,6 +70,70 @@ def _ajouter_commune(nom, code, district):
     nom, slug, code = _nettoyer_nom(nom, code)
     obj, created = Commune.objects.get_or_create(slug=slug, code=code, nom=nom, district=district)
     return obj, created
+
+@csrf_view_exempt
+def importer_data(request):
+    if request.method == "GET":
+        return render_to_response("imports/import.html")
+    f = request.FILES['donnees']
+    filename = settings.MEDIA_ROOT+'/data.xls'
+    destination = open(filename, 'wb+')
+
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()
+    
+    book = xlrd.open_workbook(filename)
+    
+    sheet = book.sheets()[0]
+
+    data_ignored = []
+    data_added = 0
+    
+    for i in xrange(sheet.nrows):
+        row = sheet.row_values(i)
+        nom, slug, code =  _nettoyer_nom(row[5], row[1])
+        try:
+            commune = Commune.objects.get(slug=slug, code=code, nom=nom)
+            annee = row[2]
+            mois = row[6]
+            if annee is not None and annee != '' and mois is not None and mois != '':
+                mois = mois.strip()
+                mois = slugify(mois)
+                annee = str(int(annee))
+                
+                if mois in LISTE_MOIS:
+                    mois = LISTE_MOIS[mois]
+                    periode = annee + '-' + mois + '-01'
+                    obj = Donnees(
+                        commune = commune,
+                        periode = periode,
+                        demandes = _convesion_int(row[7]),
+                        oppositions = _convesion_int(row[8]),
+                        resolues = _convesion_int(row[9]),
+                        certificats = _convesion_int(row[10]),
+                        femmes = _convesion_int(row[11]),
+                        surfaces = _convesion_float(row[12]),
+                        recettes = _convesion_float(row[13]),
+                        garanties = _convesion_int(row[14]),
+                        reconnaissances = _convesion_int(row[15]),
+                        mutations = _convesion_int(row[16]),
+                        valide = True,
+                    )
+                    if obj.save():
+                        data_added += 1
+                    else:
+                        data_ignored.append(u'Mois précédents non remplis ligne %s' % i)
+                else:
+                    data_ignored.append('Mois introuvable ligne %s' % i)
+            else:
+                data_ignored.append('Annee ou mois vide ligne' % i)
+        except Commune.DoesNotExist:
+            data_ignored.append('Commune introuvable ligne %s' % i)
+    import os
+    os.remove(filename)
+    return render_to_response('imports/importer_donnees.html', {"data_ignored": data_ignored, "data_added": data_added},
+                              context_instance=RequestContext(request))
 
 @login_required(login_url="/connexion")
 def importer_donnees(request):
@@ -180,7 +246,7 @@ def importer_bailleurs(request):
             if n == 0:
                 data_ignored.append('%s commune inconnue' %(i,))
             elif n == 2:
-                commune = None
+                commune = Nonerequest
                 data_ignored.append('%s commune ambigüe' %(i,))
         else:
             commune = communes[0]

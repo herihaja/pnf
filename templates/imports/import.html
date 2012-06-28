@@ -1,0 +1,10 @@
+{% extends 'layout_content.html' %}
+
+{% block content %}
+    <form method="post" action="" onsubmit="return confirm('Etès vous sûr?');" enctype="multipart/form-data">
+	{% csrf_token %}	
+        <input type="file" name="donnees"/>
+        <input type="submit" value="importer"/>
+    </form>
+    
+{% endblock %}

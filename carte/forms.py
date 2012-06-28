@@ -5,7 +5,7 @@ from django.forms import Form
 from localites.models import Region
 
 class FiltreRatioForm(Form):
-    LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, datetime.datetime.now().year))
+    LISTE_ANNEE = ((str(i), str(i)) for i in range(2006, datetime.datetime.now().year+1))
     annee = forms.ChoiceField(label='Année', choices=LISTE_ANNEE, required=False)
     region = forms.ModelChoiceField(label='Régions', queryset=Region.objects.all(), required=False)
 

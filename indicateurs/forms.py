@@ -14,7 +14,7 @@ class FiltreIndicateursForm(Form):
     date_a = forms.CharField(label='et', required=False)
 
 class FiltreIndicateurForm(Form):
-    LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, datetime.datetime.now().year))
+    LISTE_ANNEE = ((str(i), str(i)) for i in range(2006, datetime.datetime.now().year+1))
     LISTE_INDICATEURS = (
             ('demandes', 'Demandes'),
             ('oppositions', 'Oppositions'),
@@ -35,7 +35,7 @@ class FiltreIndicateurForm(Form):
     code = forms.CharField(max_length=6, required=False)
 
 class FiltreRatioForm(Form):
-    LISTE_ANNEE = ((str(i), str(i)) for i in range(2009, datetime.datetime.now().year))
+    LISTE_ANNEE = ((str(i), str(i)) for i in range(2006, datetime.datetime.now().year+1))
     LISTE_INDICATEURS = (
             ('rcertificats', 'Certification'),
             ('rfemmes', 'Certificats à des femmes'),
